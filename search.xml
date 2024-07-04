@@ -24,58 +24,216 @@
       </categories>
   </entry>
   <entry>
-    <title>《罗生门》读书摘记</title>
-    <url>/2024/07/04/%E3%80%8A%E7%BD%97%E7%94%9F%E9%97%A8%E3%80%8B%E8%AF%BB%E4%B9%A6%E6%91%98%E8%AE%B0/</url>
+    <title>CS186 SQL1 Berkeley</title>
+    <url>/2024/07/04/CS186%20SQL1/</url>
     <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p>这本书好像是芥川龙之介的作品集，只是以最出门的《罗生门》命名，其中包含了《罗生门》《鼻》《手帕》《地狱变》《蛛丝》《橘》《舞会》《密林中》《矿车》《阿富的贞操》《一篇爱情小说》《单相思》《侏儒警语》等文章。</p>
-<p>目前看到的部分是《地狱变》 读起来感觉是跟《罗生门》一样印象深刻的作品。</p>
-<p>本文是以上作品的一些句子摘录以及一些可能对自分の文学创作（？有益的批注</p>
-<h3 id="摘录始于此"><a class="header-anchor" href="#摘录始于此">¶</a>摘录始于此</h3>
-<h4 id="译本序"><a class="header-anchor" href="#译本序">¶</a>译本序</h4>
-<p>书山稗（bai四）海，文史苑囿（you四），于中沉潜含玩，钩沉抉隐，一旦发而为文，自是信手拈来。随机生发，纵横捭（bai三）阖，不可抑勒。从王侯衙役到市井小民，从寺院高僧到天主教徒，从紫宸之深到江湖之远，在其笔下无不呼之即来，腾跃纸上。</p>
+<p>Berkeley CS186 Intro to DB Systems</p>
+<p><a href="https://www.youtube.com/watch?v=Q-dxGaR3fH0&amp;list=PLYp4IGUhNFmw8USiYMJvCUjZe79fvyYge&amp;index=6">视频地址</a>  课程记录</p>
+<h2 id="SQL-1"><a class="header-anchor" href="#SQL-1">¶</a>SQL 1</h2>
+<h3 id="what-is-database"><a class="header-anchor" href="#what-is-database">¶</a>what is database</h3>
+<h4 id="一些术语"><a class="header-anchor" href="#一些术语">¶</a>一些术语</h4>
+<p><code>Relation/Table</code></p>
+<ul>
+<li><code>Schema: description(&quot;metadata&quot;)</code></li>
+<li><code>Instance: set of data satisfying the schema</code></li>
+</ul>
+<p><code>Attribute/Column/Field</code></p>
+<p><code>Tuple/Record/Row</code></p>
+<h4 id="一些注意事项"><a class="header-anchor" href="#一些注意事项">¶</a>一些注意事项</h4>
+<ol>
+<li>每列的类型都是<code>原子类型(无法再细分的)</code>,因此不会是<code>list</code>或者<code>map</code>那种类型的数据</li>
+<li><code>saddress</code> 每一行都要<code>fit the schema</code>  简单说就是三行三列的表中不能插入四列的数据行</li>
+<li><code>baddress</code>  每一列的名字不能相同</li>
+<li><code>maddress</code>  数据类型只能是原子类型</li>
+</ol>
+<h3 id="SQL-Language"><a class="header-anchor" href="#SQL-Language">¶</a>SQL Language</h3>
+<h4 id="Two-sublanguages"><a class="header-anchor" href="#Two-sublanguages">¶</a>Two sublanguages</h4>
+<p><code>DDL</code>-Data Definition Language-Define and modify schema   用于定义和修改数据库架构</p>
+<p><code>DML</code>-Data Manipulation Language-Queries can be written intuitively  用于操作实际数据</p>
+<h4 id="The-SQL-DDL-Sailors"><a class="header-anchor" href="#The-SQL-DDL-Sailors">¶</a>The SQL DDL: Sailors</h4>
+<p>以Sailors为例子，来创建数据表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Sailors (</span><br><span class="line">	sid <span class="type">INTEGER</span>,</span><br><span class="line">	sname <span class="type">CHAR</span>(<span class="number">20</span>),</span><br><span class="line">	rating <span class="type">INTEGER</span>,</span><br><span class="line">	age <span class="type">FLOAT</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (sid)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>sid</th>
+<th>SNAME</th>
+<th>RATING</th>
+<th>AGE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Fred</td>
+<td>7</td>
+<td>22</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Jim</td>
+<td>2</td>
+<td>39</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Nancy</td>
+<td>8</td>
+<td>27</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Boats (</span><br><span class="line">	bid <span class="type">INTEGER</span>,</span><br><span class="line">	bname <span class="type">CHAR</span>(<span class="number">20</span>),</span><br><span class="line">	color <span class="type">CHAR</span>(<span class="number">10</span>),</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (Bid)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>BID</th>
+<th>BNAME</th>
+<th>COLOR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>101</td>
+<td>Nina</td>
+<td>red</td>
+</tr>
+<tr>
+<td>102</td>
+<td>Pinta</td>
+<td>blue</td>
+</tr>
+<tr>
+<td>103</td>
+<td>Santa Maria</td>
+<td>red</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Reserves (</span><br><span class="line">	sid <span class="type">INTEGER</span>,</span><br><span class="line">	bid <span class="type">INTEGER</span>,</span><br><span class="line">	<span class="keyword">day</span> <span class="type">DATE</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (sid, bid, <span class="keyword">day</span>),</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (sid)  <span class="keyword">REFERENCES</span> Sailors;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>sid</th>
+<th>bid</th>
+<th>day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>102</td>
+<td>9/12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>102</td>
+<td>9/13</td>
+</tr>
+</tbody>
+</table>
+<h5 id="Primary-Key-column-s"><a class="header-anchor" href="#Primary-Key-column-s">¶</a>Primary Key column(s)</h5>
+<ul>
+<li>provide a unique “lookup key” for the relation   提供关系的唯一查找键    sid对于这些键值是唯一的</li>
+<li>cannot have any duplicate values  不能有重复的值，主键的值在表中必须是唯一的</li>
+<li>can be made up of &gt; 1 column  主键可以由多列组成   由多列组成的话就叫做复合主键（kimi给的例子：如果一个表中存储了多个部门的员工信息，可能需要使用部门ID和员工ID的组合作为主键来确保唯一性 ）</li>
+</ul>
+<h5 id="Foreign-Key-column-s"><a class="header-anchor" href="#Foreign-Key-column-s">¶</a>Foreign Key column(s)</h5>
+<p>Foreign Key column(s)  外键</p>
+<p>外键应用另一个表的主键或唯一键</p>
+<p>上述外键是<code>Sailors</code>表的指针，即<code>Reserves</code>的<code>sid</code>指向<code>Sailors</code>的<code>sid</code></p>
+<ul>
+<li>Foreign Key references a table via the primary key of that table  外键通过另一个表的主键来引用另一个表</li>
+<li>need not share the name of the referenced primary key    不一定和被引用的主键同名</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Reserves (</span><br><span class="line">	sid <span class="type">INTEGER</span>,</span><br><span class="line">	bid <span class="type">INTEGER</span>,</span><br><span class="line">	<span class="keyword">day</span> <span class="type">DATE</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (sid, bid, <span class="keyword">day</span>),</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (sid)  <span class="keyword">REFERENCES</span> Sailors,</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (bid)  <span class="keyword">REFERENCES</span> Boats;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h4 id="The-SQL-DML"><a class="header-anchor" href="#The-SQL-DML">¶</a>The SQL DML</h4>
+<h5 id="Basic-Single-Table-Queries"><a class="header-anchor" href="#Basic-Single-Table-Queries">¶</a>Basic Single-Table Queries</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="operator">&lt;</span><span class="keyword">column</span> expression list<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="operator">&lt;</span>single <span class="keyword">table</span><span class="operator">&gt;</span> [<span class="keyword">WHERE</span> <span class="operator">&lt;</span>predicate<span class="operator">&gt;</span>]</span><br></pre></td></tr></table></figure>
+<h5 id="SELECT-DISTINCT"><a class="header-anchor" href="#SELECT-DISTINCT">¶</a>SELECT DISTINCT</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> S.name, S.gpa</span><br><span class="line"><span class="keyword">FROM</span> students (<span class="keyword">AS</span>) S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>DISTINCT specifies removal of duplicate rows before output  DISTINCT 在输出前会移除重复行，如果查询结果有多行相同数据，DISTINCT 会保证这些重复行只被显示一次</li>
+<li>Can refer to the students table as “S”, this is called an alias   把学生列表记作S，S是其别名，可以简化查询，提高可读性  定义别名的AS可省略</li>
+</ul>
+<h5 id="ORDER-BY"><a class="header-anchor" href="#ORDER-BY">¶</a>ORDER BY</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, S.gpa, S.age <span class="operator">*</span> <span class="number">2</span> <span class="keyword">AS</span> A2</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.gpa, S.name, A2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将两倍年龄别名为A2</li>
+<li>ORDER BY clause specifies output to be sorted-Lexicographic ordering   按照字典序排序输出</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, S.gpa, S.age <span class="operator">*</span> <span class="number">2</span> <span class="keyword">AS</span> A2</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.gpa <span class="keyword">DESC</span>, S.name <span class="keyword">ASC</span>, A2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>DESC  降序  ASC  升序  默认是升序</li>
+</ul>
+<h5 id="LIMIT"><a class="header-anchor" href="#LIMIT">¶</a>LIMIT</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, S.gpa, S.age <span class="operator">*</span> <span class="number">2</span> <span class="keyword">AS</span> A2</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.gpa <span class="keyword">DESC</span>, S.name <span class="keyword">ASC</span>, a2;</span><br><span class="line">LIMIT <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>限制输出为几行</li>
+</ul>
+<h5 id="Aggregates"><a class="header-anchor" href="#Aggregates">¶</a>Aggregates</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="built_in">AVG</span>(S.gpa)</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>
-<p>钩沉抉隐：“钩沉”与“抉隐”意思相近，都有“探索深奥的道理或散失的内容”的意思</p>
+<p>AVG()：计算平均值</p>
 </li>
 <li>
-<p>沉潜：①在水里潜伏、沉没。②思想感情深沉，不外露。③集中精神；潜心</p>
-</li>
-</ul>
-<p>值得注意的是，芥川的历史题材小说并非为了演绎历史典故和翻拍历史人物，而是身披历史戏装的“现代小说”，目的在于借古喻今，针砭时弊，臧否人物，传达现代人的生命窘态和灵魂质地。……原典出入自如，布局浑然天成，主题独出机杼，笔致摇曳生姿。</p>
-<ul>
-<li>臧否：①褒贬，评论   ②善恶</li>
-</ul>
-<p>芥川生性敏感，纵然一件司空见惯的小事，也往往使其脆弱的神经震颤良久。一般来说，他不重描绘而意在发觉，疏于叙述而工于点化。少的是轻灵与潇洒，多的是沉郁与悲凉。</p>
-<p>无论得于史料之作，还是拾于现实之篇，其一以贯之者，大约是以下两条主线。一是对人性中“恶”的暴露、揶揄和鞭挞。第二条主线便是对人对人生的幻灭感亦即厌世主义倾向所导致的对艺术的执着与痴迷，这或许也是出于对前者的一种补偿心理。</p>
-<p>尤为可贵的是，“他有意识地创造了文体——不是陈陈相因（的文体，而是一扫庸俗气味的艺术文体”（中村真一郎语），堪称典型的艺术至上者。</p>
-<ul>
-<li>陈陈相因：粮仓里的米谷一年接一年地堆积起来。比喻沿袭老一套，没有改进。</li>
-</ul>
-<p>可以说，对中国古典的向往和对中国现实的鄙视是芥川“中国认识”的一对矛盾。前者使之怀有文化上的自卑，后者催生其现实中的傲慢（“日本优越论”）。这其实也是日本近现代主流知识分子或精英阶层共同的基本倾向，纵令夏目漱石亦不例外。愈到后来，自卑愈见其轻而傲慢愈见其烈，在结果上成为日本对外扩张和侵华战争所以顺利推进的重要思想舆论资源和社会基础。</p>
-<ul>
-<li>
-<p>纵令：即使——用在偏正复句的偏句，表示假设的让步，即退一步提出某种情况。  例句：纵令失败，我们也要继续实验。</p>
+<p>Before producing output, compute a summary(a.k.a. an aggregate) of some arithmetic expression</p>
 </li>
 <li>
-<p>黄钟大吕：形容音乐或言辞庄严、正大、高妙、和谐。  例句：①这首乐曲饱含一种黄钟大吕的气势。  ②他的这篇短文十分朴素，却如黄钟大吕，震撼人心。  ③堪称黄钟大吕的鸿篇巨制</p>
+<p>produce 1 row of output -with one column in this case</p>
+</li>
+<li>
+<p>other aggregates: SUM, COUNT, MAX, MIN</p>
 </li>
 </ul>
-<h4 id="鼻"><a class="header-anchor" href="#鼻">¶</a>鼻</h4>
-<p>人的内心存在两种相互矛盾的情感。无疑，没有人不同情他人的不幸。可是，一旦对方好歹从不幸中挣扎出来，却又因此产生若有所失的怅惘。说得夸张一点，甚至出现一种想使之重新陷入不幸的心理。于是，不觉之间开始对其怀有某种敌意，尽管是消极的敌意。不知个中缘由的内供之所以怏怏不快，无非是因为他从池尾僧俗的态度中，隐隐觉察出了这些旁观者的利己主义。</p>
-<h4 id="地狱变"><a class="header-anchor" href="#地狱变">¶</a>地狱变</h4>
-<p>这是因为，良秀笔下的众多罪人，上至三公九卿下至乞丐贱民，网罗了各色人等。有峨冠博带的庙堂高官，有花枝招展的年轻宫女，有颈挂麻纸的诵经僧，有高底木屐的书童，有长裙飘飘的豆蔻侍女，有手持供钱的阴阳先生，无暇一一列举。总之，如此形形色色的诸多男女，无不惨遭牛头马面的摧残，在上下翻腾的浓烟烈火中如风吹败叶般四下狼狈逃窜。</p>
-<p>那被烟呛得白惨惨的面庞，那随火乱舞的长飘飘的秀发，那转瞬化为火焰的美艳艳的樱花盛装——所有这些是何等惨不忍睹啊！尤其每当夜风向下盘旋而烟随风披靡之时，金星乱坠的红通通的火焰中便闪现出少女咬着堵嘴物而始终拼命挣脱锁链时那痛苦扭动的情形，令人觉得地狱的大苦大难活生生展现于眼前。</p>
-<p>刚才还在为地狱的惨烈场面惊恐困惑的良秀，此刻那满是皱纹的脸上浮现出无可名状的光辉——一种近乎恍惚状态的由衷喜悦之情。</p>
+<h5 id="GROUP-BY"><a class="header-anchor" href="#GROUP-BY">¶</a>GROUP BY</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="built_in">AVG</span>(S.gpa), S.dept</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>GROUP BY：按照GROUP BY后面列出的列，进行分组</p>
+</li>
+<li>
+<p>Partition table into groups with same GROUP BY column values - Can group by a list of columns    将表按照具有相同GROUP BY列值的组进行分区，可以根据一列或多列进行分组</p>
+</li>
+<li>
+<p>Produce an aggregate result per group -Cardinality of output = # of distinct group values   为每个组生成一个聚合结果，输出的基数等于不同组值的数量</p>
+</li>
+<li>
+<p>Note: can put grouping columns in SELECT list   可以将分组放入SELECT列表</p>
+</li>
+</ul>
+<h5 id="HAVING"><a class="header-anchor" href="#HAVING">¶</a>HAVING</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="built_in">AVG</span>(S.gpa), S.dept</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>The HAVING predicate filters groups  用于过滤分组后的结果</li>
+<li>HAVING is applied after grouping and aggregation    HAVING子句在分组和聚合计算完成后应用       -Hence can contain anything that could go in the SELECT list  因此可以包含选择列表中的任何内容</li>
+<li>HAVING can only be used in aggregate queries   HAVING只能用在聚合查询中</li>
+<li>it’s an optional clause    可选非必须</li>
+</ul>
+<h5 id="Putting-it-all-together"><a class="header-anchor" href="#Putting-it-all-together">¶</a>Putting it all together</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.dept, <span class="built_in">AVG</span>(S.gpa), <span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">WHERE</span> S.gender <span class="operator">=</span> <span class="string">&#x27;F&#x27;</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">2</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
+<h5 id="DISTINCT-Aggregates"><a class="header-anchor" href="#DISTINCT-Aggregates">¶</a>DISTINCT Aggregates</h5>
+<p>DISTINCT can be used inside or outside of aggregate function, but have different meanings</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> S.name)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> <span class="built_in">COUNT</span>(S.name)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个：在计数之前先把所有重复项移除   相当于只计算有多少中不同项</li>
+<li>第二个：先计数，再移除重复项   相当于计算所有项</li>
+</ul>
+<h5 id="What-Is-This-Asking-For"><a class="header-anchor" href="#What-Is-This-Asking-For">¶</a>What Is This Asking For?</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, <span class="built_in">AVG</span>(S.gpa)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>illegal query</code>   因为<code>S.name</code>没有被包含在<code>GROUP BY</code> 子句中，也没有被用在聚合函数中。数据库不知道应该选择哪个学生的姓名来显示，因为可能有多个学生具有相同的系别（<code>S.dept</code>）。</li>
+</ul>
+<h5 id="SQL-DML-General-Basic-Single-Table-Queries"><a class="header-anchor" href="#SQL-DML-General-Basic-Single-Table-Queries">¶</a>SQL DML: General Basic Single-Table Queries</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="operator">&lt;</span><span class="keyword">column</span> expression list<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="operator">&lt;</span>single <span class="keyword">table</span><span class="operator">&gt;</span></span><br><span class="line">[<span class="keyword">WHERE</span> <span class="operator">&lt;</span>predictable<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="operator">&lt;</span><span class="keyword">column</span> list<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">HAVING</span> <span class="operator">&lt;</span>predicate<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="operator">&lt;</span><span class="keyword">column</span> list<span class="operator">&gt;</span>]</span><br><span class="line">[LIMIT <span class="operator">&lt;</span><span class="type">integer</span><span class="operator">&gt;</span>]</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>文史哲</category>
-        <category>外国文学</category>
-        <category>日本文学</category>
+        <category>notes</category>
+        <category>SQL notes</category>
       </categories>
       <tags>
-        <tag>reading</tag>
-        <tag>外国文学</tag>
-        <tag>日本文学</tag>
+        <tag>CS Notes,Database</tag>
       </tags>
   </entry>
   <entry>
@@ -277,6 +435,61 @@
         <tag>reading</tag>
         <tag>世界史</tag>
         <tag>埃及史</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《罗生门》读书摘记</title>
+    <url>/2024/07/04/%E3%80%8A%E7%BD%97%E7%94%9F%E9%97%A8%E3%80%8B%E8%AF%BB%E4%B9%A6%E6%91%98%E8%AE%B0/</url>
+    <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p>这本书好像是芥川龙之介的作品集，只是以最出门的《罗生门》命名，其中包含了《罗生门》《鼻》《手帕》《地狱变》《蛛丝》《橘》《舞会》《密林中》《矿车》《阿富的贞操》《一篇爱情小说》《单相思》《侏儒警语》等文章。</p>
+<p>目前看到的部分是《地狱变》 读起来感觉是跟《罗生门》一样印象深刻的作品。</p>
+<p>本文是以上作品的一些句子摘录以及一些可能对自分の文学创作（？有益的批注</p>
+<h3 id="摘录始于此"><a class="header-anchor" href="#摘录始于此">¶</a>摘录始于此</h3>
+<h4 id="译本序"><a class="header-anchor" href="#译本序">¶</a>译本序</h4>
+<p>书山稗（bai四）海，文史苑囿（you四），于中沉潜含玩，钩沉抉隐，一旦发而为文，自是信手拈来。随机生发，纵横捭（bai三）阖，不可抑勒。从王侯衙役到市井小民，从寺院高僧到天主教徒，从紫宸之深到江湖之远，在其笔下无不呼之即来，腾跃纸上。</p>
+<ul>
+<li>
+<p>钩沉抉隐：“钩沉”与“抉隐”意思相近，都有“探索深奥的道理或散失的内容”的意思</p>
+</li>
+<li>
+<p>沉潜：①在水里潜伏、沉没。②思想感情深沉，不外露。③集中精神；潜心</p>
+</li>
+</ul>
+<p>值得注意的是，芥川的历史题材小说并非为了演绎历史典故和翻拍历史人物，而是身披历史戏装的“现代小说”，目的在于借古喻今，针砭时弊，臧否人物，传达现代人的生命窘态和灵魂质地。……原典出入自如，布局浑然天成，主题独出机杼，笔致摇曳生姿。</p>
+<ul>
+<li>臧否：①褒贬，评论   ②善恶</li>
+</ul>
+<p>芥川生性敏感，纵然一件司空见惯的小事，也往往使其脆弱的神经震颤良久。一般来说，他不重描绘而意在发觉，疏于叙述而工于点化。少的是轻灵与潇洒，多的是沉郁与悲凉。</p>
+<p>无论得于史料之作，还是拾于现实之篇，其一以贯之者，大约是以下两条主线。一是对人性中“恶”的暴露、揶揄和鞭挞。第二条主线便是对人对人生的幻灭感亦即厌世主义倾向所导致的对艺术的执着与痴迷，这或许也是出于对前者的一种补偿心理。</p>
+<p>尤为可贵的是，“他有意识地创造了文体——不是陈陈相因（的文体，而是一扫庸俗气味的艺术文体”（中村真一郎语），堪称典型的艺术至上者。</p>
+<ul>
+<li>陈陈相因：粮仓里的米谷一年接一年地堆积起来。比喻沿袭老一套，没有改进。</li>
+</ul>
+<p>可以说，对中国古典的向往和对中国现实的鄙视是芥川“中国认识”的一对矛盾。前者使之怀有文化上的自卑，后者催生其现实中的傲慢（“日本优越论”）。这其实也是日本近现代主流知识分子或精英阶层共同的基本倾向，纵令夏目漱石亦不例外。愈到后来，自卑愈见其轻而傲慢愈见其烈，在结果上成为日本对外扩张和侵华战争所以顺利推进的重要思想舆论资源和社会基础。</p>
+<ul>
+<li>
+<p>纵令：即使——用在偏正复句的偏句，表示假设的让步，即退一步提出某种情况。  例句：纵令失败，我们也要继续实验。</p>
+</li>
+<li>
+<p>黄钟大吕：形容音乐或言辞庄严、正大、高妙、和谐。  例句：①这首乐曲饱含一种黄钟大吕的气势。  ②他的这篇短文十分朴素，却如黄钟大吕，震撼人心。  ③堪称黄钟大吕的鸿篇巨制</p>
+</li>
+</ul>
+<h4 id="鼻"><a class="header-anchor" href="#鼻">¶</a>鼻</h4>
+<p>人的内心存在两种相互矛盾的情感。无疑，没有人不同情他人的不幸。可是，一旦对方好歹从不幸中挣扎出来，却又因此产生若有所失的怅惘。说得夸张一点，甚至出现一种想使之重新陷入不幸的心理。于是，不觉之间开始对其怀有某种敌意，尽管是消极的敌意。不知个中缘由的内供之所以怏怏不快，无非是因为他从池尾僧俗的态度中，隐隐觉察出了这些旁观者的利己主义。</p>
+<h4 id="地狱变"><a class="header-anchor" href="#地狱变">¶</a>地狱变</h4>
+<p>这是因为，良秀笔下的众多罪人，上至三公九卿下至乞丐贱民，网罗了各色人等。有峨冠博带的庙堂高官，有花枝招展的年轻宫女，有颈挂麻纸的诵经僧，有高底木屐的书童，有长裙飘飘的豆蔻侍女，有手持供钱的阴阳先生，无暇一一列举。总之，如此形形色色的诸多男女，无不惨遭牛头马面的摧残，在上下翻腾的浓烟烈火中如风吹败叶般四下狼狈逃窜。</p>
+<p>那被烟呛得白惨惨的面庞，那随火乱舞的长飘飘的秀发，那转瞬化为火焰的美艳艳的樱花盛装——所有这些是何等惨不忍睹啊！尤其每当夜风向下盘旋而烟随风披靡之时，金星乱坠的红通通的火焰中便闪现出少女咬着堵嘴物而始终拼命挣脱锁链时那痛苦扭动的情形，令人觉得地狱的大苦大难活生生展现于眼前。</p>
+<p>刚才还在为地狱的惨烈场面惊恐困惑的良秀，此刻那满是皱纹的脸上浮现出无可名状的光辉——一种近乎恍惚状态的由衷喜悦之情。</p>
+]]></content>
+      <categories>
+        <category>文史哲</category>
+        <category>外国文学</category>
+        <category>日本文学</category>
+      </categories>
+      <tags>
+        <tag>reading</tag>
+        <tag>外国文学</tag>
+        <tag>日本文学</tag>
       </tags>
   </entry>
 </search>
