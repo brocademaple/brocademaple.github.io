@@ -215,6 +215,307 @@
       </tags>
   </entry>
   <entry>
+    <title>CS186 SQL2 Berkeley</title>
+    <url>/2024/07/05/CS186%20SQL2/</url>
+    <content><![CDATA[<h2 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h2>
+<p>Berkeley CS186 Intro to DB Systems</p>
+<p><a href="https://www.youtube.com/watch?v=Q-dxGaR3fH0&amp;list=PLYp4IGUhNFmw8USiYMJvCUjZe79fvyYge&amp;index=6">视频地址</a>  课程记录</p>
+<h2 id="SQL-2"><a class="header-anchor" href="#SQL-2">¶</a>SQL 2</h2>
+<h3 id="Conceptual-SQL-Evaluation"><a class="header-anchor" href="#Conceptual-SQL-Evaluation">¶</a>Conceptual SQL Evaluation</h3>
+<p>SQL查询从原始数据表提取和转换数据的执行顺序</p>
+<ol>
+<li>
+<p><code>FROM</code> Identify table  确定表</p>
+</li>
+<li>
+<p><code>WHERE</code>  Apply selections(eliminate rows)   应用选择条件（筛选行）</p>
+</li>
+<li>
+<p><code>SELECT</code>  Project away columns(keep only those used in SELECT, GBY, HAVING)   SELECT子句指定了需要返回哪些列，或通过聚合函数进行计算</p>
+</li>
+<li>
+<p><code>GROUP BY</code>  Form groups &amp; aggregate   用GROUP BY将数据分组，并对每个组应用聚合函数</p>
+</li>
+<li>
+<p><code>HAVING</code>  Eliminate groups   过滤不满足条件的组</p>
+</li>
+<li>
+<p><code>DISTINCT</code>  Eliminate duplicates   在最终结果中去除重复的行</p>
+</li>
+<li>
+<p>(Optinal) <code>ORDER BY</code> <code>LIMIT</code> applied at end, to “format” output  格式化输出    <code>ORDER BY</code> 用于控制升序/降序输出, <code>LIMIT</code> 用于获取特定数量的排序后结果，通常与<code>ORDER BY</code>一起使用</p>
+</li>
+</ol>
+<h4 id="Putting-it-all-together"><a class="header-anchor" href="#Putting-it-all-together">¶</a>Putting it all together</h4>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.dept, <span class="built_in">AVG</span>(S.gpa), <span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.gender <span class="operator">=</span> <span class="string">&#x27;F&#x27;</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">2</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
+<p>解释：从别名为S的Students学生表中，筛选出性别为Female的学生，按照所在部门分组，并输出符合条件的学生的部门信息、平均GPA和学生总数，至少有两名女性学生的部门才会被输出，最终结果按照部门字典序排列</p>
+<h3 id="Join-Queries"><a class="header-anchor" href="#Join-Queries">¶</a>Join Queries</h3>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="operator">&lt;</span><span class="keyword">column</span> expression list<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="operator">&lt;</span>table1 [<span class="keyword">AS</span> t1], ..., tableN [<span class="keyword">AS</span> tn]<span class="operator">&gt;</span></span><br><span class="line">[<span class="keyword">WHERE</span> <span class="operator">&lt;</span>predicate<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="operator">&lt;</span><span class="keyword">column</span> list<span class="operator">&gt;</span> [<span class="keyword">HAVING</span>  <span class="operator">&lt;</span>predicate<span class="operator">&gt;</span>] ]</span><br><span class="line">[<span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="operator">&lt;</span><span class="keyword">column</span> list<span class="operator">&gt;</span>];</span><br></pre></td></tr></table></figure>
+<p><code>多表查询</code></p>
+<p>区别就是FROM那里有多个表</p>
+<h4 id="Cross-Cartesian-Product"><a class="header-anchor" href="#Cross-Cartesian-Product">¶</a>Cross(Cartesian) Product</h4>
+<ul>
+<li>All pairs of tuples, concentrated</li>
+</ul>
+<h4 id="Example-Sailors-who-have-reserved-a-boat"><a class="header-anchor" href="#Example-Sailors-who-have-reserved-a-boat">¶</a>Example: Sailors who have reserved a boat</h4>
+<p><code>Sailors</code>表</p>
+<table>
+<thead>
+<tr>
+<th>sid</th>
+<th>sname</th>
+<th>rating</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Popeye</td>
+<td>10</td>
+<td>22</td>
+</tr>
+<tr>
+<td>2</td>
+<td>OliveOyl</td>
+<td>11</td>
+<td>39</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Garfield</td>
+<td>1</td>
+<td>27</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Bob</td>
+<td>5</td>
+<td>19</td>
+</tr>
+</tbody>
+</table>
+<p><code>Reserveds</code> 表</p>
+<table>
+<thead>
+<tr>
+<th>SID</th>
+<th>BID</th>
+<th>DAY</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>102</td>
+<td>9//12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>102</td>
+<td>9/13</td>
+</tr>
+<tr>
+<td>1</td>
+<td>101</td>
+<td>10/01</td>
+</tr>
+</tbody>
+</table>
+<p>有效合并表的SQL语句 “预订了船的水手”</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Sailors.sid, Sailors.sname, Reserves.bid</span><br><span class="line"><span class="keyword">FROM</span> Sailors, Reserves</span><br><span class="line"><span class="keyword">WHERE</span> Sailors.sid <span class="operator">=</span> Reserves.sid</span><br></pre></td></tr></table></figure>
+<p>合并后的表—— “预订了船的水手”</p>
+<table>
+<thead>
+<tr>
+<th>sid</th>
+<th>BID</th>
+<th>day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>102</td>
+<td>9/12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>102</td>
+<td>9/13</td>
+</tr>
+<tr>
+<td>1</td>
+<td>101</td>
+<td>10/01</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Column-Names-and-Table-Aliases"><a class="header-anchor" href="#Column-Names-and-Table-Aliases">¶</a>Column Names and Table Aliases</h3>
+<p>原来的：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Sailors.sid, Sailors.sname, Reserve.bid</span><br><span class="line"><span class="keyword">FROM</span> Sailors, Reserves</span><br><span class="line"><span class="keyword">WHERE</span> Sailors.sid <span class="operator">=</span> Reserve.sid</span><br></pre></td></tr></table></figure>
+<p>改进之后：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Sailors.sid, sname, bid</span><br><span class="line"><span class="keyword">FROM</span> Sailors <span class="keyword">AS</span> S, Reserves <span class="keyword">AS</span> R</span><br><span class="line"><span class="keyword">WHERE</span> S.sid <span class="operator">=</span> R.sid</span><br></pre></td></tr></table></figure>
+<p>因为<code>sname</code>只有<code>Sailors</code>里面有，<code>bid</code>只有<code>Reserves</code>里面有，所以可以省略前缀，但是<code>sid</code>是两个表都有，所以需要加前缀来区分是哪个表的</p>
+<p>然后给表名取别名，有助于代码精简+可读性↑</p>
+<h4 id="More-Aliases"><a class="header-anchor" href="#More-Aliases">¶</a>More Aliases</h4>
+<p>别名也可以在输出中使用</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> x.sname, x.age, y.sname <span class="keyword">AS</span> sname2, y.age <span class="keyword">AS</span> age2</span><br><span class="line"><span class="keyword">FROM</span> Sailors <span class="keyword">AS</span> x, Sailors <span class="keyword">AS</span> y</span><br><span class="line"><span class="keyword">WHERE</span> x.age <span class="operator">&gt;</span> y.age</span><br></pre></td></tr></table></figure>
+<p>给同一个表两个别名，把一个表分成两个表，其中左表的年龄比右表大</p>
+<ul>
+<li>Table aliases in the FROM clause   - Needed when the same table used multiple times (“self-join”)    当同一个表被多次使用（“自连接”）的时候需要使用表别名来区分</li>
+<li>Column aliases in the SELECT clause  为列指定别名，以便在查询结果中使用更有意义的列名</li>
+</ul>
+<h3 id="Arithmetic-Expressions"><a class="header-anchor" href="#Arithmetic-Expressions">¶</a>Arithmetic Expressions</h3>
+<p>可以在``SELECT`语句中指定算术运算符和表达式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.age, S.age <span class="operator">-</span> <span class="number">5</span> <span class="keyword">AS</span> age1, <span class="number">2</span> <span class="operator">*</span> S.ages <span class="keyword">AS</span> age2</span><br><span class="line"><span class="keyword">FROM</span> Sailors <span class="keyword">AS</span> S</span><br><span class="line"><span class="keyword">WHERE</span> S.sname <span class="operator">=</span> <span class="string">&#x27;Popeye&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>在``WHERE`语句中也可以使用算术运算符和表达式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S1.sname <span class="keyword">AS</span> name1, S2.sname <span class="keyword">AS</span> name2</span><br><span class="line"><span class="keyword">FROM</span> Sailors <span class="keyword">AS</span> S1, Sailors <span class="keyword">AS</span> S2</span><br><span class="line"><span class="keyword">WHERE</span> <span class="number">2</span><span class="operator">*</span>S1.rating <span class="operator">=</span> S2.rating<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<h3 id="SQL-Calculator"><a class="header-anchor" href="#SQL-Calculator">¶</a>SQL Calculator!</h3>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	<span class="built_in">log</span>(<span class="number">1000</span>) <span class="keyword">as</span> three,</span><br><span class="line">	<span class="built_in">exp</span>(<span class="built_in">ln</span>(<span class="number">2</span>)) <span class="keyword">as</span> two,</span><br><span class="line">	<span class="built_in">cos</span>(<span class="number">0</span>) <span class="keyword">as</span> <span class="keyword">one</span>,</span><br><span class="line">	<span class="built_in">ln</span>(<span class="number">2</span><span class="operator">*</span><span class="number">3</span>) <span class="operator">=</span> <span class="built_in">ln</span>(<span class="number">2</span>) <span class="operator">+</span> <span class="built_in">ln</span>(<span class="number">3</span>) <span class="keyword">as</span> sanity;</span><br></pre></td></tr></table></figure>
+<p>没有FROM语句，且只返回一行。也可以吧SQL语言当作计算器</p>
+<p>以上语句会输出一行四列的表</p>
+<h3 id="String-Comparisons"><a class="header-anchor" href="#String-Comparisons">¶</a>String Comparisons</h3>
+<p>SQL还支持字符串函数，特别是WHERE子句中的字符串比较函数，以下是两种不同的方式来查找格式为以B开头、且有任意数量其他字符的字符串：</p>
+<ul>
+<li>Old-school SQL</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.sname <span class="keyword">like</span> <span class="string">&#x27;B_%&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Standard Regular Expressions</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.sname <span class="operator">~</span> <span class="string">&#x27;B.*&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>好像用的是正则表达式   ~代表的是正则式匹配</p>
+<h3 id="Combining-Predicates"><a class="header-anchor" href="#Combining-Predicates">¶</a>Combining Predicates</h3>
+<p>使用布尔逻辑来组合多个谓词</p>
+<ul>
+<li>Subtle connections between:
+<ul>
+<li>Boolean logic in WHERE(i.e., AND, OR)</li>
+<li>Traditional Set operations(i.e., INTERSECT, UNION)  传统集合操作</li>
+</ul>
+</li>
+</ul>
+<h4 id="Example1-Sid’s-of-sailors-who-reserved-a-red-or-green-boat"><a class="header-anchor" href="#Example1-Sid’s-of-sailors-who-reserved-a-red-or-green-boat">¶</a>Example1: Sid’s of sailors who reserved a red or green boat</h4>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> R.sid</span><br><span class="line"><span class="keyword">FROM</span> Boats B, Reserves R</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> (B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span> <span class="keyword">OR</span> B.color <span class="operator">=</span> <span class="string">&#x27;green&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>另一种方式：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> R.sid</span><br><span class="line"><span class="keyword">FROM</span> Boats B, Reserves R</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> R.sid</span><br><span class="line"><span class="keyword">FROM</span> Boats B, Reserves R</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;green&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><code>UNION ALL</code>    不移除重复项，相当于取并集，红or绿</p>
+<h4 id="Example2-Sid’s-of-sailors-who-reserved-a-red-and-green-boat"><a class="header-anchor" href="#Example2-Sid’s-of-sailors-who-reserved-a-red-and-green-boat">¶</a>Example2: Sid’s of sailors who reserved a red and green boat</h4>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> R.sid</span><br><span class="line"><span class="keyword">FROM</span> Boats B, Reserves R</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> (B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span> <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;green&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>但是此处第一种方式将不会返回任何东西，因为<code>color</code>不可能同时<code>='red'</code> 且<code>='green'</code></p>
+<p>所以此处只能使用另一种方式：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> R.sid</span><br><span class="line"><span class="keyword">FROM</span> Boats B, Reserves R</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">INTERSECT</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> R.sid</span><br><span class="line"><span class="keyword">FROM</span> Boats B, Reserves R</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;green&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><code>INTERSECT</code>   相当于取交集，红and绿</p>
+<h3 id="Set-Semantics"><a class="header-anchor" href="#Set-Semantics">¶</a>Set Semantics</h3>
+<ul>
+<li>Set: a collection of distinct elements    集合是由不同元素组成的集合</li>
+<li>Standard ways of manipulating / combining sets
+<ul>
+<li>Union  并集</li>
+<li>Intersect   交集</li>
+<li>Except   差集</li>
+</ul>
+</li>
+<li>Treat tuples within a relation as elements of a set   将关系中的元组视为集合中的元素</li>
+</ul>
+<h4 id="Default-Set-Semantics"><a class="header-anchor" href="#Default-Set-Semantics">¶</a>Default: Set Semantics</h4>
+<p><code>R = &#123;A, A, A, A, B, B, C, D&#125;</code></p>
+<p><code>S = &#123;A, A, B, B, B, C, E&#125;</code></p>
+<ul>
+<li><code>UNION &#123;A, B, C, D, E&#125;</code></li>
+<li><code>INTERSECT &#123;A, B, C&#125;</code></li>
+<li><code>EXCEPT &#123;D&#125;</code></li>
+</ul>
+<p>Note: Think of each other as being a tuple in relation</p>
+<h4 id="“ALL”-Multiset-Semantics"><a class="header-anchor" href="#“ALL”-Multiset-Semantics">¶</a>“ALL”: Multiset Semantics</h4>
+<p><code>R = &#123;A, A, A, A, B, B, C, D&#125; = &#123;A(4), B(2), C(1), D(1)&#125;</code></p>
+<p><code>S = &#123;A, A, B, B, B, C, E&#125; = &#123;A(2), B(3), C(1), E(1)&#125;</code></p>
+<ul>
+<li><code>UNION ALL: sum of cardinalities</code>    <code>&#123;A(4+2), B(2+3), C(1+1), D(1+0), E(0+1)&#125; = &#123;A, A, A, A, A, A, B, B, B, B, B, C, C, D, E&#125;</code></li>
+<li><code>INTERSECT ALL: min of cardinalities</code>   <code>&#123;A(min(4, 2)), B(min(2, 3)), C(min(1, 1)), D(min(1, 0)), E(min(0, 1))&#125; = &#123;A, A, B, B, C&#125;</code></li>
+<li><code>EXCEPT ALL: difference of cardinalities</code>   <code>&#123;A(4-2), B(2-3), C(1-1), D(1-0), E(0-1)&#125; = &#123;A, A, D&#125;</code></li>
+</ul>
+<h3 id="Nested-Queries"><a class="header-anchor" href="#Nested-Queries">¶</a>Nested Queries</h3>
+<ul>
+<li><code>嵌套查找</code></li>
+</ul>
+<h4 id="Nested-Queries-IN"><a class="header-anchor" href="#Nested-Queries-IN">¶</a>Nested Queries: IN</h4>
+<ul>
+<li>Example: Names of sailors who’ve reserved boat #102:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.sid <span class="keyword">IN</span></span><br><span class="line">	(<span class="keyword">SELECT</span> R.sid</span><br><span class="line">     <span class="keyword">FROM</span> Reserves R</span><br><span class="line">    <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> <span class="number">102</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>括号里的是<code>subquery</code></li>
+</ul>
+<h4 id="Nested-Queries-NOT-IN"><a class="header-anchor" href="#Nested-Queries-NOT-IN">¶</a>Nested Queries: NOT IN</h4>
+<ul>
+<li>Example: Names of sailors who’ve not reserved boat #103:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.sid <span class="keyword">NOT</span> <span class="keyword">IN</span></span><br><span class="line">	(<span class="keyword">SELECT</span> R.sid</span><br><span class="line">     <span class="keyword">FROM</span> Reserves R</span><br><span class="line">    <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> <span class="number">103</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="Nested-Queries-EXISTS"><a class="header-anchor" href="#Nested-Queries-EXISTS">¶</a>Nested Queries: EXISTS</h4>
+<ul>
+<li>This is a bit odd, but it is legal:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">EXISTS</span></span><br><span class="line">	(<span class="keyword">SELECT</span> R.sid</span><br><span class="line">    <span class="keyword">FROM</span> Reserves R</span><br><span class="line">    <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> <span class="number">103</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果subquery有东西返回，就输出其中所有的sname，如果subquery返回为空，则query输出也为空</li>
+</ul>
+<h4 id="Nested-Queries-with-Correlation"><a class="header-anchor" href="#Nested-Queries-with-Correlation">¶</a>Nested Queries with Correlation</h4>
+<ul>
+<li>相关子查询</li>
+<li>Names of sailors who 've reserved boat #102:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">EXISTS</span></span><br><span class="line">	(<span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">    <span class="keyword">FROM</span> Reserves R</span><br><span class="line">    <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> <span class="number">102</span> <span class="keyword">AND</span> S.sid <span class="operator">=</span> R.sid)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Correlated subquery is recomputed for each Sailors tuple   相关子查询针对每个Sailors元组（元组代表表中的一行 记录）重新计算</li>
+<li>这个相关子查询有点像函数</li>
+</ul>
+<h4 id="More-on-Set-Comparison-Operators"><a class="header-anchor" href="#More-on-Set-Comparison-Operators">¶</a>More on Set-Comparison Operators</h4>
+<ul>
+<li>We 've seen: <code>IN</code>  <code>EXISTS</code></li>
+<li>Can also have: <code>NOT</code>  <code>IN</code>  <code>NOT EXISTS</code></li>
+<li>Other forms: <code>op ANY</code>  <code>op ALL</code></li>
+</ul>
+<h5 id="Example-Find-sailors-whose-rating-is-greater-than-that-of-some-sailor-called-Popeye"><a class="header-anchor" href="#Example-Find-sailors-whose-rating-is-greater-than-that-of-some-sailor-called-Popeye">¶</a>Example: Find sailors whose rating is greater than that of some sailor called Popeye</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.rating <span class="operator">&gt;</span> <span class="keyword">ANY</span></span><br><span class="line">	(<span class="keyword">SELECT</span> S2.rating</span><br><span class="line">    <span class="keyword">FROM</span> Sailors S2</span><br><span class="line">    <span class="keyword">WHERE</span> S2.sname <span class="operator">=</span> <span class="string">&#x27;Popeye&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>从Sailors表中，找出比Popeye的rating更高的人，输出其所有信息</li>
+</ul>
+<h3 id="A-Tough-One-“Division”——Relational-Division"><a class="header-anchor" href="#A-Tough-One-“Division”——Relational-Division">¶</a>A Tough One: “Division”——Relational Division</h3>
+<ul>
+<li>Relational Division: “Find sailors who 've reserved all boats.”     Said differently: “sailors with no counterexample missing boats”      关系除法：“找出预订了所有船只的水手。”      以下有点像双重否定之后输出了正确的结果</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span></span><br><span class="line">	(<span class="keyword">SELECT</span> B.bid</span><br><span class="line">    <span class="keyword">FROM</span> Boats B</span><br><span class="line">    <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> R.bid</span><br><span class="line">                     <span class="keyword">FROM</span> Reserves R</span><br><span class="line">                     <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid</span><br><span class="line">                     <span class="keyword">AND</span> R.sid <span class="operator">=</span> S.sid))</span><br></pre></td></tr></table></figure>
+<h3 id="ARGMAX？"><a class="header-anchor" href="#ARGMAX？">¶</a>ARGMAX？</h3>
+<h4 id="Pt-1"><a class="header-anchor" href="#Pt-1">¶</a>Pt 1</h4>
+<ul>
+<li>The sailor with the highest rating</li>
+<li>Correct or Incorrect?</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MAX</span>(S.rating)</span><br><span class="line"><span class="keyword">FROM</span> Sailors S;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> S.<span class="operator">*</span>, <span class="built_in">MAX</span>(S.rating)</span><br><span class="line"><span class="keyword">FROM</span> Sailors S;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个写法不对，因为只输出的最大值，而没有输出最大值对应的水手的姓名等信息</li>
+<li>第二个写法有S.* ，包含了S的所有列，包括姓名、ID、最大值等。但是第二个写法是非法的，该查询会被拒绝。因为不知道该输出哪个水手的信息</li>
+<li>MAX是一个聚合函数，必须与GROUP NY子句一起使用，或者在子查询中使用，而不能直接与单个记录的列一起选择（？</li>
+</ul>
+<h4 id="Pt-2"><a class="header-anchor" href="#Pt-2">¶</a>Pt 2</h4>
+<p>以下两个query的结果一致，都是输出rating最大值的水手的信息</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.rating <span class="operator">&gt;=</span> <span class="keyword">ALL</span></span><br><span class="line">	(<span class="keyword">SELECT</span> S2.rating</span><br><span class="line">    <span class="keyword">FROM</span> Sailors S2)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> rating <span class="keyword">DESC</span></span><br><span class="line">LIMIT <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>第一种写法可能会返回一大堆评级为最高级的水手信息，相比之下第二种写法只会返回一种水手信息</p>
+<p>累了，先写到这里  目前进度SQL II 41 46</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>SQL notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>Database</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《罗生门》读书摘记</title>
     <url>/2024/07/04/%E3%80%8A%E7%BD%97%E7%94%9F%E9%97%A8%E3%80%8B%E8%AF%BB%E4%B9%A6%E6%91%98%E8%AE%B0/</url>
     <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>

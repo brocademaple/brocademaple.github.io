@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>CS186 SQL2 Berkeley |  BROCADEMAPLE</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/ayer-side.svg" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-CS186 SQL2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  CS186 SQL2 Berkeley
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/07/05/CS186%20SQL2/" class="article-date">
+  <time datetime="2024-07-04T16:00:00.000Z" itemprop="datePublished">2024-07-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/SQL-notes/">SQL notes</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">10 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h2>
+<p>Berkeley CS186 Intro to DB Systems</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Q-dxGaR3fH0&amp;list=PLYp4IGUhNFmw8USiYMJvCUjZe79fvyYge&amp;index=6">视频地址</a>  课程记录</p>
+<h2 id="SQL-2"><a class="header-anchor" href="#SQL-2">¶</a>SQL 2</h2>
+<h3 id="Conceptual-SQL-Evaluation"><a class="header-anchor" href="#Conceptual-SQL-Evaluation">¶</a>Conceptual SQL Evaluation</h3>
+<p>SQL查询从原始数据表提取和转换数据的执行顺序</p>
+<ol>
+<li>
+<p><code>FROM</code> Identify table  确定表</p>
+</li>
+<li>
+<p><code>WHERE</code>  Apply selections(eliminate rows)   应用选择条件（筛选行）</p>
+</li>
+<li>
+<p><code>SELECT</code>  Project away columns(keep only those used in SELECT, GBY, HAVING)   SELECT子句指定了需要返回哪些列，或通过聚合函数进行计算</p>
+</li>
+<li>
+<p><code>GROUP BY</code>  Form groups &amp; aggregate   用GROUP BY将数据分组，并对每个组应用聚合函数</p>
+</li>
+<li>
+<p><code>HAVING</code>  Eliminate groups   过滤不满足条件的组</p>
+</li>
+<li>
+<p><code>DISTINCT</code>  Eliminate duplicates   在最终结果中去除重复的行</p>
+</li>
+<li>
+<p>(Optinal) <code>ORDER BY</code> <code>LIMIT</code> applied at end, to “format” output  格式化输出    <code>ORDER BY</code> 用于控制升序/降序输出, <code>LIMIT</code> 用于获取特定数量的排序后结果，通常与<code>ORDER BY</code>一起使用</p>
+</li>
+</ol>
+<h4 id="Putting-it-all-together"><a class="header-anchor" href="#Putting-it-all-together">¶</a>Putting it all together</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.dept, <span class="built_in">AVG</span>(S.gpa), <span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.gender <span class="operator">=</span> <span class="string">&#x27;F&#x27;</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">2</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
+<p>解释：从别名为S的Students学生表中，筛选出性别为Female的学生，按照所在部门分组，并输出符合条件的学生的部门信息、平均GPA和学生总数，至少有两名女性学生的部门才会被输出，最终结果按照部门字典序排列</p>
+<h3 id="Join-Queries"><a class="header-anchor" href="#Join-Queries">¶</a>Join Queries</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="operator">&lt;</span><span class="keyword">column</span> expression list<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="operator">&lt;</span>table1 [<span class="keyword">AS</span> t1], ..., tableN [<span class="keyword">AS</span> tn]<span class="operator">&gt;</span></span><br><span class="line">[<span class="keyword">WHERE</span> <span class="operator">&lt;</span>predicate<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="operator">&lt;</span><span class="keyword">column</span> list<span class="operator">&gt;</span> [<span class="keyword">HAVING</span>  <span class="operator">&lt;</span>predicate<span class="operator">&gt;</span>] ]</span><br><span class="line">[<span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="operator">&lt;</span><span class="keyword">column</span> list<span class="operator">&gt;</span>];</span><br></pre></td></tr></table></figure>
+<p><code>多表查询</code></p>
+<p>区别就是FROM那里有多个表</p>
+<h4 id="Cross-Cartesian-Product"><a class="header-anchor" href="#Cross-Cartesian-Product">¶</a>Cross(Cartesian) Product</h4>
+<ul>
+<li>All pairs of tuples, concentrated</li>
+</ul>
+<h4 id="Example-Sailors-who-have-reserved-a-boat"><a class="header-anchor" href="#Example-Sailors-who-have-reserved-a-boat">¶</a>Example: Sailors who have reserved a boat</h4>
+<p><code>Sailors</code>表</p>
+<table>
+<thead>
+<tr>
+<th>sid</th>
+<th>sname</th>
+<th>rating</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Popeye</td>
+<td>10</td>
+<td>22</td>
+</tr>
+<tr>
+<td>2</td>
+<td>OliveOyl</td>
+<td>11</td>
+<td>39</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Garfield</td>
+<td>1</td>
+<td>27</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Bob</td>
+<td>5</td>
+<td>19</td>
+</tr>
+</tbody>
+</table>
+<p><code>Reserveds</code> 表</p>
+<table>
+<thead>
+<tr>
+<th>SID</th>
+<th>BID</th>
+<th>DAY</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>102</td>
+<td>9//12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>102</td>
+<td>9/13</td>
+</tr>
+<tr>
+<td>1</td>
+<td>101</td>
+<td>10/01</td>
+</tr>
+</tbody>
+</table>
+<p>有效合并表的SQL语句 “预订了船的水手”</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Sailors.sid, Sailors.sname, Reserves.bid</span><br><span class="line"><span class="keyword">FROM</span> Sailors, Reserves</span><br><span class="line"><span class="keyword">WHERE</span> Sailors.sid <span class="operator">=</span> Reserves.sid</span><br></pre></td></tr></table></figure>
+<p>合并后的表—— “预订了船的水手”</p>
+<table>
+<thead>
+<tr>
+<th>sid</th>
+<th>BID</th>
+<th>day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>102</td>
+<td>9/12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>102</td>
+<td>9/13</td>
+</tr>
+<tr>
+<td>1</td>
+<td>101</td>
+<td>10/01</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Column-Names-and-Table-Aliases"><a class="header-anchor" href="#Column-Names-and-Table-Aliases">¶</a>Column Names and Table Aliases</h3>
+<p>原来的：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Sailors.sid, Sailors.sname, Reserve.bid</span><br><span class="line"><span class="keyword">FROM</span> Sailors, Reserves</span><br><span class="line"><span class="keyword">WHERE</span> Sailors.sid <span class="operator">=</span> Reserve.sid</span><br></pre></td></tr></table></figure>
+<p>改进之后：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Sailors.sid, sname, bid</span><br><span class="line"><span class="keyword">FROM</span> Sailors <span class="keyword">AS</span> S, Reserves <span class="keyword">AS</span> R</span><br><span class="line"><span class="keyword">WHERE</span> S.sid <span class="operator">=</span> R.sid</span><br></pre></td></tr></table></figure>
+<p>因为<code>sname</code>只有<code>Sailors</code>里面有，<code>bid</code>只有<code>Reserves</code>里面有，所以可以省略前缀，但是<code>sid</code>是两个表都有，所以需要加前缀来区分是哪个表的</p>
+<p>然后给表名取别名，有助于代码精简+可读性↑</p>
+<h4 id="More-Aliases"><a class="header-anchor" href="#More-Aliases">¶</a>More Aliases</h4>
+<p>别名也可以在输出中使用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> x.sname, x.age, y.sname <span class="keyword">AS</span> sname2, y.age <span class="keyword">AS</span> age2</span><br><span class="line"><span class="keyword">FROM</span> Sailors <span class="keyword">AS</span> x, Sailors <span class="keyword">AS</span> y</span><br><span class="line"><span class="keyword">WHERE</span> x.age <span class="operator">&gt;</span> y.age</span><br></pre></td></tr></table></figure>
+<p>给同一个表两个别名，把一个表分成两个表，其中左表的年龄比右表大</p>
+<ul>
+<li>Table aliases in the FROM clause   - Needed when the same table used multiple times (“self-join”)    当同一个表被多次使用（“自连接”）的时候需要使用表别名来区分</li>
+<li>Column aliases in the SELECT clause  为列指定别名，以便在查询结果中使用更有意义的列名</li>
+</ul>
+<h3 id="Arithmetic-Expressions"><a class="header-anchor" href="#Arithmetic-Expressions">¶</a>Arithmetic Expressions</h3>
+<p>可以在``SELECT`语句中指定算术运算符和表达式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.age, S.age <span class="operator">-</span> <span class="number">5</span> <span class="keyword">AS</span> age1, <span class="number">2</span> <span class="operator">*</span> S.ages <span class="keyword">AS</span> age2</span><br><span class="line"><span class="keyword">FROM</span> Sailors <span class="keyword">AS</span> S</span><br><span class="line"><span class="keyword">WHERE</span> S.sname <span class="operator">=</span> <span class="string">&#x27;Popeye&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>在``WHERE`语句中也可以使用算术运算符和表达式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S1.sname <span class="keyword">AS</span> name1, S2.sname <span class="keyword">AS</span> name2</span><br><span class="line"><span class="keyword">FROM</span> Sailors <span class="keyword">AS</span> S1, Sailors <span class="keyword">AS</span> S2</span><br><span class="line"><span class="keyword">WHERE</span> <span class="number">2</span><span class="operator">*</span>S1.rating <span class="operator">=</span> S2.rating<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<h3 id="SQL-Calculator"><a class="header-anchor" href="#SQL-Calculator">¶</a>SQL Calculator!</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	<span class="built_in">log</span>(<span class="number">1000</span>) <span class="keyword">as</span> three,</span><br><span class="line">	<span class="built_in">exp</span>(<span class="built_in">ln</span>(<span class="number">2</span>)) <span class="keyword">as</span> two,</span><br><span class="line">	<span class="built_in">cos</span>(<span class="number">0</span>) <span class="keyword">as</span> <span class="keyword">one</span>,</span><br><span class="line">	<span class="built_in">ln</span>(<span class="number">2</span><span class="operator">*</span><span class="number">3</span>) <span class="operator">=</span> <span class="built_in">ln</span>(<span class="number">2</span>) <span class="operator">+</span> <span class="built_in">ln</span>(<span class="number">3</span>) <span class="keyword">as</span> sanity;</span><br></pre></td></tr></table></figure>
+<p>没有FROM语句，且只返回一行。也可以吧SQL语言当作计算器</p>
+<p>以上语句会输出一行四列的表</p>
+<h3 id="String-Comparisons"><a class="header-anchor" href="#String-Comparisons">¶</a>String Comparisons</h3>
+<p>SQL还支持字符串函数，特别是WHERE子句中的字符串比较函数，以下是两种不同的方式来查找格式为以B开头、且有任意数量其他字符的字符串：</p>
+<ul>
+<li>Old-school SQL</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.sname <span class="keyword">like</span> <span class="string">&#x27;B_%&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Standard Regular Expressions</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.sname <span class="operator">~</span> <span class="string">&#x27;B.*&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>好像用的是正则表达式   ~代表的是正则式匹配</p>
+<h3 id="Combining-Predicates"><a class="header-anchor" href="#Combining-Predicates">¶</a>Combining Predicates</h3>
+<p>使用布尔逻辑来组合多个谓词</p>
+<ul>
+<li>Subtle connections between:
+<ul>
+<li>Boolean logic in WHERE(i.e., AND, OR)</li>
+<li>Traditional Set operations(i.e., INTERSECT, UNION)  传统集合操作</li>
+</ul>
+</li>
+</ul>
+<h4 id="Example1-Sid’s-of-sailors-who-reserved-a-red-or-green-boat"><a class="header-anchor" href="#Example1-Sid’s-of-sailors-who-reserved-a-red-or-green-boat">¶</a>Example1: Sid’s of sailors who reserved a red or green boat</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> R.sid</span><br><span class="line"><span class="keyword">FROM</span> Boats B, Reserves R</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> (B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span> <span class="keyword">OR</span> B.color <span class="operator">=</span> <span class="string">&#x27;green&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>另一种方式：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> R.sid</span><br><span class="line"><span class="keyword">FROM</span> Boats B, Reserves R</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> R.sid</span><br><span class="line"><span class="keyword">FROM</span> Boats B, Reserves R</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;green&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><code>UNION ALL</code>    不移除重复项，相当于取并集，红or绿</p>
+<h4 id="Example2-Sid’s-of-sailors-who-reserved-a-red-and-green-boat"><a class="header-anchor" href="#Example2-Sid’s-of-sailors-who-reserved-a-red-and-green-boat">¶</a>Example2: Sid’s of sailors who reserved a red and green boat</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> R.sid</span><br><span class="line"><span class="keyword">FROM</span> Boats B, Reserves R</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> (B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span> <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;green&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>但是此处第一种方式将不会返回任何东西，因为<code>color</code>不可能同时<code>='red'</code> 且<code>='green'</code></p>
+<p>所以此处只能使用另一种方式：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> R.sid</span><br><span class="line"><span class="keyword">FROM</span> Boats B, Reserves R</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">INTERSECT</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> R.sid</span><br><span class="line"><span class="keyword">FROM</span> Boats B, Reserves R</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;green&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><code>INTERSECT</code>   相当于取交集，红and绿</p>
+<h3 id="Set-Semantics"><a class="header-anchor" href="#Set-Semantics">¶</a>Set Semantics</h3>
+<ul>
+<li>Set: a collection of distinct elements    集合是由不同元素组成的集合</li>
+<li>Standard ways of manipulating / combining sets
+<ul>
+<li>Union  并集</li>
+<li>Intersect   交集</li>
+<li>Except   差集</li>
+</ul>
+</li>
+<li>Treat tuples within a relation as elements of a set   将关系中的元组视为集合中的元素</li>
+</ul>
+<h4 id="Default-Set-Semantics"><a class="header-anchor" href="#Default-Set-Semantics">¶</a>Default: Set Semantics</h4>
+<p><code>R = &#123;A, A, A, A, B, B, C, D&#125;</code></p>
+<p><code>S = &#123;A, A, B, B, B, C, E&#125;</code></p>
+<ul>
+<li><code>UNION &#123;A, B, C, D, E&#125;</code></li>
+<li><code>INTERSECT &#123;A, B, C&#125;</code></li>
+<li><code>EXCEPT &#123;D&#125;</code></li>
+</ul>
+<p>Note: Think of each other as being a tuple in relation</p>
+<h4 id="“ALL”-Multiset-Semantics"><a class="header-anchor" href="#“ALL”-Multiset-Semantics">¶</a>“ALL”: Multiset Semantics</h4>
+<p><code>R = &#123;A, A, A, A, B, B, C, D&#125; = &#123;A(4), B(2), C(1), D(1)&#125;</code></p>
+<p><code>S = &#123;A, A, B, B, B, C, E&#125; = &#123;A(2), B(3), C(1), E(1)&#125;</code></p>
+<ul>
+<li><code>UNION ALL: sum of cardinalities</code>    <code>&#123;A(4+2), B(2+3), C(1+1), D(1+0), E(0+1)&#125; = &#123;A, A, A, A, A, A, B, B, B, B, B, C, C, D, E&#125;</code></li>
+<li><code>INTERSECT ALL: min of cardinalities</code>   <code>&#123;A(min(4, 2)), B(min(2, 3)), C(min(1, 1)), D(min(1, 0)), E(min(0, 1))&#125; = &#123;A, A, B, B, C&#125;</code></li>
+<li><code>EXCEPT ALL: difference of cardinalities</code>   <code>&#123;A(4-2), B(2-3), C(1-1), D(1-0), E(0-1)&#125; = &#123;A, A, D&#125;</code></li>
+</ul>
+<h3 id="Nested-Queries"><a class="header-anchor" href="#Nested-Queries">¶</a>Nested Queries</h3>
+<ul>
+<li><code>嵌套查找</code></li>
+</ul>
+<h4 id="Nested-Queries-IN"><a class="header-anchor" href="#Nested-Queries-IN">¶</a>Nested Queries: IN</h4>
+<ul>
+<li>Example: Names of sailors who’ve reserved boat #102:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.sid <span class="keyword">IN</span></span><br><span class="line">	(<span class="keyword">SELECT</span> R.sid</span><br><span class="line">     <span class="keyword">FROM</span> Reserves R</span><br><span class="line">    <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> <span class="number">102</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>括号里的是<code>subquery</code></li>
+</ul>
+<h4 id="Nested-Queries-NOT-IN"><a class="header-anchor" href="#Nested-Queries-NOT-IN">¶</a>Nested Queries: NOT IN</h4>
+<ul>
+<li>Example: Names of sailors who’ve not reserved boat #103:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.sid <span class="keyword">NOT</span> <span class="keyword">IN</span></span><br><span class="line">	(<span class="keyword">SELECT</span> R.sid</span><br><span class="line">     <span class="keyword">FROM</span> Reserves R</span><br><span class="line">    <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> <span class="number">103</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="Nested-Queries-EXISTS"><a class="header-anchor" href="#Nested-Queries-EXISTS">¶</a>Nested Queries: EXISTS</h4>
+<ul>
+<li>This is a bit odd, but it is legal:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">EXISTS</span></span><br><span class="line">	(<span class="keyword">SELECT</span> R.sid</span><br><span class="line">    <span class="keyword">FROM</span> Reserves R</span><br><span class="line">    <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> <span class="number">103</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果subquery有东西返回，就输出其中所有的sname，如果subquery返回为空，则query输出也为空</li>
+</ul>
+<h4 id="Nested-Queries-with-Correlation"><a class="header-anchor" href="#Nested-Queries-with-Correlation">¶</a>Nested Queries with Correlation</h4>
+<ul>
+<li>相关子查询</li>
+<li>Names of sailors who 've reserved boat #102:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">EXISTS</span></span><br><span class="line">	(<span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">    <span class="keyword">FROM</span> Reserves R</span><br><span class="line">    <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> <span class="number">102</span> <span class="keyword">AND</span> S.sid <span class="operator">=</span> R.sid)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Correlated subquery is recomputed for each Sailors tuple   相关子查询针对每个Sailors元组（元组代表表中的一行 记录）重新计算</li>
+<li>这个相关子查询有点像函数</li>
+</ul>
+<h4 id="More-on-Set-Comparison-Operators"><a class="header-anchor" href="#More-on-Set-Comparison-Operators">¶</a>More on Set-Comparison Operators</h4>
+<ul>
+<li>We 've seen: <code>IN</code>  <code>EXISTS</code></li>
+<li>Can also have: <code>NOT</code>  <code>IN</code>  <code>NOT EXISTS</code></li>
+<li>Other forms: <code>op ANY</code>  <code>op ALL</code></li>
+</ul>
+<h5 id="Example-Find-sailors-whose-rating-is-greater-than-that-of-some-sailor-called-Popeye"><a class="header-anchor" href="#Example-Find-sailors-whose-rating-is-greater-than-that-of-some-sailor-called-Popeye">¶</a>Example: Find sailors whose rating is greater than that of some sailor called Popeye</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.rating <span class="operator">&gt;</span> <span class="keyword">ANY</span></span><br><span class="line">	(<span class="keyword">SELECT</span> S2.rating</span><br><span class="line">    <span class="keyword">FROM</span> Sailors S2</span><br><span class="line">    <span class="keyword">WHERE</span> S2.sname <span class="operator">=</span> <span class="string">&#x27;Popeye&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>从Sailors表中，找出比Popeye的rating更高的人，输出其所有信息</li>
+</ul>
+<h3 id="A-Tough-One-“Division”——Relational-Division"><a class="header-anchor" href="#A-Tough-One-“Division”——Relational-Division">¶</a>A Tough One: “Division”——Relational Division</h3>
+<ul>
+<li>Relational Division: “Find sailors who 've reserved all boats.”     Said differently: “sailors with no counterexample missing boats”      关系除法：“找出预订了所有船只的水手。”      以下有点像双重否定之后输出了正确的结果</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span></span><br><span class="line">	(<span class="keyword">SELECT</span> B.bid</span><br><span class="line">    <span class="keyword">FROM</span> Boats B</span><br><span class="line">    <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> R.bid</span><br><span class="line">                     <span class="keyword">FROM</span> Reserves R</span><br><span class="line">                     <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid</span><br><span class="line">                     <span class="keyword">AND</span> R.sid <span class="operator">=</span> S.sid))</span><br></pre></td></tr></table></figure>
+<h3 id="ARGMAX？"><a class="header-anchor" href="#ARGMAX？">¶</a>ARGMAX？</h3>
+<h4 id="Pt-1"><a class="header-anchor" href="#Pt-1">¶</a>Pt 1</h4>
+<ul>
+<li>The sailor with the highest rating</li>
+<li>Correct or Incorrect?</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MAX</span>(S.rating)</span><br><span class="line"><span class="keyword">FROM</span> Sailors S;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> S.<span class="operator">*</span>, <span class="built_in">MAX</span>(S.rating)</span><br><span class="line"><span class="keyword">FROM</span> Sailors S;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个写法不对，因为只输出的最大值，而没有输出最大值对应的水手的姓名等信息</li>
+<li>第二个写法有S.* ，包含了S的所有列，包括姓名、ID、最大值等。但是第二个写法是非法的，该查询会被拒绝。因为不知道该输出哪个水手的信息</li>
+<li>MAX是一个聚合函数，必须与GROUP NY子句一起使用，或者在子查询中使用，而不能直接与单个记录的列一起选择（？</li>
+</ul>
+<h4 id="Pt-2"><a class="header-anchor" href="#Pt-2">¶</a>Pt 2</h4>
+<p>以下两个query的结果一致，都是输出rating最大值的水手的信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.rating <span class="operator">&gt;=</span> <span class="keyword">ALL</span></span><br><span class="line">	(<span class="keyword">SELECT</span> S2.rating</span><br><span class="line">    <span class="keyword">FROM</span> Sailors S2)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> rating <span class="keyword">DESC</span></span><br><span class="line">LIMIT <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>第一种写法可能会返回一大堆评级为最高级的水手信息，相比之下第二种写法只会返回一种水手信息</p>
+<p>累了，先写到这里  目前进度SQL II 41 46</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        share
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/07/05/CS186%20SQL2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/" rel="tag">Database</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2024/07/04/CS186%20SQL1/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">CS186 SQL1 Berkeley</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "CmxWxkoAcvsr881KQv45QV4R-gzGzoHsz#",
+    app_key: "qbXhQ3Ygb0y5FksypUqU9TqN#",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "comment here啊",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2024
+        <i class="ri-heart-fill heart_icon"></i> brocademaple
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="BROCADEMAPLE"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/notes">笔记库</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/">待定</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/reading">阅读</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/aboutMe">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=2010857169&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
