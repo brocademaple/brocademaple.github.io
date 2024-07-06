@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.1k</span>
+            <span class="post-count">4.4k</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">10 分钟</span>
+            <span class="post-count">21 分钟</span>
         </span>
     </span>
 </div>
@@ -381,7 +381,7 @@
 <li>Relational Division: “Find sailors who 've reserved all boats.”     Said differently: “sailors with no counterexample missing boats”      关系除法：“找出预订了所有船只的水手。”      以下有点像双重否定之后输出了正确的结果</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.sname</span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span></span><br><span class="line">	(<span class="keyword">SELECT</span> B.bid</span><br><span class="line">    <span class="keyword">FROM</span> Boats B</span><br><span class="line">    <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> R.bid</span><br><span class="line">                     <span class="keyword">FROM</span> Reserves R</span><br><span class="line">                     <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid</span><br><span class="line">                     <span class="keyword">AND</span> R.sid <span class="operator">=</span> S.sid))</span><br></pre></td></tr></table></figure>
-<h3 id="ARGMAX？"><a class="header-anchor" href="#ARGMAX？">¶</a>ARGMAX？</h3>
+<h3 id="ARGMAX？这块没太懂"><a class="header-anchor" href="#ARGMAX？这块没太懂">¶</a>ARGMAX？这块没太懂</h3>
 <h4 id="Pt-1"><a class="header-anchor" href="#Pt-1">¶</a>Pt 1</h4>
 <ul>
 <li>The sailor with the highest rating</li>
@@ -398,7 +398,312 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">WHERE</span> S.rating <span class="operator">&gt;=</span> <span class="keyword">ALL</span></span><br><span class="line">	(<span class="keyword">SELECT</span> S2.rating</span><br><span class="line">    <span class="keyword">FROM</span> Sailors S2)</span><br></pre></td></tr></table></figure>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> Sailors S</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> rating <span class="keyword">DESC</span></span><br><span class="line">LIMIT <span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p>第一种写法可能会返回一大堆评级为最高级的水手信息，相比之下第二种写法只会返回一种水手信息</p>
-<p>累了，先写到这里  目前进度SQL II 41 46</p>
+<h3 id="“Inner”-Joins-Another-Syntax"><a class="header-anchor" href="#“Inner”-Joins-Another-Syntax">¶</a>“Inner” Joins: Another Syntax</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> s.<span class="operator">*</span>, r.bid</span><br><span class="line"><span class="keyword">FROM</span> Sailors s, Reserves r</span><br><span class="line"><span class="keyword">WHERE</span> s.sid <span class="operator">=</span> r.sid</span><br><span class="line"><span class="keyword">AND</span> ...</span><br></pre></td></tr></table></figure>
+<p>以上是第一种写法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> s.<span class="operator">*</span>, r.bid</span><br><span class="line"><span class="keyword">FROM</span> Sailors s <span class="keyword">INNER</span> <span class="keyword">JOIN</span> Reserves r</span><br><span class="line"><span class="keyword">ON</span> s.sid <span class="operator">=</span> r.sid</span><br><span class="line"><span class="keyword">WHERE</span> ...</span><br></pre></td></tr></table></figure>
+<p>以上是第二种写法，两种写法的效果一样</p>
+<p><code>Inner Join</code>是一种中缀表示法，位于两个表的名称之间，用于两个表联接</p>
+<h3 id="Join-Variants"><a class="header-anchor" href="#Join-Variants">¶</a>Join Variants</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">&lt;</span><span class="keyword">column</span> expression list<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line"> [<span class="keyword">INNER</span> <span class="operator">|</span> <span class="keyword">NATURAL</span></span><br><span class="line"> 	<span class="operator">|</span> &#123;<span class="keyword">LEFT</span> <span class="operator">|</span> <span class="keyword">RIGHT</span> <span class="operator">|</span> <span class="keyword">FULL</span> &#125; &#123;<span class="keyword">OUTER</span>&#125;] <span class="keyword">JOIN</span></span><br><span class="line"> 	table_name</span><br><span class="line"> 	<span class="keyword">ON</span> <span class="operator">&lt;</span>qualification list<span class="operator">&gt;</span></span><br><span class="line"> <span class="keyword">WHERE</span> ...</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>INNER is default    默认为内部连接</p>
+</li>
+<li>
+<p>Inner join what we 've learned so far  -Same thing, just with different syntax</p>
+</li>
+</ul>
+<h4 id="Inner-Natural-Joins"><a class="header-anchor" href="#Inner-Natural-Joins">¶</a>Inner/Natural Joins</h4>
+<ul>
+<li>
+<p>内部连接/自然连接</p>
+</li>
+<li>
+<p>以下三种写法等效</p>
+</li>
+<li>
+<p>第一种：最开始的两表联合查询</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> s.sid, s.sname, r.bid</span><br><span class="line"><span class="keyword">FROM</span> Sailors s, Reserves r</span><br><span class="line"><span class="keyword">WHERE</span> s.sid <span class="operator">=</span> r.sid</span><br><span class="line"> <span class="keyword">AND</span> s.age <span class="operator">&gt;</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>第二种：Inner Join</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> s.sid, s.sname, r.bid</span><br><span class="line"><span class="keyword">FROM</span> Sailors s <span class="keyword">INNER</span> <span class="keyword">JOIN</span> Reserves r</span><br><span class="line"><span class="keyword">ON</span> s.sid <span class="operator">=</span> r.sid</span><br><span class="line"> <span class="keyword">WHERE</span> s.age <span class="operator">&gt;</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>第三种：Natural Join</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> s.sid, s.sname, r.bid</span><br><span class="line"><span class="keyword">FROM</span> Sailors s <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> Reserves r</span><br><span class="line"><span class="keyword">WHERE</span> s.age <span class="operator">&gt;</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>&quot;NATURAL&quot;</code> means equi-join for pairs of attributes with the same name</li>
+<li><code>Natural Join</code> 是``Inner Join<code>的一种特殊情况，</code>Natural Join<code>的</code>on<code>子句在后台被自动计算，自动匹配相等的列名称，也就是第二种写法中的</code>s.sid = r.sid`</li>
+<li>所以<em>谨慎选择使用<code>natural join</code></em>，因为这种方法会选择联合的表中<strong>所有列名称相同</strong>的匹配字段；而且随着向表中添加或删除列或重命名列，``natural join`会以不可预测的方式中断，所以一般不推荐使用</li>
+</ul>
+<h4 id="Left-Outer-Join"><a class="header-anchor" href="#Left-Outer-Join">¶</a>Left Outer Join</h4>
+<ul>
+<li>returns all matched rows, and preserves all unmatched rows from the table on the left of the join clause    -(use nulls in fields of non-matching tuples)   返回所有匹配的行，并保留连接子句左侧表中未匹配的所有行  （在不匹配元组的字段中使用空值）</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> s.sid, s.sname, r.bid</span><br><span class="line"><span class="keyword">FROM</span> Sailors2 s <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Reserves2 r</span><br><span class="line"><span class="keyword">On</span> s.sid <span class="operator">=</span> r.sid;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>returns all sailors &amp; bid for boat in any of their reservations   返回了所有水手及其在<code>Reserves</code>中的船只编号<code>r.bid</code></li>
+<li>note: no match for s.sid? r.bid IS NULL  如果<code>s.sid</code>没有匹配项则<code>r.bid = NULL</code>     结果集将包含左侧表的所有记录，以及右侧表中对应的记录</li>
+</ul>
+<h4 id="Right-Outer-Join"><a class="header-anchor" href="#Right-Outer-Join">¶</a>Right Outer Join</h4>
+<ul>
+<li>returns all matched rows, and preserves all unmatched rows from the table on the rightof the join clause    -(use nulls in fields of non-matching tuples)   返回所有匹配的行，并保留连接子句右侧表中未匹配的所有行  （在不匹配元组的字段中使用空值）</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> r.sid, b.bid, b.bname</span><br><span class="line"><span class="keyword">FROM</span> Reserves2 r <span class="keyword">RIGHT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Boats2 b</span><br><span class="line"><span class="keyword">On</span> r.bid <span class="operator">=</span> b.bid</span><br></pre></td></tr></table></figure>
+<ul>
+<li>returns all boats&amp; sid for any sailor associated with the reservation   返回了所有水手及其在<code>Reserves</code>中的船只编号<code>r.bid</code></li>
+<li>note: no match for s.sid? r.bid IS NULL  如果<code>s.sid</code>没有匹配项则<code>r.bid = NULL</code>     结果集将包含右侧表的所有记录，以及左侧表中对应的记录</li>
+</ul>
+<h4 id="Full-Outer-Join"><a class="header-anchor" href="#Full-Outer-Join">¶</a>Full Outer Join</h4>
+<ul>
+<li>Returns all (matched or unmatched) rows from the tables on both sides of the join clause    返回连接子句两侧表中的所有行（不管匹不匹配）</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> r.sid, b.bid, b.bname</span><br><span class="line"><span class="keyword">FROM</span> Reserves2 r <span class="keyword">FULL</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Boats2 b</span><br><span class="line"><span class="keyword">ON</span> r.bid <span class="operator">=</span> b.bid</span><br></pre></td></tr></table></figure>
+<ul>
+<li>returns all boats &amp; all information on reservations   返回左右表所有信息    此处即所有船只和所有预订信息</li>
+<li>No match for r.bid?  - b.bid IS NULL AND b.bname IS NULL   如果<code>r.bid没有匹配项？</code> 则 <code>b.bid</code> 和 <code>b.bname</code> 都是<code>NULL</code></li>
+<li>No match for b.bid?  - <code>r.sid</code> IS NULL</li>
+</ul>
+<h3 id="Views-Named-Queries"><a class="header-anchor" href="#Views-Named-Queries">¶</a>Views: Named Queries</h3>
+<ul>
+<li>视图是一个虚拟的表，其内容由SQL查询定义。视图不存储数据，而是在查询视图时动态生成数据</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> view_name   <span class="operator">/</span><span class="operator">/</span> 创建视图</span><br><span class="line"><span class="keyword">AS</span> select_statement     <span class="operator">/</span><span class="operator">/</span> 定义视图内容</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Makes development simpler   简化复杂的查询，通过简单的视图名称来代替复杂的SQL语句</li>
+<li>Often used for security  视图可以限制用户对某些数据的访问，隐藏其余数据</li>
+<li>Not “materialized”   非物化，即视图不存储查询结果，每次访问视图时都会执行底层的SQL查询</li>
+<li>应用场景：数据聚合、数据过滤、简化复杂查询等</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> Redcount</span><br><span class="line"><span class="keyword">AS</span> <span class="keyword">SELECT</span> B.bid, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> scount</span><br><span class="line">	<span class="keyword">FROM</span> Boats2 B, Reserves2 R</span><br><span class="line">	<span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span></span><br><span class="line">	<span class="keyword">GROUP</span> <span class="keyword">BY</span> B.bid</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Redcount</code>视图通过查询<code>Boats2</code>和<code>Reserves2</code>表，统计了颜色为红色的船只的预订数量，并按船只编号分组。如果<code>B.bid</code>在<code>Reserves2</code>表中没有匹配项，那么对应的计数将为0</li>
+</ul>
+<h4 id="Views-Instead-of-Relations-in-Queries-这个没太懂"><a class="header-anchor" href="#Views-Instead-of-Relations-in-Queries-这个没太懂">¶</a>Views Instead of Relations in Queries   这个没太懂</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> Redcount</span><br><span class="line"><span class="keyword">AS</span> <span class="keyword">SELECT</span> B.bid, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> scount</span><br><span class="line">	<span class="keyword">FROM</span> Boats2 B, Reserves2 R</span><br><span class="line">	<span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span></span><br><span class="line">	<span class="keyword">GROUP</span> <span class="keyword">BY</span> B.bid;</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 因为视图是一个虚拟的表，所以这条语句执行的是定义视图时的<span class="keyword">SQL</span>查询</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">from</span> Redcount</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> bname, scount</span><br><span class="line"><span class="keyword">FROM</span> Redcount R, Boats2 B  <span class="operator">/</span><span class="operator">/</span> 将视图和Boats2表进行查询</span><br><span class="line"><span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid</span><br><span class="line"><span class="keyword">AND</span> scount <span class="operator">&lt;</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>基于<code>Boats2</code>和<code>Reserves2</code>表，统计了颜色为红色的船只的预订数量，并按船只编号分组</li>
+</ul>
+<h4 id="Subqueries-in-FROM"><a class="header-anchor" href="#Subqueries-in-FROM">¶</a>Subqueries in FROM</h4>
+<ul>
+<li>想创建一个只使用一次的“视图”    “即时视图”</li>
+<li>define some query in the FROM while define the outer query   定义外部查询时在FROM语句中定义子查询</li>
+<li>Like a “view on the fly”</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> bname, scount</span><br><span class="line"><span class="keyword">FROM</span> Boats2 B,</span><br><span class="line">(<span class="keyword">SELECT</span> B.bid, <span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line">	<span class="keyword">FROM</span> Boats2 B, Reserves2 R</span><br><span class="line">	<span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span></span><br><span class="line">	<span class="keyword">GROUP</span> <span class="keyword">BY</span> B.bid) <span class="keyword">AS</span> Reds(bid, scount)</span><br><span class="line">  <span class="keyword">WHERE</span> Reds.bid <span class="operator">=</span> B.bid   <span class="operator">/</span><span class="operator">/</span> 连接子查询</span><br><span class="line">  	<span class="keyword">AND</span> scount <span class="operator">&lt;</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<h4 id="With-a-k-a-common-table-expression-CTE"><a class="header-anchor" href="#With-a-k-a-common-table-expression-CTE">¶</a>With a.k.a common table expression(CTE)</h4>
+<ul>
+<li>CTE   Common Table Expression  公用表表达式</li>
+<li>Another “view on the fly” syntax:</li>
+<li>在常规查询之前定义子查询，这个子查询可在后面的查询复用</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span> 定义了Reds这个子查询</span><br><span class="line">	<span class="keyword">WITH</span> Reds(bid, scount) <span class="keyword">AS</span></span><br><span class="line">	(<span class="keyword">SELECT</span> B.bid, <span class="built_in">COUNT</span> (<span class="operator">*</span>)</span><br><span class="line">    <span class="keyword">FROM</span> Boats2 B, Reserves2 R</span><br><span class="line">    <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span></span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> B.bid)    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">SELECT</span> bname, scount</span><br><span class="line"><span class="keyword">FROM</span> Boats2 B, Reds</span><br><span class="line"><span class="keyword">WHERE</span> Reds.bid <span class="operator">=</span> B.bid</span><br><span class="line"><span class="keyword">AND</span> scount <span class="operator">&lt;</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<h4 id="Can-have-many-queries-in-WITH"><a class="header-anchor" href="#Can-have-many-queries-in-WITH">¶</a>Can have many queries in WITH</h4>
+<ul>
+<li>Another “view on the fly” syntax</li>
+<li>在常规查询前定义多个子查询，这些子查询也可以相互引用</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">WITH</span> Reds(bid, scount) <span class="keyword">AS</span></span><br><span class="line">	(<span class="keyword">SELECT</span> B.bid, <span class="built_in">COUNT</span> (<span class="operator">*</span>)</span><br><span class="line">    <span class="keyword">FROM</span> Boats2 B, Reserves2 R</span><br><span class="line">    <span class="keyword">WHERE</span> R.bid <span class="operator">=</span> B.bid <span class="keyword">AND</span> B.color <span class="operator">=</span> <span class="string">&#x27;red&#x27;</span></span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> B.bid),</span><br><span class="line">    </span><br><span class="line">    UnpopularReds <span class="keyword">AS</span></span><br><span class="line">    <span class="keyword">SELECT</span> bname, scount</span><br><span class="line">    <span class="keyword">FROM</span> Boats2 B, Reds</span><br><span class="line">    <span class="keyword">WHERE</span> Reds.bid <span class="operator">=</span> B.bid</span><br><span class="line">    <span class="keyword">AND</span> scount <span class="operator">&lt;</span> <span class="number">10</span></span><br><span class="line">   </span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> UnpopularReds;</span><br></pre></td></tr></table></figure>
+<h4 id="Example-ARGMAX-GROUP-BY"><a class="header-anchor" href="#Example-ARGMAX-GROUP-BY">¶</a>Example: ARGMAX GROUP BY?</h4>
+<ul>
+<li>The sailor with the highest rating per age  找出每个年龄段最高的rating值</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">WITH</span> maxratings(age, maxrating) <span class="keyword">AS</span></span><br><span class="line">	(<span class="keyword">SELECT</span> age, <span class="built_in">max</span>(rating)</span><br><span class="line">	<span class="keyword">FROM</span> Sailors</span><br><span class="line">	<span class="keyword">GROUP</span> <span class="keyword">BY</span> age)</span><br><span class="line">	</span><br><span class="line"><span class="keyword">SELECT</span> S.<span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> Sailors S, maxratings m</span><br><span class="line"><span class="keyword">WHERE</span> S.age <span class="operator">=</span> m.age</span><br><span class="line"><span class="keyword">AND</span> S.rating <span class="operator">=</span> m.maxrating</span><br></pre></td></tr></table></figure>
+<h3 id="Testing-SQL-Queries"><a class="header-anchor" href="#Testing-SQL-Queries">¶</a>Testing SQL Queries</h3>
+<ul>
+<li>Not every database instance will reveal every bug in your query
+<ul>
+<li>Eg: database instance without any rows in it</li>
+</ul>
+</li>
+<li>Need to debug your queries</li>
+<li>reasoning about them carefully</li>
+<li>constructing test data</li>
+</ul>
+<h3 id="Brief-Detour-Null-Values"><a class="header-anchor" href="#Brief-Detour-Null-Values">¶</a>Brief Detour: Null Values</h3>
+<ul>
+<li>Field values are sometimes unknown
+<ul>
+<li>SQL provides a special value NULL for such situations</li>
+<li>every data type can be NULL</li>
+</ul>
+</li>
+<li>The presence of null complicates many issues. E.g.:  有时有NULL会变得复杂
+<ul>
+<li>Selection predicates(<code>WHERE</code>)   <code>NULL</code>如何与<code>WHERE</code>子句交互</li>
+<li>Aggregation    聚合</li>
+</ul>
+</li>
+<li>But NULLs comes naturally from Outer joins  NULL无法避免，NULL来自外部连接</li>
+</ul>
+<h4 id="NULL-in-the-WHERE-clause"><a class="header-anchor" href="#NULL-in-the-WHERE-clause">¶</a>NULL in the WHERE clause</h4>
+<h5 id="Example"><a class="header-anchor" href="#Example">¶</a>Example</h5>
+<ul>
+<li>
+<p>Consider a tuple where rating IS NULL</p>
+</li>
+<li>
+<pre><code class="language-sql">INSERT INTO sailors VALUES
+(11, 'Jack Sparrow', NULL, 35);
+
+SELECT * FROM sailors
+WHERE rating &gt; 8;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- Is Jack Sparrow in the output?    --The result is yes/no 有/没有，答案不能是含糊的</span><br><span class="line"></span><br><span class="line">#### NULL in comparators</span><br><span class="line"></span><br><span class="line">- 比较器中的NULL</span><br><span class="line">- Rules: (x op NULL) evaluates to ... NULL!</span><br><span class="line"></span><br><span class="line">```sql</span><br><span class="line">SELECT rating = NULL FROM sailors;</span><br><span class="line">SELECT rating &lt; NULL FROM sailors;</span><br><span class="line">SELECT rating &gt;= NULL FROM sailors;</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+<li>
+<p>每行SELECT语句返回的都是NULL</p>
+</li>
+</ul>
+<h4 id="Explicit-NULL-Checks"><a class="header-anchor" href="#Explicit-NULL-Checks">¶</a>Explicit NULL Checks</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> sailors <span class="keyword">WHERE</span> rating <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> sailors <span class="keyword">WHERE</span> rating <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>显式NULL检查</li>
+<li>当将字段与NULL进行比较时，使用<code>IS NULL</code>/<code>IS NOT NULL</code> 而不是等号，返回值为<code>true/false</code></li>
+</ul>
+<h4 id="NULL-at-top-of-WHERE"><a class="header-anchor" href="#NULL-at-top-of-WHERE">¶</a>NULL at top of WHERE</h4>
+<ul>
+<li>Rule: Do not output a tuple WHERE NULL</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> sailors;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> sailors <span class="keyword">WHERE</span> rating <span class="operator">&gt;</span> <span class="number">8</span>;  <span class="operator">/</span><span class="operator">/</span> <span class="keyword">NULL</span> <span class="operator">&gt;</span> <span class="number">8</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> sailors <span class="keyword">WHERE</span> rating <span class="operator">&lt;=</span> <span class="number">8</span>;  <span class="operator">/</span><span class="operator">/</span> <span class="keyword">NULL</span> <span class="operator">&lt;=</span> <span class="number">8</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>二三句查询语句的结果都是NULL，因此结果不会输出</li>
+</ul>
+<h4 id="NULL-in-boolean-Logic"><a class="header-anchor" href="#NULL-in-boolean-Logic">¶</a>NULL in boolean Logic</h4>
+<ul>
+<li>布尔逻辑中的NULL</li>
+<li>SQL遵循三值逻辑：<code>True</code> / <code>False</code> / <code>NULL</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>not</th>
+<th>t</th>
+<th>f</th>
+<th>n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>F</td>
+<td>T</td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>AND</th>
+<th>T</th>
+<th>F</th>
+<th>N</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>N</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>N</td>
+<td>N</td>
+<td>F</td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>OR</th>
+<th>T</th>
+<th>F</th>
+<th>N</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>N</td>
+</tr>
+<tr>
+<td>N</td>
+<td>T</td>
+<td>N</td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>General rule:
+<ul>
+<li>NULL can take on either T or F, so answer needs to accommodate either value   NULL可以代表TRUE或FALSE，因此任何包含NULL的布尔表达式的结果都需要 能够适应这两种可能的值（好奇妙啊</li>
+</ul>
+</li>
+</ul>
+<h4 id="NULL-and-Aggregation"><a class="header-anchor" href="#NULL-and-Aggregation">¶</a>NULL and Aggregation</h4>
+<ul>
+<li>General rule:
+<ul>
+<li>NULL <strong>column values</strong> are ignored by aggregate functions   聚合函数在处理输出时会忽略列中的NULL值。如果某个列的值是NULL，则其不会对聚合函数的结果产生影响（值都不知道啊不知道干脆忽视吧^^</li>
+</ul>
+</li>
+</ul>
+<h4 id="NULLs-Summary"><a class="header-anchor" href="#NULLs-Summary">¶</a>NULLs: Summary</h4>
+<ul>
+<li>(x op NULL) is NULL</li>
+<li>WHERE NULL: do not send to output</li>
+<li>Boolean connectives: 3-valued logic</li>
+<li>Aggregates ignore NULL-valued inputs</li>
+</ul>
+<h2 id="Summary"><a class="header-anchor" href="#Summary">¶</a>Summary</h2>
+<ul>
+<li>SQL is a declarative language    声明式语言
+<ul>
+<li>Somebody has to translate to algorithms though   需要将其翻译成算法</li>
+<li>The RDBMS implementor … i.e. you   自分=数据库管理系统的实现者</li>
+</ul>
+</li>
+<li>The data structure and algorithms that make SQL possible also power:  SQL背后的数据结构和算法也支持：
+<ul>
+<li>NoSQL, data mining, scalable ML, network routing   NoSQL、数据挖掘、可扩展的机器学习、网络路由</li>
+<li>A toolbox for scalable computing   一套用于可扩展计算的工具箱</li>
+</ul>
+</li>
+<li>Temporarily skirted questions of good database(schema) design   后续继续讨论数据库（架构）设计的问题
+<ul>
+<li>a topic we ‘ll consider in greater depth later’</li>
+</ul>
+</li>
+</ul>
+<h2 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h2>
+<p>课的知识密度很高，算算时长两节课才两个多小时可能，我tm看了两三天。。。需要停一停沉淀一下了</p>
+<p>哔哔：</p>
+<p>感觉没什么东西能真正留住我，是我想留下，所以才给自己硬栓了一条绳子。但是刚刚，产生了五分钟拴不住的念头</p>
+<p>可能是学累了吧嘿嘿</p>
  
       <!-- reward -->
       
@@ -475,6 +780,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2024/07/06/%E3%80%90%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%E3%80%912_%E5%8C%97%E8%9B%AE%E5%85%A5%E4%BE%B5_%E7%BD%97%E9%A9%AC%E5%8D%B1%E6%9C%BA/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            【从城邦到帝国】2_北蛮入侵_罗马危机
+          
+        </div>
+      </a>
     
     
       <a href="/2024/07/04/CS186%20SQL1/" class="article-nav-link">
@@ -579,19 +893,11 @@
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/tags/">待定</a>
-    </li>
-    
-    <li class="nav-item">
       <a class="nav-item-link" href="/tags/reading">阅读</a>
     </li>
     
     <li class="nav-item">
       <a class="nav-item-link" href="/friends">友链</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/aboutMe">关于我</a>
     </li>
     
   </ul>
