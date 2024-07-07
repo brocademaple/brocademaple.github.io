@@ -1,6 +1,662 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CS186 SQL1 Berkeley</title>
+    <url>/2024/07/04/CS186%20SQL1/</url>
+    <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p>Berkeley CS186 Intro to DB Systems</p>
+<p><a href="https://www.youtube.com/watch?v=Q-dxGaR3fH0&amp;list=PLYp4IGUhNFmw8USiYMJvCUjZe79fvyYge&amp;index=6">视频地址</a>  课程记录</p>
+<h2 id="SQL-1"><a class="header-anchor" href="#SQL-1">¶</a>SQL 1</h2>
+<h3 id="what-is-database"><a class="header-anchor" href="#what-is-database">¶</a>what is database</h3>
+<h4 id="一些术语"><a class="header-anchor" href="#一些术语">¶</a>一些术语</h4>
+<p><code>Relation/Table</code></p>
+<ul>
+<li><code>Schema: description(&quot;metadata&quot;)</code></li>
+<li><code>Instance: set of data satisfying the schema</code></li>
+</ul>
+<p><code>Attribute/Column/Field</code></p>
+<p><code>Tuple/Record/Row</code></p>
+<h4 id="一些注意事项"><a class="header-anchor" href="#一些注意事项">¶</a>一些注意事项</h4>
+<ol>
+<li>每列的类型都是<code>原子类型(无法再细分的)</code>,因此不会是<code>list</code>或者<code>map</code>那种类型的数据</li>
+<li><code>saddress</code> 每一行都要<code>fit the schema</code>  简单说就是三行三列的表中不能插入四列的数据行</li>
+<li><code>baddress</code>  每一列的名字不能相同</li>
+<li><code>maddress</code>  数据类型只能是原子类型</li>
+</ol>
+<h3 id="SQL-Language"><a class="header-anchor" href="#SQL-Language">¶</a>SQL Language</h3>
+<h4 id="Two-sublanguages"><a class="header-anchor" href="#Two-sublanguages">¶</a>Two sublanguages</h4>
+<p><code>DDL</code>-Data Definition Language-Define and modify schema   用于定义和修改数据库架构</p>
+<p><code>DML</code>-Data Manipulation Language-Queries can be written intuitively  用于操作实际数据</p>
+<h4 id="The-SQL-DDL-Sailors"><a class="header-anchor" href="#The-SQL-DDL-Sailors">¶</a>The SQL DDL: Sailors</h4>
+<p>以Sailors为例子，来创建数据表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Sailors (</span><br><span class="line">	sid <span class="type">INTEGER</span>,</span><br><span class="line">	sname <span class="type">CHAR</span>(<span class="number">20</span>),</span><br><span class="line">	rating <span class="type">INTEGER</span>,</span><br><span class="line">	age <span class="type">FLOAT</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (sid)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>sid</th>
+<th>SNAME</th>
+<th>RATING</th>
+<th>AGE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Fred</td>
+<td>7</td>
+<td>22</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Jim</td>
+<td>2</td>
+<td>39</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Nancy</td>
+<td>8</td>
+<td>27</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Boats (</span><br><span class="line">	bid <span class="type">INTEGER</span>,</span><br><span class="line">	bname <span class="type">CHAR</span>(<span class="number">20</span>),</span><br><span class="line">	color <span class="type">CHAR</span>(<span class="number">10</span>),</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (Bid)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>BID</th>
+<th>BNAME</th>
+<th>COLOR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>101</td>
+<td>Nina</td>
+<td>red</td>
+</tr>
+<tr>
+<td>102</td>
+<td>Pinta</td>
+<td>blue</td>
+</tr>
+<tr>
+<td>103</td>
+<td>Santa Maria</td>
+<td>red</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Reserves (</span><br><span class="line">	sid <span class="type">INTEGER</span>,</span><br><span class="line">	bid <span class="type">INTEGER</span>,</span><br><span class="line">	<span class="keyword">day</span> <span class="type">DATE</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (sid, bid, <span class="keyword">day</span>),</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (sid)  <span class="keyword">REFERENCES</span> Sailors;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>sid</th>
+<th>bid</th>
+<th>day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>102</td>
+<td>9/12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>102</td>
+<td>9/13</td>
+</tr>
+</tbody>
+</table>
+<h5 id="Primary-Key-column-s"><a class="header-anchor" href="#Primary-Key-column-s">¶</a>Primary Key column(s)</h5>
+<ul>
+<li>provide a unique “lookup key” for the relation   提供关系的唯一查找键    sid对于这些键值是唯一的</li>
+<li>cannot have any duplicate values  不能有重复的值，主键的值在表中必须是唯一的</li>
+<li>can be made up of &gt; 1 column  主键可以由多列组成   由多列组成的话就叫做复合主键（kimi给的例子：如果一个表中存储了多个部门的员工信息，可能需要使用部门ID和员工ID的组合作为主键来确保唯一性 ）</li>
+</ul>
+<h5 id="Foreign-Key-column-s"><a class="header-anchor" href="#Foreign-Key-column-s">¶</a>Foreign Key column(s)</h5>
+<p>Foreign Key column(s)  外键</p>
+<p>外键应用另一个表的主键或唯一键</p>
+<p>上述外键是<code>Sailors</code>表的指针，即<code>Reserves</code>的<code>sid</code>指向<code>Sailors</code>的<code>sid</code></p>
+<ul>
+<li>Foreign Key references a table via the primary key of that table  外键通过另一个表的主键来引用另一个表</li>
+<li>need not share the name of the referenced primary key    不一定和被引用的主键同名</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Reserves (</span><br><span class="line">	sid <span class="type">INTEGER</span>,</span><br><span class="line">	bid <span class="type">INTEGER</span>,</span><br><span class="line">	<span class="keyword">day</span> <span class="type">DATE</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (sid, bid, <span class="keyword">day</span>),</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (sid)  <span class="keyword">REFERENCES</span> Sailors,</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (bid)  <span class="keyword">REFERENCES</span> Boats;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h4 id="The-SQL-DML"><a class="header-anchor" href="#The-SQL-DML">¶</a>The SQL DML</h4>
+<h5 id="Basic-Single-Table-Queries"><a class="header-anchor" href="#Basic-Single-Table-Queries">¶</a>Basic Single-Table Queries</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="operator">&lt;</span><span class="keyword">column</span> expression list<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="operator">&lt;</span>single <span class="keyword">table</span><span class="operator">&gt;</span> [<span class="keyword">WHERE</span> <span class="operator">&lt;</span>predicate<span class="operator">&gt;</span>]</span><br></pre></td></tr></table></figure>
+<h5 id="SELECT-DISTINCT"><a class="header-anchor" href="#SELECT-DISTINCT">¶</a>SELECT DISTINCT</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> S.name, S.gpa</span><br><span class="line"><span class="keyword">FROM</span> students (<span class="keyword">AS</span>) S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>DISTINCT specifies removal of duplicate rows before output  DISTINCT 在输出前会移除重复行，如果查询结果有多行相同数据，DISTINCT 会保证这些重复行只被显示一次</li>
+<li>Can refer to the students table as “S”, this is called an alias   把学生列表记作S，S是其别名，可以简化查询，提高可读性  定义别名的AS可省略</li>
+</ul>
+<h5 id="ORDER-BY"><a class="header-anchor" href="#ORDER-BY">¶</a>ORDER BY</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, S.gpa, S.age <span class="operator">*</span> <span class="number">2</span> <span class="keyword">AS</span> A2</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.gpa, S.name, A2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将两倍年龄别名为A2</li>
+<li>ORDER BY clause specifies output to be sorted-Lexicographic ordering   按照字典序排序输出</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, S.gpa, S.age <span class="operator">*</span> <span class="number">2</span> <span class="keyword">AS</span> A2</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.gpa <span class="keyword">DESC</span>, S.name <span class="keyword">ASC</span>, A2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>DESC  降序  ASC  升序  默认是升序</li>
+</ul>
+<h5 id="LIMIT"><a class="header-anchor" href="#LIMIT">¶</a>LIMIT</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, S.gpa, S.age <span class="operator">*</span> <span class="number">2</span> <span class="keyword">AS</span> A2</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.gpa <span class="keyword">DESC</span>, S.name <span class="keyword">ASC</span>, a2;</span><br><span class="line">LIMIT <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>限制输出为几行</li>
+</ul>
+<h5 id="Aggregates"><a class="header-anchor" href="#Aggregates">¶</a>Aggregates</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="built_in">AVG</span>(S.gpa)</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>AVG()：计算平均值</p>
+</li>
+<li>
+<p>Before producing output, compute a summary(a.k.a. an aggregate) of some arithmetic expression</p>
+</li>
+<li>
+<p>produce 1 row of output -with one column in this case</p>
+</li>
+<li>
+<p>other aggregates: SUM, COUNT, MAX, MIN</p>
+</li>
+</ul>
+<h5 id="GROUP-BY"><a class="header-anchor" href="#GROUP-BY">¶</a>GROUP BY</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="built_in">AVG</span>(S.gpa), S.dept</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>GROUP BY：按照GROUP BY后面列出的列，进行分组</p>
+</li>
+<li>
+<p>Partition table into groups with same GROUP BY column values - Can group by a list of columns    将表按照具有相同GROUP BY列值的组进行分区，可以根据一列或多列进行分组</p>
+</li>
+<li>
+<p>Produce an aggregate result per group -Cardinality of output = # of distinct group values   为每个组生成一个聚合结果，输出的基数等于不同组值的数量</p>
+</li>
+<li>
+<p>Note: can put grouping columns in SELECT list   可以将分组放入SELECT列表</p>
+</li>
+</ul>
+<h5 id="HAVING"><a class="header-anchor" href="#HAVING">¶</a>HAVING</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="built_in">AVG</span>(S.gpa), S.dept</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>The HAVING predicate filters groups  用于过滤分组后的结果</li>
+<li>HAVING is applied after grouping and aggregation    HAVING子句在分组和聚合计算完成后应用       -Hence can contain anything that could go in the SELECT list  因此可以包含选择列表中的任何内容</li>
+<li>HAVING can only be used in aggregate queries   HAVING只能用在聚合查询中</li>
+<li>it’s an optional clause    可选非必须</li>
+</ul>
+<h5 id="Putting-it-all-together"><a class="header-anchor" href="#Putting-it-all-together">¶</a>Putting it all together</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.dept, <span class="built_in">AVG</span>(S.gpa), <span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">WHERE</span> S.gender <span class="operator">=</span> <span class="string">&#x27;F&#x27;</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">2</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
+<h5 id="DISTINCT-Aggregates"><a class="header-anchor" href="#DISTINCT-Aggregates">¶</a>DISTINCT Aggregates</h5>
+<p>DISTINCT can be used inside or outside of aggregate function, but have different meanings</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> S.name)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> <span class="built_in">COUNT</span>(S.name)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个：在计数之前先把所有重复项移除   相当于只计算有多少中不同项</li>
+<li>第二个：先计数，再移除重复项   相当于计算所有项</li>
+</ul>
+<h5 id="What-Is-This-Asking-For"><a class="header-anchor" href="#What-Is-This-Asking-For">¶</a>What Is This Asking For?</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, <span class="built_in">AVG</span>(S.gpa)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>illegal query</code>   因为<code>S.name</code>没有被包含在<code>GROUP BY</code> 子句中，也没有被用在聚合函数中。数据库不知道应该选择哪个学生的姓名来显示，因为可能有多个学生具有相同的系别（<code>S.dept</code>）。</li>
+</ul>
+<h5 id="SQL-DML-General-Basic-Single-Table-Queries"><a class="header-anchor" href="#SQL-DML-General-Basic-Single-Table-Queries">¶</a>SQL DML: General Basic Single-Table Queries</h5>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="operator">&lt;</span><span class="keyword">column</span> expression list<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="operator">&lt;</span>single <span class="keyword">table</span><span class="operator">&gt;</span></span><br><span class="line">[<span class="keyword">WHERE</span> <span class="operator">&lt;</span>predictable<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="operator">&lt;</span><span class="keyword">column</span> list<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">HAVING</span> <span class="operator">&lt;</span>predicate<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="operator">&lt;</span><span class="keyword">column</span> list<span class="operator">&gt;</span>]</span><br><span class="line">[LIMIT <span class="operator">&lt;</span><span class="type">integer</span><span class="operator">&gt;</span>]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>SQL notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>Database</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL practice record</title>
+    <url>/2024/07/07/SQL-practice-record/</url>
+    <content><![CDATA[<h4 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h4>
+<p>昨天看完SQL部分，今天练习一下</p>
+<p><a href="http://sqlmother.yupi.icu/#/learn">练习网站-SQL之母</a></p>
+<h4 id="1-基础语法-查询-全表查询"><a class="header-anchor" href="#1-基础语法-查询-全表查询">¶</a>1 基础语法-查询-全表查询</h4>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+<h4 id="2-基础语法-查询-选择查询"><a class="header-anchor" href="#2-基础语法-查询-选择查询">¶</a>2 基础语法-查询-选择查询</h4>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name, age <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+<h4 id="3-基础语法-查询-别名"><a class="header-anchor" href="#3-基础语法-查询-别名">¶</a>3 基础语法-查询-别名</h4>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name <span class="keyword">as</span> 学生姓名, age <span class="keyword">as</span> 学生年龄 <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+<h4 id="4-基础语法-查询-常量和运算"><a class="header-anchor" href="#4-基础语法-查询-常量和运算">¶</a>4 基础语法-查询-常量和运算</h4>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name, score, <span class="number">2</span> <span class="operator">*</span> score <span class="keyword">as</span> double_score <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+<h4 id="5-基础语法-条件查询-where"><a class="header-anchor" href="#5-基础语法-条件查询-where">¶</a>5 基础语法-条件查询-where</h4>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name, score <span class="keyword">from</span> student <span class="keyword">where</span> name <span class="operator">=</span> &quot;鱼皮&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="6-基础语法-条件查询-运算符"><a class="header-anchor" href="#6-基础语法-条件查询-运算符">¶</a>6 基础语法-条件查询-运算符</h4>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name, age <span class="keyword">from</span> student <span class="keyword">where</span> name <span class="operator">!=</span> &quot;热dog&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="7-基础语法-条件查询-空值"><a class="header-anchor" href="#7-基础语法-条件查询-空值">¶</a>7 基础语法-条件查询-空值</h4>
+<ul>
+<li>在SQL查询中，我们可以使用 “IS NULL” 和 “IS NOT NULL” 来判断字段是否为空值或非空值</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name, age, score <span class="keyword">from</span> student <span class="keyword">where</span> age <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
+<h4 id="8-基础语法-条件查询-模糊查询"><a class="header-anchor" href="#8-基础语法-条件查询-模糊查询">¶</a>8 基础语法-条件查询-模糊查询</h4>
+<ul>
+<li>使用 <code>like</code> 关键字实现模糊查询</li>
+<li>在 LIKE 模糊查询中，我们使用通配符来代表零个或多个字符，从而能够快速地找到匹配的数据。</li>
+<li>有如下 2 种通配符：
+<ul>
+<li>百分号（%）：表示任意长度的任意字符序列。</li>
+<li>下划线（_）：表示任意单个字符。</li>
+</ul>
+</li>
+<li>同理，可以使用 <code>not like</code> 来查询不包含某关键字的信息</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name, score <span class="keyword">from</span> student <span class="keyword">where</span> name <span class="keyword">not</span> <span class="keyword">like</span> &quot;%李%&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="9-基础语法-条件查询-逻辑运算"><a class="header-anchor" href="#9-基础语法-条件查询-逻辑运算">¶</a>9 基础语法-条件查询-逻辑运算</h4>
+<p>在逻辑运算中，常用的运算符有：</p>
+<ul>
+<li>AND：表示逻辑与，要求同时满足多个条件，才返回 true。</li>
+<li>OR：表示逻辑或，要求满足其中任意一个条件，就返回 true。</li>
+<li>NOT：表示逻辑非，用于否定一个条件（本来是 true，用了 not 后转为 false）</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name, score <span class="keyword">from</span> student <span class="keyword">where</span> name <span class="keyword">like</span> &quot;%李%&quot; <span class="keyword">OR</span> score <span class="operator">&gt;</span> <span class="number">500</span></span><br></pre></td></tr></table></figure>
+<h4 id="10-基础语法-去重"><a class="header-anchor" href="#10-基础语法-去重">¶</a>10 基础语法-去重</h4>
+<ul>
+<li>可以使用 <code>DISTINCT</code> 关键字来实现去重操作</li>
+<li>除了按照单字段去重外，<code>DISTINCT</code> 关键字还支持根据多个字段的组合来进行去重操作，确保多个字段的组合是唯一的</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> class_id, exam_num <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+<h3 id="11-基础语法-排序"><a class="header-anchor" href="#11-基础语法-排序">¶</a>11 基础语法-排序</h3>
+<ul>
+<li>可以使用 <code>ORDER BY</code> 关键字来实现排序操作。<code>ORDER BY</code> 后面跟上需要排序的字段，可以选择升序（ASC）或降序（DESC）排列</li>
+<li>在排序的基础上，我们还可以根据多个字段的值进行排序。当第一个字段的值相同时，再按照第二个字段的值进行排序:  <code>order by 字段1 [升序/降序], 字段2 [升序/降序], ...</code></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name, age, score <span class="keyword">from</span> student <span class="keyword">order</span> <span class="keyword">by</span> score <span class="keyword">desc</span>, age <span class="keyword">asc</span></span><br></pre></td></tr></table></figure>
+<h3 id="12-基础语法-截断与偏移"><a class="header-anchor" href="#12-基础语法-截断与偏移">¶</a>12 基础语法-截断与偏移</h3>
+<ul>
+<li>
+<p>使用 <code>LIMIT</code> 关键字来实现数据的截断和偏移</p>
+</li>
+<li>
+<pre><code class="language-sql">-- LIMIT 后只跟一个整数，表示要截断的数据条数（一次获取几条）
+select task_name, due_date from tasks limit 2;
+
+-- LIMIT 后跟 2 个整数，依次表示从第几条数据开始、一次获取几条
+select task_name, due_date from tasks limit 2, 2;
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```sql</span><br><span class="line">select name, age from student order by age asc limit 1, 3</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+<li>
+<p>注意：第n条数据的下标为n-1</p>
+</li>
+</ul>
+<h3 id="13-基础语法-条件分支"><a class="header-anchor" href="#13-基础语法-条件分支">¶</a>13 基础语法-条件分支</h3>
+<ul>
+<li>
+<p>条件分支 <code>case when</code> 是 SQL 中用于根据条件进行分支处理的语法。它类似于其他编程语言中的 if else 条件判断语句</p>
+</li>
+<li>
+<p><code>case when</code> 支持同时指定多个分支，示例语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CASE</span> <span class="keyword">WHEN</span> (条件<span class="number">1</span>) <span class="keyword">THEN</span> 结果<span class="number">1</span></span><br><span class="line">	   <span class="keyword">WHEN</span> (条件<span class="number">2</span>) <span class="keyword">THEN</span> 结果<span class="number">2</span></span><br><span class="line">	   ...</span><br><span class="line">	   <span class="keyword">ELSE</span> 其他结果 <span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  name,</span><br><span class="line">  <span class="keyword">CASE</span></span><br><span class="line">    <span class="keyword">WHEN</span> (age <span class="operator">&gt;</span> <span class="number">60</span>) <span class="keyword">THEN</span> &quot;老同学&quot;</span><br><span class="line">    <span class="keyword">WHEN</span> (age <span class="operator">&gt;</span> <span class="number">20</span>) <span class="keyword">THEN</span> &quot;年轻&quot;</span><br><span class="line">    <span class="keyword">ELSE</span> &quot;小同学&quot;</span><br><span class="line">  <span class="keyword">END</span> <span class="keyword">AS</span> age_level</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">  student</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> name <span class="keyword">asc</span></span><br></pre></td></tr></table></figure>
+<h3 id="14-函数-时间函数"><a class="header-anchor" href="#14-函数-时间函数">¶</a>14 函数-时间函数</h3>
+<ul>
+<li>常用的时间函数有：
+<ul>
+<li>DATE：获取当前日期</li>
+<li>DATETIME：获取当前日期时间</li>
+<li>TIME：获取当前时间</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 获取当前日期</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="type">DATE</span>() <span class="keyword">AS</span> <span class="built_in">current_date</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 获取当前日期时间</span></span><br><span class="line"><span class="keyword">SELECT</span> DATETIME() <span class="keyword">AS</span> current_datetime;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 获取当前时间</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="type">TIME</span>() <span class="keyword">AS</span> <span class="built_in">current_time</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name, <span class="type">DATE</span>() <span class="keyword">as</span> &quot;当前日期&quot; <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+<h3 id="15-函数-字符串处理"><a class="header-anchor" href="#15-函数-字符串处理">¶</a>15 函数-字符串处理</h3>
+<ul>
+<li>
+<p>1）使用字符串处理函数 <code>UPPER</code> 将姓名转换为大写：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 将姓名转换为大写</span></span><br><span class="line"><span class="keyword">SELECT</span> name, <span class="built_in">UPPER</span>(name) <span class="keyword">AS</span> upper_name</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>2）使用字符串处理函数 <code>LENGTH</code> 计算姓名长度：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 计算姓名长度</span></span><br><span class="line"><span class="keyword">SELECT</span> name, LENGTH(name) <span class="keyword">AS</span> name_length</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>3）使用字符串处理函数 <code>LOWER</code> 将姓名转换为小写：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 将姓名转换为小写并进行条件筛选</span></span><br><span class="line"><span class="keyword">SELECT</span> name, <span class="built_in">LOWER</span>(name) <span class="keyword">AS</span> lower_name</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id, name, <span class="built_in">UPPER</span>(name) <span class="keyword">AS</span> upper_name <span class="keyword">from</span> student <span class="keyword">where</span> name <span class="operator">=</span> &quot;热dog&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="16-函数-聚合函数"><a class="header-anchor" href="#16-函数-聚合函数">¶</a>16 函数-聚合函数</h3>
+<p>聚合函数是一类用于对数据集进行 <strong>汇总计算</strong> 的特殊函数。它们可以对一组数据执行诸如计数、求和、平均值、最大值和最小值等操作。聚合函数通常在 SELECT 语句中配合 GROUP BY 子句使用，用于对分组后的数据进行汇总分析。</p>
+<ul>
+<li>
+<p>常见的聚合函数包括：</p>
+<ul>
+<li>COUNT：计算指定列的行数或非空值的数量。</li>
+<li>SUM：计算指定列的数值之和。</li>
+<li>AVG：计算指定列的数值平均值。</li>
+<li>MAX：找出指定列的最大值。</li>
+<li>MIN：找出指定列的最小值。</li>
+</ul>
+</li>
+<li>
+<p>1）使用聚合函数 <code>COUNT</code> 计算订单表中的总订单数：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> order_num</span><br><span class="line"><span class="keyword">FROM</span> orders;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>2）使用聚合函数 <code>COUNT(DISTINCT 列名)</code> 计算订单表中不同客户的数量：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> customer_id) <span class="keyword">AS</span> customer_num</span><br><span class="line"><span class="keyword">FROM</span> orders;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>3）使用聚合函数 <code>SUM</code> 计算总订单金额：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(amount) <span class="keyword">AS</span> total_amount</span><br><span class="line"><span class="keyword">FROM</span> orders;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">SUM</span>(score) <span class="keyword">AS</span> total_score, <span class="built_in">AVG</span>(score) <span class="keyword">AS</span> avg_score, <span class="built_in">MAX</span>(score) <span class="keyword">AS</span> max_score, <span class="built_in">MIN</span>(score) <span class="keyword">as</span> min_score <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+<h3 id="17-分组聚合-单字段分组"><a class="header-anchor" href="#17-分组聚合-单字段分组">¶</a>17 分组聚合-单字段分组</h3>
+<ul>
+<li>
+<p>分组聚合是一种对数据进行分类并对每个分类进行聚合计算的操作。它允许我们按照指定的列或字段对数据进行分组，然后对每个分组应用聚合函数，如 COUNT、SUM、AVG 等，以获得分组后的汇总结果</p>
+</li>
+<li>
+<p>使用 <code>GROUP BY</code> 关键字对数据进行分组</p>
+</li>
+<li>
+<p>1）使用分组聚合查询中每个客户的编号：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customer_id</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_id;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>2）使用分组聚合查询每个客户的下单数：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customer_id, <span class="built_in">COUNT</span>(order_id) <span class="keyword">AS</span> order_num</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_id;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> class_id, <span class="built_in">AVG</span>(score) <span class="keyword">as</span> avg_score <span class="keyword">from</span> student <span class="keyword">group</span> <span class="keyword">by</span> class_id</span><br></pre></td></tr></table></figure>
+<h3 id="18-分组聚合-多字段分组"><a class="header-anchor" href="#18-分组聚合-多字段分组">¶</a>18 分组聚合-多字段分组</h3>
+<ul>
+<li>
+<p>多字段分组和单字段分组的实现方式几乎一致，使用 <code>GROUP BY</code> 语法即可</p>
+</li>
+<li>
+<p>要查询使用多字段分组查询表中 <strong>每个客户</strong> 购买的 <strong>每种商品</strong> 的总金额，相当于按照客户编号和商品编号分组：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查询每个用户购买的每种商品的总金额，按照客户编号和商品编号分组</span></span><br><span class="line"><span class="keyword">SELECT</span> customer_id, product_id, <span class="built_in">SUM</span>(amount) <span class="keyword">AS</span> total_amount</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_id, product_id;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> class_id, exam_num, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">as</span> total_num <span class="keyword">from</span> student <span class="keyword">group</span> <span class="keyword">by</span> class_id, exam_num</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对GROUP BY还是有点晕……</li>
+</ul>
+<h3 id="19-分组聚合-having子句"><a class="header-anchor" href="#19-分组聚合-having子句">¶</a>19 分组聚合-having子句</h3>
+<ul>
+<li>
+<p>HAVING 子句用于在<strong>分组聚合</strong>后对分组进行过滤。它允许我们对分组后的结果进行条件筛选，只保留满足特定条件的分组</p>
+</li>
+<li>
+<p>HAVING 子句与条件查询 WHERE 子句的区别在于，WHERE 子句用于在 <strong>分组之前</strong> 进行过滤，而 HAVING 子句用于在 <strong>分组之后</strong> 进行过滤</p>
+</li>
+<li>
+<p>1）使用 HAVING 子句查询订单数超过 1 的客户：</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customer_id, <span class="built_in">COUNT</span>(order_id) <span class="keyword">AS</span> order_num</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(order_id) <span class="operator">&gt;</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2）使用 HAVING 子句查询订单总金额超过 100 的客户：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查询订单总金额超过100的客户</span></span><br><span class="line"><span class="keyword">SELECT</span> customer_id, <span class="built_in">SUM</span>(amount) <span class="keyword">AS</span> total_amount</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">SUM</span>(amount) <span class="operator">&gt;</span> <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> class_id, <span class="built_in">SUM</span>(score) <span class="keyword">AS</span> total_score <span class="keyword">from</span> student <span class="keyword">group</span> <span class="keyword">by</span> class_id <span class="keyword">HAVING</span> total_score <span class="operator">&gt;</span> <span class="number">150</span></span><br></pre></td></tr></table></figure>
+<h3 id="20-查询进阶-关联查询-cross-join"><a class="header-anchor" href="#20-查询进阶-关联查询-cross-join">¶</a>20 查询进阶-关联查询-cross join</h3>
+<ul>
+<li>
+<p>关联查询是一种用于联合多个数据表中的数据的查询方式</p>
+</li>
+<li>
+<p><code>CROSS JOIN</code> 是一种简单的关联查询，不需要任何条件来匹配行，它直接将左表的 <strong>每一行</strong> 与右表的 <strong>每一行</strong> 进行组合，返回的结果是两个表的笛卡尔积</p>
+</li>
+<li>
+<p>使用 CROSS JOIN 进行关联查询，将员工表和部门表的所有行组合在一起，获取员工姓名、工资、部门名称和部门经理，示例 SQL 代码如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e.emp_name, e.salary, e.department, d.manager</span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">CROSS</span> <span class="keyword">JOIN</span> departments d;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> S.name <span class="keyword">AS</span> student_name, S.age <span class="keyword">AS</span> student_age, S.class_id <span class="keyword">AS</span> class_id, C.name <span class="keyword">AS</span> class_name <span class="keyword">from</span> student S <span class="keyword">cross</span> <span class="keyword">join</span> class C </span><br></pre></td></tr></table></figure>
+<ul>
+<li>就是多表查询啊，不用<code>cross join</code>，直接在<code>FROM</code>后面加个逗号，加上联合查询的表就行了</li>
+</ul>
+<h3 id="21-查询进阶-关联查询-inner-join"><a class="header-anchor" href="#21-查询进阶-关联查询-inner-join">¶</a>21 查询进阶-关联查询-inner join</h3>
+<ul>
+<li>
+<p>INNER JOIN 是一种常见的关联查询方式，它根据两个表之间的关联条件，将满足条件的行组合在一起。</p>
+</li>
+<li>
+<p>INNER JOIN 只返回两个表中满足关联条件的交集部分，即在两个表中都存在的匹配行。</p>
+</li>
+<li>
+<p>使用 INNER JOIN 进行关联查询，根据员工表和部门表之间的公共字段 <code>部门名称（department）</code> 进行匹配，将员工的姓名、工资以及所属部门和部门经理组合在一起：</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e.emp_name, e.salary, e.department, d.manager</span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">JOIN</span> departments d <span class="keyword">ON</span> e.department <span class="operator">=</span> d.department;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  S.name <span class="keyword">AS</span> student_name,</span><br><span class="line">  S.age <span class="keyword">AS</span> student_age,</span><br><span class="line">  C.id <span class="keyword">AS</span> class_id,</span><br><span class="line">  C.name <span class="keyword">AS</span> class_name,</span><br><span class="line">  C.level <span class="keyword">AS</span> class_level</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">  student S</span><br><span class="line">  <span class="keyword">JOIN</span> class C <span class="keyword">ON</span> S.class_id <span class="operator">=</span> C.id</span><br></pre></td></tr></table></figure>
+<h3 id="22-查询进阶-关联查询-outer-join"><a class="header-anchor" href="#22-查询进阶-关联查询-outer-join">¶</a>22 查询进阶-关联查询-outer join</h3>
+<ul>
+<li>
+<p>OUTER JOIN 是一种关联查询方式，它根据指定的关联条件，将两个表中满足条件的行组合在一起，并 <strong>包含没有匹配的行</strong></p>
+</li>
+<li>
+<p>在 OUTER JOIN 中，包括 LEFT OUTER JOIN 和 RIGHT OUTER JOIN 两种类型，它们分别表示查询左表和右表的所有行（即使没有被匹配），再加上满足条件的交集部分</p>
+</li>
+<li>
+<p>使用 LEFT JOIN 进行关联查询，根据员工表和部门表之间的部门名称进行匹配，将员工的姓名、工资以及所属部门和部门经理组合在一起，并包含所有员工的信息：</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e.emp_name, e.salary, e.department, d.manager</span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> departments d <span class="keyword">ON</span> e.department <span class="operator">=</span> d.department;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>有些数据库并不支持 RIGHT JOIN 语法，其实只需要把主表（from 后面的表）和关联表（LEFT JOIN 后面的表）顺序进行调换即可实现效果</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  S.name <span class="keyword">AS</span> student_name,</span><br><span class="line">  S.age <span class="keyword">AS</span> student_age,</span><br><span class="line">  S.class_id <span class="keyword">AS</span> class_id,</span><br><span class="line">  C.name <span class="keyword">AS</span> class_name,</span><br><span class="line">  C.level <span class="keyword">AS</span> class_level</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">  student S</span><br><span class="line">  <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> class C <span class="keyword">ON</span> S.class_id <span class="operator">=</span> C.id</span><br></pre></td></tr></table></figure>
+<h3 id="23-查询进阶-子查询"><a class="header-anchor" href="#23-查询进阶-子查询">¶</a>23 查询进阶-子查询</h3>
+<ul>
+<li>
+<p>子查询是指在一个查询语句内部 <strong>嵌套</strong> 另一个完整的查询语句，内层查询被称为子查询。</p>
+</li>
+<li>
+<p>子查询可以用于获取更复杂的查询结果或者用于过滤数据</p>
+</li>
+<li>
+<p>数据库引擎会首先执行子查询，然后将其结果作为条件或数据源来执行外层查询</p>
+</li>
+<li>
+<p>现在，我们希望查询出订单总金额 &gt; 200 的客户的姓名和他们的订单总金额，示例 SQL 如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 主查询</span></span><br><span class="line"><span class="keyword">SELECT</span> name, total_amount</span><br><span class="line"><span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">WHERE</span> customer_id <span class="keyword">IN</span> (</span><br><span class="line">    <span class="comment">-- 子查询</span></span><br><span class="line">    <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> customer_id</span><br><span class="line">    <span class="keyword">FROM</span> orders</span><br><span class="line">    <span class="keyword">WHERE</span> total_amount <span class="operator">&gt;</span> <span class="number">200</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  S.name <span class="keyword">AS</span> name,</span><br><span class="line">  S.score <span class="keyword">AS</span> score,</span><br><span class="line">  S.class_id <span class="keyword">AS</span> class_id</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">  student S</span><br><span class="line"><span class="keyword">where</span></span><br><span class="line">  class_id <span class="keyword">IN</span> (</span><br><span class="line">    <span class="keyword">select</span> <span class="keyword">distinct</span> id</span><br><span class="line">    <span class="keyword">from</span> class C</span><br><span class="line">    <span class="keyword">where</span> C.id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<h3 id="24-查询进阶-子查询-exists"><a class="header-anchor" href="#24-查询进阶-子查询-exists">¶</a>24 查询进阶-子查询-exists</h3>
+<ul>
+<li>
+<p>子查询中的一种特殊类型是 “exists” 子查询，用于检查主查询的结果集是否存在满足条件的记录，它返回布尔值（True 或 False），而不返回实际的数据</p>
+</li>
+<li>
+<p>现在，我们希望查询出 <strong>存在订单的</strong> 客户姓名和订单金额。</p>
+<p>使用 exists 子查询的方式，SQL 代码如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 主查询</span></span><br><span class="line"><span class="keyword">SELECT</span> name, total_amount</span><br><span class="line"><span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">EXISTS</span> (</span><br><span class="line">    <span class="comment">-- 子查询</span></span><br><span class="line">    <span class="keyword">SELECT</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">FROM</span> orders</span><br><span class="line">    <span class="keyword">WHERE</span> orders.customer_id <span class="operator">=</span> customers.customer_id</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>和 exists 相对的是 not exists，用于查找不满足存在条件的记录</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  name,</span><br><span class="line">  age,</span><br><span class="line">  class_id</span><br><span class="line"><span class="keyword">from</span> student S</span><br><span class="line"><span class="keyword">where</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (</span><br><span class="line">    <span class="keyword">select</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">from</span> class C</span><br><span class="line">    <span class="keyword">where</span> S.class_id <span class="operator">=</span> C.id</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<h3 id="25-查询进阶-组合查询"><a class="header-anchor" href="#25-查询进阶-组合查询">¶</a>25 查询进阶-组合查询</h3>
+<ul>
+<li>
+<p>组合查询是一种将多个 SELECT 查询结果合并在一起的查询操作。</p>
+</li>
+<li>
+<p>包括两种常见的组合查询操作：UNION 和 UNION ALL</p>
+<ul>
+<li>UNION 操作：它用于将两个或多个查询的结果集合并， <strong>并去除重复的行</strong> 。即如果两个查询的结果有相同的行，则只保留一行。</li>
+<li>UNION ALL 操作：它也用于将两个或多个查询的结果集合并， <strong>但不去除重复的行</strong> 。即如果两个查询的结果有相同的行，则全部保留。</li>
+</ul>
+</li>
+<li>
+<p>UNION 操作：</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, age, department</span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> name, age, department</span><br><span class="line"><span class="keyword">FROM</span> table2;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>UNION ALL 操作：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- UNION ALL操作</span></span><br><span class="line"><span class="keyword">SELECT</span> name, age, department</span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="keyword">SELECT</span> name, age, department</span><br><span class="line"><span class="keyword">FROM</span> table2;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> S.name, S.age, S.score, S.class_id <span class="keyword">from</span> student S </span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span> </span><br><span class="line"><span class="keyword">select</span> SN.name, SN.age, SN.score, SN.class_id <span class="keyword">from</span> student_new SN </span><br></pre></td></tr></table></figure>
+<h3 id="26-查询进阶-开窗函数-sum-over"><a class="header-anchor" href="#26-查询进阶-开窗函数-sum-over">¶</a>26 查询进阶-开窗函数-sum over</h3>
+<ul>
+<li>
+<p>开窗函数是一种强大的查询工具，它允许我们在查询中进行对分组数据进行计算、 <strong>同时保留原始行的详细信息</strong></p>
+</li>
+<li>
+<p>开窗函数可以与聚合函数（如 SUM、AVG、COUNT 等）结合使用，但与普通聚合函数不同，开窗函数不会导致结果集的行数减少</p>
+</li>
+<li>
+<p>第一个开窗函数：sum over。</p>
+<p>该函数用法为：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="built_in">SUM</span>(计算字段名) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> 分组字段名)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>现在，我们希望计算每个客户的订单总金额，并显示每个订单的详细信息。</p>
+<p>示例 SQL 如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    order_id, </span><br><span class="line">    customer_id, </span><br><span class="line">    order_date, </span><br><span class="line">    total_amount,</span><br><span class="line">    <span class="built_in">SUM</span>(total_amount) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> customer_id) <span class="keyword">AS</span> customer_total_amount</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    orders;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  id,</span><br><span class="line">  name,</span><br><span class="line">  age,</span><br><span class="line">  score,</span><br><span class="line">  class_id,</span><br><span class="line">  <span class="built_in">AVG</span>(score) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> class_id) </span><br><span class="line">  <span class="keyword">AS</span> class_avg_score</span><br><span class="line"><span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+<h3 id="27-查询进阶-开窗函数-sum-over-order-by"><a class="header-anchor" href="#27-查询进阶-开窗函数-sum-over-order-by">¶</a>27 查询进阶-开窗函数-sum over order by</h3>
+<ul>
+<li>
+<p>sum over order by，可以实现同组内数据的 <strong>累加求和</strong> 。</p>
+<p>示例用法如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="built_in">SUM</span>(计算字段名) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> 分组字段名 <span class="keyword">ORDER</span> <span class="keyword">BY</span> 排序字段 排序规则)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>举一个应用场景：老师在每个班级里依次点名，每点到一个学生，老师都会记录当前已点到的学生们的分数总和。（？跟SUM有啥区别</p>
+</li>
+<li>
+<p>计算每个客户的历史订单累计金额，并显示每个订单的详细信息。</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    order_id, </span><br><span class="line">    customer_id, </span><br><span class="line">    order_date, </span><br><span class="line">    total_amount,</span><br><span class="line">    <span class="built_in">SUM</span>(total_amount) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> customer_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> order_date <span class="keyword">ASC</span>) <span class="keyword">AS</span> cumulative_total_amount</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    orders;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id, name, age, score, class_id, </span><br><span class="line">		<span class="built_in">SUM</span>(score) <span class="keyword">OVER</span> </span><br><span class="line">		(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> class_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> score <span class="keyword">ASC</span>) <span class="keyword">AS</span> class_sum_score </span><br><span class="line"><span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这个知识点有点不熟练ORZ</li>
+</ul>
+<h3 id="28-查询进阶-开窗函数-rank"><a class="header-anchor" href="#28-查询进阶-开窗函数-rank">¶</a>28 查询进阶-开窗函数-rank</h3>
+<ul>
+<li>
+<p>开窗函数 Rank</p>
+</li>
+<li>
+<p>Rank 开窗函数是 SQL 中一种用于对查询结果集中的行进行 <strong>排名</strong> 的开窗函数。它可以根据指定的列或表达式对结果集中的行进行排序，并为每一行分配一个排名。在排名过程中，相同的值将被赋予相同的排名，而不同的值将被赋予不同的排名。</p>
+<blockquote>
+<p>当存在并列（相同排序值）时，Rank 会跳过后续排名，并保留相同的排名。</p>
+</blockquote>
+<ul>
+<li>
+<p>Rank 开窗函数的常见用法是在查询结果中查找前几名（Top N）或排名最高的行。</p>
+</li>
+<li>
+<p>Rank 开窗函数的语法如下：</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="built_in">RANK</span>() <span class="keyword">OVER</span> (</span><br><span class="line">  <span class="keyword">PARTITION</span> <span class="keyword">BY</span> 列名<span class="number">1</span>, 列名<span class="number">2</span>, ... <span class="comment">-- 可选，用于指定分组列</span></span><br><span class="line">  <span class="keyword">ORDER</span> <span class="keyword">BY</span> 列名<span class="number">3</span> [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>], 列名<span class="number">4</span> [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>], ... <span class="comment">-- 用于指定排序列及排序方式</span></span><br><span class="line">) <span class="keyword">AS</span> rank_column</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>其中，<code>PARTITION BY</code> 子句可选，用于指定分组列，将结果集按照指定列进行分组；<code>ORDER BY</code> 子句用于指定排序列及排序方式，决定了计算 Rank 时的排序规则。<code>AS rank_column</code> 用于指定生成的 Rank 排名列的别名。</p>
+</li>
+<li>
+<p>为每个客户的订单按照订单金额降序排名，并显示每个订单的详细信息。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    order_id, </span><br><span class="line">    customer_id, </span><br><span class="line">    order_date, </span><br><span class="line">    total_amount,</span><br><span class="line">    <span class="built_in">RANK</span>() <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> customer_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> total_amount <span class="keyword">DESC</span>) <span class="keyword">AS</span> customer_rank</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    orders;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id, name, age, score, class_id, <span class="built_in">RANK</span>() <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> class_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> score <span class="keyword">DESC</span>) <span class="keyword">AS</span> ranking <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+<h3 id="29-查询进阶-开窗函数-row-number"><a class="header-anchor" href="#29-查询进阶-开窗函数-row-number">¶</a>29 查询进阶-开窗函数-row_number</h3>
+<ul>
+<li>
+<p>Row_Number 开窗函数是 SQL 中的一种用于为查询结果集中的每一行 <strong>分配唯一连续排名</strong> 的开窗函数</p>
+</li>
+<li>
+<p>与之前讲到的 Rank 函数不同，Row_Number 函数为每一行都分配一个唯一的整数值，不管是否存在并列（相同排序值）的情况。每一行都有一个唯一的行号，从 1 开始连续递增。</p>
+<p>Row_Number 开窗函数的语法如下（几乎和 Rank 函数一模一样）：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span> (</span><br><span class="line">  <span class="keyword">PARTITION</span> <span class="keyword">BY</span> column1, column2, ... <span class="comment">-- 可选，用于指定分组列</span></span><br><span class="line">  <span class="keyword">ORDER</span> <span class="keyword">BY</span> column3 [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>], column4 [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>], ... <span class="comment">-- 用于指定排序列及排序方式</span></span><br><span class="line">) <span class="keyword">AS</span> row_number_column</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>其中，<code>PARTITION BY</code>子句可选，用于指定分组列，将结果集按照指定列进行分组。<code>ORDER BY</code> 子句用于指定排序列及排序方式，决定了计算 Row_Number 时的排序规则。<code>AS row_number_column</code> 用于指定生成的行号列的别名。</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id, name, age, score, class_id, <span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span>(</span><br><span class="line">    <span class="keyword">PARTITION</span> <span class="keyword">BY</span> class_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> score <span class="keyword">DESC</span></span><br><span class="line">) <span class="keyword">AS</span> row_number <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+<h3 id="30-查询进阶-开窗函数-lag-lead"><a class="header-anchor" href="#30-查询进阶-开窗函数-lag-lead">¶</a>30 查询进阶-开窗函数-lag/lead</h3>
+<p>开窗函数 Lag 和 Lead 的作用是获取在当前行之前或之后的行的值，这两个函数通常在需要<strong>比较相邻行</strong>数据或<strong>进行时间序列分析</strong>时非常有用。</p>
+<ul>
+<li>1）Lag 函数</li>
+</ul>
+<p>Lag 函数用于获取 <strong>当前行之前</strong> 的某一列的值。它可以帮助我们查看上一行的数据。</p>
+<p>Lag 函数的语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="built_in">LAG</span>(column_name, <span class="keyword">offset</span>, default_value) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> partition_column <span class="keyword">ORDER</span> <span class="keyword">BY</span> sort_column)</span><br></pre></td></tr></table></figure>
+<p>参数解释：</p>
+<ul>
+<li>
+<p><code>column_name</code>：要获取值的列名。</p>
+</li>
+<li>
+<p><code>offset</code>：表示要向上偏移的行数。例如，offset为1表示获取上一行的值，offset为2表示获取上两行的值，以此类推。</p>
+</li>
+<li>
+<p><code>default_value</code>：可选参数，用于指定当没有前一行时的默认值。</p>
+</li>
+<li>
+<p><code>PARTITION BY</code>和<code>ORDER BY</code>子句可选，用于分组和排序数据。</p>
+</li>
+<li>
+<p>2）Lead 函数</p>
+</li>
+</ul>
+<p>Lead 函数用于获取 <strong>当前行之后</strong> 的某一列的值。它可以帮助我们查看下一行的数据。</p>
+<p>Lead 函数的语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="built_in">LEAD</span>(column_name, <span class="keyword">offset</span>, default_value) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> partition_column <span class="keyword">ORDER</span> <span class="keyword">BY</span> sort_column)</span><br></pre></td></tr></table></figure>
+<p>参数解释：</p>
+<ul>
+<li>
+<p><code>column_name</code>：要获取值的列名。</p>
+</li>
+<li>
+<p><code>offset</code>：表示要向下偏移的行数。例如，offset为1表示获取下一行的值，offset为2表示获取下两行的值，以此类推。</p>
+</li>
+<li>
+<p><code>default_value</code>：可选参数，用于指定当没有后一行时的默认值。</p>
+</li>
+<li>
+<p><code>PARTITION BY</code>和<code>ORDER BY</code>子句可选，用于分组和排序数据。</p>
+</li>
+<li>
+<p>例：查询每个学生的考试日期和上一次考试的成绩，以及下一次考试的成绩，示例 SQL 如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    student_id,</span><br><span class="line">    exam_date,</span><br><span class="line">    score,</span><br><span class="line">    <span class="built_in">LAG</span>(score, <span class="number">1</span>, <span class="keyword">NULL</span>) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> student_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> exam_date) <span class="keyword">AS</span> previous_score,</span><br><span class="line">    <span class="built_in">LEAD</span>(score, <span class="number">1</span>, <span class="keyword">NULL</span>) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> student_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> exam_date) <span class="keyword">AS</span> next_score</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    scores;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id, name, age, score, class_id,</span><br><span class="line">        <span class="built_in">LAG</span>(name, <span class="number">1</span>, <span class="keyword">NULL</span>) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> class_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> score <span class="keyword">DESC</span>) <span class="keyword">AS</span> prev_name,</span><br><span class="line">        <span class="built_in">LEAD</span>(name, <span class="number">1</span>, <span class="keyword">NULL</span>) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> class_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> score <span class="keyword">DESC</span>) <span class="keyword">AS</span> next_name</span><br><span class="line"> <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+<ul>
+<li>P.S. 这题居然一次过，好感动T T</li>
+</ul>
+<h3 id="恭喜通关！"><a class="header-anchor" href="#恭喜通关！">¶</a>恭喜通关！</h3>
+<h3 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h3>
+<p>比第一次刷熟练多了，第一次刚学了一遍，后半部分都需要参考答案才能写出来，这回只有个别题卡了一下，其余的都挺顺利</p>
+<p>复习SQL命令的好方式~</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>SQL notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>Database</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CS186 SQL2 Berkeley</title>
     <url>/2024/07/05/CS186%20SQL2/</url>
     <content><![CDATA[<h2 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h2>
@@ -693,220 +1349,6 @@ WHERE rating &gt; 8;
         <tag>reading</tag>
         <tag>世界史</tag>
         <tag>罗马史</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CS186 SQL1 Berkeley</title>
-    <url>/2024/07/04/CS186%20SQL1/</url>
-    <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p>Berkeley CS186 Intro to DB Systems</p>
-<p><a href="https://www.youtube.com/watch?v=Q-dxGaR3fH0&amp;list=PLYp4IGUhNFmw8USiYMJvCUjZe79fvyYge&amp;index=6">视频地址</a>  课程记录</p>
-<h2 id="SQL-1"><a class="header-anchor" href="#SQL-1">¶</a>SQL 1</h2>
-<h3 id="what-is-database"><a class="header-anchor" href="#what-is-database">¶</a>what is database</h3>
-<h4 id="一些术语"><a class="header-anchor" href="#一些术语">¶</a>一些术语</h4>
-<p><code>Relation/Table</code></p>
-<ul>
-<li><code>Schema: description(&quot;metadata&quot;)</code></li>
-<li><code>Instance: set of data satisfying the schema</code></li>
-</ul>
-<p><code>Attribute/Column/Field</code></p>
-<p><code>Tuple/Record/Row</code></p>
-<h4 id="一些注意事项"><a class="header-anchor" href="#一些注意事项">¶</a>一些注意事项</h4>
-<ol>
-<li>每列的类型都是<code>原子类型(无法再细分的)</code>,因此不会是<code>list</code>或者<code>map</code>那种类型的数据</li>
-<li><code>saddress</code> 每一行都要<code>fit the schema</code>  简单说就是三行三列的表中不能插入四列的数据行</li>
-<li><code>baddress</code>  每一列的名字不能相同</li>
-<li><code>maddress</code>  数据类型只能是原子类型</li>
-</ol>
-<h3 id="SQL-Language"><a class="header-anchor" href="#SQL-Language">¶</a>SQL Language</h3>
-<h4 id="Two-sublanguages"><a class="header-anchor" href="#Two-sublanguages">¶</a>Two sublanguages</h4>
-<p><code>DDL</code>-Data Definition Language-Define and modify schema   用于定义和修改数据库架构</p>
-<p><code>DML</code>-Data Manipulation Language-Queries can be written intuitively  用于操作实际数据</p>
-<h4 id="The-SQL-DDL-Sailors"><a class="header-anchor" href="#The-SQL-DDL-Sailors">¶</a>The SQL DDL: Sailors</h4>
-<p>以Sailors为例子，来创建数据表</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Sailors (</span><br><span class="line">	sid <span class="type">INTEGER</span>,</span><br><span class="line">	sname <span class="type">CHAR</span>(<span class="number">20</span>),</span><br><span class="line">	rating <span class="type">INTEGER</span>,</span><br><span class="line">	age <span class="type">FLOAT</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (sid)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th>sid</th>
-<th>SNAME</th>
-<th>RATING</th>
-<th>AGE</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Fred</td>
-<td>7</td>
-<td>22</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Jim</td>
-<td>2</td>
-<td>39</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Nancy</td>
-<td>8</td>
-<td>27</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Boats (</span><br><span class="line">	bid <span class="type">INTEGER</span>,</span><br><span class="line">	bname <span class="type">CHAR</span>(<span class="number">20</span>),</span><br><span class="line">	color <span class="type">CHAR</span>(<span class="number">10</span>),</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (Bid)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th>BID</th>
-<th>BNAME</th>
-<th>COLOR</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>101</td>
-<td>Nina</td>
-<td>red</td>
-</tr>
-<tr>
-<td>102</td>
-<td>Pinta</td>
-<td>blue</td>
-</tr>
-<tr>
-<td>103</td>
-<td>Santa Maria</td>
-<td>red</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Reserves (</span><br><span class="line">	sid <span class="type">INTEGER</span>,</span><br><span class="line">	bid <span class="type">INTEGER</span>,</span><br><span class="line">	<span class="keyword">day</span> <span class="type">DATE</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (sid, bid, <span class="keyword">day</span>),</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (sid)  <span class="keyword">REFERENCES</span> Sailors;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th>sid</th>
-<th>bid</th>
-<th>day</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>102</td>
-<td>9/12</td>
-</tr>
-<tr>
-<td>2</td>
-<td>102</td>
-<td>9/13</td>
-</tr>
-</tbody>
-</table>
-<h5 id="Primary-Key-column-s"><a class="header-anchor" href="#Primary-Key-column-s">¶</a>Primary Key column(s)</h5>
-<ul>
-<li>provide a unique “lookup key” for the relation   提供关系的唯一查找键    sid对于这些键值是唯一的</li>
-<li>cannot have any duplicate values  不能有重复的值，主键的值在表中必须是唯一的</li>
-<li>can be made up of &gt; 1 column  主键可以由多列组成   由多列组成的话就叫做复合主键（kimi给的例子：如果一个表中存储了多个部门的员工信息，可能需要使用部门ID和员工ID的组合作为主键来确保唯一性 ）</li>
-</ul>
-<h5 id="Foreign-Key-column-s"><a class="header-anchor" href="#Foreign-Key-column-s">¶</a>Foreign Key column(s)</h5>
-<p>Foreign Key column(s)  外键</p>
-<p>外键应用另一个表的主键或唯一键</p>
-<p>上述外键是<code>Sailors</code>表的指针，即<code>Reserves</code>的<code>sid</code>指向<code>Sailors</code>的<code>sid</code></p>
-<ul>
-<li>Foreign Key references a table via the primary key of that table  外键通过另一个表的主键来引用另一个表</li>
-<li>need not share the name of the referenced primary key    不一定和被引用的主键同名</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Reserves (</span><br><span class="line">	sid <span class="type">INTEGER</span>,</span><br><span class="line">	bid <span class="type">INTEGER</span>,</span><br><span class="line">	<span class="keyword">day</span> <span class="type">DATE</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (sid, bid, <span class="keyword">day</span>),</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (sid)  <span class="keyword">REFERENCES</span> Sailors,</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (bid)  <span class="keyword">REFERENCES</span> Boats;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h4 id="The-SQL-DML"><a class="header-anchor" href="#The-SQL-DML">¶</a>The SQL DML</h4>
-<h5 id="Basic-Single-Table-Queries"><a class="header-anchor" href="#Basic-Single-Table-Queries">¶</a>Basic Single-Table Queries</h5>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="operator">&lt;</span><span class="keyword">column</span> expression list<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="operator">&lt;</span>single <span class="keyword">table</span><span class="operator">&gt;</span> [<span class="keyword">WHERE</span> <span class="operator">&lt;</span>predicate<span class="operator">&gt;</span>]</span><br></pre></td></tr></table></figure>
-<h5 id="SELECT-DISTINCT"><a class="header-anchor" href="#SELECT-DISTINCT">¶</a>SELECT DISTINCT</h5>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> S.name, S.gpa</span><br><span class="line"><span class="keyword">FROM</span> students (<span class="keyword">AS</span>) S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>DISTINCT specifies removal of duplicate rows before output  DISTINCT 在输出前会移除重复行，如果查询结果有多行相同数据，DISTINCT 会保证这些重复行只被显示一次</li>
-<li>Can refer to the students table as “S”, this is called an alias   把学生列表记作S，S是其别名，可以简化查询，提高可读性  定义别名的AS可省略</li>
-</ul>
-<h5 id="ORDER-BY"><a class="header-anchor" href="#ORDER-BY">¶</a>ORDER BY</h5>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, S.gpa, S.age <span class="operator">*</span> <span class="number">2</span> <span class="keyword">AS</span> A2</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.gpa, S.name, A2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>将两倍年龄别名为A2</li>
-<li>ORDER BY clause specifies output to be sorted-Lexicographic ordering   按照字典序排序输出</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, S.gpa, S.age <span class="operator">*</span> <span class="number">2</span> <span class="keyword">AS</span> A2</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.gpa <span class="keyword">DESC</span>, S.name <span class="keyword">ASC</span>, A2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>DESC  降序  ASC  升序  默认是升序</li>
-</ul>
-<h5 id="LIMIT"><a class="header-anchor" href="#LIMIT">¶</a>LIMIT</h5>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, S.gpa, S.age <span class="operator">*</span> <span class="number">2</span> <span class="keyword">AS</span> A2</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.gpa <span class="keyword">DESC</span>, S.name <span class="keyword">ASC</span>, a2;</span><br><span class="line">LIMIT <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>限制输出为几行</li>
-</ul>
-<h5 id="Aggregates"><a class="header-anchor" href="#Aggregates">¶</a>Aggregates</h5>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="built_in">AVG</span>(S.gpa)</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>
-<p>AVG()：计算平均值</p>
-</li>
-<li>
-<p>Before producing output, compute a summary(a.k.a. an aggregate) of some arithmetic expression</p>
-</li>
-<li>
-<p>produce 1 row of output -with one column in this case</p>
-</li>
-<li>
-<p>other aggregates: SUM, COUNT, MAX, MIN</p>
-</li>
-</ul>
-<h5 id="GROUP-BY"><a class="header-anchor" href="#GROUP-BY">¶</a>GROUP BY</h5>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="built_in">AVG</span>(S.gpa), S.dept</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
-<ul>
-<li>
-<p>GROUP BY：按照GROUP BY后面列出的列，进行分组</p>
-</li>
-<li>
-<p>Partition table into groups with same GROUP BY column values - Can group by a list of columns    将表按照具有相同GROUP BY列值的组进行分区，可以根据一列或多列进行分组</p>
-</li>
-<li>
-<p>Produce an aggregate result per group -Cardinality of output = # of distinct group values   为每个组生成一个聚合结果，输出的基数等于不同组值的数量</p>
-</li>
-<li>
-<p>Note: can put grouping columns in SELECT list   可以将分组放入SELECT列表</p>
-</li>
-</ul>
-<h5 id="HAVING"><a class="header-anchor" href="#HAVING">¶</a>HAVING</h5>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="built_in">AVG</span>(S.gpa), S.dept</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>The HAVING predicate filters groups  用于过滤分组后的结果</li>
-<li>HAVING is applied after grouping and aggregation    HAVING子句在分组和聚合计算完成后应用       -Hence can contain anything that could go in the SELECT list  因此可以包含选择列表中的任何内容</li>
-<li>HAVING can only be used in aggregate queries   HAVING只能用在聚合查询中</li>
-<li>it’s an optional clause    可选非必须</li>
-</ul>
-<h5 id="Putting-it-all-together"><a class="header-anchor" href="#Putting-it-all-together">¶</a>Putting it all together</h5>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.dept, <span class="built_in">AVG</span>(S.gpa), <span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">WHERE</span> S.gender <span class="operator">=</span> <span class="string">&#x27;F&#x27;</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">2</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
-<h5 id="DISTINCT-Aggregates"><a class="header-anchor" href="#DISTINCT-Aggregates">¶</a>DISTINCT Aggregates</h5>
-<p>DISTINCT can be used inside or outside of aggregate function, but have different meanings</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> S.name)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> <span class="built_in">COUNT</span>(S.name)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>第一个：在计数之前先把所有重复项移除   相当于只计算有多少中不同项</li>
-<li>第二个：先计数，再移除重复项   相当于计算所有项</li>
-</ul>
-<h5 id="What-Is-This-Asking-For"><a class="header-anchor" href="#What-Is-This-Asking-For">¶</a>What Is This Asking For?</h5>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, <span class="built_in">AVG</span>(S.gpa)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>illegal query</code>   因为<code>S.name</code>没有被包含在<code>GROUP BY</code> 子句中，也没有被用在聚合函数中。数据库不知道应该选择哪个学生的姓名来显示，因为可能有多个学生具有相同的系别（<code>S.dept</code>）。</li>
-</ul>
-<h5 id="SQL-DML-General-Basic-Single-Table-Queries"><a class="header-anchor" href="#SQL-DML-General-Basic-Single-Table-Queries">¶</a>SQL DML: General Basic Single-Table Queries</h5>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="operator">&lt;</span><span class="keyword">column</span> expression list<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="operator">&lt;</span>single <span class="keyword">table</span><span class="operator">&gt;</span></span><br><span class="line">[<span class="keyword">WHERE</span> <span class="operator">&lt;</span>predictable<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="operator">&lt;</span><span class="keyword">column</span> list<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">HAVING</span> <span class="operator">&lt;</span>predicate<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="operator">&lt;</span><span class="keyword">column</span> list<span class="operator">&gt;</span>]</span><br><span class="line">[LIMIT <span class="operator">&lt;</span><span class="type">integer</span><span class="operator">&gt;</span>]</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>notes</category>
-        <category>SQL notes</category>
-      </categories>
-      <tags>
-        <tag>CS Notes</tag>
-        <tag>Database</tag>
       </tags>
   </entry>
   <entry>
