@@ -59,7 +59,7 @@
     
   <div class="cover-frame">
     <div class="bg-box">
-      <img src="/images/cover3.jpg" alt="image frame" />
+      <img src="/images/cover5.jpg" alt="image frame" />
     </div>
     <div class="cover-inner text-center text-white">
       <h1><a href="/">BROCADEMAPLE</a></h1>
@@ -152,7 +152,7 @@
     
     
     <article
-  id="post-SQL-practice-record"
+  id="post-CS_Notes/Database/CS186-SQL3"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -163,7 +163,805 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2024/07/07/SQL-practice-record/"
+  <a class="article-title" href="/2024/07/08/CS_Notes/Database/CS186-SQL3/"
+    >CS186 SQL3 Berkeley</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/07/08/CS_Notes/Database/CS186-SQL3/" class="article-date">
+  <time datetime="2024-07-07T16:00:00.000Z" itemprop="datePublished">2024-07-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/SQL-notes/">SQL notes</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p>Berkeley CS186 Intro to DB Systems</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Q-dxGaR3fH0&amp;list=PLYp4IGUhNFmw8USiYMJvCUjZe79fvyYge&amp;index=6">视频地址</a>  课程记录</p>
+<h1>SQL 3</h1>
+<h2 id="Architecture-of-a-DBMS-SQL-Client"><a class="header-anchor" href="#Architecture-of-a-DBMS-SQL-Client">¶</a>Architecture of a DBMS: SQL Client</h2>
+<ul>
+<li>数据库管理系统的架构：SQL客户端</li>
+<li>Database Management System</li>
+</ul>
+<h3 id="DBMS-Parsing-Optimization"><a class="header-anchor" href="#DBMS-Parsing-Optimization">¶</a>DBMS: Parsing &amp; Optimization</h3>
+<ul>
+<li>数据库管理系统（DBMS）：解析与优化</li>
+</ul>
+<h4 id="Purpose"><a class="header-anchor" href="#Purpose">¶</a>Purpose:</h4>
+<ul>
+<li>
+<p>Parse, check, and verify the SQL, and translate into an efficient relational query plan</p>
+</li>
+<li>
+<p>解析、检查和验证SQL语句，将其转换为高效的关系查询方案</p>
+</li>
+<li>
+<pre><code class="language-sql">SELECT S.sid, S.sname, R.bid
+FROM Sailors S, Reserves R
+WHERE S.sid = R.sid and S.age &gt; 30
+GROUP BY age
+</code></pre>
+</li>
+</ul>
+<h3 id="DBMS-Relational-Operators"><a class="header-anchor" href="#DBMS-Relational-Operators">¶</a>DBMS: Relational Operators</h3>
+<ul>
+<li>数据库管理系统（DBMS）：关系操作符</li>
+</ul>
+<h4 id="Purpose-v2"><a class="header-anchor" href="#Purpose-v2">¶</a>Purpose:</h4>
+<ul>
+<li>Execute a dataflow by operating on records and files</li>
+<li>通过在记录和文件上执行数据流来操作数据</li>
+</ul>
+<h3 id="DBMS-Files-and-Index-Management"><a class="header-anchor" href="#DBMS-Files-and-Index-Management">¶</a>DBMS: Files and Index Management</h3>
+<ul>
+<li>文件和索引管理</li>
+</ul>
+<h4 id="Purpose-v3"><a class="header-anchor" href="#Purpose-v3">¶</a>Purpose:</h4>
+<ul>
+<li>Organize tables and Records as groups of pages in a logical file</li>
+<li>将表和记录组织成逻辑文件中的页面组</li>
+</ul>
+<h3 id="DBMS-Buffer-Management"><a class="header-anchor" href="#DBMS-Buffer-Management">¶</a>DBMS: Buffer Management</h3>
+<ul>
+<li>缓冲区管理层</li>
+</ul>
+<h4 id="Purpose-v4"><a class="header-anchor" href="#Purpose-v4">¶</a>Purpose:</h4>
+<ul>
+<li>Provide the illusion of operating in memory</li>
+<li>提供一种操作内存的假象</li>
+</ul>
+<h3 id="DBMS-Disk-Space-Management"><a class="header-anchor" href="#DBMS-Disk-Space-Management">¶</a>DBMS: Disk Space Management</h3>
+<ul>
+<li>磁盘空间管理</li>
+</ul>
+<h4 id="Purpose-v5"><a class="header-anchor" href="#Purpose-v5">¶</a>Purpose:</h4>
+<ul>
+<li>
+<p>Translate page requests into physical bytes on one or more device(s)</p>
+</li>
+<li>
+<p>将缓冲区管理器的页面请求转换为一个或多个设备（如磁盘、固态磁盘）上的物理字节</p>
+</li>
+</ul>
+<h3 id="Architecture-of-a-DBMS"><a class="header-anchor" href="#Architecture-of-a-DBMS">¶</a>Architecture of a DBMS</h3>
+<ul>
+<li>数据库管理系统的架构
+<ul>
+<li>Organized in layers   层次架构</li>
+<li>Each layer abstracts the layer below  每一层都抽象了其下的层次
+<ul>
+<li>Manage complexity    管理复杂性</li>
+<li>Performance assumptions   性能假设</li>
+</ul>
+</li>
+<li>Example of good systems design   DBMS是良好的系统设计示例</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>SQL CLIENT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Query Parsing &amp; Optimization       <strong>解析与优化</strong></td>
+</tr>
+<tr>
+<td>Relational Operators                         <strong>关系操作符</strong></td>
+</tr>
+<tr>
+<td>Files and Index Management           <strong>文件和索引管理</strong></td>
+</tr>
+<tr>
+<td>Buffer Management                            <strong>缓冲区管理</strong></td>
+</tr>
+<tr>
+<td>Disk Space Management                     <strong>磁盘空间管理</strong></td>
+</tr>
+<tr>
+<td>DBMS的架构通常分为几个层次，每一层都为上层提供服务，同时抽象了下层的复杂性。这种分层的设计有助于提高系统的可维护性和可扩展性</td>
+</tr>
+<tr>
+<td>DATABASE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="DBMS-Concurrency-Recovery"><a class="header-anchor" href="#DBMS-Concurrency-Recovery">¶</a>DBMS: Concurrency &amp; Recovery</h3>
+<ul>
+<li>
+<p>并发控制与恢复（？</p>
+</li>
+<li>
+<p>Two cross-cutting issues related to storage and memory management</p>
+</li>
+</ul>
+<h2 id="Before-we-begin-storage-media"><a class="header-anchor" href="#Before-we-begin-storage-media">¶</a>Before we begin: storage media</h2>
+<h3 id="Disks"><a class="header-anchor" href="#Disks">¶</a>Disks</h3>
+<ul>
+<li>Most database systems were originally designed for magnetic disks   大多数数据库系统最初是为磁盘设计的
+<ul>
+<li>Disk are a mechanical anachronism    磁盘是一种机械性的过时技术</li>
+<li>Instilled design ideas that apply to using solid state disks as well    它所灌输的设计思想也适用于固态硬盘的使用</li>
+</ul>
+</li>
+<li>Major implications   主要影响
+<ul>
+<li><strong>No “pointer derefs”</strong> .Instead, an API:   没有“指针解”引用
+<ul>
+<li>READ: transfer “page” of data from disk to RAM    （读取）将数据的“页面”从磁盘传输到RAM</li>
+<li>WRITE: transfer “page” of data from RAM to disk      （写入）将数据的“页面”从RAM传输到磁盘</li>
+</ul>
+</li>
+<li>Both API calls are very, very slow     这两个API调用都非常非常慢
+<ul>
+<li>Plan carefully   仔细规划</li>
+</ul>
+</li>
+<li>An explicit API can be a good thing   明确的API
+<ul>
+<li>Minimizes the kind of pointer errors you see in C    最小化了你在C语言中看到的指针错误类型</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Storage-Hierarchy"><a class="header-anchor" href="#Storage-Hierarchy">¶</a>Storage Hierarchy</h3>
+<ul>
+<li>存储层次结构</li>
+<li>存储层次结构是计算机系统中不同类型存储设备的层级排列，从最快的到最慢的【从上到下】</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>registers   寄存器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1   Cache       L1缓存</td>
+</tr>
+<tr>
+<td>L2   Cache       L2缓存</td>
+</tr>
+<tr>
+<td>RAM                随机存取存储器</td>
+</tr>
+<tr>
+<td>SSD                  固态硬盘</td>
+</tr>
+<tr>
+<td>Disk                  磁盘</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>emmm，理解下来就是读写到磁盘很慢（？</li>
+</ul>
+<h3 id="Components-of-a-Disk-Pt-6"><a class="header-anchor" href="#Components-of-a-Disk-Pt-6">¶</a>Components of a Disk, Pt. 6</h3>
+<ul>
+<li>
+<p>Platters spin(say 15000 rpm)</p>
+</li>
+<li>
+<p>Arm assembly moved in or out to position a head on a desired track</p>
+<ul>
+<li>Tracks under heads make a “cylinder”</li>
+</ul>
+</li>
+<li>
+<p>Only one head reads/writes at any one time</p>
+</li>
+<li>
+<p>Block/page size is a multiple of (fixed) sector size</p>
+</li>
+<li>
+<p>这个地方是磁盘结构的解释，所以待插入一张结构图，就一览了然了，当然目前我还不会插图片，后面来</p>
+</li>
+</ul>
+<p><img src="https://notes.bencuan.me/cs186/Disks,%20Buffers,%20Files/Untitled%201.png" alt="Untitled|400"></p>
+<h3 id="Accessing-a-Disk-page"><a class="header-anchor" href="#Accessing-a-Disk-page">¶</a>Accessing a Disk page</h3>
+<ul>
+<li>
+<p>访问磁盘界面</p>
+</li>
+<li>
+<p>Time to access (read/write)  a disk block:    读写磁盘块的时间   以下也涉及到磁盘结构那张图</p>
+<ul>
+<li>seek time (moving arms to position disk head on track)
+<ul>
+<li>~2-3 ms on average   寻道时间   磁盘头读取所需的磁道的位置</li>
+</ul>
+</li>
+<li>rotational delay (waiting for block to rotate under head)
+<ul>
+<li>~0-4 ms (15000 RPM)   旋转延迟时间</li>
+</ul>
+</li>
+<li>transfer time (actually moving data to/from disk surface)
+<ul>
+<li>~0.25 ms per 64KB page   将数据从磁盘表面移动到磁盘头/从磁盘头移动到磁盘表面得到时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Key to lower I/O cost: reduce seek/rotational delays    降低I/O成本的关键：减少寻道和旋转延迟的时间</p>
+</li>
+</ul>
+<h3 id="Notes-on-Flash-SSD"><a class="header-anchor" href="#Notes-on-Flash-SSD">¶</a>Notes on Flash(SSD)</h3>
+<ul>
+<li>闪存/固态磁盘Solid State Disks，闪存通常组合在一起形成称为固态磁盘的磁盘驱动器</li>
+<li>Issues in current generation (NAND)
+<ul>
+<li>Fine-grain reads (4-8K reads), coarse-grain writes (1-2 MB writes)    <strong>细粒度读取（Fine-grain reads）</strong>：可以进行4-8KB的细粒度读取;   <strong>粗粒度写入（Coarse-grain writes）</strong>：写入操作通常是1-2MB的粗粒度</li>
+<li>Only 2k-3k erasures before failure, so keep moving hot write units around (“wear leveling”)     闪存的寿命限制：通常在2000到3000次擦除周期后可能发生故障，因此需要不断移动热点写入单元（“磨损均衡” wear leveling）</li>
+<li>write amplification: big units, need to reorg for wear &amp; garbage collection    <strong>写入放大（Write amplification）</strong>：由于写入单元较大，需要重新组织数据以进行磨损均衡和垃圾收集</li>
+</ul>
+</li>
+<li>So <strong>read</strong> is fast and predictable
+<ul>
+<li>Single read access time: 0.03 ms</li>
+<li>4 KB random reads: ~500MB/sec</li>
+<li>Sequential reads: ~525MB/sec</li>
+<li>64K: 0.48 ms</li>
+<li>在闪存中，顺序读取和随机读取的带宽速度大致一样</li>
+</ul>
+</li>
+<li>But write is not . Slower for random
+<ul>
+<li>Single write access time: 0.03 ms   单次写入挺快的</li>
+<li>4 KB random writes: ~120 MB/sec</li>
+<li>Sequential writes: ~480 MB/sec</li>
+<li>顺序写入相比随机写入速度快很多</li>
+</ul>
+</li>
+<li>Flash is faster than disk. But disk offers about 10x the capacity per $就是disk在相等价钱下提供的容量更大（自分の理解）</li>
+</ul>
+<h2 id="Storage-Pragmatics-Trends"><a class="header-anchor" href="#Storage-Pragmatics-Trends">¶</a>Storage Pragmatics &amp; Trends</h2>
+<ul>
+<li>Many significant DBs are not big, but data sizes grow faster than Moore’s Law (“Big Data” is real) , so the role of disk, flash, RAM → to debate</li>
+</ul>
+<h3 id="Bottom-Line-last-few-years"><a class="header-anchor" href="#Bottom-Line-last-few-years">¶</a>Bottom Line (last few years)</h3>
+<ul>
+<li>Very large DBs: relatively traditional   非常大的数据库（Very large DBs）: 相对传统
+<ul>
+<li>Disk still the best cost/MB by a lot    磁盘仍然是成本/每兆字节（cost/MB）比最高的存储介质</li>
+<li>SSDs improve performance and performance variance   固态硬盘（SSDs）提高了性能和性能的一致性</li>
+</ul>
+</li>
+<li>Smaller DB story is changing quickly   小型数据库
+<ul>
+<li>Entry cost for disk is not cheap, so flash wins at the low end     磁盘的入门成本高，在低端市场闪存（flash）√</li>
+<li>Many interesting databases fit in RAM     许多有趣的数据库可以完全装入RAM</li>
+</ul>
+</li>
+</ul>
+<h2 id="Disks-and-Files"><a class="header-anchor" href="#Disks-and-Files">¶</a>Disks and Files</h2>
+<ul>
+<li>Recall, most DBMSs stores information on <strong>Disks</strong> and <strong>SSDs</strong>   <u><strong>对以上Disk和SSD讨论的总结</strong></u>
+<ul>
+<li>Disk are a mechanical anachronism(slow)</li>
+<li>SSDs faster, <strong>slow relative to memory</strong>, costly writes</li>
+</ul>
+</li>
+</ul>
+<h3 id="Block-Level-Storage"><a class="header-anchor" href="#Block-Level-Storage">¶</a>Block Level Storage</h3>
+<ul>
+<li>
+<p><strong>块级存储</strong></p>
+</li>
+<li>
+<p>Read and Write <strong>large chunks of sequential bytes</strong>   读写大顺序字节块：块级存储系统设计为一次读取或写入<strong>大的连续字节块</strong></p>
+</li>
+<li>
+<p>Sequentially: “Next” disk block is fastest   顺序性：在顺序访问中，读取或写入“下一个”磁盘块是最快的</p>
+</li>
+<li>
+<p>Maximize usage of data per Read/Write    最大化每次读写的数据使用量</p>
+<ul>
+<li>“Amortize” seek delays(HDDs) and writes (SSDs)   分摊   硬盘驱动器上的寻道延迟    以及旋转延迟    翻译器：通过<strong>分摊</strong>硬盘驱动器（HDD）上的寻道延迟和固态硬盘（SSD）上的写入放大，来提高效率</li>
+</ul>
+</li>
+<li>
+<p>Predict future behavior   预测未来行为</p>
+<ul>
+<li>Cache popular blocks   缓存热门块，将频繁访问的数据块存储在快速访问的缓存中</li>
+<li>Pre-fetch likely-to-be-accessed blocks    预取可能访问的块，根据访问模式预测并提前加载数据块</li>
+<li>Buffer writes to sequential blocks    缓冲顺序块的写入，将写入操作暂时存储，然后一次性写入到顺序的磁盘块中</li>
+</ul>
+</li>
+</ul>
+<h3 id="A-Note-on-Terminology"><a class="header-anchor" href="#A-Note-on-Terminology">¶</a>A Note on Terminology</h3>
+<ul>
+<li>术语解释</li>
+<li>Block = Unit of transfer for disk read/write   <strong>块</strong>：磁盘读写操作的数据传输单元
+<ul>
+<li>64 KB - 128 KB is a good number today    64KB到128KB是一个常见的块大小</li>
+<li>Book says 4 KB   书籍中可能提到4KB作为块大小的标准</li>
+</ul>
+</li>
+<li>Page: a common synonym for “block”    <strong>页面</strong>：通常是“块”的同义词
+<ul>
+<li>In some texts, “page” = a block-sized chunk of RAM    在某些文献中，“页面”指的是RAM中与块大小相等的数据块</li>
+</ul>
+</li>
+<li>treat “block” and “page” as synonyms     将“块”和“页面”视为可以互换的同义词</li>
+</ul>
+<h3 id="Arranging-Blocks-on-Disk"><a class="header-anchor" href="#Arranging-Blocks-on-Disk">¶</a>Arranging Blocks on Disk</h3>
+<ul>
+<li>
+<p>在磁盘上排列块</p>
+</li>
+<li>
+<p>‘Next’ block concept:</p>
+<ul>
+<li>sequential blocks on same track, followed by     位于同一磁道上的顺序块</li>
+<li>blocks on same cylinder, followed by  位于同一柱面上的块</li>
+<li>blocks on adjacent cylinder   相邻柱面上的块</li>
+</ul>
+</li>
+<li>
+<p>Arrange file pages sequentially by ‘next’ on disk     按磁盘上的“下一个”顺序排列文件页面</p>
+<ul>
+<li>minimize seek and rotational delay     最小化寻道和旋转延迟</li>
+</ul>
+</li>
+<li>
+<p>For a sequential scan, pre-fetch    对于顺序扫描，进行预取</p>
+<ul>
+<li>several blocks at a time    一次预取多个块</li>
+</ul>
+</li>
+<li>
+<p>Read large consecutive blocks     读取大的连续块</p>
+</li>
+</ul>
+<h3 id="Disk-Space-Management"><a class="header-anchor" href="#Disk-Space-Management">¶</a>Disk Space Management</h3>
+<ul>
+<li>
+<p>磁盘空间管理</p>
+</li>
+<li>
+<p>Lowest layer of DBMS, manages space on disk</p>
+</li>
+<li>
+<p>Purpose:</p>
+<ul>
+<li>Map pages to locations on disk    将页面映射到磁盘上的位置</li>
+<li>Load pages from disk to memory   从磁盘加载页面到内存</li>
+<li>Save pages back to disk &amp; ensuring writes    将页面保存回磁盘并确保写入</li>
+</ul>
+</li>
+<li>
+<p>Higher levels call upon this layer to :    更高层级调用这一层来：</p>
+<ul>
+<li>Read/write a page     读写页面</li>
+<li>Allocate/de-allocate logical pages    分配/释放逻辑页面</li>
+</ul>
+</li>
+</ul>
+<h4 id="Requesting-Pages"><a class="header-anchor" href="#Requesting-Pages">¶</a>Requesting Pages</h4>
+<ul>
+<li>
+<p>请求页面</p>
+</li>
+<li>
+<p>Request for s sequences of pages best satisfied by pages stored sequentially on disk     对页面序列的请求最好由磁盘上顺序存储的页面满足</p>
+<ul>
+<li>Physical details hidden from higher levels of systems    物理细节对系统更高层级隐藏</li>
+<li>Higher levels may “safely” assume Next Page is fast, so they will simply expect sequential runs of pages to be quick to scan   更高层级可能“安全地”假设下一页很快，因此他们将期望页面的顺序运行快速扫描</li>
+<li>尼玛好抽象……</li>
+</ul>
+</li>
+</ul>
+<h4 id="Implementation"><a class="header-anchor" href="#Implementation">¶</a>Implementation</h4>
+<ul>
+<li>
+<p>实现</p>
+</li>
+<li>
+<p>Proposal 1：Talk to the storage device directly   数据库存储软件直接与存储设备对话，存储设备绕过操作系统的任何功能导出的协议</p>
+<ul>
+<li>could be very fast if u knew the device well   数据库系统直接连接到硬件，速度尽可能的快</li>
+<li>when devices change    设备可能变换，所以这个proposal不适用了</li>
+</ul>
+</li>
+<li>
+<p>Proposal 2: Run over filesystems (FS)</p>
+<ul>
+<li>Allocate single large “contiguous” file on a nice empty disk and assume sequential / nearby byte access are fast     在一个干净的空磁盘上分配一个大的“连续”文件，并假设顺序/附近的字节访问是快速的</li>
+<li>Most FS optimize disk layout for sequential access    大多数文件系统优化磁盘布局以进行顺序访问
+<ul>
+<li>Gives us more or less what we want if we start with an empty disk</li>
+</ul>
+</li>
+<li>DBMS “file” may span multiple FS files on multiple disks/machines      DBMS的“文件”可能跨越多个磁盘/机器上的多个文件系统文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="Summary-Disk-Space-Management"><a class="header-anchor" href="#Summary-Disk-Space-Management">¶</a>Summary: Disk Space Management</h3>
+<ul>
+<li>provide API to read and write pages to device    提供API以向设备读写页面</li>
+<li>Pages: block level organization of bytes on disk    页面：磁盘上字节的块级组织</li>
+<li>Provides “next” locality and abstracts FS/device details    提供“下一个”局部性并抽象文件系统/设备细节</li>
+</ul>
+<h2 id="Disks-and-Files-Summary"><a class="header-anchor" href="#Disks-and-Files-Summary">¶</a>Disks and Files: Summary</h2>
+<ul>
+<li>Magnetic (hard) disks and SSDs   磁性（硬）磁盘和固态硬盘（SSDs）
+<ul>
+<li>Basic HDD mechanics   基本的HDD机械特性</li>
+<li>SSD write amplification    SSD写入放大</li>
+<li>Concept of “near” pages and how it relates to cost of access   近邻页面的概念以及相对成本</li>
+<li>Relative cost of
+<ul>
+<li>Random vs. sequential disk access (10x)    随机访问与顺序磁盘访问</li>
+<li>Disk (pluto 冥王星) vs RAM (sacramento) vs. registers (your head)     磁盘（以冥王星为例）与RAM（以萨克拉门托为例？不懂）与寄存器（你的头脑）
+<ul>
+<li>Big differences</li>
+<li>不同存储介质的成本和性能有显著差异，寄存器最快但容量最小，RAM容量较大且速度很快，而磁盘提供了巨大的存储容量但速度相对较慢</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DB File storage
+<ul>
+<li>Typically over FS file(s)    通常通过文件系统（FS）上的一个或多个文件来实现</li>
+</ul>
+</li>
+<li>Disk space manager loads and stores pages
+<ul>
+<li>Block level reasoning     基于块级逻辑进行操作</li>
+<li>Abstracts device and file system; provide fast “next”     抽象化了设备和文件系统的细节；提供快速的“下一个”页面访问</li>
+</ul>
+</li>
+</ul>
+<h1>写在后面</h1>
+<p>抽象啊（流口水</p>
+<p>不过也算有所收获</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/" rel="tag">Database</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-CS_Notes/RuoYi/【RuoYi-+-AI】2_若伊搭建"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/07/07/CS_Notes/RuoYi/%E3%80%90RuoYi-+-AI%E3%80%912_%E8%8B%A5%E4%BC%8A%E6%90%AD%E5%BB%BA/"
+    >【RuoYi + AI】2_若伊搭建</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/07/07/CS_Notes/RuoYi/%E3%80%90RuoYi-+-AI%E3%80%912_%E8%8B%A5%E4%BC%8A%E6%90%AD%E5%BB%BA/" class="article-date">
+  <time datetime="2024-07-06T16:00:00.000Z" itemprop="datePublished">2024-07-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/RuoYi-notes/">RuoYi notes</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="若伊搭建"><a class="header-anchor" href="#若伊搭建">¶</a>若伊搭建</h2>
+<h3 id="版本的解释"><a class="header-anchor" href="#版本的解释">¶</a>版本的解释</h3>
+<p><s><code>RuoYi</code> 前后端混合开发版本   后端Springboot  前端Bootstrap</s>  已淘汰</p>
+<p><code>RuoYi-Vue</code> 前后端分离开发版本   后端Springboot  前端Vue   单体项目√   中大型项目会有性能或扩展性的问题</p>
+<p><code>RuoYi-Cloud</code>   后端SpringCloud  前端Bootstrap   微服务版本，系统延伸性和稳定性有    做分布式微服务项目选这个</p>
+<p>以上两个提供的都是PC端，移动端的选下面APP这个版本</p>
+<p><code>RuoYi-APP</code>   后端Uniapp前端Vue  一次编写多端运行</p>
+<ul>
+<li>注意：<code>RuoYi-APP</code>没有提供后端代码，可以适配<code>RuoYi-Vue</code>和<code>RuoYi-Cloud</code></li>
+</ul>
+<p><code>RuoYi-other</code> <code>Vue3+ElementPlus+Vite</code></p>
+<h3 id="RuoYi-Vue"><a class="header-anchor" href="#RuoYi-Vue">¶</a>RuoYi-Vue</h3>
+<ul>
+<li>前后端分离的单体框架设计</li>
+<li>软件环境：JDK、MySQL、Redis、Maven、Node</li>
+</ul>
+<p>阿西吧我服了最讨厌配环境了……</p>
+<h4 id="确认版本"><a class="header-anchor" href="#确认版本">¶</a>确认版本</h4>
+<ul>
+<li>
+<p>JDK</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+<p>获得信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;java -version</span><br><span class="line">java version <span class="string">&quot;17.0.9&quot;</span> 2023-10-17 LTS</span><br><span class="line">Java(TM) SE Runtime Environment (build 17.0.9+11-LTS-201)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 17.0.9+11-LTS-201, mixed mode, sharing)</span><br><span class="line"></span><br><span class="line">&gt;javac -version</span><br><span class="line">javac 17.0.9</span><br></pre></td></tr></table></figure>
+<ul>
+<li>课程版本：JDK 11</li>
+</ul>
+</li>
+<li>
+<p>MySQL</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql --version</span><br><span class="line">mysql -V   </span><br><span class="line">// 都行</span><br></pre></td></tr></table></figure>
+<ul>
+<li>服了，之前为了配小皮的环境把本地mysql给卸了，不知道要不要重装一个</li>
+<li>课程版本：MySQL 8</li>
+</ul>
+</li>
+<li>
+<p>Redis</p>
+<ul>
+<li>当Redis服务器正在运行，使用以下命令：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli info | grep redis_version</span><br></pre></td></tr></table></figure>
+<ul>
+<li>没启动就先启动Redis服务器</li>
+<li>课程版本：Redis 5（Win）</li>
+</ul>
+</li>
+<li>
+<p>Maven</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -version</span><br></pre></td></tr></table></figure>
+<ul>
+<li>课程版本：Maven 3.6</li>
+</ul>
+</li>
+<li>
+<p>Node.js以及npm（Node的包管理器），可以使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得信息：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;node -v</span><br><span class="line">v20.12.1</span><br><span class="line"></span><br><span class="line">&gt;npm -v</span><br><span class="line">10.5.0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>课程版本：Node16（Vue3）</li>
+</ul>
+</li>
+</ul>
+<h4 id="技术选型"><a class="header-anchor" href="#技术选型">¶</a>技术选型</h4>
+<ul>
+<li>Spring Boot</li>
+<li>Spring Security</li>
+<li>MyBatis</li>
+<li>Jwt</li>
+<li>Vue3</li>
+<li>Element-Plus</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://gitee.com/y_project/RuoYi-Vue</span><br></pre></td></tr></table></figure>
+<p>芝士前后端分离版本的脚手架，但是其中的ruoyi-ui使用的还是Vue2版本，换成Vue3</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://gitee.com/fanxincc/RuoYi-Vue3</span><br></pre></td></tr></table></figure>
+<p>以上是Vue3扩展地址</p>
+<h2 id="搭建后端项目步骤"><a class="header-anchor" href="#搭建后端项目步骤">¶</a>搭建后端项目步骤</h2>
+<ol>
+<li>Git克隆并初始化项目</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">→ 打开IDEA </span><br><span class="line">→ 右上角Get from VCS </span><br><span class="line">→ 将仓库存储地址和url复制上去  RuoYi-Vue</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>MySQL导入与配置</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pf421B71v/?p=2&amp;spm_id_from=pageDriver&amp;vd_source=3f0983ef34615b702fec513c41e55a64">基础篇-02.若依搭建_哔哩哔哩_bilibili</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RuoYi/" rel="tag">RuoYi</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-CS_Notes/RuoYi/【RuoYi-+-AI】1_导入部分"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/07/07/CS_Notes/RuoYi/%E3%80%90RuoYi-+-AI%E3%80%911_%E5%AF%BC%E5%85%A5%E9%83%A8%E5%88%86/"
+    >【RuoYi + AI】1 导入部分</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/07/07/CS_Notes/RuoYi/%E3%80%90RuoYi-+-AI%E3%80%911_%E5%AF%BC%E5%85%A5%E9%83%A8%E5%88%86/" class="article-date">
+  <time datetime="2024-07-06T16:00:00.000Z" itemprop="datePublished">2024-07-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/RuoYi-notes/">RuoYi notes</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="导入部分"><a class="header-anchor" href="#导入部分">¶</a>导入部分</h2>
+<h3 id="系统开发流程与AI局限性"><a class="header-anchor" href="#系统开发流程与AI局限性">¶</a>系统开发流程与AI局限性</h3>
+<ol>
+<li><code>项目环境搭建，技术选型，框架整合</code></li>
+<li><code>设计产品原型，例如库表、接口等</code></li>
+<li><code>前后端编码，将设计转换为实际的软件功能</code></li>
+<li><code>测试部署上线</code></li>
+</ol>
+<p>AI能完成编码部分，但是环境搭建部分还是得人工</p>
+<p>AI在设计阶段也可以起到辅助作用</p>
+<p>在测试部署阶段，AI可以辅助生成测试用例，编写部署所需要的脚本</p>
+<ul>
+<li>
+<p>若伊功能：<code>快速构建</code>  <code>通用模块</code>  <code>代码生成（尤其是对于需要重复编写的增删改查部分）</code></p>
+</li>
+<li>
+<p>若伊：基于SpringBoot+Bootstrap的极速后台开发框架</p>
+</li>
+</ul>
+<h3 id="基础应用部分"><a class="header-anchor" href="#基础应用部分">¶</a>基础应用部分</h3>
+<ul>
+<li>若伊搭建</li>
+<li>入门案例</li>
+<li>功能详解</li>
+<li>项目结构</li>
+<li>源码阅读</li>
+<li>二次开发</li>
+<li>通义灵码AI工具</li>
+</ul>
+<h3 id="项目实战部分"><a class="header-anchor" href="#项目实战部分">¶</a>项目实战部分</h3>
+<ul>
+<li>帝可得-项目搭建</li>
+<li>帝可得-前端页面</li>
+<li>帝可得-点位管理</li>
+<li>帝可得-人员管理</li>
+<li>帝可得-设备管理</li>
+<li>AI优化代码</li>
+<li>AI生成代码</li>
+<li>AI代码调错</li>
+</ul>
+<h3 id="拔高原理部分"><a class="header-anchor" href="#拔高原理部分">¶</a>拔高原理部分</h3>
+<ul>
+<li>若伊框架的核心原理和底层运行机制分析</li>
+<li>Velocity代码生成器</li>
+<li>RBAC权限控制</li>
+<li>异步任务管理器</li>
+<li>自定义日志注解</li>
+<li>AI生成注释</li>
+<li>AI辅助阅读</li>
+</ul>
+<h3 id="前置知识"><a class="header-anchor" href="#前置知识">¶</a>前置知识</h3>
+<ul>
+<li>关系型数据库 MySQL</li>
+<li>非关系型数据库Redis</li>
+<li>后端
+<ul>
+<li>Springboot</li>
+<li>MyBatis</li>
+</ul>
+</li>
+<li>前端
+<ul>
+<li>Vue3</li>
+<li>Axios</li>
+<li>Element-Plus</li>
+</ul>
+</li>
+<li>工具
+<ul>
+<li>IDEA、VSCode</li>
+<li>Git</li>
+</ul>
+</li>
+<li>AI+若伊
+<ul>
+<li>全栈开发</li>
+</ul>
+</li>
+</ul>
+<h2 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h2>
+<p>以后真的全栈3k吧hhhhhh</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RuoYi/" rel="tag">RuoYi</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-CS_Notes/Database/SQL-practice-record"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/07/07/CS_Notes/Database/SQL-practice-record/"
     >SQL practice record</a> 
 </h2>
  
@@ -172,7 +970,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2024/07/07/SQL-practice-record/" class="article-date">
+      <a href="/2024/07/07/CS_Notes/Database/SQL-practice-record/" class="article-date">
   <time datetime="2024-07-06T16:00:00.000Z" itemprop="datePublished">2024-07-07</time>
 </a> 
   <div class="article-category">
@@ -634,7 +1432,7 @@ select task_name, due_date from tasks limit 2, 2;
 
     
     <article
-  id="post-[从城邦到帝国]-1-罗马起源-王政时代"
+  id="post-文史哲/中国史/中国神话/冥界篇/[中国神话-冥界篇]-1-三魂七魄"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -645,7 +1443,137 @@ select task_name, due_date from tasks limit 2, 2;
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2024/07/06/%5B%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%5D-1-%E7%BD%97%E9%A9%AC%E8%B5%B7%E6%BA%90-%E7%8E%8B%E6%94%BF%E6%97%B6%E4%BB%A3/"
+  <a class="article-title" href="/2024/07/07/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%AD%E5%9B%BD%E5%8F%B2/%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D/%E5%86%A5%E7%95%8C%E7%AF%87/%5B%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D-%E5%86%A5%E7%95%8C%E7%AF%87%5D-1-%E4%B8%89%E9%AD%82%E4%B8%83%E9%AD%84/"
+    >【中国神话-冥界篇】1_三魂七魄</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/07/07/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%AD%E5%9B%BD%E5%8F%B2/%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D/%E5%86%A5%E7%95%8C%E7%AF%87/%5B%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D-%E5%86%A5%E7%95%8C%E7%AF%87%5D-1-%E4%B8%89%E9%AD%82%E4%B8%83%E9%AD%84/" class="article-date">
+  <time datetime="2024-07-06T16:00:00.000Z" itemprop="datePublished">2024-07-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/">文史哲</a> / <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%AD%E5%9B%BD%E5%8F%B2/">中国史</a> / <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%AD%E5%9B%BD%E5%8F%B2/%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D/">中国神话</a> / <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%AD%E5%9B%BD%E5%8F%B2/%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D/%E5%86%A5%E7%95%8C%E7%AF%87/">冥界篇</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p>[视频地址](<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yA411V7ko/?spm_id_from=333.337.search-card.all.click&amp;vd_source=3f0983ef34615b702fec513c41e55a64">[中国神话-冥界篇 合集]中国古代魂魄观念大盘点！让你理清中国人的灵魂观！_哔哩哔哩_bilibili</a>)    感觉自分乃亚文化爱好者HHH</p>
+<h3 id="冥界篇-1"><a class="header-anchor" href="#冥界篇-1">¶</a>冥界篇 1</h3>
+<ul>
+<li>
+<p>由于中国人喜欢记录历史，神话人物大部分以历史人物为雏形衍生的，例如三皇五帝就是以部落或者部落首领的名字来创作的神话。</p>
+</li>
+<li>
+<p>中华民族还有着楚国屈原记录的《九歌》神话。</p>
+<ul>
+<li>
+<p>在九歌之中，东皇太一是至高主神；</p>
+</li>
+<li>
+<p>而在《山海经》中，则以女娲、帝俊为主神；</p>
+</li>
+<li>
+<p>盘古开天的神话却要直到三国时期由徐整所著的《三五历纪》中才出现，比在战国时期的《山海经》雏形要晚了几百年。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>十几代人的时间差使得中国神话主神与诸神的关系模糊不清，再加上道教、佛教、儒家思想对于神话的梳理与编纂，中国神话的主要脉络很难梳理。</p>
+</li>
+<li></li>
+<li>
+<p>传说商朝人好鬼神，每逢有战事或国家大事，帝王都会去往祖陵或祭台由祭司进行占卜。最为主流的占卜是将龟甲打磨抛光之后，由祭司投入紫荆木点燃的火焰之中，以龟甲之上的裂痕来判断吉凶，并以吉凶来判断接下来人们该怎样行事。这里的占卜出的结果，就是上天和鬼神们所给人的答案。</p>
+</li>
+<li>
+<p>“社稷大事，唯祀与戎”</p>
+</li>
+<li>
+<p>但随着时间的流逝，这一类的占卜之术逐渐的失传，变为了其他形式。</p>
+</li>
+<li>
+<p>到了汉朝时，帝王独尊儒术，圣人孔子不说鬼神。此时，对于鬼神的解释之权落到了道家的手中。道家以老子学说，结合阴阳五行，乾坤八卦思想，再加上古人对于天地自然的观测与想象，这才衍生出了三魂七魄的观念。</p>
+</li>
+<li>
+<p>这个观念之所以能保留下来，也是因为皇权与儒家选择的结果。中国人敬拜祖先，因此还有了清明节和中元节这一类祭奠逝者的节日。</p>
+</li>
+<li>
+<p>在三魂七魄的观念未出现之前，不说鬼神的儒家一直无法解释大家到底在祭拜什么。直到三魂七魄观念的出现，才打破这一僵局。</p>
+</li>
+<li></li>
+<li></li>
+<li>
+<p>三魂，分别是天魂胎光、地魂爽灵、人魂幽精。</p>
+</li>
+<li>
+<p>传说在人没有出生之前，人魂由神明专司保管。当人体形成，人魂就会进入到肉体之中，此时，天地阴阳之精气也会形成人的魂魄，从而辅助人魂的成长。随着人本身的成长，天地人三魂也会有着同样的记忆、行为与性格。</p>
+</li>
+<li></li>
+<li>
+<p>一个传说之中的故事：明太祖朱元璋有一次被一个冒失的太监吓了一跳，于是命人将太监拖出去斩首，当时这个太监吓得面无血色。在斩首之时，人们惊讶的发现，斩首台之下竟然有一个长的和太监一模一样的人在那里看热闹。在太监被斩首的前一刻，朱元璋又下旨赦免了这个太监。也是这一吓，将太监的一个魂吓掉了，幻化出来另一个一模一样的自己并较有兴致的观看自己被斩首。</p>
+</li>
+<li>
+<p>而在人死后，天魂和地魂的精气会再度回归到天地之中。丧失本源精气的这两个魂，一个会守护在自己的尸身旁边，一个会去到子孙后代供奉的牌位之中，接受子孙的敬拜与祭祀，而人魂则会被专司灵魂的神明拘走，从而为自己生前的善果和恶行负责；依附在尸身与牌位旁的魂，会像是一个监视器一样在灵位与坟墓旁边观看子孙的言行，观察子孙是否遵纪守法，心向善而不作恶，并保佑这些子孙健康的成长</p>
+</li>
+<li>
+<p>这套说法之所以能够大面积地流行，很大原因取决于儒家接受了三魂这一设定，认为人每当清明节祭祀祖先的时候，都是在祭祀祖先肉体死亡后留下来的那个魂（此处可以指先祖的精神）</p>
+</li>
+<li>
+<p>但对于祖先的祭祀也有规矩：先祖们只能够接受自己直系血脉的祭祀。这个观点来自于古代人对血缘观念的认识。</p>
+</li>
+<li>
+<p>民间也有流传这样一个传说故事：据说一个地方的县太守手下有一个异人，这个人天生可以看到各家祖先的祭祀情况，县太守便命此人观察自家祭祀香火情况。当县太守的儿子为自家祖先上香之后，这个人却说他看到一个屠夫模样的魂进入到太守的祖庙大吃大喝，而旁边穿着官服的县太守本家的祖先，却饿的瘦骨嶙峋在家庙前徘徊。县太守于是逼问妻子，才得知当年生的是女儿，与屠夫家的女人换了孩子。</p>
+</li>
+<li>
+<p>由这个故事可见中国文化中对直系子孙的重视，因此还产生了“不孝有三，无后为大”的言论。虽然故事中由重男轻女的陈腐观念，但也可以从中看出鬼神文化对古人生活的影响。</p>
+</li>
+<li>
+<p>在<strong>道家</strong>系统中，三魂是阳之所属，相对应的七魄则是阴所在。七魄各自都有名称，分别是尸狗、伏矢、雀阴、吞贼、非毒、除秽、臭肺。七魄各自负责人们的喜、怒、哀、惧、爱、恶、欲七种主要的情绪。</p>
+</li>
+<li>
+<p>传说在平日里，都是由三魂来掌控七魄，致使七魄不敢为非作歹使人沉浸于情欲之中。但当三魂受到严重打击而衰弱之时，三魂无力掌控七魄，</p>
+</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reading/" rel="tag">reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E5%8F%B2/" rel="tag">世界史</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D/" rel="tag">中国神话</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%A5%E7%95%8C%E7%AF%87/" rel="tag">冥界篇</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-文史哲/世界史/罗马史/[从城邦到帝国]-1-罗马起源-王政时代"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/07/06/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E7%BD%97%E9%A9%AC%E5%8F%B2/%5B%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%5D-1-%E7%BD%97%E9%A9%AC%E8%B5%B7%E6%BA%90-%E7%8E%8B%E6%94%BF%E6%97%B6%E4%BB%A3/"
     >【从城邦到帝国】1_罗马起源_王政时代</a> 
 </h2>
  
@@ -654,7 +1582,7 @@ select task_name, due_date from tasks limit 2, 2;
     </header>
      
     <div class="article-meta">
-      <a href="/2024/07/06/%5B%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%5D-1-%E7%BD%97%E9%A9%AC%E8%B5%B7%E6%BA%90-%E7%8E%8B%E6%94%BF%E6%97%B6%E4%BB%A3/" class="article-date">
+      <a href="/2024/07/06/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E7%BD%97%E9%A9%AC%E5%8F%B2/%5B%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%5D-1-%E7%BD%97%E9%A9%AC%E8%B5%B7%E6%BA%90-%E7%8E%8B%E6%94%BF%E6%97%B6%E4%BB%A3/" class="article-date">
   <time datetime="2024-07-05T16:00:00.000Z" itemprop="datePublished">2024-07-06</time>
 </a> 
   <div class="article-category">
@@ -761,7 +1689,7 @@ select task_name, due_date from tasks limit 2, 2;
 
     
     <article
-  id="post-【从城邦到帝国】2_北蛮入侵_罗马危机"
+  id="post-文史哲/世界史/罗马史/【从城邦到帝国】2_北蛮入侵_罗马危机"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -772,7 +1700,7 @@ select task_name, due_date from tasks limit 2, 2;
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2024/07/06/%E3%80%90%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%E3%80%912_%E5%8C%97%E8%9B%AE%E5%85%A5%E4%BE%B5_%E7%BD%97%E9%A9%AC%E5%8D%B1%E6%9C%BA/"
+  <a class="article-title" href="/2024/07/06/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E7%BD%97%E9%A9%AC%E5%8F%B2/%E3%80%90%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%E3%80%912_%E5%8C%97%E8%9B%AE%E5%85%A5%E4%BE%B5_%E7%BD%97%E9%A9%AC%E5%8D%B1%E6%9C%BA/"
     >【从城邦到帝国】2_北蛮入侵_罗马危机</a> 
 </h2>
  
@@ -781,7 +1709,7 @@ select task_name, due_date from tasks limit 2, 2;
     </header>
      
     <div class="article-meta">
-      <a href="/2024/07/06/%E3%80%90%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%E3%80%912_%E5%8C%97%E8%9B%AE%E5%85%A5%E4%BE%B5_%E7%BD%97%E9%A9%AC%E5%8D%B1%E6%9C%BA/" class="article-date">
+      <a href="/2024/07/06/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E7%BD%97%E9%A9%AC%E5%8F%B2/%E3%80%90%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%E3%80%912_%E5%8C%97%E8%9B%AE%E5%85%A5%E4%BE%B5_%E7%BD%97%E9%A9%AC%E5%8D%B1%E6%9C%BA/" class="article-date">
   <time datetime="2024-07-05T16:00:00.000Z" itemprop="datePublished">2024-07-06</time>
 </a> 
   <div class="article-category">
@@ -862,7 +1790,7 @@ select task_name, due_date from tasks limit 2, 2;
 
     
     <article
-  id="post-CS186 SQL2"
+  id="post-CS_Notes/Database/CS186 SQL2"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -873,7 +1801,7 @@ select task_name, due_date from tasks limit 2, 2;
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2024/07/05/CS186%20SQL2/"
+  <a class="article-title" href="/2024/07/05/CS_Notes/Database/CS186%20SQL2/"
     >CS186 SQL2 Berkeley</a> 
 </h2>
  
@@ -882,7 +1810,7 @@ select task_name, due_date from tasks limit 2, 2;
     </header>
      
     <div class="article-meta">
-      <a href="/2024/07/05/CS186%20SQL2/" class="article-date">
+      <a href="/2024/07/05/CS_Notes/Database/CS186%20SQL2/" class="article-date">
   <time datetime="2024-07-04T16:00:00.000Z" itemprop="datePublished">2024-07-05</time>
 </a> 
   <div class="article-category">
@@ -1508,7 +2436,7 @@ WHERE rating &gt; 8;
 
     
     <article
-  id="post-CS186 SQL1"
+  id="post-CS_Notes/Database/CS186 SQL1"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -1519,7 +2447,7 @@ WHERE rating &gt; 8;
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2024/07/04/CS186%20SQL1/"
+  <a class="article-title" href="/2024/07/04/CS_Notes/Database/CS186%20SQL1/"
     >CS186 SQL1 Berkeley</a> 
 </h2>
  
@@ -1528,7 +2456,7 @@ WHERE rating &gt; 8;
     </header>
      
     <div class="article-meta">
-      <a href="/2024/07/04/CS186%20SQL1/" class="article-date">
+      <a href="/2024/07/04/CS_Notes/Database/CS186%20SQL1/" class="article-date">
   <time datetime="2024-07-03T16:00:00.000Z" itemprop="datePublished">2024-07-04</time>
 </a> 
   <div class="article-category">
@@ -1762,7 +2690,7 @@ WHERE rating &gt; 8;
 
     
     <article
-  id="post-《罗生门》读书摘记"
+  id="post-文史哲/世界史/埃及史/【艺术史】来世与王权的艺术——古埃及艺术"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -1773,100 +2701,7 @@ WHERE rating &gt; 8;
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2024/07/04/%E3%80%8A%E7%BD%97%E7%94%9F%E9%97%A8%E3%80%8B%E8%AF%BB%E4%B9%A6%E6%91%98%E8%AE%B0/"
-    >《罗生门》读书摘记</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/07/04/%E3%80%8A%E7%BD%97%E7%94%9F%E9%97%A8%E3%80%8B%E8%AF%BB%E4%B9%A6%E6%91%98%E8%AE%B0/" class="article-date">
-  <time datetime="2024-07-03T16:00:00.000Z" itemprop="datePublished">2024-07-04</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/">文史哲</a> / <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/%E5%A4%96%E5%9B%BD%E6%96%87%E5%AD%A6/">外国文学</a> / <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/%E5%A4%96%E5%9B%BD%E6%96%87%E5%AD%A6/%E6%97%A5%E6%9C%AC%E6%96%87%E5%AD%A6/">日本文学</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p>这本书好像是芥川龙之介的作品集，只是以最出门的《罗生门》命名，其中包含了《罗生门》《鼻》《手帕》《地狱变》《蛛丝》《橘》《舞会》《密林中》《矿车》《阿富的贞操》《一篇爱情小说》《单相思》《侏儒警语》等文章。</p>
-<p>目前看到的部分是《地狱变》 读起来感觉是跟《罗生门》一样印象深刻的作品。</p>
-<p>本文是以上作品的一些句子摘录以及一些可能对自分の文学创作（？有益的批注</p>
-<h3 id="摘录始于此"><a class="header-anchor" href="#摘录始于此">¶</a>摘录始于此</h3>
-<h4 id="译本序"><a class="header-anchor" href="#译本序">¶</a>译本序</h4>
-<p>书山稗（bai四）海，文史苑囿（you四），于中沉潜含玩，钩沉抉隐，一旦发而为文，自是信手拈来。随机生发，纵横捭（bai三）阖，不可抑勒。从王侯衙役到市井小民，从寺院高僧到天主教徒，从紫宸之深到江湖之远，在其笔下无不呼之即来，腾跃纸上。</p>
-<ul>
-<li>
-<p>钩沉抉隐：“钩沉”与“抉隐”意思相近，都有“探索深奥的道理或散失的内容”的意思</p>
-</li>
-<li>
-<p>沉潜：①在水里潜伏、沉没。②思想感情深沉，不外露。③集中精神；潜心</p>
-</li>
-</ul>
-<p>值得注意的是，芥川的历史题材小说并非为了演绎历史典故和翻拍历史人物，而是身披历史戏装的“现代小说”，目的在于借古喻今，针砭时弊，臧否人物，传达现代人的生命窘态和灵魂质地。……原典出入自如，布局浑然天成，主题独出机杼，笔致摇曳生姿。</p>
-<ul>
-<li>臧否：①褒贬，评论   ②善恶</li>
-</ul>
-<p>芥川生性敏感，纵然一件司空见惯的小事，也往往使其脆弱的神经震颤良久。一般来说，他不重描绘而意在发觉，疏于叙述而工于点化。少的是轻灵与潇洒，多的是沉郁与悲凉。</p>
-<p>无论得于史料之作，还是拾于现实之篇，其一以贯之者，大约是以下两条主线。一是对人性中“恶”的暴露、揶揄和鞭挞。第二条主线便是对人对人生的幻灭感亦即厌世主义倾向所导致的对艺术的执着与痴迷，这或许也是出于对前者的一种补偿心理。</p>
-<p>尤为可贵的是，“他有意识地创造了文体——不是陈陈相因（的文体，而是一扫庸俗气味的艺术文体”（中村真一郎语），堪称典型的艺术至上者。</p>
-<ul>
-<li>陈陈相因：粮仓里的米谷一年接一年地堆积起来。比喻沿袭老一套，没有改进。</li>
-</ul>
-<p>可以说，对中国古典的向往和对中国现实的鄙视是芥川“中国认识”的一对矛盾。前者使之怀有文化上的自卑，后者催生其现实中的傲慢（“日本优越论”）。这其实也是日本近现代主流知识分子或精英阶层共同的基本倾向，纵令夏目漱石亦不例外。愈到后来，自卑愈见其轻而傲慢愈见其烈，在结果上成为日本对外扩张和侵华战争所以顺利推进的重要思想舆论资源和社会基础。</p>
-<ul>
-<li>
-<p>纵令：即使——用在偏正复句的偏句，表示假设的让步，即退一步提出某种情况。  例句：纵令失败，我们也要继续实验。</p>
-</li>
-<li>
-<p>黄钟大吕：形容音乐或言辞庄严、正大、高妙、和谐。  例句：①这首乐曲饱含一种黄钟大吕的气势。  ②他的这篇短文十分朴素，却如黄钟大吕，震撼人心。  ③堪称黄钟大吕的鸿篇巨制</p>
-</li>
-</ul>
-<h4 id="鼻"><a class="header-anchor" href="#鼻">¶</a>鼻</h4>
-<p>人的内心存在两种相互矛盾的情感。无疑，没有人不同情他人的不幸。可是，一旦对方好歹从不幸中挣扎出来，却又因此产生若有所失的怅惘。说得夸张一点，甚至出现一种想使之重新陷入不幸的心理。于是，不觉之间开始对其怀有某种敌意，尽管是消极的敌意。不知个中缘由的内供之所以怏怏不快，无非是因为他从池尾僧俗的态度中，隐隐觉察出了这些旁观者的利己主义。</p>
-<h4 id="地狱变"><a class="header-anchor" href="#地狱变">¶</a>地狱变</h4>
-<p>这是因为，良秀笔下的众多罪人，上至三公九卿下至乞丐贱民，网罗了各色人等。有峨冠博带的庙堂高官，有花枝招展的年轻宫女，有颈挂麻纸的诵经僧，有高底木屐的书童，有长裙飘飘的豆蔻侍女，有手持供钱的阴阳先生，无暇一一列举。总之，如此形形色色的诸多男女，无不惨遭牛头马面的摧残，在上下翻腾的浓烟烈火中如风吹败叶般四下狼狈逃窜。</p>
-<p>那被烟呛得白惨惨的面庞，那随火乱舞的长飘飘的秀发，那转瞬化为火焰的美艳艳的樱花盛装——所有这些是何等惨不忍睹啊！尤其每当夜风向下盘旋而烟随风披靡之时，金星乱坠的红通通的火焰中便闪现出少女咬着堵嘴物而始终拼命挣脱锁链时那痛苦扭动的情形，令人觉得地狱的大苦大难活生生展现于眼前。</p>
-<p>刚才还在为地狱的惨烈场面惊恐困惑的良秀，此刻那满是皱纹的脸上浮现出无可名状的光辉——一种近乎恍惚状态的由衷喜悦之情。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reading/" rel="tag">reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%96%E5%9B%BD%E6%96%87%E5%AD%A6/" rel="tag">外国文学</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E6%9C%AC%E6%96%87%E5%AD%A6/" rel="tag">日本文学</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-【艺术史】来世与王权的艺术——古埃及艺术"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/07/04/%E3%80%90%E8%89%BA%E6%9C%AF%E5%8F%B2%E3%80%91%E6%9D%A5%E4%B8%96%E4%B8%8E%E7%8E%8B%E6%9D%83%E7%9A%84%E8%89%BA%E6%9C%AF%E2%80%94%E2%80%94%E5%8F%A4%E5%9F%83%E5%8F%8A%E8%89%BA%E6%9C%AF/"
+  <a class="article-title" href="/2024/07/04/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E5%9F%83%E5%8F%8A%E5%8F%B2/%E3%80%90%E8%89%BA%E6%9C%AF%E5%8F%B2%E3%80%91%E6%9D%A5%E4%B8%96%E4%B8%8E%E7%8E%8B%E6%9D%83%E7%9A%84%E8%89%BA%E6%9C%AF%E2%80%94%E2%80%94%E5%8F%A4%E5%9F%83%E5%8F%8A%E8%89%BA%E6%9C%AF/"
     >【艺术史】来世与王权的艺术——古埃及艺术</a> 
 </h2>
  
@@ -1875,7 +2710,7 @@ WHERE rating &gt; 8;
     </header>
      
     <div class="article-meta">
-      <a href="/2024/07/04/%E3%80%90%E8%89%BA%E6%9C%AF%E5%8F%B2%E3%80%91%E6%9D%A5%E4%B8%96%E4%B8%8E%E7%8E%8B%E6%9D%83%E7%9A%84%E8%89%BA%E6%9C%AF%E2%80%94%E2%80%94%E5%8F%A4%E5%9F%83%E5%8F%8A%E8%89%BA%E6%9C%AF/" class="article-date">
+      <a href="/2024/07/04/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E5%9F%83%E5%8F%8A%E5%8F%B2/%E3%80%90%E8%89%BA%E6%9C%AF%E5%8F%B2%E3%80%91%E6%9D%A5%E4%B8%96%E4%B8%8E%E7%8E%8B%E6%9D%83%E7%9A%84%E8%89%BA%E6%9C%AF%E2%80%94%E2%80%94%E5%8F%A4%E5%9F%83%E5%8F%8A%E8%89%BA%E6%9C%AF/" class="article-date">
   <time datetime="2024-07-03T16:00:00.000Z" itemprop="datePublished">2024-07-04</time>
 </a> 
   <div class="article-category">
@@ -2093,75 +2928,14 @@ WHERE rating &gt; 8;
 </article>
 
     
-    <article
-  id="post-hello-world"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/07/01/hello-world/"
-    >Hexo初始指南</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/07/01/hello-world/" class="article-date">
-  <time datetime="2024-07-01T13:44:24.793Z" itemprop="datePublished">2024-07-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/notes/">notes</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a class="header-anchor" href="#Quick-Start">¶</a>Quick Start</h2>
-<h3 id="Create-a-new-post"><a class="header-anchor" href="#Create-a-new-post">¶</a>Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main() &#123;</span><br><span class="line">    printf(&quot;hello world!\n&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Run-server"><a class="header-anchor" href="#Run-server">¶</a>Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a class="header-anchor" href="#Generate-static-files">¶</a>Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a class="header-anchor" href="#Deploy-to-remote-sites">¶</a>Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
   </article>
   
 
+  
+  <nav class="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+  </nav>
   
 </section>
 </div>
