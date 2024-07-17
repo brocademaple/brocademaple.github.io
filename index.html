@@ -152,6 +152,321 @@
     
     
     <article
+  id="post-CS_Notes/PWN/【Pvvn】000-036知识点记录"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/07/17/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91000-036%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/"
+    >【Pvvn】000-036知识点记录</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/07/17/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91000-036%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time datetime="2024-07-16T16:00:00.000Z" itemprop="datePublished">2024-07-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/Pwn-notes/">Pwn notes</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<ul>
+<li>刚做完一遍，跟着vvp。基本流程是知道个七七八八了，这回重新把每道题看过去，提取一下知识点。为苯白痴量身制作的vvp白痴解释版思密达QwQ顺便复习（预习C语言</li>
+</ul>
+<p>vvp的链接：<a target="_blank" rel="noopener" href="https://brocademaple.github.io/2024/07/16/CS_Notes/PWN/%5BPwn%5Dwp%E5%AD%98%E6%A1%A3/">【Puun】uup留档 | BROCADEMAPLE</a></p>
+<h3 id="000-ssh连接的彩蛋题"><a class="header-anchor" href="#000-ssh连接的彩蛋题">¶</a>000 ssh连接的彩蛋题</h3>
+<h4 id="什么是ssh连接"><a class="header-anchor" href="#什么是ssh连接">¶</a>什么是ssh连接</h4>
+<ul>
+<li>SSH（Secure Shell）是一种加密的网络协议，用于安全地访问远程计算机。</li>
+<li>它提供了一个安全的渠道，允许用户在本地计算机上执行远程计算机上的命令，就像直接在远程计算机上操作一样。</li>
+<li>SSH使用公钥加密技术来验证远程计算机和用户的身份，并为数据传输提供加密</li>
+</ul>
+<h4 id="什么是shell"><a class="header-anchor" href="#什么是shell">¶</a>什么是shell</h4>
+<ol>
+<li><strong>命令行界面</strong>：Shell是一个命令行界面（CLI），允许用户输入命令并接收输出结果。</li>
+<li><strong>脚本执行</strong>：Shell可以执行脚本，这些脚本是一系列命令的集合，可以自动化任务。</li>
+<li><strong>环境变量</strong>：Shell允许用户设置和使用环境变量，这些变量可以影响程序的行为。</li>
+<li><strong>管道和重定向</strong>：Shell支持管道操作，可以将一个命令的输出作为另一个命令的输入。同时，Shell也支持输入输出的重定向。</li>
+<li><strong>权限和安全</strong>：Shell执行的命令受到用户权限的限制。在安全方面，Shell需要正确配置以防止未授权访问。</li>
+</ol>
+<h4 id="在shell中输入id"><a class="header-anchor" href="#在shell中输入id">¶</a>在shell中输入id</h4>
+<ul>
+<li><code>id</code>命令用于显示当前用户的信息，包括用户ID（UID）、组ID（GID）以及其他所属的组。</li>
+<li>在CTF赛题中，这可以帮助参赛者了解他们以哪个用户的身份登录，以及该用户具有哪些权限</li>
+</ul>
+<h4 id="ls-区别于ls的作用"><a class="header-anchor" href="#ls-区别于ls的作用">¶</a>ls /区别于ls的作用</h4>
+<ul>
+<li><code>ls</code>命令用于列出目录中的文件和子目录。不加任何参数时，默认列出当前目录的内容。</li>
+<li><code>ls /</code>命令列出的是根目录（<code>/</code>）的内容。根目录是文件系统的最顶层目录，包含了所有其他目录和文件。这可以帮助参赛者了解服务器的文件系统结构。</li>
+<li>通常，<code>ls</code>命令会列出<em><strong>当前工作目录</strong></em>的内容，而<code>ls /</code>则是列出<em><strong>根目录</strong></em>的内容，两者的区别在于它们指定的目录不同</li>
+</ul>
+<h3 id="001-nc连接-后门函数"><a class="header-anchor" href="#001-nc连接-后门函数">¶</a>001 nc连接+后门函数</h3>
+<h4 id="什么是nc连接"><a class="header-anchor" href="#什么是nc连接">¶</a>什么是nc连接</h4>
+<ul>
+<li><code>nc</code>（Netcat）是一个用于网络工具，可以用于读写网络连接，使用TCP或UDP协议。它可以用来创建监听在特定端口的服务器，也可以用来发起连接到远程服务器的客户端。<code>nc</code>因其简单性和灵活性，在网络安全领域被广泛用于测试网络服务和进行端口扫描</li>
+</ul>
+<h4 id="nc连接和ssh连接的关联和区别"><a class="header-anchor" href="#nc连接和ssh连接的关联和区别">¶</a>nc连接和ssh连接的关联和区别</h4>
+<ul>
+<li><strong>关联</strong>：<code>nc</code>可以用来创建一个简单的SSH连接，例如，使用<code>nc</code>监听本地端口并转发到远程主机的SSH端口，实现端口转发。</li>
+<li><strong>区别</strong>：
+<ul>
+<li><strong>协议</strong>：SSH是一种加密的网络协议，专为安全访问远程计算机而设计；而<code>nc</code>是一个更为通用的网络工具，不提供加密功能。</li>
+<li><strong>安全性</strong>：SSH提供了加密和身份验证机制，确保数据传输的安全性；<code>nc</code>则不加密数据，容易受到中间人攻击。</li>
+<li><strong>用途</strong>：SSH主要用于远程登录和命令执行，而<code>nc</code>可以用于更广泛的网络通信任务，如端口扫描、数据传输等。</li>
+</ul>
+</li>
+</ul>
+<h4 id="checksec"><a class="header-anchor" href="#checksec">¶</a>checksec</h4>
+<ul>
+<li><code>checksec</code>是一个用于分析程序二进制文件的安全特性的工具，它可以帮助user了解程序的内存保护机制，例如栈保护（<strong>Stack Canaries</strong>）、地址空间布局随机化（<strong>ASLR</strong>）、非执行栈（<strong>NoExecStack</strong>）、符号表剥离（<strong>NX</strong>）等。</li>
+<li>在CTF的Pwn（二进制漏洞利用）方向中，了解这些安全特性对于找到漏洞和制定利用策略至关重要</li>
+</ul>
+<h4 id="system-“cat-ctfshow-flag”-是后门函数的原因"><a class="header-anchor" href="#system-“cat-ctfshow-flag”-是后门函数的原因">¶</a>system(“cat /ctfshow_flag”)是后门函数的原因</h4>
+<ul>
+<li><code>system</code>函数是C语言标准库中的一个函数，它允许调用shell命令。</li>
+<li>如果一个程序中存在<code>system(&quot;cat /ctfshow_flag&quot;)</code>这样的代码，它实际上是在调用系统shell来执行<code>cat /ctfshow_flag</code>命令，这通常不是一个正常的程序行为，而是故意留下的后门</li>
+</ul>
+<h4 id="后门函数"><a class="header-anchor" href="#后门函数">¶</a>后门函数</h4>
+<ul>
+<li>
+<p>后门函数是指在软件中故意或无意留下的代码，允许未经授权的用户绕过正常的认证和授权机制，获得对系统的访问权限或执行特定的操作。后门可以是一段代码、一个配置设置，或者是一个隐藏的接口。在CTF比赛中，找到并利用后门是获取Flag的一种常见策略。</p>
+</li>
+<li>
+<p>在比赛中，参赛者需要利用程序的漏洞来执行任意代码，而后门函数如<code>system</code>可以被用来执行特定的命令，如读取Flag文件。</p>
+</li>
+<li>
+<p>然而，使用后门函数通常需要找到一种方法来绕过程序的正常逻辑，这可能涉及到溢出、格式化字符串攻击等技术</p>
+</li>
+</ul>
+<h4 id="在本地写入一个flag文件作为测试"><a class="header-anchor" href="#在本地写入一个flag文件作为测试">¶</a>在本地写入一个flag文件作为测试</h4>
+<p><code>echo &quot;flag&#123;just_test_my_process! &#125;&quot;&gt;/c|t|f|s|h|o|w_flag</code></p>
+<p>然后运行pvvn程序，可以得到本地写入的flag值</p>
+<p>后面的题中，在连接远程环境之前，可以先本地运行pvvn文件，测试能否得到这个flag值</p>
+<h3 id="002-shell-分析c代码"><a class="header-anchor" href="#002-shell-分析c代码">¶</a>002 shell+分析c代码</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[*] <span class="string">&#x27;/home/ctfshow/Desktop/ctfshow-pwn-primary/pwn002/pwn&#x27;</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br></pre></td></tr></table></figure>
+<p>64位程序，仅关闭canary</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __cdecl <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span> &#123;</span><br><span class="line">  setvbuf(_bss_start, <span class="number">0LL</span>, <span class="number">2</span>, <span class="number">0LL</span>);</span><br><span class="line">  setvbuf(<span class="built_in">stdin</span>, <span class="number">0LL</span>, <span class="number">2</span>, <span class="number">0LL</span>);</span><br><span class="line">  logo();  <span class="comment">// 显示logo</span></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot; Now, you can use &#x27;cat /ctfshow_flag&#x27; to get flag! &quot;</span>);</span><br><span class="line">  system(<span class="string">&quot;/bin/sh&quot;</span>);  <span class="comment">// 后门函数，给了一个shell</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这段代码设计了一个程序，启动时会调整一些I/O缓冲设置，展示一个欢迎信息，并最终提供一个交互式shell，暗示用户可以通过特定命令获取某个“flag”</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/sh</span><br><span class="line">... -&gt; dash  // </span><br></pre></td></tr></table></figure>
+<h4 id="setvbuf调用"><a class="header-anchor" href="#setvbuf调用">¶</a>setvbuf调用</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setvbuf(_bss_start, 0LL, 2, 0LL);</span><br><span class="line">setvbuf(stdin, 0LL, 2, 0LL);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><code>setvbuf</code>函数用于控制缓冲区行为。这里进行了两次调用，分别针对<code>_bss_start</code>和标准输入<code>stdin</code>。</p>
+</li>
+<li>
+<p><code>_bss_start</code>通常指向未初始化数据段的开始，这里的调用可能意在对程序的BSS段（存放未初始化全局变量和静态变量的部分）进行缓冲区设置。但是，传入的参数（尤其是第二个参数为NULL和第三个参数为2）表明它试图禁用缓冲或使用无缓冲I/O。实际上，直接对_BSS_START进行这样的操作不太常见且可能不正确，因为_BSS_START不是一个标准的文件流。</p>
+</li>
+<li>
+<p>对于<code>stdin</code>的<code>setvbuf</code>调用，它设置了标准输入流为无缓冲I/O（模式2），这意味着从标准输入读取数据时将直接进行，没有缓冲延迟，这对于交互式shell尤其重要。</p>
+</li>
+</ul>
+<h4 id="system-“-bin-sh”-的工作原理"><a class="header-anchor" href="#system-“-bin-sh”-的工作原理">¶</a>system(“/bin/sh”)的工作原理</h4>
+<ul>
+<li>system()函数先fork一个子进程，在这个子进程中调用/bin/sh -c来执行command指定的命令。</li>
+<li>/bin/sh在系统中一般是个软链接，指向dash或者bash等常用的shell，-c选项是告诉shell从字符串</li>
+<li>command中读取要执行的命令（shell将扩展command中的任何特殊字符）。父进程则调用waitpid()函数来为变成僵尸的子进程收尸，获得其结束状态，然后将这个结束状态返回给system()函数的调用者</li>
+<li>执行完这个后它就会返回一个shell给函数的调用者</li>
+<li>system(“cat /ctfshow_flag”);  system(“/bin/sh”);这一类的我们称之为后门函数，再后续利用过程中我们要尽可能找到或者构造出来</li>
+</ul>
+<h3 id="003-真假命令（一）"><a class="header-anchor" href="#003-真假命令（一）">¶</a>003 真假命令（一）</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[*] level up ! Let&#x27;s go ! </span><br><span class="line">You can call the following function:</span><br><span class="line">1._start</span><br><span class="line">2.main</span><br><span class="line">3.hello_ctfshow</span><br><span class="line">4.ctfshow(&#x27;echo /ctfshow_flag&#x27;)</span><br><span class="line">5.print(&#x27;/ctfshow_flag&#x27;)</span><br><span class="line">6.system(&#x27;cat /ctfshow_flag&#x27;)</span><br><span class="line">7.puts(&#x27;/ctfshow_flag&#x27;)</span><br><span class="line">8.exit</span><br><span class="line">Your choice is :</span><br></pre></td></tr></table></figure>
+<p>看起来是这样的，看起来选6，但是真的假的还是得看源代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">checksec pwn</span><br><span class="line">[*] &#x27;/home/ctfshow/Desktop/ctfshow-pwn-primary/pwn003/pwn&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">64位程序保护全开</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __cdecl <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 变量定义</span></span><br><span class="line">  <span class="type">const</span> <span class="type">char</span> **v3; <span class="comment">// rdx   指针变量v3</span></span><br><span class="line">  <span class="type">char</span> argva[<span class="number">12</span>]; <span class="comment">// [rsp+4h] [rbp-Ch] BYREF  12位的字符数组</span></span><br><span class="line"></span><br><span class="line">  *(_QWORD *)&amp;argva[<span class="number">4</span>] = __readfsqword(<span class="number">0x28</span>u);  <span class="comment">// 这行代码读取了线程信息块(TIB)中的某个地址（通常是栈基址），并将该值存储到argva数组的某个位置</span></span><br><span class="line">  </span><br><span class="line">  setvbuf(_bss_start, <span class="number">0LL</span>, <span class="number">2</span>, <span class="number">0LL</span>);</span><br><span class="line">  setvbuf(<span class="built_in">stdin</span>, <span class="number">0LL</span>, <span class="number">2</span>, <span class="number">0LL</span>);  <span class="comment">// 调用了setvbuf来改变缓冲区行为，与之前的代码一致，分别为_BSS段和标准输入stdin设置无缓冲I/O</span></span><br><span class="line">   </span><br><span class="line">    </span><br><span class="line">  logo();  <span class="comment">// 美术部分</span></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;[*] level up ! Let&#x27;s go ! &quot;</span>);</span><br><span class="line">  menu();  <span class="comment">// 就是上面的选项列表</span></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Your choice is :\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, argva);  <span class="comment">// 使用__isoc99_scanf函数从标准输入读取一个整数到argva数组中，作为用户的选择</span></span><br><span class="line">  <span class="keyword">switch</span> ( *(_DWORD *)argva )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;start&quot;</span>);  <span class="comment">// 一眼假</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">      main((<span class="type">int</span>)<span class="string">&quot;%d&quot;</span>, (<span class="type">const</span> <span class="type">char</span> **)argva, v3);  <span class="comment">// ai说是递归调用main函数</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;Hello CTFshow&quot;</span>);    <span class="comment">// 一眼假</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">      ctfshow();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;/ctfshow_flag&quot;</span>);    <span class="comment">// 一眼假</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">      system_func();  <span class="comment">// 看看这个函数有没有执行</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;/ctfshow_flag&quot;</span>);    <span class="comment">// 一眼假</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);    <span class="comment">// 一眼假</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;Invalid input&quot;</span>);    <span class="comment">// 一眼假</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"> <span class="type">int</span> <span class="title function_">system_func</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> system(<span class="string">&quot;cat /ctfshow_flag&quot;</span>);</span><br><span class="line">&#125;  <span class="comment">// 看来确实执行了</span></span><br><span class="line"></span><br><span class="line"> <span class="type">int</span> <span class="title function_">ctfshow</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> system(<span class="string">&quot;echo /ctfshow_flag&quot;</span>);</span><br><span class="line">&#125;  <span class="comment">// 执行了，但是只有打印，一眼假</span></span><br></pre></td></tr></table></figure>
+<h3 id="004-看C代码"><a class="header-anchor" href="#004-看C代码">¶</a>004 看C代码</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">checksec pwn</span><br><span class="line">[*] &#x27;/home/ctfshow/Desktop/ctfshow-pwn-primary/pwn004/pwn&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">64位保护全开</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __cdecl <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 变量定义</span></span><br><span class="line">  <span class="type">char</span> s1[<span class="number">11</span>]; <span class="comment">// [rsp+1h] [rbp-1Fh] BYREF  // 用于存储字符串&quot;CTFshowPWN&quot;</span></span><br><span class="line">  <span class="type">char</span> s2[<span class="number">12</span>]; <span class="comment">// [rsp+Ch] [rbp-14h] BYREF  // 用于接收用户输入</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v6; <span class="comment">// [rsp+18h] [rbp-8h]  // 用于存储从FS段读取的信息，可能与栈保护或调试相关</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">  v6 = __readfsqword(<span class="number">0x28</span>u);  <span class="comment">// 读取FS段寄存器的值</span></span><br><span class="line">  setvbuf(_bss_start, <span class="number">0LL</span>, <span class="number">2</span>, <span class="number">0LL</span>);  </span><br><span class="line">  setvbuf(<span class="built_in">stdin</span>, <span class="number">0LL</span>, <span class="number">2</span>, <span class="number">0LL</span>);  <span class="comment">// 通过两次setvbuf调用，禁用了_BSS段和标准输入stdin的缓冲</span></span><br><span class="line">  <span class="built_in">strcpy</span>(s1, <span class="string">&quot;CTFshowPWN&quot;</span>);  <span class="comment">// 字符串&quot;CTFshowPWN&quot;复制到s1数组</span></span><br><span class="line">  logo();  <span class="comment">// 美术</span></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;find the secret !&quot;</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%s&quot;</span>, s2);  <span class="comment">// 通过scanf函数等待用户输入一个字符串，并将其保存到s2数组中。注意，直接使用%s格式化字符串而不指定最大长度可能会导致缓冲区溢出的安全风险</span></span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">strcmp</span>(s1, s2) )</span><br><span class="line">    execve_func();  <span class="comment">// s1 s2相同就执行</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> __int64 <span class="title function_">execve_func</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> *argv[<span class="number">3</span>]; <span class="comment">// [rsp+0h] [rbp-20h] BYREF  读取了线程信息块中的某个值，可能用于检测堆栈是否被修改，确保安全</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v2; <span class="comment">// [rsp+18h] [rbp-8h]  // 用于存储FS段的原始值，可能用于安全检查或调试</span></span><br><span class="line"></span><br><span class="line">  v2 = __readfsqword(<span class="number">0x28</span>u);  <span class="comment">// 读取了线程信息块中的某个值，可能用于检测堆栈是否被修改，确保安全</span></span><br><span class="line">  argv[<span class="number">0</span>] = <span class="string">&quot;/bin/sh&quot;</span>;  <span class="comment">// shell自身的名称</span></span><br><span class="line">  argv[<span class="number">1</span>] = <span class="number">0LL</span>;  <span class="comment">// 参数结束标志</span></span><br><span class="line">  argv[<span class="number">2</span>] = <span class="number">0LL</span>; <span class="comment">// 多余的，因为在argv[1]后已经结束</span></span><br><span class="line">  execve(<span class="string">&quot;/bin/sh&quot;</span>, argv, <span class="number">0LL</span>);  <span class="comment">// 使用execve系统调用来启动一个新的程序，替换当前进程的内存空间。在这里，它启动的是Shell (/bin/sh)，并且传入了预先准备好的参数列表argv。第三个参数为0LL，意味着环境变量列表为空</span></span><br><span class="line"> <span class="comment">// 第一个参数是指向可执行文件路径的字符串，指向Shell程序</span></span><br><span class="line"> <span class="comment">// 第三个参数0LL，即(char*)NULL，意味着不传递任何环境变量给新进程</span></span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><code>execve</code> 本身并不是一个后门函数。实际上， <code>execve</code> 是一个标准的系统调用函数，用于在 Linux和类 Unix 系统中执行一个新的程序。它的原型如下：<br>
+<code>int execve(const char *filename, char *const argv[], char *const envp[]);</code><br>
+该函数接受三个参数：</p>
+<ul>
+<li>filename ：要执行的程序的文件名或路径。</li>
+<li>argv ：一个以 NULL 结尾的字符串数组，表示传递给新程序的命令行参数。</li>
+<li>envp ：一个以 NULL 结尾的字符串数组，表示新程序的环境变量。</li>
+<li>当调用 execve 函数时，它会将当前进程替换为新程序的代码，并开始执行新程序。新程序接收argv 和 envp 作为命令行参数和环境变量。</li>
+<li>在加入某些参数后就可以达到我们所需要的后门函数的效果</li>
+</ul>
+</li>
+<li>
+<p>这道题就是输入<code>CTFshowPWN</code>字符串，即可获得shell，然后<code>cat /ctfshow_flag</code></p>
+</li>
+</ul>
+<h3 id="005-012-了解寄存器、寻址方式’"><a class="header-anchor" href="#005-012-了解寄存器、寻址方式’">¶</a>005-012  了解寄存器、寻址方式’</h3>
+<h4 id="汇编代码"><a class="header-anchor" href="#汇编代码">¶</a>汇编代码</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">section .data</span><br><span class="line">	msg db &quot;Welcome_to_CTFshow_PWN&quot;, 0</span><br><span class="line">section .text</span><br><span class="line">	global _start</span><br><span class="line"></span><br><span class="line">_start:</span><br><span class="line"></span><br><span class="line">; 立即寻址方式</span><br><span class="line">    mov eax, 11 ; 将11赋值给eax</span><br><span class="line">    add eax, 114504 ; eax加上114504</span><br><span class="line">    sub eax, 1 ; eax减去1</span><br><span class="line">; 寄存器寻址方式</span><br><span class="line">    mov ebx, 0x36d ; 将0x36d赋值给ebx</span><br><span class="line">    mov edx, ebx ; 将ebx的值赋值给edx</span><br><span class="line">; 直接寻址方式</span><br><span class="line">    mov ecx, [msg] ; 将msg的地址赋值给ecx	</span><br><span class="line">; 寄存器间接寻址方式</span><br><span class="line">    mov esi, msg ; 将msg的地址赋值给esi</span><br><span class="line">    mov eax, [esi] ; 将esi所指向的地址的值赋值给eax</span><br><span class="line">; 寄存器相对寻址方式</span><br><span class="line">    mov ecx, msg ; 将msg的地址赋值给ecx</span><br><span class="line">    add ecx, 4 ; 将ecx加上4</span><br><span class="line">    mov eax, [ecx] ; 将ecx所指向的地址的值赋值给eax</span><br><span class="line">; 基址变址寻址方式</span><br><span class="line">    mov ecx, msg ; 将msg的地址赋值给ecx</span><br><span class="line">    mov edx, 2 ; 将2赋值给edx</span><br><span class="line">    mov eax, [ecx + edx*2] ; 将ecx+edx*2所指向的地址的值赋值给eax</span><br><span class="line">; 相对基址变址寻址方式</span><br><span class="line">    mov ecx, msg ; 将msg的地址赋值给ecx</span><br><span class="line">    mov edx, 1 ; 将1赋值给edx</span><br><span class="line">    add ecx, 8 ; 将ecx加上8</span><br><span class="line">    mov eax, [ecx + edx*2 - 6] ; 将ecx+edx*2-6所指向的地址的值赋值给eax</span><br><span class="line">; 输出字符串</span><br><span class="line">    mov eax, 4 ; 系统调用号4代表输出字符串</span><br><span class="line">    mov ebx, 1 ; 文件描述符1代表标准输出</span><br><span class="line">    mov ecx, msg ; 要输出的字符串的地址</span><br><span class="line">    mov edx, 22 ; 要输出的字符串的长度</span><br><span class="line">    int 0x80 ; 调用系统调用</span><br><span class="line">; 退出程序</span><br><span class="line">    mov eax, 1 ; 系统调用号1代表退出程序</span><br><span class="line">    xor ebx, ebx ; 返回值为0</span><br><span class="line">    int 0x80 ; 调用系统调用</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>使用NASM汇编器和ld链接器将汇编代码编译成可执行文件</p>
+</li>
+<li>
+<p>首先，将代码保存为一个文件，例如 Welcome_CTFshow.asm 。然后，使用以下命令将其编译为对象文件↓↓↓</p>
+</li>
+<li>
+<p><code>nasm -f elf Welcome_to_CTFshow.asm</code></p>
+<ul>
+<li>这将生成一个名为 <code>Welcome_CTFshow.o</code> 的对象文件。接下来，使用以下命令将对象文件链接成可执行文件</li>
+<li><code>ld -m elf_i386 -s -o Welcome_to_CTFshow Welcome_to_CTFshow.o</code>
+<ul>
+<li>这将生成一个名为 Welcome_CTFshow 的可执行文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>用64位IDA打开<code>Welcome_to_CTFshow.o</code>，即可获得以上汇编代码</p>
+</li>
+<li>
+<p>好抽象啊啊啊啊啊啊啊啊啊啊</p>
+</li>
+</ul>
+<h4 id="005-运行可执行文件"><a class="header-anchor" href="#005-运行可执行文件">¶</a>005  运行可执行文件</h4>
+<p><code>./Welcome_to_CTFshow</code></p>
+<p>得到：<code>Welcome_to_CTFshow_PWN</code></p>
+<ul>
+<li><code>ctfshow&#123;Welcome_to_CTFshow_PWN&#125;</code></li>
+</ul>
+<h4 id="006-立即寻址方式"><a class="header-anchor" href="#006-立即寻址方式">¶</a>006  立即寻址方式</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">; 立即寻址方式</span><br><span class="line">    mov eax, 11 ; 将11赋值给eax</span><br><span class="line">    add eax, 114504 ; eax加上114504</span><br><span class="line">    sub eax, 1 ; eax减去1</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>ctfshow&#123;114514&#125;</code>  （好臭啊</li>
+</ul>
+<h4 id="007-寄存器寻址方式"><a class="header-anchor" href="#007-寄存器寻址方式">¶</a>007  寄存器寻址方式</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">; 寄存器寻址方式</span><br><span class="line">    mov ebx, 0x36d ; 将0x36d赋值给ebx</span><br><span class="line">    mov edx, ebx ; 将ebx的值赋值给edx</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>ctfshow&#123;0x36D&#125;</code></li>
+</ul>
+<h4 id="008-直接寻址方式"><a class="header-anchor" href="#008-直接寻址方式">¶</a>008  直接寻址方式</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">; 直接寻址方式</span><br><span class="line">	mov ecx, [msg] ; 将msg的地址赋值给ecx</span><br><span class="line">对应IDA：</span><br><span class="line">	mov ecx, dword_80490E8</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>ctfshow&#123;0x80490E8&#125;</code></li>
+</ul>
+<h4 id="009-寄存器间接寻址方式"><a class="header-anchor" href="#009-寄存器间接寻址方式">¶</a>009  寄存器间接寻址方式</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">; 寄存器间接寻址方式</span><br><span class="line">    mov esi, msg ; 将msg的地址赋值给esi</span><br><span class="line">    mov eax, [esi] ; 将esi所指向的地址的值赋值给eax</span><br><span class="line">对应IDA：</span><br><span class="line">	mov esi, offset dword_80490E8</span><br><span class="line">	mov eax, [esi]</span><br><span class="line"></span><br><span class="line">.data:080490E8 dword_80490E8 dd 696C6557h		; DATA XREF: LOAD:0804805C↑o</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>ctfshow&#123;0x636C6557&#125;</code></li>
+</ul>
+<h4 id="010-寄存器相对寻址方式"><a class="header-anchor" href="#010-寄存器相对寻址方式">¶</a>010  寄存器相对寻址方式</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">; 寄存器相对寻址方式</span><br><span class="line">    mov ecx, msg ; 将msg的地址赋值给ecx</span><br><span class="line">    add ecx, 4 ; 将ecx加上4</span><br><span class="line">    mov eax, [ecx] ; 将ecx所指向的地址的值赋值给eax</span><br><span class="line">对应IDA：</span><br><span class="line">	mov ecx, offset dword_80490E8</span><br><span class="line">	add ecx, 4</span><br><span class="line">	mov eax, [ecx]</span><br><span class="line">	</span><br><span class="line">.data:080490E8 dword_80490E8 dd 696C6557h		; DATA XREF: LOAD:0804805C↑o</span><br><span class="line">.data:080490EC aOmeToCtfshowPw db &#x27;ome_to_CTFshow_PWN&#x27;, 0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>这里将msg的地址（0x80490E8）+ 4 处所执向的地址的值赋给eax</p>
+</li>
+<li>
+<p><code>hex(0x80490E8+4)</code>    得到<code>0x80490ec</code>   也就是<code>“ome_to_CTFshow_PWN”</code></p>
+</li>
+<li>
+<p><code>ctfshow&#123;ome_to_CTFshow_PWN&#125;</code></p>
+</li>
+</ul>
+<h4 id="011-基址变址寻址方式"><a class="header-anchor" href="#011-基址变址寻址方式">¶</a>011  基址变址寻址方式</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">; 基址变址寻址方式</span><br><span class="line">    mov ecx, msg ; 将msg的地址赋值给ecx</span><br><span class="line">    mov edx, 2 ; 将2赋值给edx</span><br><span class="line">    mov eax, [ecx + edx*2] ; 将ecx+edx*2所指向的地址的值赋值给eax</span><br><span class="line">对应IDA：</span><br><span class="line">	mov ecx, offset dword_80490E8</span><br><span class="line">	add edx, 2</span><br><span class="line">	mov eax, [ecx + edx * 2]</span><br><span class="line">	</span><br><span class="line">.data:080490E8 dword_80490E8 dd 696C6557h		; DATA XREF: LOAD:0804805C↑o</span><br><span class="line">.data:080490EC aOmeToCtfshowPw db &#x27;ome_to_CTFshow_PWN&#x27;, 0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>计算最终也是 [0x80490E8 + 2*2 ] = [0X80490EC]</li>
+<li><code>ctfshow&#123;ome_to_CTFshow_PWN&#125;</code></li>
+</ul>
+<h4 id="012-相对基址变址寻址"><a class="header-anchor" href="#012-相对基址变址寻址">¶</a>012  相对基址变址寻址</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">; 相对基址变址寻址方式</span><br><span class="line">    mov ecx, msg ; 将msg的地址赋值给ecx</span><br><span class="line">    mov edx, 1 ; 将1赋值给edx</span><br><span class="line">    add ecx, 8 ; 将ecx加上8</span><br><span class="line">    mov eax, [ecx + edx*2 - 6] ; 将ecx+edx*2-6所指向的地址的值赋值给eax</span><br><span class="line">    </span><br><span class="line">对应IDA：</span><br><span class="line">	mov ecx, offset dword_80490E8</span><br><span class="line">	add edx, 2</span><br><span class="line">	mov eax, [ecx + edx * 2]</span><br><span class="line">	</span><br><span class="line">.data:080490E8 dword_80490E8 dd 696C6557h		; DATA XREF: LOAD:0804805C↑o</span><br><span class="line">.data:080490EC aOmeToCtfshowPw db &#x27;ome_to_CTFshow_PWN&#x27;, 0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><code>hex(8 + 0x80490E8 + 1*2 -6)</code>    得到<code>0x80490ec</code>   也就是<code>“ome_to_CTFshow_PWN”</code></p>
+</li>
+<li>
+<p><code>ctfshow&#123;ome_to_CTFshow_PWN&#125;</code></p>
+</li>
+</ul>
+<h3 id="013-gcc编译"><a class="header-anchor" href="#013-gcc编译">¶</a>013  gcc编译</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat flag.c</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> flag[] = &#123;<span class="number">99</span>, <span class="number">116</span>, <span class="number">102</span>, <span class="number">115</span>, <span class="number">104</span>, <span class="number">111</span>, <span class="number">119</span>, <span class="number">123</span>, <span class="number">104</span>, <span class="number">79</span>, <span class="number">119</span>, <span class="number">95</span>, <span class="number">116</span>, <span class="number">48</span>, <span class="number">95</span>, <span class="number">117</span>, <span class="number">115</span>, <span class="number">51</span>, <span class="number">95</span>, <span class="number">71</span>, <span class="number">67</span>, <span class="number">67</span>, <span class="number">63</span>, <span class="number">125</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, flag);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>它使用字符数组 flag 存储了一个加密的字符串，并通过 printf函数将其打印出来</p>
+</li>
+<li>
+<p>在这段代码中， flag 数组存储了一串整数值，这些整数值代表了字符的 ASCII 码。通过将这些整数值转换为相应的字符，就可以还原出原始的字符串</p>
+</li>
+<li>
+<p>运行该程序， printf 函数使用 %s 格式字符串将 flag 数组作为参数进行打印。由于 flag 数组的最后一个元素为零（NULL 字符），printf 函数会将其之前的字符依次打印，直到遇到 NULL 字符为止。</p>
+</li>
+<li>
+<p>根据给定的整数值数组，还原出的字符串为： <code>ctfshow&#123;hOw_t0_us3_GCC?&#125;</code></p>
+</li>
+</ul>
+<h3 id="014-编译c文件"><a class="header-anchor" href="#014-编译c文件">¶</a>014  编译c文件</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// flag.c</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BUFFER_SIZE 1024  </span></span><br><span class="line"><span class="comment">// 定义了缓冲区的大小为1024字节，用于读取文件内容</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    FILE *fp;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> buffer[BUFFER_SIZE];</span><br><span class="line">    <span class="type">size_t</span> n;</span><br><span class="line">    </span><br><span class="line">    fp = fopen(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;rb&quot;</span>);  <span class="comment">// 尝试以二进制只读模式(&quot;rb&quot;)打开名为&quot;key&quot;的文件</span></span><br><span class="line">    <span class="keyword">if</span> (fp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;Nothing here!&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">char</span> output[BUFFER_SIZE * <span class="number">9</span> + <span class="number">12</span>];  <span class="comment">// 输出字符串output的大小预留得比原始缓冲区大得多，以容纳转换后的位表示及额外的格式化字符</span></span><br><span class="line">    <span class="type">int</span> offset = <span class="number">0</span>;</span><br><span class="line">    offset += <span class="built_in">sprintf</span>(output + offset, <span class="string">&quot;ctfshow&#123;&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> ((n = fread(buffer, <span class="keyword">sizeof</span>(<span class="type">unsigned</span> <span class="type">char</span>), BUFFER_SIZE, fp)) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 从打开的文件中读取数据，并将读取到的每个字节的位转换成字符串形式输出</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;  <span class="comment">// 外层的for循环(for (size_t i = 0; i &lt; n; i++))遍历了当前读取批次中的每个字节</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">7</span>; j &gt;= <span class="number">0</span>; j--) &#123;  <span class="comment">// 内层的for循环(for (int j = 7; j &gt;= 0; j--))负责将每个字节的每一位转换为字符串</span></span><br><span class="line">                offset += <span class="built_in">sprintf</span>(output + offset, <span class="string">&quot;%d&quot;</span>, (buffer[i] &gt;&gt; j) &amp; <span class="number">1</span>);  <span class="comment">// (buffer[i] &gt;&gt; j)是对字节buffer[i]进行右移操作</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (i != n - <span class="number">1</span>) &#123;  <span class="comment">// 非最后一个字节就加下划线</span></span><br><span class="line">                offset += <span class="built_in">sprintf</span>(output + offset, <span class="string">&quot;_&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!feof(fp)) &#123;  <span class="comment">// 非文件最后一部分就加空格</span></span><br><span class="line">            offset += <span class="built_in">sprintf</span>(output + offset, <span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    offset += <span class="built_in">sprintf</span>(output + offset, <span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, output);</span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>程序打开名为 “key” 的文件，以二进制（“rb”）模式进行读取。如果文件打开失败，将输出错误消息 “Nothing here!” 并返回 -1</p>
+</li>
+<li>
+<p>然后，程序定义了一个缓冲区 buffer 用于读取文件内容，以及一个字符串数组 output 用于存储转换后的二进制字符串。变量 offset 用于跟踪 output 数组中的偏移量。</p>
+</li>
+<li>
+<p>接下来，程序开始将输出字符串初始化为 “ctfshow{”，然后进入一个循环，每次读取BUFFER_SIZE 字节的数据到 buffer 中，并将其转换为二进制字符串形式。</p>
+</li>
+<li>
+<p>在内层循环中，程序遍历当前读取的字节的每一位，从最高位到最低位。通过右移操作和位与运算，提取出每一位的值，并使用 sprintf 函数将其添加到 output 字符串中。</p>
+</li>
+<li>
+<p>在每个字节的二进制表示结束后，如果当前字节不是最后一个字节，则在 output 字符串中添加下划线作为分隔符。</p>
+</li>
+<li>
+<p>如果文件还未读取完毕（即文件结束符未被读取），则在 output 字符串中添加空格作为分隔符。</p>
+</li>
+<li>
+<p>循环结束后，程序在 output 字符串中添加 “}”，表示结束标记，并使用 printf 函数将最终的转换结果打印出来。最后，程序关闭文件，并返回 0 表示成功执行。</p>
+</li>
+<li>
+<p>该程序的作用是将二进制文件中的内容转换为二进制字符串形式，并以特定格式输出</p>
+</li>
+<li>
+<p><code>echo &quot;CTFshow&quot;&gt;key</code>   使用<code>echo</code>工具输出到标准输出，通过重定向操作符<code>&gt;</code>，输出的内容被写入（或覆盖）到名为<code>key</code>的文件中。  创建一个含有字符串<code>CTFshow</code>的文件<code>key</code></p>
+</li>
+<li>
+<p><code>gcc -o flag flag.c</code>   编译<code>flag.c</code>，生成一个名为<code>flag</code>的程序</p>
+</li>
+</ul>
+<h3 id="015-编译汇编代码"><a class="header-anchor" href="#015-编译汇编代码">¶</a>015  编译汇编代码</h3>
+<h4 id="汇编语言→目标文件→可执行文件"><a class="header-anchor" href="#汇编语言→目标文件→可执行文件">¶</a>汇编语言→目标文件→可执行文件</h4>
+<p><code>nsam -f elf flag.asm -o flag.o</code>   将汇编代码编译为目标文件</p>
+<p><code>ld -m elf_i386 -o flag flag.o</code>    将目标文件链接为可执行文件</p>
+<p><code>./flag</code>   运行文件</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pwn/" rel="tag">Pwn</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-CS_Notes/PWN/【Pwn】wp存档"
   class="article article-type-post"
   itemscope
@@ -164,7 +479,7 @@
        
 <h2 itemprop="name">
   <a class="article-title" href="/2024/07/16/CS_Notes/PWN/%E3%80%90Pwn%E3%80%91wp%E5%AD%98%E6%A1%A3/"
-    >【Puun】uup留档</a> 
+    >【Pvvn】vvp留档</a> 
 </h2>
  
 
@@ -184,7 +499,7 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p>方便起见把u|u|p统一收到一个地方，文件有点乱。但是因为是付|费|内|容所以很担心可能的律|师|函警告。。。。所以保险起见先把仓库地址和邮箱放这里如有侵|权请联系在下orz会马上删除的。。跪orz</p>
+<p>方便起见把v|v|p统一收到一个地方，文件有点乱。但是因为是付|费|内|容所以很担心可能的律|师|函警告。。。。所以保险起见先把仓库地址和邮箱放这里如有侵|权请联系在下orz会马上删除的。。跪orz</p>
 <ul>
 <li>
 <p>此博客对应的gith|ub仓库地址：<a target="_blank" rel="noopener" href="https://github.com/brocademaple/brocademaple.github.io">brocademaple/brocademaple.github.io</a></p>
@@ -217,7 +532,7 @@
 
 
 <h3 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h3>
-<p>偷感很重的在学puun的大学生一枚吖 QwQ</p>
+<p>偷感很重的在学pvvn的大学生一枚吖 QwQ</p>
  
       <!-- reward -->
       
@@ -616,6 +931,91 @@
 
     
     <article
+  id="post-CS_Notes/NLP/【NLP夏令营】链接留档"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/07/13/CS_Notes/NLP/%E3%80%90NLP%E5%A4%8F%E4%BB%A4%E8%90%A5%E3%80%91%E9%93%BE%E6%8E%A5%E7%95%99%E6%A1%A3/"
+    >【NLP夏令营】链接留档</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/07/13/CS_Notes/NLP/%E3%80%90NLP%E5%A4%8F%E4%BB%A4%E8%90%A5%E3%80%91%E9%93%BE%E6%8E%A5%E7%95%99%E6%A1%A3/" class="article-date">
+  <time datetime="2024-07-12T16:00:00.000Z" itemprop="datePublished">2024-07-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/NLP-notes/">NLP notes</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/FfZvw4QIzibTkQkM6FMcrqCgnce">‌‍‍‬⁠‌⁠⁠﻿⁠‬﻿⁠‍‍⁠‌‌‍⁠‬‌‌⁠⁠⁠活动 ｜ Datawhale AI 夏令营 - 飞书云文档 (feishu.cn)</a></p>
+<ul>
+<li>两个推荐资料
+<ul>
+<li><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/JcnEwCYO2i0v3FkBizWcLfWanKb">‌‌‌⁠‬﻿‍‌‌‍‬⁠﻿‬‌‌﻿‍﻿⁠﻿‬‍⁠‬Datawhale人工智能培养方案V2.0 - 飞书云文档 (feishu.cn)</a></li>
+<li><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/file/IXdDbOBgIoZbtvxLukqc2432nQd">⁠‌‍‬﻿‍‬﻿‍﻿﻿‌﻿﻿⁠﻿⁠‍﻿‬‌‬‬‬﻿‍﻿﻿‌《数据竞赛入门讲义》.pdf - 飞书云文档 (feishu.cn)</a></li>
+</ul>
+</li>
+<li>比赛地址
+<ul>
+<li><a target="_blank" rel="noopener" href="https://challenge.xfyun.cn/topic/info?type=machine-translation-2024&amp;option=ssgy&amp;ch=dw24_sHJm0e">2024 iFLYTEK A.I.开发者大赛-讯飞开放平台 (xfyun.cn)</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Task-1：跑通baseline并提交，查看得分"><a class="header-anchor" href="#Task-1：跑通baseline并提交，查看得分">¶</a>Task 1：跑通baseline并提交，查看得分</h3>
+<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/TObSwHZdFi2y0XktauWcolpcnyf">‍‌‬⁠﻿‍﻿﻿﻿⁠‬‌﻿‌‍‬‍‬‌﻿‍‌⁠‬‍⁠‌‬‍⁠从零入门NLP竞赛 - 飞书云文档 (feishu.cn)</a>    Task1 操作指南</p>
+<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/FVs2wAVN5iqHMqk5lW2ckfhAncb">‌‌‍⁠‍‬⁠⁠‌‬⁠‍‍‍⁠⁠‬﻿‌⁠⁠‬‍‌﻿‍‍Task1：了解机器翻译 &amp; 理解赛题 - 飞书云文档 (feishu.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_60489376/article/details/140395962">Datawhale AI夏令营- 讯飞机器翻译挑战赛baseline解析-CSDN博客</a>  助教写的，比较完整的笔记</p>
+<h3 id="Task-2：从baseline代码详解入门深度学习"><a class="header-anchor" href="#Task-2：从baseline代码详解入门深度学习">¶</a>Task 2：从baseline代码详解入门深度学习</h3>
+<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/PztLwkofsi95oak2Iercw9hkn2g">‌﻿⁠‍⁠‬⁠﻿‌‍‬‌﻿‬⁠‌‍⁠‍⁠‍‬﻿﻿‌Task2：从baseline代码详解入门深度学习 - 飞书云文档 (feishu.cn)</a></p>
+<h3 id="Task-3：基于-Transformer-模型实现在机器翻译任务上的应用"><a class="header-anchor" href="#Task-3：基于-Transformer-模型实现在机器翻译任务上的应用">¶</a>Task 3：基于 Transformer 模型实现在机器翻译任务上的应用</h3>
+<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/OgQWwkYkviPfpwkE1ZmcXwcWnAh">‌﻿‬‌‍‬‬‬⁠‬⁠‍‬⁠﻿﻿‍‬‌‬‌﻿‍‬⁠﻿﻿‬Task3知识点文档 - 飞书云文档 (feishu.cn)</a></p>
+<p>看完一遍有点懵……ok其实是很懵。。。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51879931/article/details/134142492">transformer模型— 20道面试题自我检测_transformer面试题-CSDN博客</a></p>
+<h3 id="Task-4：通过代码实践入门大模型处理机器翻译"><a class="header-anchor" href="#Task-4：通过代码实践入门大模型处理机器翻译">¶</a>Task 4：通过代码实践入门大模型处理机器翻译</h3>
+<ul>
+<li>选修性质</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/L64jw94HwivDoQkptGccDMCznxc">⁠‍⁠‌‌﻿‌‍﻿‍‌‬⁠‍‌‬﻿⁠⁠‌‬‬⁠⁠⁠Task4知识点文档 - 飞书云文档 (feishu.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/llm-universe/#/">动手学大模型应用开发 (datawhalechina.github.io)</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/datawhalechina/self-llm/tree/master">datawhalechina/self-llm: 《开源大模型食用指南》基于Linux环境快速部署开源大模型，更适合中国宝宝的部署教程 (github.com)</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-CS_Notes/hexo/【hexo】添加pdf"
   class="article article-type-post"
   itemscope
@@ -762,91 +1162,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-CS_Notes/NLP/【NLP夏令营】链接留档"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/07/13/CS_Notes/NLP/%E3%80%90NLP%E5%A4%8F%E4%BB%A4%E8%90%A5%E3%80%91%E9%93%BE%E6%8E%A5%E7%95%99%E6%A1%A3/"
-    >【NLP夏令营】链接留档</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/07/13/CS_Notes/NLP/%E3%80%90NLP%E5%A4%8F%E4%BB%A4%E8%90%A5%E3%80%91%E9%93%BE%E6%8E%A5%E7%95%99%E6%A1%A3/" class="article-date">
-  <time datetime="2024-07-12T16:00:00.000Z" itemprop="datePublished">2024-07-13</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/NLP-notes/">NLP notes</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/FfZvw4QIzibTkQkM6FMcrqCgnce">‌‍‍‬⁠‌⁠⁠﻿⁠‬﻿⁠‍‍⁠‌‌‍⁠‬‌‌⁠⁠⁠活动 ｜ Datawhale AI 夏令营 - 飞书云文档 (feishu.cn)</a></p>
-<ul>
-<li>两个推荐资料
-<ul>
-<li><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/JcnEwCYO2i0v3FkBizWcLfWanKb">‌‌‌⁠‬﻿‍‌‌‍‬⁠﻿‬‌‌﻿‍﻿⁠﻿‬‍⁠‬Datawhale人工智能培养方案V2.0 - 飞书云文档 (feishu.cn)</a></li>
-<li><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/file/IXdDbOBgIoZbtvxLukqc2432nQd">⁠‌‍‬﻿‍‬﻿‍﻿﻿‌﻿﻿⁠﻿⁠‍﻿‬‌‬‬‬﻿‍﻿﻿‌《数据竞赛入门讲义》.pdf - 飞书云文档 (feishu.cn)</a></li>
-</ul>
-</li>
-<li>比赛地址
-<ul>
-<li><a target="_blank" rel="noopener" href="https://challenge.xfyun.cn/topic/info?type=machine-translation-2024&amp;option=ssgy&amp;ch=dw24_sHJm0e">2024 iFLYTEK A.I.开发者大赛-讯飞开放平台 (xfyun.cn)</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="Task-1：跑通baseline并提交，查看得分"><a class="header-anchor" href="#Task-1：跑通baseline并提交，查看得分">¶</a>Task 1：跑通baseline并提交，查看得分</h3>
-<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/TObSwHZdFi2y0XktauWcolpcnyf">‍‌‬⁠﻿‍﻿﻿﻿⁠‬‌﻿‌‍‬‍‬‌﻿‍‌⁠‬‍⁠‌‬‍⁠从零入门NLP竞赛 - 飞书云文档 (feishu.cn)</a>    Task1 操作指南</p>
-<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/FVs2wAVN5iqHMqk5lW2ckfhAncb">‌‌‍⁠‍‬⁠⁠‌‬⁠‍‍‍⁠⁠‬﻿‌⁠⁠‬‍‌﻿‍‍Task1：了解机器翻译 &amp; 理解赛题 - 飞书云文档 (feishu.cn)</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_60489376/article/details/140395962">Datawhale AI夏令营- 讯飞机器翻译挑战赛baseline解析-CSDN博客</a>  助教写的，比较完整的笔记</p>
-<h3 id="Task-2：从baseline代码详解入门深度学习"><a class="header-anchor" href="#Task-2：从baseline代码详解入门深度学习">¶</a>Task 2：从baseline代码详解入门深度学习</h3>
-<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/PztLwkofsi95oak2Iercw9hkn2g">‌﻿⁠‍⁠‬⁠﻿‌‍‬‌﻿‬⁠‌‍⁠‍⁠‍‬﻿﻿‌Task2：从baseline代码详解入门深度学习 - 飞书云文档 (feishu.cn)</a></p>
-<h3 id="Task-3：基于-Transformer-模型实现在机器翻译任务上的应用"><a class="header-anchor" href="#Task-3：基于-Transformer-模型实现在机器翻译任务上的应用">¶</a>Task 3：基于 Transformer 模型实现在机器翻译任务上的应用</h3>
-<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/OgQWwkYkviPfpwkE1ZmcXwcWnAh">‌﻿‬‌‍‬‬‬⁠‬⁠‍‬⁠﻿﻿‍‬‌‬‌﻿‍‬⁠﻿﻿‬Task3知识点文档 - 飞书云文档 (feishu.cn)</a></p>
-<p>看完一遍有点懵……ok其实是很懵。。。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51879931/article/details/134142492">transformer模型— 20道面试题自我检测_transformer面试题-CSDN博客</a></p>
-<h3 id="Task-4：通过代码实践入门大模型处理机器翻译"><a class="header-anchor" href="#Task-4：通过代码实践入门大模型处理机器翻译">¶</a>Task 4：通过代码实践入门大模型处理机器翻译</h3>
-<ul>
-<li>选修性质</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/L64jw94HwivDoQkptGccDMCznxc">⁠‍⁠‌‌﻿‌‍﻿‍‌‬⁠‍‌‬﻿⁠⁠‌‬‬⁠⁠⁠Task4知识点文档 - 飞书云文档 (feishu.cn)</a></p>
-<p><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/llm-universe/#/">动手学大模型应用开发 (datawhalechina.github.io)</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/datawhalechina/self-llm/tree/master">datawhalechina/self-llm: 《开源大模型食用指南》基于Linux环境快速部署开源大模型，更适合中国宝宝的部署教程 (github.com)</a></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li></ul>
 
     </footer>
   </div>
@@ -1222,7 +1537,7 @@
        
 <h2 itemprop="name">
   <a class="article-title" href="/2024/07/11/CS_Notes/Database/PHP+MySQL_note_and_practice/"
-    >MySQL复习</a> 
+    >【在xp.cn上】MySQL+PHP复习</a> 
 </h2>
  
 
@@ -1475,527 +1790,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/" rel="tag">Database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-CS_Notes/Database/CS186-SQL3"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/07/08/CS_Notes/Database/CS186-SQL3/"
-    >CS186 SQL3 Berkeley</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/07/08/CS_Notes/Database/CS186-SQL3/" class="article-date">
-  <time datetime="2024-07-07T16:00:00.000Z" itemprop="datePublished">2024-07-08</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/SQL-notes/">SQL notes</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p>Berkeley CS186 Intro to DB Systems</p>
-<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Q-dxGaR3fH0&amp;list=PLYp4IGUhNFmw8USiYMJvCUjZe79fvyYge&amp;index=6">视频地址</a>  课程记录</p>
-<h1>SQL 3</h1>
-<h2 id="Architecture-of-a-DBMS-SQL-Client"><a class="header-anchor" href="#Architecture-of-a-DBMS-SQL-Client">¶</a>Architecture of a DBMS: SQL Client</h2>
-<ul>
-<li>数据库管理系统的架构：SQL客户端</li>
-<li>Database Management System</li>
-</ul>
-<h3 id="DBMS-Parsing-Optimization"><a class="header-anchor" href="#DBMS-Parsing-Optimization">¶</a>DBMS: Parsing &amp; Optimization</h3>
-<ul>
-<li>数据库管理系统（DBMS）：解析与优化</li>
-</ul>
-<h4 id="Purpose"><a class="header-anchor" href="#Purpose">¶</a>Purpose:</h4>
-<ul>
-<li>
-<p>Parse, check, and verify the SQL, and translate into an efficient relational query plan</p>
-</li>
-<li>
-<p>解析、检查和验证SQL语句，将其转换为高效的关系查询方案</p>
-</li>
-<li>
-<pre><code class="language-sql">SELECT S.sid, S.sname, R.bid
-FROM Sailors S, Reserves R
-WHERE S.sid = R.sid and S.age &gt; 30
-GROUP BY age
-</code></pre>
-</li>
-</ul>
-<h3 id="DBMS-Relational-Operators"><a class="header-anchor" href="#DBMS-Relational-Operators">¶</a>DBMS: Relational Operators</h3>
-<ul>
-<li>数据库管理系统（DBMS）：关系操作符</li>
-</ul>
-<h4 id="Purpose-v2"><a class="header-anchor" href="#Purpose-v2">¶</a>Purpose:</h4>
-<ul>
-<li>Execute a dataflow by operating on records and files</li>
-<li>通过在记录和文件上执行数据流来操作数据</li>
-</ul>
-<h3 id="DBMS-Files-and-Index-Management"><a class="header-anchor" href="#DBMS-Files-and-Index-Management">¶</a>DBMS: Files and Index Management</h3>
-<ul>
-<li>文件和索引管理</li>
-</ul>
-<h4 id="Purpose-v3"><a class="header-anchor" href="#Purpose-v3">¶</a>Purpose:</h4>
-<ul>
-<li>Organize tables and Records as groups of pages in a logical file</li>
-<li>将表和记录组织成逻辑文件中的页面组</li>
-</ul>
-<h3 id="DBMS-Buffer-Management"><a class="header-anchor" href="#DBMS-Buffer-Management">¶</a>DBMS: Buffer Management</h3>
-<ul>
-<li>缓冲区管理层</li>
-</ul>
-<h4 id="Purpose-v4"><a class="header-anchor" href="#Purpose-v4">¶</a>Purpose:</h4>
-<ul>
-<li>Provide the illusion of operating in memory</li>
-<li>提供一种操作内存的假象</li>
-</ul>
-<h3 id="DBMS-Disk-Space-Management"><a class="header-anchor" href="#DBMS-Disk-Space-Management">¶</a>DBMS: Disk Space Management</h3>
-<ul>
-<li>磁盘空间管理</li>
-</ul>
-<h4 id="Purpose-v5"><a class="header-anchor" href="#Purpose-v5">¶</a>Purpose:</h4>
-<ul>
-<li>
-<p>Translate page requests into physical bytes on one or more device(s)</p>
-</li>
-<li>
-<p>将缓冲区管理器的页面请求转换为一个或多个设备（如磁盘、固态磁盘）上的物理字节</p>
-</li>
-</ul>
-<h3 id="Architecture-of-a-DBMS"><a class="header-anchor" href="#Architecture-of-a-DBMS">¶</a>Architecture of a DBMS</h3>
-<ul>
-<li>数据库管理系统的架构
-<ul>
-<li>Organized in layers   层次架构</li>
-<li>Each layer abstracts the layer below  每一层都抽象了其下的层次
-<ul>
-<li>Manage complexity    管理复杂性</li>
-<li>Performance assumptions   性能假设</li>
-</ul>
-</li>
-<li>Example of good systems design   DBMS是良好的系统设计示例</li>
-</ul>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>SQL CLIENT</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Query Parsing &amp; Optimization       <strong>解析与优化</strong></td>
-</tr>
-<tr>
-<td>Relational Operators                         <strong>关系操作符</strong></td>
-</tr>
-<tr>
-<td>Files and Index Management           <strong>文件和索引管理</strong></td>
-</tr>
-<tr>
-<td>Buffer Management                            <strong>缓冲区管理</strong></td>
-</tr>
-<tr>
-<td>Disk Space Management                     <strong>磁盘空间管理</strong></td>
-</tr>
-<tr>
-<td>DBMS的架构通常分为几个层次，每一层都为上层提供服务，同时抽象了下层的复杂性。这种分层的设计有助于提高系统的可维护性和可扩展性</td>
-</tr>
-<tr>
-<td>DATABASE</td>
-</tr>
-</tbody>
-</table>
-<h3 id="DBMS-Concurrency-Recovery"><a class="header-anchor" href="#DBMS-Concurrency-Recovery">¶</a>DBMS: Concurrency &amp; Recovery</h3>
-<ul>
-<li>
-<p>并发控制与恢复（？</p>
-</li>
-<li>
-<p>Two cross-cutting issues related to storage and memory management</p>
-</li>
-</ul>
-<h2 id="Before-we-begin-storage-media"><a class="header-anchor" href="#Before-we-begin-storage-media">¶</a>Before we begin: storage media</h2>
-<h3 id="Disks"><a class="header-anchor" href="#Disks">¶</a>Disks</h3>
-<ul>
-<li>Most database systems were originally designed for magnetic disks   大多数数据库系统最初是为磁盘设计的
-<ul>
-<li>Disk are a mechanical anachronism    磁盘是一种机械性的过时技术</li>
-<li>Instilled design ideas that apply to using solid state disks as well    它所灌输的设计思想也适用于固态硬盘的使用</li>
-</ul>
-</li>
-<li>Major implications   主要影响
-<ul>
-<li><strong>No “pointer derefs”</strong> .Instead, an API:   没有“指针解”引用
-<ul>
-<li>READ: transfer “page” of data from disk to RAM    （读取）将数据的“页面”从磁盘传输到RAM</li>
-<li>WRITE: transfer “page” of data from RAM to disk      （写入）将数据的“页面”从RAM传输到磁盘</li>
-</ul>
-</li>
-<li>Both API calls are very, very slow     这两个API调用都非常非常慢
-<ul>
-<li>Plan carefully   仔细规划</li>
-</ul>
-</li>
-<li>An explicit API can be a good thing   明确的API
-<ul>
-<li>Minimizes the kind of pointer errors you see in C    最小化了你在C语言中看到的指针错误类型</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Storage-Hierarchy"><a class="header-anchor" href="#Storage-Hierarchy">¶</a>Storage Hierarchy</h3>
-<ul>
-<li>存储层次结构</li>
-<li>存储层次结构是计算机系统中不同类型存储设备的层级排列，从最快的到最慢的【从上到下】</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>registers   寄存器</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>L1   Cache       L1缓存</td>
-</tr>
-<tr>
-<td>L2   Cache       L2缓存</td>
-</tr>
-<tr>
-<td>RAM                随机存取存储器</td>
-</tr>
-<tr>
-<td>SSD                  固态硬盘</td>
-</tr>
-<tr>
-<td>Disk                  磁盘</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>emmm，理解下来就是读写到磁盘很慢（？</li>
-</ul>
-<h3 id="Components-of-a-Disk-Pt-6"><a class="header-anchor" href="#Components-of-a-Disk-Pt-6">¶</a>Components of a Disk, Pt. 6</h3>
-<ul>
-<li>
-<p>Platters spin(say 15000 rpm)</p>
-</li>
-<li>
-<p>Arm assembly moved in or out to position a head on a desired track</p>
-<ul>
-<li>Tracks under heads make a “cylinder”</li>
-</ul>
-</li>
-<li>
-<p>Only one head reads/writes at any one time</p>
-</li>
-<li>
-<p>Block/page size is a multiple of (fixed) sector size</p>
-</li>
-<li>
-<p>这个地方是磁盘结构的解释，所以待插入一张结构图，就一览了然了，当然目前我还不会插图片，后面来</p>
-</li>
-</ul>
-<p><img src="https://notes.bencuan.me/cs186/Disks,%20Buffers,%20Files/Untitled%201.png" alt="Untitled|400"></p>
-<h3 id="Accessing-a-Disk-page"><a class="header-anchor" href="#Accessing-a-Disk-page">¶</a>Accessing a Disk page</h3>
-<ul>
-<li>
-<p>访问磁盘界面</p>
-</li>
-<li>
-<p>Time to access (read/write)  a disk block:    读写磁盘块的时间   以下也涉及到磁盘结构那张图</p>
-<ul>
-<li>seek time (moving arms to position disk head on track)
-<ul>
-<li>~2-3 ms on average   寻道时间   磁盘头读取所需的磁道的位置</li>
-</ul>
-</li>
-<li>rotational delay (waiting for block to rotate under head)
-<ul>
-<li>~0-4 ms (15000 RPM)   旋转延迟时间</li>
-</ul>
-</li>
-<li>transfer time (actually moving data to/from disk surface)
-<ul>
-<li>~0.25 ms per 64KB page   将数据从磁盘表面移动到磁盘头/从磁盘头移动到磁盘表面得到时间</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Key to lower I/O cost: reduce seek/rotational delays    降低I/O成本的关键：减少寻道和旋转延迟的时间</p>
-</li>
-</ul>
-<h3 id="Notes-on-Flash-SSD"><a class="header-anchor" href="#Notes-on-Flash-SSD">¶</a>Notes on Flash(SSD)</h3>
-<ul>
-<li>闪存/固态磁盘Solid State Disks，闪存通常组合在一起形成称为固态磁盘的磁盘驱动器</li>
-<li>Issues in current generation (NAND)
-<ul>
-<li>Fine-grain reads (4-8K reads), coarse-grain writes (1-2 MB writes)    <strong>细粒度读取（Fine-grain reads）</strong>：可以进行4-8KB的细粒度读取;   <strong>粗粒度写入（Coarse-grain writes）</strong>：写入操作通常是1-2MB的粗粒度</li>
-<li>Only 2k-3k erasures before failure, so keep moving hot write units around (“wear leveling”)     闪存的寿命限制：通常在2000到3000次擦除周期后可能发生故障，因此需要不断移动热点写入单元（“磨损均衡” wear leveling）</li>
-<li>write amplification: big units, need to reorg for wear &amp; garbage collection    <strong>写入放大（Write amplification）</strong>：由于写入单元较大，需要重新组织数据以进行磨损均衡和垃圾收集</li>
-</ul>
-</li>
-<li>So <strong>read</strong> is fast and predictable
-<ul>
-<li>Single read access time: 0.03 ms</li>
-<li>4 KB random reads: ~500MB/sec</li>
-<li>Sequential reads: ~525MB/sec</li>
-<li>64K: 0.48 ms</li>
-<li>在闪存中，顺序读取和随机读取的带宽速度大致一样</li>
-</ul>
-</li>
-<li>But write is not . Slower for random
-<ul>
-<li>Single write access time: 0.03 ms   单次写入挺快的</li>
-<li>4 KB random writes: ~120 MB/sec</li>
-<li>Sequential writes: ~480 MB/sec</li>
-<li>顺序写入相比随机写入速度快很多</li>
-</ul>
-</li>
-<li>Flash is faster than disk. But disk offers about 10x the capacity per $就是disk在相等价钱下提供的容量更大（自分の理解）</li>
-</ul>
-<h2 id="Storage-Pragmatics-Trends"><a class="header-anchor" href="#Storage-Pragmatics-Trends">¶</a>Storage Pragmatics &amp; Trends</h2>
-<ul>
-<li>Many significant DBs are not big, but data sizes grow faster than Moore’s Law (“Big Data” is real) , so the role of disk, flash, RAM → to debate</li>
-</ul>
-<h3 id="Bottom-Line-last-few-years"><a class="header-anchor" href="#Bottom-Line-last-few-years">¶</a>Bottom Line (last few years)</h3>
-<ul>
-<li>Very large DBs: relatively traditional   非常大的数据库（Very large DBs）: 相对传统
-<ul>
-<li>Disk still the best cost/MB by a lot    磁盘仍然是成本/每兆字节（cost/MB）比最高的存储介质</li>
-<li>SSDs improve performance and performance variance   固态硬盘（SSDs）提高了性能和性能的一致性</li>
-</ul>
-</li>
-<li>Smaller DB story is changing quickly   小型数据库
-<ul>
-<li>Entry cost for disk is not cheap, so flash wins at the low end     磁盘的入门成本高，在低端市场闪存（flash）√</li>
-<li>Many interesting databases fit in RAM     许多有趣的数据库可以完全装入RAM</li>
-</ul>
-</li>
-</ul>
-<h2 id="Disks-and-Files"><a class="header-anchor" href="#Disks-and-Files">¶</a>Disks and Files</h2>
-<ul>
-<li>Recall, most DBMSs stores information on <strong>Disks</strong> and <strong>SSDs</strong>   <u><strong>对以上Disk和SSD讨论的总结</strong></u>
-<ul>
-<li>Disk are a mechanical anachronism(slow)</li>
-<li>SSDs faster, <strong>slow relative to memory</strong>, costly writes</li>
-</ul>
-</li>
-</ul>
-<h3 id="Block-Level-Storage"><a class="header-anchor" href="#Block-Level-Storage">¶</a>Block Level Storage</h3>
-<ul>
-<li>
-<p><strong>块级存储</strong></p>
-</li>
-<li>
-<p>Read and Write <strong>large chunks of sequential bytes</strong>   读写大顺序字节块：块级存储系统设计为一次读取或写入<strong>大的连续字节块</strong></p>
-</li>
-<li>
-<p>Sequentially: “Next” disk block is fastest   顺序性：在顺序访问中，读取或写入“下一个”磁盘块是最快的</p>
-</li>
-<li>
-<p>Maximize usage of data per Read/Write    最大化每次读写的数据使用量</p>
-<ul>
-<li>“Amortize” seek delays(HDDs) and writes (SSDs)   分摊   硬盘驱动器上的寻道延迟    以及旋转延迟    翻译器：通过<strong>分摊</strong>硬盘驱动器（HDD）上的寻道延迟和固态硬盘（SSD）上的写入放大，来提高效率</li>
-</ul>
-</li>
-<li>
-<p>Predict future behavior   预测未来行为</p>
-<ul>
-<li>Cache popular blocks   缓存热门块，将频繁访问的数据块存储在快速访问的缓存中</li>
-<li>Pre-fetch likely-to-be-accessed blocks    预取可能访问的块，根据访问模式预测并提前加载数据块</li>
-<li>Buffer writes to sequential blocks    缓冲顺序块的写入，将写入操作暂时存储，然后一次性写入到顺序的磁盘块中</li>
-</ul>
-</li>
-</ul>
-<h3 id="A-Note-on-Terminology"><a class="header-anchor" href="#A-Note-on-Terminology">¶</a>A Note on Terminology</h3>
-<ul>
-<li>术语解释</li>
-<li>Block = Unit of transfer for disk read/write   <strong>块</strong>：磁盘读写操作的数据传输单元
-<ul>
-<li>64 KB - 128 KB is a good number today    64KB到128KB是一个常见的块大小</li>
-<li>Book says 4 KB   书籍中可能提到4KB作为块大小的标准</li>
-</ul>
-</li>
-<li>Page: a common synonym for “block”    <strong>页面</strong>：通常是“块”的同义词
-<ul>
-<li>In some texts, “page” = a block-sized chunk of RAM    在某些文献中，“页面”指的是RAM中与块大小相等的数据块</li>
-</ul>
-</li>
-<li>treat “block” and “page” as synonyms     将“块”和“页面”视为可以互换的同义词</li>
-</ul>
-<h3 id="Arranging-Blocks-on-Disk"><a class="header-anchor" href="#Arranging-Blocks-on-Disk">¶</a>Arranging Blocks on Disk</h3>
-<ul>
-<li>
-<p>在磁盘上排列块</p>
-</li>
-<li>
-<p>‘Next’ block concept:</p>
-<ul>
-<li>sequential blocks on same track, followed by     位于同一磁道上的顺序块</li>
-<li>blocks on same cylinder, followed by  位于同一柱面上的块</li>
-<li>blocks on adjacent cylinder   相邻柱面上的块</li>
-</ul>
-</li>
-<li>
-<p>Arrange file pages sequentially by ‘next’ on disk     按磁盘上的“下一个”顺序排列文件页面</p>
-<ul>
-<li>minimize seek and rotational delay     最小化寻道和旋转延迟</li>
-</ul>
-</li>
-<li>
-<p>For a sequential scan, pre-fetch    对于顺序扫描，进行预取</p>
-<ul>
-<li>several blocks at a time    一次预取多个块</li>
-</ul>
-</li>
-<li>
-<p>Read large consecutive blocks     读取大的连续块</p>
-</li>
-</ul>
-<h3 id="Disk-Space-Management"><a class="header-anchor" href="#Disk-Space-Management">¶</a>Disk Space Management</h3>
-<ul>
-<li>
-<p>磁盘空间管理</p>
-</li>
-<li>
-<p>Lowest layer of DBMS, manages space on disk</p>
-</li>
-<li>
-<p>Purpose:</p>
-<ul>
-<li>Map pages to locations on disk    将页面映射到磁盘上的位置</li>
-<li>Load pages from disk to memory   从磁盘加载页面到内存</li>
-<li>Save pages back to disk &amp; ensuring writes    将页面保存回磁盘并确保写入</li>
-</ul>
-</li>
-<li>
-<p>Higher levels call upon this layer to :    更高层级调用这一层来：</p>
-<ul>
-<li>Read/write a page     读写页面</li>
-<li>Allocate/de-allocate logical pages    分配/释放逻辑页面</li>
-</ul>
-</li>
-</ul>
-<h4 id="Requesting-Pages"><a class="header-anchor" href="#Requesting-Pages">¶</a>Requesting Pages</h4>
-<ul>
-<li>
-<p>请求页面</p>
-</li>
-<li>
-<p>Request for s sequences of pages best satisfied by pages stored sequentially on disk     对页面序列的请求最好由磁盘上顺序存储的页面满足</p>
-<ul>
-<li>Physical details hidden from higher levels of systems    物理细节对系统更高层级隐藏</li>
-<li>Higher levels may “safely” assume Next Page is fast, so they will simply expect sequential runs of pages to be quick to scan   更高层级可能“安全地”假设下一页很快，因此他们将期望页面的顺序运行快速扫描</li>
-<li>尼玛好抽象……</li>
-</ul>
-</li>
-</ul>
-<h4 id="Implementation"><a class="header-anchor" href="#Implementation">¶</a>Implementation</h4>
-<ul>
-<li>
-<p>实现</p>
-</li>
-<li>
-<p>Proposal 1：Talk to the storage device directly   数据库存储软件直接与存储设备对话，存储设备绕过操作系统的任何功能导出的协议</p>
-<ul>
-<li>could be very fast if u knew the device well   数据库系统直接连接到硬件，速度尽可能的快</li>
-<li>when devices change    设备可能变换，所以这个proposal不适用了</li>
-</ul>
-</li>
-<li>
-<p>Proposal 2: Run over filesystems (FS)</p>
-<ul>
-<li>Allocate single large “contiguous” file on a nice empty disk and assume sequential / nearby byte access are fast     在一个干净的空磁盘上分配一个大的“连续”文件，并假设顺序/附近的字节访问是快速的</li>
-<li>Most FS optimize disk layout for sequential access    大多数文件系统优化磁盘布局以进行顺序访问
-<ul>
-<li>Gives us more or less what we want if we start with an empty disk</li>
-</ul>
-</li>
-<li>DBMS “file” may span multiple FS files on multiple disks/machines      DBMS的“文件”可能跨越多个磁盘/机器上的多个文件系统文件</li>
-</ul>
-</li>
-</ul>
-<h3 id="Summary-Disk-Space-Management"><a class="header-anchor" href="#Summary-Disk-Space-Management">¶</a>Summary: Disk Space Management</h3>
-<ul>
-<li>provide API to read and write pages to device    提供API以向设备读写页面</li>
-<li>Pages: block level organization of bytes on disk    页面：磁盘上字节的块级组织</li>
-<li>Provides “next” locality and abstracts FS/device details    提供“下一个”局部性并抽象文件系统/设备细节</li>
-</ul>
-<h2 id="Disks-and-Files-Summary"><a class="header-anchor" href="#Disks-and-Files-Summary">¶</a>Disks and Files: Summary</h2>
-<ul>
-<li>Magnetic (hard) disks and SSDs   磁性（硬）磁盘和固态硬盘（SSDs）
-<ul>
-<li>Basic HDD mechanics   基本的HDD机械特性</li>
-<li>SSD write amplification    SSD写入放大</li>
-<li>Concept of “near” pages and how it relates to cost of access   近邻页面的概念以及相对成本</li>
-<li>Relative cost of
-<ul>
-<li>Random vs. sequential disk access (10x)    随机访问与顺序磁盘访问</li>
-<li>Disk (pluto 冥王星) vs RAM (sacramento) vs. registers (your head)     磁盘（以冥王星为例）与RAM（以萨克拉门托为例？不懂）与寄存器（你的头脑）
-<ul>
-<li>Big differences</li>
-<li>不同存储介质的成本和性能有显著差异，寄存器最快但容量最小，RAM容量较大且速度很快，而磁盘提供了巨大的存储容量但速度相对较慢</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>DB File storage
-<ul>
-<li>Typically over FS file(s)    通常通过文件系统（FS）上的一个或多个文件来实现</li>
-</ul>
-</li>
-<li>Disk space manager loads and stores pages
-<ul>
-<li>Block level reasoning     基于块级逻辑进行操作</li>
-<li>Abstracts device and file system; provide fast “next”     抽象化了设备和文件系统的细节；提供快速的“下一个”页面访问</li>
-</ul>
-</li>
-</ul>
-<h1>写在后面</h1>
-<p>抽象啊（流口水</p>
-<p>不过也算有所收获</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/" rel="tag">Database</a></li></ul>
 
     </footer>
   </div>

@@ -152,6 +152,527 @@
     
     
     <article
+  id="post-CS_Notes/Database/CS186-SQL3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/07/08/CS_Notes/Database/CS186-SQL3/"
+    >CS186 SQL3 Berkeley</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/07/08/CS_Notes/Database/CS186-SQL3/" class="article-date">
+  <time datetime="2024-07-07T16:00:00.000Z" itemprop="datePublished">2024-07-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/SQL-notes/">SQL notes</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p>Berkeley CS186 Intro to DB Systems</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Q-dxGaR3fH0&amp;list=PLYp4IGUhNFmw8USiYMJvCUjZe79fvyYge&amp;index=6">视频地址</a>  课程记录</p>
+<h1>SQL 3</h1>
+<h2 id="Architecture-of-a-DBMS-SQL-Client"><a class="header-anchor" href="#Architecture-of-a-DBMS-SQL-Client">¶</a>Architecture of a DBMS: SQL Client</h2>
+<ul>
+<li>数据库管理系统的架构：SQL客户端</li>
+<li>Database Management System</li>
+</ul>
+<h3 id="DBMS-Parsing-Optimization"><a class="header-anchor" href="#DBMS-Parsing-Optimization">¶</a>DBMS: Parsing &amp; Optimization</h3>
+<ul>
+<li>数据库管理系统（DBMS）：解析与优化</li>
+</ul>
+<h4 id="Purpose"><a class="header-anchor" href="#Purpose">¶</a>Purpose:</h4>
+<ul>
+<li>
+<p>Parse, check, and verify the SQL, and translate into an efficient relational query plan</p>
+</li>
+<li>
+<p>解析、检查和验证SQL语句，将其转换为高效的关系查询方案</p>
+</li>
+<li>
+<pre><code class="language-sql">SELECT S.sid, S.sname, R.bid
+FROM Sailors S, Reserves R
+WHERE S.sid = R.sid and S.age &gt; 30
+GROUP BY age
+</code></pre>
+</li>
+</ul>
+<h3 id="DBMS-Relational-Operators"><a class="header-anchor" href="#DBMS-Relational-Operators">¶</a>DBMS: Relational Operators</h3>
+<ul>
+<li>数据库管理系统（DBMS）：关系操作符</li>
+</ul>
+<h4 id="Purpose-v2"><a class="header-anchor" href="#Purpose-v2">¶</a>Purpose:</h4>
+<ul>
+<li>Execute a dataflow by operating on records and files</li>
+<li>通过在记录和文件上执行数据流来操作数据</li>
+</ul>
+<h3 id="DBMS-Files-and-Index-Management"><a class="header-anchor" href="#DBMS-Files-and-Index-Management">¶</a>DBMS: Files and Index Management</h3>
+<ul>
+<li>文件和索引管理</li>
+</ul>
+<h4 id="Purpose-v3"><a class="header-anchor" href="#Purpose-v3">¶</a>Purpose:</h4>
+<ul>
+<li>Organize tables and Records as groups of pages in a logical file</li>
+<li>将表和记录组织成逻辑文件中的页面组</li>
+</ul>
+<h3 id="DBMS-Buffer-Management"><a class="header-anchor" href="#DBMS-Buffer-Management">¶</a>DBMS: Buffer Management</h3>
+<ul>
+<li>缓冲区管理层</li>
+</ul>
+<h4 id="Purpose-v4"><a class="header-anchor" href="#Purpose-v4">¶</a>Purpose:</h4>
+<ul>
+<li>Provide the illusion of operating in memory</li>
+<li>提供一种操作内存的假象</li>
+</ul>
+<h3 id="DBMS-Disk-Space-Management"><a class="header-anchor" href="#DBMS-Disk-Space-Management">¶</a>DBMS: Disk Space Management</h3>
+<ul>
+<li>磁盘空间管理</li>
+</ul>
+<h4 id="Purpose-v5"><a class="header-anchor" href="#Purpose-v5">¶</a>Purpose:</h4>
+<ul>
+<li>
+<p>Translate page requests into physical bytes on one or more device(s)</p>
+</li>
+<li>
+<p>将缓冲区管理器的页面请求转换为一个或多个设备（如磁盘、固态磁盘）上的物理字节</p>
+</li>
+</ul>
+<h3 id="Architecture-of-a-DBMS"><a class="header-anchor" href="#Architecture-of-a-DBMS">¶</a>Architecture of a DBMS</h3>
+<ul>
+<li>数据库管理系统的架构
+<ul>
+<li>Organized in layers   层次架构</li>
+<li>Each layer abstracts the layer below  每一层都抽象了其下的层次
+<ul>
+<li>Manage complexity    管理复杂性</li>
+<li>Performance assumptions   性能假设</li>
+</ul>
+</li>
+<li>Example of good systems design   DBMS是良好的系统设计示例</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>SQL CLIENT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Query Parsing &amp; Optimization       <strong>解析与优化</strong></td>
+</tr>
+<tr>
+<td>Relational Operators                         <strong>关系操作符</strong></td>
+</tr>
+<tr>
+<td>Files and Index Management           <strong>文件和索引管理</strong></td>
+</tr>
+<tr>
+<td>Buffer Management                            <strong>缓冲区管理</strong></td>
+</tr>
+<tr>
+<td>Disk Space Management                     <strong>磁盘空间管理</strong></td>
+</tr>
+<tr>
+<td>DBMS的架构通常分为几个层次，每一层都为上层提供服务，同时抽象了下层的复杂性。这种分层的设计有助于提高系统的可维护性和可扩展性</td>
+</tr>
+<tr>
+<td>DATABASE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="DBMS-Concurrency-Recovery"><a class="header-anchor" href="#DBMS-Concurrency-Recovery">¶</a>DBMS: Concurrency &amp; Recovery</h3>
+<ul>
+<li>
+<p>并发控制与恢复（？</p>
+</li>
+<li>
+<p>Two cross-cutting issues related to storage and memory management</p>
+</li>
+</ul>
+<h2 id="Before-we-begin-storage-media"><a class="header-anchor" href="#Before-we-begin-storage-media">¶</a>Before we begin: storage media</h2>
+<h3 id="Disks"><a class="header-anchor" href="#Disks">¶</a>Disks</h3>
+<ul>
+<li>Most database systems were originally designed for magnetic disks   大多数数据库系统最初是为磁盘设计的
+<ul>
+<li>Disk are a mechanical anachronism    磁盘是一种机械性的过时技术</li>
+<li>Instilled design ideas that apply to using solid state disks as well    它所灌输的设计思想也适用于固态硬盘的使用</li>
+</ul>
+</li>
+<li>Major implications   主要影响
+<ul>
+<li><strong>No “pointer derefs”</strong> .Instead, an API:   没有“指针解”引用
+<ul>
+<li>READ: transfer “page” of data from disk to RAM    （读取）将数据的“页面”从磁盘传输到RAM</li>
+<li>WRITE: transfer “page” of data from RAM to disk      （写入）将数据的“页面”从RAM传输到磁盘</li>
+</ul>
+</li>
+<li>Both API calls are very, very slow     这两个API调用都非常非常慢
+<ul>
+<li>Plan carefully   仔细规划</li>
+</ul>
+</li>
+<li>An explicit API can be a good thing   明确的API
+<ul>
+<li>Minimizes the kind of pointer errors you see in C    最小化了你在C语言中看到的指针错误类型</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Storage-Hierarchy"><a class="header-anchor" href="#Storage-Hierarchy">¶</a>Storage Hierarchy</h3>
+<ul>
+<li>存储层次结构</li>
+<li>存储层次结构是计算机系统中不同类型存储设备的层级排列，从最快的到最慢的【从上到下】</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>registers   寄存器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1   Cache       L1缓存</td>
+</tr>
+<tr>
+<td>L2   Cache       L2缓存</td>
+</tr>
+<tr>
+<td>RAM                随机存取存储器</td>
+</tr>
+<tr>
+<td>SSD                  固态硬盘</td>
+</tr>
+<tr>
+<td>Disk                  磁盘</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>emmm，理解下来就是读写到磁盘很慢（？</li>
+</ul>
+<h3 id="Components-of-a-Disk-Pt-6"><a class="header-anchor" href="#Components-of-a-Disk-Pt-6">¶</a>Components of a Disk, Pt. 6</h3>
+<ul>
+<li>
+<p>Platters spin(say 15000 rpm)</p>
+</li>
+<li>
+<p>Arm assembly moved in or out to position a head on a desired track</p>
+<ul>
+<li>Tracks under heads make a “cylinder”</li>
+</ul>
+</li>
+<li>
+<p>Only one head reads/writes at any one time</p>
+</li>
+<li>
+<p>Block/page size is a multiple of (fixed) sector size</p>
+</li>
+<li>
+<p>这个地方是磁盘结构的解释，所以待插入一张结构图，就一览了然了，当然目前我还不会插图片，后面来</p>
+</li>
+</ul>
+<p><img src="https://notes.bencuan.me/cs186/Disks,%20Buffers,%20Files/Untitled%201.png" alt="Untitled|400"></p>
+<h3 id="Accessing-a-Disk-page"><a class="header-anchor" href="#Accessing-a-Disk-page">¶</a>Accessing a Disk page</h3>
+<ul>
+<li>
+<p>访问磁盘界面</p>
+</li>
+<li>
+<p>Time to access (read/write)  a disk block:    读写磁盘块的时间   以下也涉及到磁盘结构那张图</p>
+<ul>
+<li>seek time (moving arms to position disk head on track)
+<ul>
+<li>~2-3 ms on average   寻道时间   磁盘头读取所需的磁道的位置</li>
+</ul>
+</li>
+<li>rotational delay (waiting for block to rotate under head)
+<ul>
+<li>~0-4 ms (15000 RPM)   旋转延迟时间</li>
+</ul>
+</li>
+<li>transfer time (actually moving data to/from disk surface)
+<ul>
+<li>~0.25 ms per 64KB page   将数据从磁盘表面移动到磁盘头/从磁盘头移动到磁盘表面得到时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Key to lower I/O cost: reduce seek/rotational delays    降低I/O成本的关键：减少寻道和旋转延迟的时间</p>
+</li>
+</ul>
+<h3 id="Notes-on-Flash-SSD"><a class="header-anchor" href="#Notes-on-Flash-SSD">¶</a>Notes on Flash(SSD)</h3>
+<ul>
+<li>闪存/固态磁盘Solid State Disks，闪存通常组合在一起形成称为固态磁盘的磁盘驱动器</li>
+<li>Issues in current generation (NAND)
+<ul>
+<li>Fine-grain reads (4-8K reads), coarse-grain writes (1-2 MB writes)    <strong>细粒度读取（Fine-grain reads）</strong>：可以进行4-8KB的细粒度读取;   <strong>粗粒度写入（Coarse-grain writes）</strong>：写入操作通常是1-2MB的粗粒度</li>
+<li>Only 2k-3k erasures before failure, so keep moving hot write units around (“wear leveling”)     闪存的寿命限制：通常在2000到3000次擦除周期后可能发生故障，因此需要不断移动热点写入单元（“磨损均衡” wear leveling）</li>
+<li>write amplification: big units, need to reorg for wear &amp; garbage collection    <strong>写入放大（Write amplification）</strong>：由于写入单元较大，需要重新组织数据以进行磨损均衡和垃圾收集</li>
+</ul>
+</li>
+<li>So <strong>read</strong> is fast and predictable
+<ul>
+<li>Single read access time: 0.03 ms</li>
+<li>4 KB random reads: ~500MB/sec</li>
+<li>Sequential reads: ~525MB/sec</li>
+<li>64K: 0.48 ms</li>
+<li>在闪存中，顺序读取和随机读取的带宽速度大致一样</li>
+</ul>
+</li>
+<li>But write is not . Slower for random
+<ul>
+<li>Single write access time: 0.03 ms   单次写入挺快的</li>
+<li>4 KB random writes: ~120 MB/sec</li>
+<li>Sequential writes: ~480 MB/sec</li>
+<li>顺序写入相比随机写入速度快很多</li>
+</ul>
+</li>
+<li>Flash is faster than disk. But disk offers about 10x the capacity per $就是disk在相等价钱下提供的容量更大（自分の理解）</li>
+</ul>
+<h2 id="Storage-Pragmatics-Trends"><a class="header-anchor" href="#Storage-Pragmatics-Trends">¶</a>Storage Pragmatics &amp; Trends</h2>
+<ul>
+<li>Many significant DBs are not big, but data sizes grow faster than Moore’s Law (“Big Data” is real) , so the role of disk, flash, RAM → to debate</li>
+</ul>
+<h3 id="Bottom-Line-last-few-years"><a class="header-anchor" href="#Bottom-Line-last-few-years">¶</a>Bottom Line (last few years)</h3>
+<ul>
+<li>Very large DBs: relatively traditional   非常大的数据库（Very large DBs）: 相对传统
+<ul>
+<li>Disk still the best cost/MB by a lot    磁盘仍然是成本/每兆字节（cost/MB）比最高的存储介质</li>
+<li>SSDs improve performance and performance variance   固态硬盘（SSDs）提高了性能和性能的一致性</li>
+</ul>
+</li>
+<li>Smaller DB story is changing quickly   小型数据库
+<ul>
+<li>Entry cost for disk is not cheap, so flash wins at the low end     磁盘的入门成本高，在低端市场闪存（flash）√</li>
+<li>Many interesting databases fit in RAM     许多有趣的数据库可以完全装入RAM</li>
+</ul>
+</li>
+</ul>
+<h2 id="Disks-and-Files"><a class="header-anchor" href="#Disks-and-Files">¶</a>Disks and Files</h2>
+<ul>
+<li>Recall, most DBMSs stores information on <strong>Disks</strong> and <strong>SSDs</strong>   <u><strong>对以上Disk和SSD讨论的总结</strong></u>
+<ul>
+<li>Disk are a mechanical anachronism(slow)</li>
+<li>SSDs faster, <strong>slow relative to memory</strong>, costly writes</li>
+</ul>
+</li>
+</ul>
+<h3 id="Block-Level-Storage"><a class="header-anchor" href="#Block-Level-Storage">¶</a>Block Level Storage</h3>
+<ul>
+<li>
+<p><strong>块级存储</strong></p>
+</li>
+<li>
+<p>Read and Write <strong>large chunks of sequential bytes</strong>   读写大顺序字节块：块级存储系统设计为一次读取或写入<strong>大的连续字节块</strong></p>
+</li>
+<li>
+<p>Sequentially: “Next” disk block is fastest   顺序性：在顺序访问中，读取或写入“下一个”磁盘块是最快的</p>
+</li>
+<li>
+<p>Maximize usage of data per Read/Write    最大化每次读写的数据使用量</p>
+<ul>
+<li>“Amortize” seek delays(HDDs) and writes (SSDs)   分摊   硬盘驱动器上的寻道延迟    以及旋转延迟    翻译器：通过<strong>分摊</strong>硬盘驱动器（HDD）上的寻道延迟和固态硬盘（SSD）上的写入放大，来提高效率</li>
+</ul>
+</li>
+<li>
+<p>Predict future behavior   预测未来行为</p>
+<ul>
+<li>Cache popular blocks   缓存热门块，将频繁访问的数据块存储在快速访问的缓存中</li>
+<li>Pre-fetch likely-to-be-accessed blocks    预取可能访问的块，根据访问模式预测并提前加载数据块</li>
+<li>Buffer writes to sequential blocks    缓冲顺序块的写入，将写入操作暂时存储，然后一次性写入到顺序的磁盘块中</li>
+</ul>
+</li>
+</ul>
+<h3 id="A-Note-on-Terminology"><a class="header-anchor" href="#A-Note-on-Terminology">¶</a>A Note on Terminology</h3>
+<ul>
+<li>术语解释</li>
+<li>Block = Unit of transfer for disk read/write   <strong>块</strong>：磁盘读写操作的数据传输单元
+<ul>
+<li>64 KB - 128 KB is a good number today    64KB到128KB是一个常见的块大小</li>
+<li>Book says 4 KB   书籍中可能提到4KB作为块大小的标准</li>
+</ul>
+</li>
+<li>Page: a common synonym for “block”    <strong>页面</strong>：通常是“块”的同义词
+<ul>
+<li>In some texts, “page” = a block-sized chunk of RAM    在某些文献中，“页面”指的是RAM中与块大小相等的数据块</li>
+</ul>
+</li>
+<li>treat “block” and “page” as synonyms     将“块”和“页面”视为可以互换的同义词</li>
+</ul>
+<h3 id="Arranging-Blocks-on-Disk"><a class="header-anchor" href="#Arranging-Blocks-on-Disk">¶</a>Arranging Blocks on Disk</h3>
+<ul>
+<li>
+<p>在磁盘上排列块</p>
+</li>
+<li>
+<p>‘Next’ block concept:</p>
+<ul>
+<li>sequential blocks on same track, followed by     位于同一磁道上的顺序块</li>
+<li>blocks on same cylinder, followed by  位于同一柱面上的块</li>
+<li>blocks on adjacent cylinder   相邻柱面上的块</li>
+</ul>
+</li>
+<li>
+<p>Arrange file pages sequentially by ‘next’ on disk     按磁盘上的“下一个”顺序排列文件页面</p>
+<ul>
+<li>minimize seek and rotational delay     最小化寻道和旋转延迟</li>
+</ul>
+</li>
+<li>
+<p>For a sequential scan, pre-fetch    对于顺序扫描，进行预取</p>
+<ul>
+<li>several blocks at a time    一次预取多个块</li>
+</ul>
+</li>
+<li>
+<p>Read large consecutive blocks     读取大的连续块</p>
+</li>
+</ul>
+<h3 id="Disk-Space-Management"><a class="header-anchor" href="#Disk-Space-Management">¶</a>Disk Space Management</h3>
+<ul>
+<li>
+<p>磁盘空间管理</p>
+</li>
+<li>
+<p>Lowest layer of DBMS, manages space on disk</p>
+</li>
+<li>
+<p>Purpose:</p>
+<ul>
+<li>Map pages to locations on disk    将页面映射到磁盘上的位置</li>
+<li>Load pages from disk to memory   从磁盘加载页面到内存</li>
+<li>Save pages back to disk &amp; ensuring writes    将页面保存回磁盘并确保写入</li>
+</ul>
+</li>
+<li>
+<p>Higher levels call upon this layer to :    更高层级调用这一层来：</p>
+<ul>
+<li>Read/write a page     读写页面</li>
+<li>Allocate/de-allocate logical pages    分配/释放逻辑页面</li>
+</ul>
+</li>
+</ul>
+<h4 id="Requesting-Pages"><a class="header-anchor" href="#Requesting-Pages">¶</a>Requesting Pages</h4>
+<ul>
+<li>
+<p>请求页面</p>
+</li>
+<li>
+<p>Request for s sequences of pages best satisfied by pages stored sequentially on disk     对页面序列的请求最好由磁盘上顺序存储的页面满足</p>
+<ul>
+<li>Physical details hidden from higher levels of systems    物理细节对系统更高层级隐藏</li>
+<li>Higher levels may “safely” assume Next Page is fast, so they will simply expect sequential runs of pages to be quick to scan   更高层级可能“安全地”假设下一页很快，因此他们将期望页面的顺序运行快速扫描</li>
+<li>尼玛好抽象……</li>
+</ul>
+</li>
+</ul>
+<h4 id="Implementation"><a class="header-anchor" href="#Implementation">¶</a>Implementation</h4>
+<ul>
+<li>
+<p>实现</p>
+</li>
+<li>
+<p>Proposal 1：Talk to the storage device directly   数据库存储软件直接与存储设备对话，存储设备绕过操作系统的任何功能导出的协议</p>
+<ul>
+<li>could be very fast if u knew the device well   数据库系统直接连接到硬件，速度尽可能的快</li>
+<li>when devices change    设备可能变换，所以这个proposal不适用了</li>
+</ul>
+</li>
+<li>
+<p>Proposal 2: Run over filesystems (FS)</p>
+<ul>
+<li>Allocate single large “contiguous” file on a nice empty disk and assume sequential / nearby byte access are fast     在一个干净的空磁盘上分配一个大的“连续”文件，并假设顺序/附近的字节访问是快速的</li>
+<li>Most FS optimize disk layout for sequential access    大多数文件系统优化磁盘布局以进行顺序访问
+<ul>
+<li>Gives us more or less what we want if we start with an empty disk</li>
+</ul>
+</li>
+<li>DBMS “file” may span multiple FS files on multiple disks/machines      DBMS的“文件”可能跨越多个磁盘/机器上的多个文件系统文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="Summary-Disk-Space-Management"><a class="header-anchor" href="#Summary-Disk-Space-Management">¶</a>Summary: Disk Space Management</h3>
+<ul>
+<li>provide API to read and write pages to device    提供API以向设备读写页面</li>
+<li>Pages: block level organization of bytes on disk    页面：磁盘上字节的块级组织</li>
+<li>Provides “next” locality and abstracts FS/device details    提供“下一个”局部性并抽象文件系统/设备细节</li>
+</ul>
+<h2 id="Disks-and-Files-Summary"><a class="header-anchor" href="#Disks-and-Files-Summary">¶</a>Disks and Files: Summary</h2>
+<ul>
+<li>Magnetic (hard) disks and SSDs   磁性（硬）磁盘和固态硬盘（SSDs）
+<ul>
+<li>Basic HDD mechanics   基本的HDD机械特性</li>
+<li>SSD write amplification    SSD写入放大</li>
+<li>Concept of “near” pages and how it relates to cost of access   近邻页面的概念以及相对成本</li>
+<li>Relative cost of
+<ul>
+<li>Random vs. sequential disk access (10x)    随机访问与顺序磁盘访问</li>
+<li>Disk (pluto 冥王星) vs RAM (sacramento) vs. registers (your head)     磁盘（以冥王星为例）与RAM（以萨克拉门托为例？不懂）与寄存器（你的头脑）
+<ul>
+<li>Big differences</li>
+<li>不同存储介质的成本和性能有显著差异，寄存器最快但容量最小，RAM容量较大且速度很快，而磁盘提供了巨大的存储容量但速度相对较慢</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DB File storage
+<ul>
+<li>Typically over FS file(s)    通常通过文件系统（FS）上的一个或多个文件来实现</li>
+</ul>
+</li>
+<li>Disk space manager loads and stores pages
+<ul>
+<li>Block level reasoning     基于块级逻辑进行操作</li>
+<li>Abstracts device and file system; provide fast “next”     抽象化了设备和文件系统的细节；提供快速的“下一个”页面访问</li>
+</ul>
+</li>
+</ul>
+<h1>写在后面</h1>
+<p>抽象啊（流口水</p>
+<p>不过也算有所收获</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/" rel="tag">Database</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-CS_Notes/Database/SQL-practice-record"
   class="article article-type-post"
   itemscope
@@ -2251,245 +2772,6 @@ WHERE rating &gt; 8;
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reading/" rel="tag">reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%96%E5%9B%BD%E6%96%87%E5%AD%A6/" rel="tag">外国文学</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E6%9C%AC%E6%96%87%E5%AD%A6/" rel="tag">日本文学</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-文史哲/世界史/埃及史/【艺术史】来世与王权的艺术——古埃及艺术"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/07/04/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E5%9F%83%E5%8F%8A%E5%8F%B2/%E3%80%90%E8%89%BA%E6%9C%AF%E5%8F%B2%E3%80%91%E6%9D%A5%E4%B8%96%E4%B8%8E%E7%8E%8B%E6%9D%83%E7%9A%84%E8%89%BA%E6%9C%AF%E2%80%94%E2%80%94%E5%8F%A4%E5%9F%83%E5%8F%8A%E8%89%BA%E6%9C%AF/"
-    >【艺术史】来世与王权的艺术——古埃及艺术</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/07/04/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E5%9F%83%E5%8F%8A%E5%8F%B2/%E3%80%90%E8%89%BA%E6%9C%AF%E5%8F%B2%E3%80%91%E6%9D%A5%E4%B8%96%E4%B8%8E%E7%8E%8B%E6%9D%83%E7%9A%84%E8%89%BA%E6%9C%AF%E2%80%94%E2%80%94%E5%8F%A4%E5%9F%83%E5%8F%8A%E8%89%BA%E6%9C%AF/" class="article-date">
-  <time datetime="2024-07-03T16:00:00.000Z" itemprop="datePublished">2024-07-04</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/">文史哲</a> / <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/">世界史</a> / <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E5%9F%83%E5%8F%8A%E5%8F%B2/">埃及史</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Dg411t7nz/?spm_id_from=333.999.0.0">视频的地址</a>  是偶然发现的一个up主，自分作为埃及历史文化爱好者=不能错过！</p>
-<p>当时所有的自行记录都在幕布，所以整理起来发现都是一些凌乱的句子集（捂脸） 后面有心思了可能会完善吧！（？</p>
-<p>而且是视频看了一半才想起来记录的，所以这个markdown只有后面一半部分！前半部分有机会补上吧！（？</p>
-<h3 id="摘录始于此"><a class="header-anchor" href="#摘录始于此">¶</a>摘录始于此</h3>
-<p>艺术是一面镜子，我们能够从中看到的东西取决于我们的知识储备和受教育水平。</p>
-<p>古王国时期是艺术发展的黄金时代，这一时期的艺术风格恢弘、稳重、自信，大多数的艺术形式和艺术程式已经确定下来，形成了传统。</p>
-<p>五个世纪以来，王权制度慢慢侵蚀了埃及的经济活力，使其再也无法支撑一个庞大的中央集权政府。</p>
-<p>（在第一中间期）尽管从在着各种困难，但由于总督们摆脱了法老获得了独立，各个地方的艺术创造力得到了激发，古埃及进入了一个文化多元发展的时期。</p>
-<p>总的来说，中王国时期的艺术在细部上有所创新，但在大体上还是遵循了古王国时期的传统。</p>
-<p>不论是对于一个王朝也好，还是对于一个个人也好，对于其成长和发展来说必不可少的一件事就是回溯历史。</p>
-<p>法老是一位女性，这对于埃及传统来说是一次巨大的挑战，但这件事却并非是无源之水，无本之木，而是有其现实基础的。</p>
-<p>有一个普遍规律，就是女性能够成为统治者的前提，是这一时期该地区对于女性的地位是有普遍认知的，并且女性的权益是可以得到保障的。</p>
-<p>而根据古埃及的法律，社会成员所拥有的权利取决于他所处的社会地位而非性别。</p>
-<p>在古代的社会当中，古埃及的妇女地位相对较高。女性在几乎所有领域都与男性平等，她们享有拥有、继承和遗嘱自己财产的权利。</p>
-<p>而“法老”是埃及统治者的称呼，它无关性别。</p>
-<p>即使如此，一位女性成为法老还是很罕见的，她必然面临着来自传统的压力和质疑，而这必然会对她的执政合法性构成挑战。</p>
-<h4 id="哈特谢普苏特"><a class="header-anchor" href="#哈特谢普苏特">¶</a>哈特谢普苏特</h4>
-<p>她在自己的女性身份和传统之间找到了一个平衡点。而在这个过程当中，艺术起到了关键的作用。</p>
-<h5 id="哈特谢普苏特的“三板斧”"><a class="header-anchor" href="#哈特谢普苏特的“三板斧”">¶</a>哈特谢普苏特的“三板斧”</h5>
-<p>首先是在对外政策方面，在她掌权期间埃及停止了对外战争，转而大力发展和邻国之间的贸易往来，这使得国内的经济迅速繁荣，财富迅速增长；然后是在宗教方面，她宣称自己是阿蒙神之女，这样她的统治就不需要经由和图特摩斯二世的婚姻，而是完全来自于宗教；最后，她通过在埃及大规模的兴建纪念性建筑和雕像来对民众施加影响力，其目的是在于塑造自己的形象，推广自己的成就。</p>
-<p>这些建筑和雕像可以迫使民众习惯于看到一个女性统治者的形象，并且接受相应的宗教叙事。这样可以确保当她（哈特谢普苏特）宣称自己为法老的时候，埃及社会不会产生太大的震动。</p>
-<p>埃及艺术程式“概念性”的特点再次体现了出来：表现法老的艺术程式不是为了塑造某个具体的人，而是塑造一个概念化的形象，一个符合传统要求的形象。这里也能看出埃及人对于传统的重视。</p>
-<p>埃赫那顿的统治不仅见证了一个新首都的建立和一个新宗教的兴起，它也导致了这一时期传统艺术程式的彻底改变，产生了一种新的“阿玛纳风格”（阿玛纳艺术）。</p>
-<p>阿玛纳风格自然、生动、充满个性，这是古埃及艺术史上一次出现比较大的风格变化，可能也是唯一的一次。</p>
-<p>后世对于这种风格的评价呈现出两极分化的趋势。</p>
-<p>这种新的艺术风格就如同他的宗教改革一样极具争议。</p>
-<h5 id="视频作者的一些观点"><a class="header-anchor" href="#视频作者的一些观点">¶</a>视频作者的一些观点</h5>
-<p>我认为这场宗教改革改变了埃及文化的核心价值，这个特别的法老形象（指埃赫那顿）和阿玛纳风格所反映出的正是这一时期埃及的主流价值。</p>
-<p>前面提到，埃及传统文化的核心价值是玛亚特。在这种价值之下，传统的艺术程式所强调的事永恒与秩序，永恒与秩序在法老雕像上面体现出的就是一种“阳刚之美”，甚至很多女性雕像也体现出了男性的特质。</p>
-<p>而宗教改革所造成的结果就是传统价值——玛亚特缺失了，或者至少可以说是玛亚特被削弱了。</p>
-<p>这种价值的改变可能就造成了埃及人不再追求来世的永恒，而是转而追求现世的美好。</p>
-<p>于是，自然、生动、世俗、柔软、充满个性的新艺术风格随之出现，而这种新的艺术风格在法老雕像上面所呈现出的就是女性化的“阴柔之美”。</p>
-<p>究其原因，这是由于宗教改革改变了文化的核心价值。</p>
-<p>在埃及社会，宗教要比政治重要得多；相比于政治，宗教对艺术产生的影响也要深刻得多。</p>
-<p>可能可以佐证这一观点的事实：这一时期所留存下来的墓葬浮雕当中不再有关于来世和死亡的描写。</p>
-<p>主流学术界和艺术通史书籍对于埃赫那顿巨像的评价普遍偏负面，他们认为这个雕像是难看的，是不讨人喜欢的。</p>
-<p>而他们对于阿玛纳风格的态度则褒贬不一，原因在于阿玛纳艺术自然、轻松的风格在古埃及程式化的艺术当中独树一帜，让人印象深刻。</p>
-<p>奈菲尔提提半身像在德国辗转的这85年也是德国风云变幻的85年。</p>
-<p>对于德国来说，这件作品的意义早已经超越了艺术范畴，它已经和德国的民族认同和柏林文化联系在了一起。</p>
-<p>到这里也就不难理解为什么德国当局对于这件作品的态度如此坚决。</p>
-<p>在古埃及艺术充满“象征性”和“正确性”的大环境当中，阿玛纳风格对于具体的人的关怀是很罕见的。</p>
-<p>以上小结：阿玛纳时期的艺术相较于传统艺术咋风格上有较大的差异，其原因可能在于埃赫那顿的宗教改革造成了文化核心价值的改变。</p>
-<h4 id="阿玛纳风格"><a class="header-anchor" href="#阿玛纳风格">¶</a>阿玛纳风格</h4>
-<p>相比之前“静态”的传统风格，阿玛纳风格是“动态的”，其特点是放松、自然、充满“运动感”和“活动感”。</p>
-<p>浮雕的主要表现方式为柔和的曲线而非僵硬的直线，所表现的神只有阿顿，没有其他的神。也没有关于死亡和来世的描写。</p>
-<p>神庙通常是露天的，没有顶部</p>
-<p>人物特征为细长的头部，摇摆的姿态，修长的四肢和突出的肚子。</p>
-<p>在构图上相较于传统对于“秩序”的强调，阿玛纳风格显得较为“混乱”。</p>
-<p>相较于传统雕像所体现出的“永恒感”和“力量感”（肌肉感），阿玛纳风格的雕像缺乏力量感，而且具有明显的女性化特征，体现出的是一种“阴柔美”。</p>
-<p>相较于传统艺术程式对人物所进行的“概念化”描绘，阿玛纳风格侧重于对人物进行“个性化”的表现。</p>
-<p>通过对比可以发现，哈特谢普苏特时期的艺术变革是发生在表层的，而阿玛纳时期的艺术变革是发生在深层的。</p>
-<p>相比于政治，宗教对艺术的影响要深刻得多。</p>
-<h5 id="视频作者的理解"><a class="header-anchor" href="#视频作者的理解">¶</a>视频作者的理解</h5>
-<p>世界是一个全面的、联系的、发展的整体，历史是求变的，不论是埃及传统还是艺术程式，它发展到一定程度必然会发生一次突变。</p>
-<h4 id="埃赫那顿-宗教改革"><a class="header-anchor" href="#埃赫那顿-宗教改革">¶</a>埃赫那顿&amp;宗教改革</h4>
-<p>埃赫那顿和他的宗教改革就是埃及这个文化系统当中的一次突变。</p>
-<p>而这次突变会给这个系统注入新的元素，让它继续发展。在后面的作品当中我们仍然能够看到一些阿玛纳风格的影子</p>
-<p>在古埃及的陵墓当中，真正的诅咒其实非常罕见，这些“诅咒”通常和墓葬文书当中的咒语相混淆。</p>
-<p>然而这些“诅咒”的确有科学上可以解释的原因，例如细菌或者辐射；</p>
-<p>后来这些说法和历史结合在了一起，再加上能够让人信服的证据就构成了故事的传播基础，而这些故事后来又随着纪录片和相关的书籍广为流传</p>
-<p>但近些年来“法老的诅咒”更多的是作为一种文化元素存在，为各种电影和游戏提供灵感和素材</p>
-<p>祭司和抄写员会将来世之旅的过程记录在一个莎草纸卷轴上，然后将这些卷轴和死者一同下葬，这样他们就不会在冥界迷路了。</p>
-<p>后来，学者们就将这种图文并茂的古埃及卷轴称为“亡灵书”。</p>
-<p>人在第一次死亡之后灵魂会进入冥界，但每个灵魂通过冥界的方式各有不同，方式的选择取决于他们的地位。</p>
-<p>通往来世的道路十分艰难，路上会有可怕的生物阻拦灵魂的前行。这时就需要灵魂吟唱亡灵书当中适当的咒语来安抚他们。</p>
-<p>当灵魂经历重重险阻穿越冥界之后，他们会到达玛亚特大厅。这里是来世旅程当中最重要的部分，灵魂要在这里接受审判。</p>
-<p>每个人的结局都各有不同，而灵魂的纯洁性将是他们能否被允许进入奥西里斯天国的决定性因素。</p>
-<p>来世信仰，或者说古埃及文明就是一场永恒的“接力赛”。埃及人将人的死亡与重生和太阳的升起与落下联系在一起，生者的世界和亡者的世界是一个联系的整体，它们都是玛亚特这个更广泛秩序的一部分。</p>
-<p>“如果没有来世信仰，埃及社会将失去凝聚力”。从这个角度来说，我们可以将古埃及文明称为“来世的文明”。</p>
-<p>古埃及人所渴望的永恒就蕴藏在自己的生活当中，透过“轮回、秩序与永恒”这些在艺术作品当中反复出现的主题，所体现出的其实是埃及人对于生命的渴望和对于死亡的敬畏。</p>
-<p>用佛教的话来说，人生是一场修行。</p>
-<p>以上小结：亡灵书的形式感很重，它所体现出的是传统的秩序感和永恒感。</p>
-<p>除了实用性和故事性，亡灵书也是埃及少见的具有明确道德内容的作品。</p>
-<p>亡灵书当中的每一个“我没有…”都蕴含着一个“你不应该”的潜在含义。</p>
-<p>拉美西斯二世既满足了人们对于一个曾经存在过的、无限辉煌的文明的想象，同时他也满足了人们对于一个拥有不世功绩，却又自命不凡的帝王的想象。</p>
-<p>宗教、语言和文字是一个文明的重要载体，其重要性不言而喻。而随着宗教的衰落，虽然当地的居民仍然说着他们的语言，但随着神庙作用的降低和掌握着文字的祭司的减少，人们阅读和书写象形文字的能力慢慢也就消失了。</p>
-<h4 id="罗塞塔石碑与现代埃及学"><a class="header-anchor" href="#罗塞塔石碑与现代埃及学">¶</a>罗塞塔石碑与现代埃及学</h4>
-<p>石碑上刻有三种文字，上面的为埃及的正式书写文字，象形文字，也被称为“圣书体”；中间是另一种古埃及文字，被称为“世俗体”；而最下方则是古希腊文字。</p>
-<p>欧洲的学者对于古希腊文字相对熟悉，如果他们可以将三种文字对应起来的话应该就能破译象形文字。</p>
-<p>石碑的破译工作以古希腊文字为起点，很多学者都参与了进来。</p>
-<p>英国的学者托马斯·杨为破译象形文字做出了重要贡献，不过他更为著名的是建立了光的波动理论和进行了杨氏双缝干涉实验。</p>
-<p>最后，成功破译象形文字的是法国学者商博良，而他也因此成为了埃及学的奠基人。</p>
-<p>罗塞塔石碑的破译成为了现代埃及学的开端，自此人们终于找到了打开古埃及文明这座宝库的钥匙，让我们有机会了解这个辉煌的古老文明</p>
-<h4 id="雪莱《奥兹曼迪亚斯》（拉美西斯二世）"><a class="header-anchor" href="#雪莱《奥兹曼迪亚斯》（拉美西斯二世）">¶</a>雪莱《奥兹曼迪亚斯》（拉美西斯二世）</h4>
-<p>讽刺诗歌《Ozymandias/奥兹曼迪亚斯》中英文对照[波西·比希.雪莱]</p>
-<p>Ozymandias（奥兹曼迪亚斯）被古代希腊称作埃及的Ramses II是一位威武的法老（国王），英国诗人雪莱有写了一首关于他的傲慢与灭亡来暗喻警示当时当权者的傲慢的诗。</p>
-<p>诗歌是文学艺术最为凝练的表现形式。波西·比希.雪莱（Percy.Bysshe.Shelley）是19世纪英国<a target="_blank" rel="noopener" href="http://www.timeface.cn/aiqing/lmqs">浪漫主义伟大诗人</a>的代表之一，其诗风古朴自然，极富韵律，而内容上也是极富个性，既有对自己情感的强烈表达，又有对大自然的欣赏和热爱，同时还有对封建权威、强权统治的反抗。雪莱笔下的“奥兹曼迪亚斯”（Ozymandias）就是这样一首承载了诗人对权威、传统的反抗的传世之作。对这首诗的诗歌主题进行分析研究的大有人在，然而，诗歌不仅是表意最凝练的方式，它更多地是一种文字艺术，因而，其形式本身也是一种艺术。本题拟将从表词达意（meaning）、意象（imagery）以及修辞手法（figure of speech）对“奥兹曼迪亚斯”进行梳理分析。</p>
-<ul>
-<li>
-<p>《奥兹曼迪亚斯》中英文对照</p>
-</li>
-<li>
-<p>英文原文</p>
-</li>
-<li>
-<p>Ozymandias</p>
-</li>
-<li>
-<p>I met a traveller from an antique land</p>
-</li>
-<li>
-<p>Who said: &quot;Two vast and trunkless legs of stone</p>
-</li>
-<li>
-<p>Stand in the desert. Near them on the sand,</p>
-</li>
-<li>
-<p>Half sunk, a shattered visage lies, whose frown</p>
-</li>
-<li>
-<p>And wrinkled lip and sneer of cold command</p>
-</li>
-<li>
-<p>Tell that its sculptor well those passions read</p>
-</li>
-<li>
-<p>Which yet survive, stamped on these lifeless things,</p>
-</li>
-<li>
-<p>The hand that mocked them and the heart that fed.</p>
-</li>
-<li>
-<p>And on the pedestal these words appear:</p>
-</li>
-<li>
-<p>'My name is Ozymandias, King of Kings:</p>
-</li>
-<li>
-<p>Look on my works, ye mighty, and despair!’</p>
-</li>
-<li>
-<p>Nothing beside remains. Round the decay</p>
-</li>
-<li>
-<p>Of that colossal wreck, boundless and bare,</p>
-</li>
-<li>
-<p>The lone and level sands stretch far away.</p>
-</li>
-<li>
-<p>中文翻译　　1. 奥兹曼迪亚斯（杨绛 译）</p>
-</li>
-<li>
-<p>我遇见一位来自古国的旅人</p>
-</li>
-<li>
-<p>他说：有两条巨大的石腿</p>
-</li>
-<li>
-<p>半掩于沙漠之间</p>
-</li>
-<li>
-<p>近旁的沙土中，有一张破碎的石脸</p>
-</li>
-<li>
-<p>抿着嘴，蹙着眉，面孔依旧威严</p>
-</li>
-<li>
-<p>想那雕刻者，必定深谙其人情感</p>
-</li>
-<li>
-<p>那神态还留在石头上</p>
-</li>
-<li>
-<p>而斯人已逝，化作尘烟</p>
-</li>
-<li>
-<p>看那石座上刻着字句：</p>
-</li>
-<li>
-<p>“我是万王之王,奥兹曼斯迪亚斯</p>
-</li>
-<li>
-<p>功业盖物,强者折服”</p>
-</li>
-<li>
-<p>此外，荡然无物</p>
-</li>
-<li>
-<p>废墟四周，唯余黄沙莽莽</p>
-</li>
-<li>
-<p>寂寞荒凉，伸展四方。</p>
-</li>
-</ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reading/" rel="tag">reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E5%8F%B2/" rel="tag">世界史</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%83%E5%8F%8A%E5%8F%B2/" rel="tag">埃及史</a></li></ul>
 
     </footer>
   </div>
