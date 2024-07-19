@@ -270,7 +270,7 @@
   <time datetime="2024-07-18T16:00:00.000Z" itemprop="datePublished">2024-07-19</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/CV-notes/">CV notes</a>
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/AI-notes/">AI notes</a>
   </div>
    
     </div>
@@ -279,6 +279,7 @@
        
   <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
 <p>黑马的知识星球的第一次直播。。。睡前一看，播了四个多小时。。。逆天，不过放在旁边听了两个多小时，还是挺多干货的，故今日开始回放记录</p>
+<p>目前看到183分钟，从回放链接进去继续看</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Miracle_ps/article/details/114791335">Hexo 添加图片——不用插件，超简单_hexo添加图片-CSDN博客</a></p>
 
 	<iframe src="https://www.slideshare.net/slideshow/embed_code/key/fIZ6YhyrfWCZ81?hostedIn=slideshare&amp;page=upload" style="width:100%;height:550px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen> </iframe> <div style="margin-bottom:5px">
@@ -375,13 +376,179 @@
 <li><code>Transformer</code>   Transformer：深度学习的一种神经网络模型。多数AIGC模型都依赖于此。</li>
 </ul>
 </li>
+<li>machine translation   机器翻译</li>
+<li>voice-to-text   声音-文字转写</li>
+<li>text-to-image    文本生成</li>
+<li>推理预测     对于不合理的结构→可能出现幻觉</li>
 </ul>
 <h3 id="文本向量化"><a class="header-anchor" href="#文本向量化">¶</a>文本向量化</h3>
 <ol>
 <li>将文本转成一组浮点数，放入一个数组，作为多维空间坐标</li>
 <li>通过训练调整向量坐标，使其在不同方向具备含义(GPT3采用12288维空间)</li>
 </ol>
+<h4 id="向量的相似度"><a class="header-anchor" href="#向量的相似度">¶</a>向量的相似度</h4>
+<ul>
+<li>
+<p>向量的远近</p>
+</li>
+<li>
+<p><strong><u>把词语转换成向量，放到向量空间中。通过向量之间的关系和相似度，来理解词语之间的关系</u></strong></p>
+<ul>
+<li>例如：“美丽”≈“漂亮”     “美丽”=-“丑陋”</li>
+</ul>
+</li>
+<li>
+<p>二维/三维都有</p>
+</li>
+<li>
+<p>视频中的例子：</p>
+<ul>
+<li><code>E(queen)-E(king) ≈ E(woman)-E(man)</code>  发现这两组词只有性别上的差别</li>
+<li><code>E(queen) ≈ E(king) + E(woman)-E(man)</code></li>
+<li><code>E(niece)-E(nephew) ≈ E(woman)-E(man)</code></li>
+<li><code>E(father)-E(mother) ≈ E(woman)-E(man)</code></li>
+<li>E(汉堡) + E(美国) - E(中国) = E(肉夹馍)</li>
+</ul>
+</li>
+</ul>
+<h4 id="注意力机制"><a class="header-anchor" href="#注意力机制">¶</a>注意力机制</h4>
+<ul>
+<li>来源是谷歌的一篇论文</li>
+<li>基于上下文，根据其中词语的坐标对向量进行修改，来计算出最终推理到的结果</li>
+<li>给的上下文越多，关键词越多，就能进行越精确的调整</li>
+<li>GPT有一万多维，计算量十分庞大。所以搜索不会是无穷无尽的，只会限定在<code>上下文(Context)</code>这个范围中</li>
+</ul>
+<h3 id="GPT的应用"><a class="header-anchor" href="#GPT的应用">¶</a>GPT的应用</h3>
+<ul>
+<li>
+<p>因为记忆力短，所以无法完成复杂任务</p>
+<ul>
+<li>需要人对任务进行拆解，由AI完成其中的小部分，从而大大提升效率</li>
+</ul>
+</li>
+<li>
+<p>第一阶段：<code>AI Embedded</code>   AI嵌入    人类作为主导，任务比例高；由AI完成其中部分</p>
+</li>
+<li>
+<p>第二阶段：<code>AI Copilot</code>   AI助手     1:1工作量     【目前是处于这个阶段】</p>
+</li>
+<li>
+<p>第三阶段：<code>AI Agent</code>     AI智能体     人类来下达命令，AI来拆解任务，把任务块交给其他<code>Agent</code>来完成</p>
+</li>
+</ul>
 <h2 id="AI编程"><a class="header-anchor" href="#AI编程">¶</a>AI编程</h2>
+<h4 id="AI编程顾问"><a class="header-anchor" href="#AI编程顾问">¶</a>AI编程顾问</h4>
+<ul>
+<li>需求分析
+<ul>
+<li>ChatGPT</li>
+<li>Coze/扣子</li>
+<li>举例：我要开发一个小程序，帮助用户生成简单的小学算术题，还可以拍照批改用户的作业，记录试卷结果。
+<ul>
+<li>这样问的不够专业，得到的答案也不够符合需求</li>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>产品设计</li>
+<li>编码实现</li>
+<li>测试与调试</li>
+<li>部署与维护</li>
+</ul>
+<h4 id="需求分析"><a class="header-anchor" href="#需求分析">¶</a>需求分析</h4>
+<h5 id="Prompt"><a class="header-anchor" href="#Prompt">¶</a>Prompt</h5>
+<ul>
+<li>提示词，即发给大模型的指令。是AI时代的编程语言</li>
+</ul>
+<h5 id="提示词的典型构成"><a class="header-anchor" href="#提示词的典型构成">¶</a>提示词的典型构成</h5>
+<ul>
+<li><strong>角色</strong>：给AI定义一个最匹配任务的角色</li>
+<li><strong>提示</strong>：对任务进行描述</li>
+<li><strong>上下文</strong>：给出与任务相关的其他背景信息</li>
+<li><strong>例子</strong>：必要时给出举例，对输出的正确性有很大帮助</li>
+<li><strong>输入</strong>：任务的输入信息</li>
+<li><strong>输出</strong>：输出的有效格式，比如（JSON、XML）</li>
+<li><strong>注意</strong>：
+<ul>
+<li>大模型对于Prompt开头和结尾的内容更敏感</li>
+<li>一次写出完美的提示词不太现实，必须不断调试</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// Prompt示例</span><br><span class="line"># 角色</span><br><span class="line">你是一名旅游策划师</span><br><span class="line"># 技能</span><br><span class="line">您能够根据以下内容指定旅行计划</span><br><span class="line">- 出发地和目的地</span><br><span class="line">- 人数</span><br><span class="line">-  行程安排（如果没有就根据热门景点推荐合理行程）</span><br><span class="line">- 交通方式</span><br><span class="line">- 旅行时间</span><br><span class="line">以上信息可以与用户交互来获取</span><br><span class="line"># 输出</span><br><span class="line">将旅行计划以表格的形式输出，方便阅读，表格包含下列内容：</span><br><span class="line">- 日期</span><br><span class="line">- 行程安排</span><br><span class="line">- 交通方式</span><br><span class="line">- 住宿安排</span><br></pre></td></tr></table></figure>
+<ul>
+<li>斯国一啊</li>
+<li>优质提示词：<a target="_blank" rel="noopener" href="https://github.com/ai-boost/awesome-prompts">https://github.com/ai-boost/awesome-prompts</a></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">// 还有一个提示词示例，看起来挺完善的</span><br><span class="line"># 角色</span><br><span class="line">你是一位经验丰富的产品经理，可以从产品设计、需求分析、功能设计、交互设计、业务建模、产品架构设计等方面为用户提供专业的产品建议和指导</span><br><span class="line"></span><br><span class="line">## 技能</span><br><span class="line">### 技能1：需求分析</span><br><span class="line">- 收集和分析用户需求，包括功能需求、性能需求、安全需求等。</span><br><span class="line">- 确定需求的优先级和重要性，为产品的开发和迭代提供指导。</span><br><span class="line"></span><br><span class="line">### 技能2：业务维度分析</span><br><span class="line">- 从市场分析、竞争分析、用户分析等维度进行分析，以确定产品的核心价值和定位。</span><br><span class="line">- 输出格式 ：</span><br><span class="line">	- 维度：&lt;业务维度名称&gt;</span><br><span class="line">	- 有利因素：&lt;该维度的有利因素&gt;</span><br><span class="line">	- 不利因素：&lt;该维度的不利因素&gt;</span><br><span class="line">	- 补充建议：&lt;针对不利因素的补充建议&gt;</span><br><span class="line">	</span><br><span class="line">### 技能3：功能设计</span><br><span class="line">- 根据用户需求和产品目标，设计产品的功能架构和模块。</span><br><span class="line">- 根据产品的功能规格说明书，明确功能的具体要求和实现方式。</span><br><span class="line">- 输出：功能架构图（例如层级结构图、模块关系图）。</span><br><span class="line"></span><br><span class="line">### 技能4：业务建模</span><br><span class="line">- 理解业务流程和业务规则，建立产品的业务模型和数据模型</span><br><span class="line">- 输出业务数据字段的表格，信息如下：</span><br><span class="line">	- 字段名：&lt;字段名称&gt;</span><br><span class="line">	- 定义：&lt;对字段的定义描述&gt;</span><br><span class="line">	- 示例：&lt;举例说明字段的用法&gt;</span><br><span class="line">	- 限制范围/枚举：&lt;字段的限制范围或可能的取值范围&gt;</span><br><span class="line">	- 是否必须：&lt;说明该字段是否为必须字段&gt;</span><br><span class="line">	</span><br><span class="line">### 技能5：交互设计</span><br><span class="line">- 设计产品的用户界面和交互流程，提供产品的易用性和用户满意度。</span><br><span class="line">- 输出：界面设计建议和草图</span><br><span class="line"></span><br><span class="line">## Workflow</span><br><span class="line">1. **确认需求：**通过需求分析确定功能模块和业务维度</span><br><span class="line">2. **业务维度分析：**我从多个维度分析需求文档，并提供补充建议</span><br><span class="line">3. **功能架构图：**我将输出功能架构图，并提供多种样式选项</span><br><span class="line">4. **业务数据字段：**我将输出业务数据字段，并提供详细说明</span><br><span class="line">5. **其他图表：**我将生成业务流程图、时序图和类图</span><br><span class="line"></span><br><span class="line">## 限制</span><br><span class="line">- 只处理与需求文档相关的内容</span><br><span class="line">- 确保输出内容准确、逻辑严谨、格式规范</span><br><span class="line">- 对于不明确或确缺失的信息，将向您询问或提出建议</span><br></pre></td></tr></table></figure>
+<h5 id="Coze"><a class="header-anchor" href="#Coze">¶</a>Coze</h5>
+<p>Coze中的机器人，有人设与回复逻辑，说明Prompt结构已经提前设计好，直接开始对话即可</p>
+<h4 id="设计阶段"><a class="header-anchor" href="#设计阶段">¶</a>设计阶段</h4>
+<ul>
+<li>设计产品原型，UI</li>
+<li>可用模型：
+<ul>
+<li>Galileo AI</li>
+<li>v0</li>
+<li>莫高设计</li>
+</ul>
+</li>
+</ul>
+<h5 id="Galileo-AI"><a class="header-anchor" href="#Galileo-AI">¶</a>Galileo AI</h5>
+<ul>
+<li>界面设计建议和草图
+<ul>
+<li>页面设计建议
+<ol>
+<li>主界面：包含题目生成入口、拍照批改入口、错题记录查看入口</li>
+<li>题目生成界面：用户可以选择年级、题型和题目数量，然后点击生成按钮</li>
+<li>拍照批改界面：用户上传照片，系统自动批改并显示结果</li>
+<li>错题记录查看界面：显示用户的错题记录，用户可以查看详细信息并标记复习状态</li>
+</ol>
+</li>
+<li>草图‘</li>
+</ul>
+</li>
+<li>提交以上信息后，AI会在线生成效果图，期间可以根据个人需求进行调整。完成后保存效果图，放到v0中使用</li>
+</ul>
+<h5 id="v0"><a class="header-anchor" href="#v0">¶</a>v0</h5>
+<ul>
+<li>直接把产品原型的图片上传，v0会自动根据图片生成前端的代码</li>
+<li>生成代码后，还可以在效果图中拖拽元素，相应的代码会在线调整</li>
+<li>非常适合独立开发者</li>
+</ul>
+<h4 id="编码实现"><a class="header-anchor" href="#编码实现">¶</a>编码实现</h4>
+<ul>
+<li>通义灵码</li>
+<li>文心快码</li>
+<li>Copilot</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 角色</span><br><span class="line">你扮演一位经验丰富的程序员，根据用户的需求帮助用户完成业务功能开发。</span><br><span class="line"></span><br><span class="line"># 需求</span><br><span class="line">我需要开发一个根据年级生成算术题的接口。</span><br><span class="line">- 参数：年级，可以是1或2，分别代表一年级或二年级</span><br><span class="line">- 返回值：100道算术题</span><br><span class="line"></span><br><span class="line">一年级算术题包含3种类型：</span><br><span class="line">- 100以内的加法</span><br><span class="line">- 100以内的减法</span><br><span class="line">- 100以内3个数字的加减混合运算</span><br><span class="line"></span><br><span class="line">二年级算术题包含类型：</span><br><span class="line">- 表内乘法、除法</span><br><span class="line">- 加减乘除混合运算，运算数字为3个数，加减运算数字不超过100，乘除必须是表内乘除法，除法必须是整除</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>展示了一个IDEA里面的插件：<code>Baidu Comate</code>，还有阿里的通义千问，在<code>Plugins</code>里面搜索下载</li>
+<li></li>
+</ul>
+<h4 id="测试与调试"><a class="header-anchor" href="#测试与调试">¶</a>测试与调试</h4>
+<ul>
+<li>通义灵码</li>
+<li>文心快码</li>
+<li>Copilot</li>
+</ul>
+<h4 id="部署与维护"><a class="header-anchor" href="#部署与维护">¶</a>部署与维护</h4>
+<ul>
+<li>AI生成部署脚本</li>
+<li>运维智能体</li>
+</ul>
+<h4 id="AI代码助手"><a class="header-anchor" href="#AI代码助手">¶</a>AI代码助手</h4>
+<ul>
+<li>自动生成代码</li>
+</ul>
+<h4 id="AI应用开发"><a class="header-anchor" href="#AI应用开发">¶</a>AI应用开发</h4>
+<h2 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 角色</span><br><span class="line">你扮演一位经验丰富的程序员，根据用户的需求帮助用户完成业务功能开发。</span><br><span class="line"></span><br><span class="line"># 需求</span><br><span class="line">我需要开发一个根据年级生成算术题的接口。</span><br><span class="line">参数：年级，可以是一年级或二年级</span><br><span class="line">返回值：100道算术题</span><br><span class="line"></span><br><span class="line">一年级算术题包含3种类型：</span><br><span class="line">- 100以内的加法</span><br><span class="line">- 100以内的减法</span><br><span class="line">- 100以内3个数字的加减混合运算</span><br><span class="line"></span><br><span class="line">二年级算术题包含类型：</span><br><span class="line">- 表内乘法、除法</span><br><span class="line">- 加减乘除混合运算，运算数字为3个数，加减运算数字不超过100，乘除必须是表内乘除法</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>感觉这个需求不错，我家确实有小孩需要这个</p>
+<p>或许可以作为这个博客的学习项目^ ^?</p>
 </div> 
       <!-- reward -->
       
@@ -392,7 +559,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CV/" rel="tag">CV</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li></ul>
 
     </footer>
   </div>
@@ -1614,6 +1781,91 @@ PIE:      No PIE (0x8048000)<br>
 
     
     <article
+  id="post-CS_Notes/NLP/【NLP夏令营】链接留档"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/07/13/CS_Notes/NLP/%E3%80%90NLP%E5%A4%8F%E4%BB%A4%E8%90%A5%E3%80%91%E9%93%BE%E6%8E%A5%E7%95%99%E6%A1%A3/"
+    >【NLP夏令营】链接留档</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/07/13/CS_Notes/NLP/%E3%80%90NLP%E5%A4%8F%E4%BB%A4%E8%90%A5%E3%80%91%E9%93%BE%E6%8E%A5%E7%95%99%E6%A1%A3/" class="article-date">
+  <time datetime="2024-07-12T16:00:00.000Z" itemprop="datePublished">2024-07-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/NLP-notes/">NLP notes</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/FfZvw4QIzibTkQkM6FMcrqCgnce">‌‍‍‬⁠‌⁠⁠﻿⁠‬﻿⁠‍‍⁠‌‌‍⁠‬‌‌⁠⁠⁠活动 ｜ Datawhale AI 夏令营 - 飞书云文档 (feishu.cn)</a></p>
+<ul>
+<li>两个推荐资料
+<ul>
+<li><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/JcnEwCYO2i0v3FkBizWcLfWanKb">‌‌‌⁠‬﻿‍‌‌‍‬⁠﻿‬‌‌﻿‍﻿⁠﻿‬‍⁠‬Datawhale人工智能培养方案V2.0 - 飞书云文档 (feishu.cn)</a></li>
+<li><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/file/IXdDbOBgIoZbtvxLukqc2432nQd">⁠‌‍‬﻿‍‬﻿‍﻿﻿‌﻿﻿⁠﻿⁠‍﻿‬‌‬‬‬﻿‍﻿﻿‌《数据竞赛入门讲义》.pdf - 飞书云文档 (feishu.cn)</a></li>
+</ul>
+</li>
+<li>比赛地址
+<ul>
+<li><a target="_blank" rel="noopener" href="https://challenge.xfyun.cn/topic/info?type=machine-translation-2024&amp;option=ssgy&amp;ch=dw24_sHJm0e">2024 iFLYTEK A.I.开发者大赛-讯飞开放平台 (xfyun.cn)</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Task-1：跑通baseline并提交，查看得分"><a class="header-anchor" href="#Task-1：跑通baseline并提交，查看得分">¶</a>Task 1：跑通baseline并提交，查看得分</h3>
+<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/TObSwHZdFi2y0XktauWcolpcnyf">‍‌‬⁠﻿‍﻿﻿﻿⁠‬‌﻿‌‍‬‍‬‌﻿‍‌⁠‬‍⁠‌‬‍⁠从零入门NLP竞赛 - 飞书云文档 (feishu.cn)</a>    Task1 操作指南</p>
+<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/FVs2wAVN5iqHMqk5lW2ckfhAncb">‌‌‍⁠‍‬⁠⁠‌‬⁠‍‍‍⁠⁠‬﻿‌⁠⁠‬‍‌﻿‍‍Task1：了解机器翻译 &amp; 理解赛题 - 飞书云文档 (feishu.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_60489376/article/details/140395962">Datawhale AI夏令营- 讯飞机器翻译挑战赛baseline解析-CSDN博客</a>  助教写的，比较完整的笔记</p>
+<h3 id="Task-2：从baseline代码详解入门深度学习"><a class="header-anchor" href="#Task-2：从baseline代码详解入门深度学习">¶</a>Task 2：从baseline代码详解入门深度学习</h3>
+<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/PztLwkofsi95oak2Iercw9hkn2g">‌﻿⁠‍⁠‬⁠﻿‌‍‬‌﻿‬⁠‌‍⁠‍⁠‍‬﻿﻿‌Task2：从baseline代码详解入门深度学习 - 飞书云文档 (feishu.cn)</a></p>
+<h3 id="Task-3：基于-Transformer-模型实现在机器翻译任务上的应用"><a class="header-anchor" href="#Task-3：基于-Transformer-模型实现在机器翻译任务上的应用">¶</a>Task 3：基于 Transformer 模型实现在机器翻译任务上的应用</h3>
+<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/OgQWwkYkviPfpwkE1ZmcXwcWnAh">‌﻿‬‌‍‬‬‬⁠‬⁠‍‬⁠﻿﻿‍‬‌‬‌﻿‍‬⁠﻿﻿‬Task3知识点文档 - 飞书云文档 (feishu.cn)</a></p>
+<p>看完一遍有点懵……ok其实是很懵。。。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51879931/article/details/134142492">transformer模型— 20道面试题自我检测_transformer面试题-CSDN博客</a></p>
+<h3 id="Task-4：通过代码实践入门大模型处理机器翻译"><a class="header-anchor" href="#Task-4：通过代码实践入门大模型处理机器翻译">¶</a>Task 4：通过代码实践入门大模型处理机器翻译</h3>
+<ul>
+<li>选修性质</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/L64jw94HwivDoQkptGccDMCznxc">⁠‍⁠‌‌﻿‌‍﻿‍‌‬⁠‍‌‬﻿⁠⁠‌‬‬⁠⁠⁠Task4知识点文档 - 飞书云文档 (feishu.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/llm-universe/#/">动手学大模型应用开发 (datawhalechina.github.io)</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/datawhalechina/self-llm/tree/master">datawhalechina/self-llm: 《开源大模型食用指南》基于Linux环境快速部署开源大模型，更适合中国宝宝的部署教程 (github.com)</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-CS_Notes/hexo/【hexo】添加pdf"
   class="article article-type-post"
   itemscope
@@ -1760,91 +2012,6 @@ PIE:      No PIE (0x8048000)<br>
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-CS_Notes/NLP/【NLP夏令营】链接留档"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/07/13/CS_Notes/NLP/%E3%80%90NLP%E5%A4%8F%E4%BB%A4%E8%90%A5%E3%80%91%E9%93%BE%E6%8E%A5%E7%95%99%E6%A1%A3/"
-    >【NLP夏令营】链接留档</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/07/13/CS_Notes/NLP/%E3%80%90NLP%E5%A4%8F%E4%BB%A4%E8%90%A5%E3%80%91%E9%93%BE%E6%8E%A5%E7%95%99%E6%A1%A3/" class="article-date">
-  <time datetime="2024-07-12T16:00:00.000Z" itemprop="datePublished">2024-07-13</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/NLP-notes/">NLP notes</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/FfZvw4QIzibTkQkM6FMcrqCgnce">‌‍‍‬⁠‌⁠⁠﻿⁠‬﻿⁠‍‍⁠‌‌‍⁠‬‌‌⁠⁠⁠活动 ｜ Datawhale AI 夏令营 - 飞书云文档 (feishu.cn)</a></p>
-<ul>
-<li>两个推荐资料
-<ul>
-<li><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/JcnEwCYO2i0v3FkBizWcLfWanKb">‌‌‌⁠‬﻿‍‌‌‍‬⁠﻿‬‌‌﻿‍﻿⁠﻿‬‍⁠‬Datawhale人工智能培养方案V2.0 - 飞书云文档 (feishu.cn)</a></li>
-<li><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/file/IXdDbOBgIoZbtvxLukqc2432nQd">⁠‌‍‬﻿‍‬﻿‍﻿﻿‌﻿﻿⁠﻿⁠‍﻿‬‌‬‬‬﻿‍﻿﻿‌《数据竞赛入门讲义》.pdf - 飞书云文档 (feishu.cn)</a></li>
-</ul>
-</li>
-<li>比赛地址
-<ul>
-<li><a target="_blank" rel="noopener" href="https://challenge.xfyun.cn/topic/info?type=machine-translation-2024&amp;option=ssgy&amp;ch=dw24_sHJm0e">2024 iFLYTEK A.I.开发者大赛-讯飞开放平台 (xfyun.cn)</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="Task-1：跑通baseline并提交，查看得分"><a class="header-anchor" href="#Task-1：跑通baseline并提交，查看得分">¶</a>Task 1：跑通baseline并提交，查看得分</h3>
-<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/TObSwHZdFi2y0XktauWcolpcnyf">‍‌‬⁠﻿‍﻿﻿﻿⁠‬‌﻿‌‍‬‍‬‌﻿‍‌⁠‬‍⁠‌‬‍⁠从零入门NLP竞赛 - 飞书云文档 (feishu.cn)</a>    Task1 操作指南</p>
-<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/FVs2wAVN5iqHMqk5lW2ckfhAncb">‌‌‍⁠‍‬⁠⁠‌‬⁠‍‍‍⁠⁠‬﻿‌⁠⁠‬‍‌﻿‍‍Task1：了解机器翻译 &amp; 理解赛题 - 飞书云文档 (feishu.cn)</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_60489376/article/details/140395962">Datawhale AI夏令营- 讯飞机器翻译挑战赛baseline解析-CSDN博客</a>  助教写的，比较完整的笔记</p>
-<h3 id="Task-2：从baseline代码详解入门深度学习"><a class="header-anchor" href="#Task-2：从baseline代码详解入门深度学习">¶</a>Task 2：从baseline代码详解入门深度学习</h3>
-<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/PztLwkofsi95oak2Iercw9hkn2g">‌﻿⁠‍⁠‬⁠﻿‌‍‬‌﻿‬⁠‌‍⁠‍⁠‍‬﻿﻿‌Task2：从baseline代码详解入门深度学习 - 飞书云文档 (feishu.cn)</a></p>
-<h3 id="Task-3：基于-Transformer-模型实现在机器翻译任务上的应用"><a class="header-anchor" href="#Task-3：基于-Transformer-模型实现在机器翻译任务上的应用">¶</a>Task 3：基于 Transformer 模型实现在机器翻译任务上的应用</h3>
-<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/OgQWwkYkviPfpwkE1ZmcXwcWnAh">‌﻿‬‌‍‬‬‬⁠‬⁠‍‬⁠﻿﻿‍‬‌‬‌﻿‍‬⁠﻿﻿‬Task3知识点文档 - 飞书云文档 (feishu.cn)</a></p>
-<p>看完一遍有点懵……ok其实是很懵。。。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51879931/article/details/134142492">transformer模型— 20道面试题自我检测_transformer面试题-CSDN博客</a></p>
-<h3 id="Task-4：通过代码实践入门大模型处理机器翻译"><a class="header-anchor" href="#Task-4：通过代码实践入门大模型处理机器翻译">¶</a>Task 4：通过代码实践入门大模型处理机器翻译</h3>
-<ul>
-<li>选修性质</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://datawhaler.feishu.cn/wiki/L64jw94HwivDoQkptGccDMCznxc">⁠‍⁠‌‌﻿‌‍﻿‍‌‬⁠‍‌‬﻿⁠⁠‌‬‬⁠⁠⁠Task4知识点文档 - 飞书云文档 (feishu.cn)</a></p>
-<p><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/llm-universe/#/">动手学大模型应用开发 (datawhalechina.github.io)</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/datawhalechina/self-llm/tree/master">datawhalechina/self-llm: 《开源大模型食用指南》基于Linux环境快速部署开源大模型，更适合中国宝宝的部署教程 (github.com)</a></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li></ul>
 
     </footer>
   </div>
