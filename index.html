@@ -152,7 +152,7 @@
     
     
     <article
-  id="post-【AI-indoor】AI编程开发-md"
+  id="post-CS_Notes/Java/【Java】坤础复习扫盲"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -163,8 +163,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2024/07/19/%E3%80%90AI-indoor%E3%80%91AI%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91-md/"
-    >【AI_indoor】AI编程开发.md</a> 
+  <a class="article-title" href="/2024/07/20/CS_Notes/Java/%E3%80%90Java%E3%80%91%E5%9D%A4%E7%A1%80%E5%A4%8D%E4%B9%A0%E6%89%AB%E7%9B%B2/"
+    >【Java】坤础复习扫盲</a> 
 </h2>
  
 
@@ -172,61 +172,339 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2024/07/19/%E3%80%90AI-indoor%E3%80%91AI%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91-md/" class="article-date">
-  <time datetime="2024-07-19T09:07:55.000Z" itemprop="datePublished">2024-07-19</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
+      <a href="/2024/07/20/CS_Notes/Java/%E3%80%90Java%E3%80%91%E5%9D%A4%E7%A1%80%E5%A4%8D%E4%B9%A0%E6%89%AB%E7%9B%B2/" class="article-date">
+  <time datetime="2024-07-19T16:00:00.000Z" itemprop="datePublished">2024-07-20</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/Java-notes/">Java notes</a>
   </div>
-
    
-   
-  
-</article>
-
-    
-    <article
-  id="post-【AI-indoor】AI编程开发"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/07/19/%E3%80%90AI-indoor%E3%80%91AI%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/"
-    >【AI_indoor】AI编程开发</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/07/19/%E3%80%90AI-indoor%E3%80%91AI%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="article-date">
-  <time datetime="2024-07-19T09:04:58.000Z" itemprop="datePublished">2024-07-19</time>
-</a>    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<ul>
+<li>根据以下两份，只摘出其中还不会或者不太熟练的部分，额外关注一下</li>
+<li>Java基础入门（上）.pdf</li>
+</ul>
+<p>文件还没上传处理，先放着</p>
+<ul>
+<li>Java基础入门（下）.pdf</li>
+</ul>
+<p>文件还没上传处理，先放着</p>
+<h1>由此始</h1>
+<h2 id="Day1-Java基础语法"><a class="header-anchor" href="#Day1-Java基础语法">¶</a>Day1 Java基础语法</h2>
+<h3 id="常见CMD命令"><a class="header-anchor" href="#常见CMD命令">¶</a>常见CMD命令</h3>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>盘符名称:</td>
+<td>盘符切换。E:回⻋，表⽰切换到E盘。</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>查看当前路径下的内容。</td>
+</tr>
+<tr>
+<td>cd ⽬录</td>
+<td>进⼊单级⽬录。cd itheima</td>
+</tr>
+<tr>
+<td>cd …</td>
+<td>回退到上⼀级⽬录。</td>
+</tr>
+<tr>
+<td>cd ⽬录1\⽬录2…</td>
+<td>进⼊多级⽬录。cd itheima\JavaSE</td>
+</tr>
+<tr>
+<td>cd \</td>
+<td>回退到盘符⽬录。</td>
+</tr>
+<tr>
+<td>cls</td>
+<td>清屏。</td>
+</tr>
+<tr>
+<td>exit</td>
+<td>退出命令提⽰符窗⼝。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>CMD练习：<code>qq.exe</code>启动qq     hhhhhhh</li>
+</ul>
+<h3 id="环境变量"><a class="header-anchor" href="#环境变量">¶</a>环境变量</h3>
+<ul>
+<li>
+<p>作⽤：如果我想要在<strong>CMD的任意⽬录下</strong>，都可以<strong>启动某⼀个软件</strong>，那么就可以把这个软件的路径配置到环境变量中的PATH⾥⾯。</p>
+</li>
+<li>
+<p>在启动软件的时候，操作系统会先在<strong>当前路径</strong>下找，如果在当前录课没有再到<strong>环境变量的路径</strong>中去找。如果都找不到就提⽰⽆法启动。</p>
+</li>
+<li>
+<p>在CMD中打开软件时，会先找当前路径，再找环境变量，在环境变量中是从上往下依次查找的，如果路径放在最上⾯查找的速度⽐较快。</p>
+</li>
+</ul>
+<h3 id="Java版本"><a class="header-anchor" href="#Java版本">¶</a>Java版本</h3>
+<ul>
+<li>
+<p>Java的版本<strong>向下兼容</strong>。新的版本只是在原有的基础上添加了⼀些新的功能⽽已。</p>
+</li>
+<li>
+<p>举例：</p>
+<ul>
+<li>⽤8版本开发的代码，⽤11版本能运⾏吗？必须可以的。</li>
+<li>⽤11版本开发的代码，⽤8版本能运⾏吗？不⼀定。</li>
+<li>如果11版本开发的代码，没有⽤到9-11的新特性，那么⽤8是可以运⾏的。</li>
+<li>如果11版本开发的代码，⽤到了9-11的新特性，那么⽤8就⽆法运⾏了。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Java三大平台"><a class="header-anchor" href="#Java三大平台">¶</a>Java三大平台</h3>
+<ul>
+<li>JavaSE、JavaME、JavaEE</li>
+</ul>
+<h4 id="JavaSE"><a class="header-anchor" href="#JavaSE">¶</a>JavaSE</h4>
+<p>是其他两个版本的基础</p>
+<h4 id="JavaME"><a class="header-anchor" href="#JavaME">¶</a>JavaME</h4>
+<p>Java语⾔的⼩型版，⽤于嵌⼊式消费类电⼦设备或者⼩型移动设备的开发。其中最为主要的还是⼩型移动设备的开发（⼿机）。渐渐的没落了，已经被安卓和IOS给替代了。但是，安卓也是可以⽤Java来开发的。</p>
+<h4 id="JavaEE"><a class="header-anchor" href="#JavaEE">¶</a>JavaEE</h4>
+<p>⽤于Web⽅向的⽹站开发（主要从事后台服务器的开发），在服务器领域，Java是当之⽆愧的⻰头⽼</p>
+<p>⼤。</p>
+<h3 id="Java主要特性"><a class="header-anchor" href="#Java主要特性">¶</a>Java主要特性</h3>
+<ul>
+<li>⾯向对象</li>
+<li>安全性</li>
+<li>多线程</li>
+<li>简单易⽤</li>
+<li>开源</li>
+<li>跨平台</li>
+</ul>
+<h4 id="Java语言跨平台的原理"><a class="header-anchor" href="#Java语言跨平台的原理">¶</a>Java语言跨平台的原理</h4>
+<ul>
+<li>
+<p>操作系统本⾝其实是不认识Java语⾔的。</p>
+</li>
+<li>
+<p>但是针对于不同的操作系统，Java提供了不同的虚拟机。</p>
+</li>
+<li>
+<p>虚拟机会把Java语⾔翻译成操作系统能看得懂的语⾔。</p>
+</li>
+<li>
+<p>Java程序—javac编译→Class文件</p>
+<ul>
+<li>→Windows版JVM虚拟机</li>
+<li>→Linux版JVM虚拟机</li>
+<li>→MacOS版JVM虚拟机</li>
+</ul>
+</li>
+</ul>
+<h4 id="JRE和JDK"><a class="header-anchor" href="#JRE和JDK">¶</a>JRE和JDK</h4>
+<ul>
+<li>
+<p>JVM（Java Virtual Machine），Java虚拟机</p>
+</li>
+<li>
+<p>JRE（Java Runtime Environment），Java运⾏环境，包含了JVM和Java的核⼼类库（Java API）</p>
+</li>
+<li>
+<p>JDK（Java Development Kit）称为Java开发⼯具，包含了JRE和开发⼯具</p>
+</li>
+</ul>
+<p>———————————————————————————————————————</p>
+<p>|											JDK															  |</p>
+<p>|			JVM				核心类库			开发工具								|</p>
+<p>|————————————————————————————————————|</p>
+<p>———————————————————————————————————————</p>
+<p>|											JRE															  |</p>
+<p>|			JVM				核心类库			运行工具								|</p>
+<p>|————————————————————————————————————|</p>
+<ul>
+<li>只需安装JDK即可，它包含了java的运⾏环境和虚拟机</li>
+</ul>
+<h2 id="Day2-Java基础语法"><a class="header-anchor" href="#Day2-Java基础语法">¶</a>Day2 Java基础语法</h2>
+<h3 id="Java语言数据类型的分类"><a class="header-anchor" href="#Java语言数据类型的分类">¶</a>Java语言数据类型的分类</h3>
+<ul>
+<li>基本数据类型</li>
+<li>引用数据类型（在面向对象阶段深入）</li>
+</ul>
+<h4 id="基础数据类型的四类八种"><a class="header-anchor" href="#基础数据类型的四类八种">¶</a>基础数据类型的四类八种</h4>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>关键字</th>
+<th>内存占用</th>
+<th>取值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整数</td>
+<td>byte</td>
+<td>1</td>
+<td>负的2的7次⽅ ~ 2的7次⽅-1(-128~127)</td>
+</tr>
+<tr>
+<td></td>
+<td>short</td>
+<td>2</td>
+<td>负的2的15次⽅ ~ 2的15次⽅-1(-32768~32767)</td>
+</tr>
+<tr>
+<td></td>
+<td>int</td>
+<td>4</td>
+<td>负的2的31次⽅ ~ 2的31次⽅-1</td>
+</tr>
+<tr>
+<td></td>
+<td>long</td>
+<td>8</td>
+<td>负的2的63次⽅ ~ 2的63次⽅-1</td>
+</tr>
+<tr>
+<td>浮点数</td>
+<td>float</td>
+<td>4</td>
+<td>1.401298e-45 ~ 3.402823e+38</td>
+</tr>
+<tr>
+<td></td>
+<td>double</td>
+<td>8</td>
+<td>4.9000000e-324 ~ 1.797693e+308</td>
+</tr>
+<tr>
+<td>字符</td>
+<td>char</td>
+<td>2</td>
+<td>0-65535</td>
+</tr>
+<tr>
+<td>布尔</td>
+<td>boolean</td>
+<td>1</td>
+<td>true, false</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Java中整数默认是int类型，浮点数默认是double类型</li>
+<li>记忆以下几点：
+<ul>
+<li>byte 类型的取值范围：<code> -128 ~ 127</code></li>
+<li>int 类型的⼤概取值范围： <code>-21亿多 ~ 21亿多</code></li>
+<li>整数类型和⼩数类型的取值范围⼤⼩关系： <code>double &gt; float &gt; long &gt; int &gt; short &gt; byte</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="最为常用的数据类型选择"><a class="header-anchor" href="#最为常用的数据类型选择">¶</a>最为常用的数据类型选择</h4>
+<ul>
+<li>在定义变量的时候，要根据实际的情况来选择不同类型的变量
+<ul>
+<li>⼈的年龄，可以选择 byte 类型</li>
+<li>地球的年龄，可以选择 long 类型</li>
+<li>如果整数类型中，不太确定范围，那么默认使⽤ int 类型</li>
+<li>如果⼩数类型中，不太确定范围，那么默认使⽤ double 类型</li>
+<li>如果要定义字符类型的变量，那么使⽤ char</li>
+<li>如果要定义布尔类型的变量，那么使⽤ boolean</li>
+</ul>
+</li>
+</ul>
+<h4 id="定义8种基本数据类型变量"><a class="header-anchor" href="#定义8种基本数据类型变量">¶</a>定义8种基本数据类型变量</h4>
+<ul>
+<li>注意点
+<ul>
+<li>如果要定义 ⼀个整数类型的变量，不知道选择哪种数据类型了，默认使⽤ int。</li>
+<li>如果要定义 ⼀个⼩数类型的变量，不知道选择哪种数据类型了，默认使⽤ double。</li>
+<li>如果要定义⼀个 long 类型的变量，在数据值的后⾯需要加上 L 后缀。(⼤⼩写都可以，建议⼤写)</li>
+<li>如果要定义⼀个 float 类型的变量，在数据值的后⾯需要加上 F 后缀。(⼤⼩写都可以）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.定义byte类型的变量</span></span><br><span class="line"><span class="comment">//数据类型 变量名 = 数据值;</span></span><br><span class="line"><span class="type">byte</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.定义short类型的变量</span></span><br><span class="line"><span class="type">short</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//4.定义long类型的变量</span></span><br><span class="line"><span class="type">long</span> <span class="variable">d</span> <span class="operator">=</span> <span class="number">123456789123456789L</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//5.定义float类型的变量</span></span><br><span class="line"><span class="type">float</span> <span class="variable">e</span> <span class="operator">=</span> <span class="number">10.1F</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//8.定义boolean类型的变量</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">h</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="IDEA中层级结构介绍"><a class="header-anchor" href="#IDEA中层级结构介绍">¶</a>IDEA中层级结构介绍</h3>
+<h4 id="结构分类"><a class="header-anchor" href="#结构分类">¶</a>结构分类</h4>
+<ul>
+<li>project（项⽬、⼯程）</li>
+<li>module（模块）</li>
+<li>package（包）</li>
+<li>class（类）</li>
+</ul>
+<h5 id="结构介绍"><a class="header-anchor" href="#结构介绍">¶</a>结构介绍</h5>
+<ul>
+<li>
+<p>最基础的 project、module、class。</p>
+<ul>
+<li>project（项⽬、⼯程）
+<ul>
+<li>淘宝、京东、⿊⻢程序员⽹站都属于⼀个个项⽬，IDEA 中就是⼀个个的 Project。</li>
+</ul>
+</li>
+<li>module（模块）
+<ul>
+<li>在⼀个项⽬中，可以存放多个模块，不同的模块可以存放项⽬中不同的业务功能代码。在⿊⻢程序员的官⽅⽹站中，⾄少包含了以下模块：
+<ul>
+<li>论坛模块</li>
+<li>报名、咨询模块</li>
+<li>为了更好的管理代码，我们会把代码分别放在两个模块中存放。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>package（包）
+<ul>
+<li>⼀个模块中⼜有很多的业务，以⿊⻢程序员官⽅⽹站的论坛模块为例，⾄少包含了以下不同的业务。</li>
+<li>发帖</li>
+<li>评论</li>
+<li>为了把这些业务区分的更加清楚，就会⽤包来管理这些不同的业务。</li>
+</ul>
+</li>
+<li>class（类）
+<ul>
+<li>就是真正写代码的地⽅。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>层级关系 project - module - package - class</p>
+<ul>
+<li>包含数量
+<ul>
+<li>project 中可以创建多个 module</li>
+<li>module 中可以创建多个 package</li>
+<li>package 中可以创建多个 class</li>
+<li>这些结构的划分，是为了⽅便管理类⽂件的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="IDEA代码步骤"><a class="header-anchor" href="#IDEA代码步骤">¶</a>IDEA代码步骤</h5>
+<ul>
+<li>创建Project项目</li>
+<li>创建Module模块</li>
+<li>创建class类</li>
+<li>在类中编写代码</li>
+<li>完成编译运行</li>
+</ul>
+<h6 id="一些小Tips"><a class="header-anchor" href="#一些小Tips">¶</a>一些小Tips</h6>
+<ul>
+<li>在IDEA中删除类，不走回收站，直接从硬盘中删掉</li>
+</ul>
+<p>还没写完，明天再说</p>
+ 
       <!-- reward -->
       
     </div>
@@ -236,6 +514,8 @@
     
     <footer class="article-footer">
        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
     </footer>
   </div>
 
@@ -279,7 +559,6 @@
        
   <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
 <p>黑马的知识星球的第一次直播。。。睡前一看，播了四个多小时。。。逆天，不过放在旁边听了两个多小时，还是挺多干货的，故今日开始回放记录</p>
-<p>目前看到183分钟，从回放链接进去继续看</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Miracle_ps/article/details/114791335">Hexo 添加图片——不用插件，超简单_hexo添加图片-CSDN博客</a></p>
 
 	<iframe src="https://www.slideshare.net/slideshow/embed_code/key/fIZ6YhyrfWCZ81?hostedIn=slideshare&amp;page=upload" style="width:100%;height:550px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen> </iframe> <div style="margin-bottom:5px">
@@ -527,7 +806,20 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 角色</span><br><span class="line">你扮演一位经验丰富的程序员，根据用户的需求帮助用户完成业务功能开发。</span><br><span class="line"></span><br><span class="line"># 需求</span><br><span class="line">我需要开发一个根据年级生成算术题的接口。</span><br><span class="line">- 参数：年级，可以是1或2，分别代表一年级或二年级</span><br><span class="line">- 返回值：100道算术题</span><br><span class="line"></span><br><span class="line">一年级算术题包含3种类型：</span><br><span class="line">- 100以内的加法</span><br><span class="line">- 100以内的减法</span><br><span class="line">- 100以内3个数字的加减混合运算</span><br><span class="line"></span><br><span class="line">二年级算术题包含类型：</span><br><span class="line">- 表内乘法、除法</span><br><span class="line">- 加减乘除混合运算，运算数字为3个数，加减运算数字不超过100，乘除必须是表内乘除法，除法必须是整除</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <ul>
 <li>展示了一个IDEA里面的插件：<code>Baidu Comate</code>，还有阿里的通义千问，在<code>Plugins</code>里面搜索下载</li>
-<li></li>
+<li>通过演示的小学口算项目，可以发现AI生成的代码可以辅助完成基础框架，但是细节部分仍需要人工修改bug</li>
+</ul>
+<h5 id="AI代码助手"><a class="header-anchor" href="#AI代码助手">¶</a>AI代码助手</h5>
+<ul>
+<li>
+<h5 id="Baidu-Comate-插件"><a class="header-anchor" href="#Baidu-Comate-插件">¶</a>Baidu Comate 插件</h5>
+<ul>
+<li>打开插件界面，有<code>/指令</code> <code>@插件</code> <code>#知识</code>  三个选项</li>
+<li>举例：<code>知识→API→天气API</code> 选中，然后输入：<code>#天气查询   帮我生成一个查询天气的工具类</code>   即可基于百度的知识库生成代码</li>
+<li>也可以查看腾讯云的API中心：<code>https://cloud.tencent.com/document/api/1004/30616</code>  这个是数学作业批改-速算题目批改接口</li>
+<li>发送整个文档给Baidu Comate</li>
+<li>Prompt：<code>https://cloud.tencent.com/document/api/1004/30616</code> ，请参考链接中的文档，分析一下这个接口的请求地址、请求参数、返回值格式等信息</li>
+</ul>
+</li>
 </ul>
 <h4 id="测试与调试"><a class="header-anchor" href="#测试与调试">¶</a>测试与调试</h4>
 <ul>
@@ -540,11 +832,135 @@
 <li>AI生成部署脚本</li>
 <li>运维智能体</li>
 </ul>
-<h4 id="AI代码助手"><a class="header-anchor" href="#AI代码助手">¶</a>AI代码助手</h4>
-<ul>
-<li>自动生成代码</li>
-</ul>
 <h4 id="AI应用开发"><a class="header-anchor" href="#AI应用开发">¶</a>AI应用开发</h4>
+<ul>
+<li>文本分析
+<ul>
+<li>数据提取和格式化、坐席质检、舆情分析、文本摘要、知识库</li>
+<li>推荐的工具：Coze内搜索相关插件、360AI浏览器</li>
+</ul>
+</li>
+<li>多模态
+<ul>
+<li>Stable Diffusion、文生图、图生图、图像识别、视频生成、语音识别合成、数字人等</li>
+<li></li>
+</ul>
+</li>
+<li>机器人应用
+<ul>
+<li>AI智能客服机器人开发、对话管理、情感分析、个性化回复等</li>
+</ul>
+</li>
+<li>智能体
+<ul>
+<li>AI金融分析、自动化办公、智慧医疗、工业/制造智能体、运维智能体</li>
+</ul>
+</li>
+<li>自动驾驶
+<ul>
+<li>计算机视觉处理、车辆自动驾驶</li>
+</ul>
+</li>
+</ul>
+<h4 id="AI技术架构"><a class="header-anchor" href="#AI技术架构">¶</a>AI技术架构</h4>
+<ul>
+<li>纯Prompt问答
+<ul>
+<li>利用大模型的推理能力，通过Prompt提问来完成业务</li>
+</ul>
+</li>
+<li>Agent + Function Calling
+<ul>
+<li>AI拆解业务，调用业务端提供的接口实现复杂业务</li>
+</ul>
+</li>
+<li>Fine tuning
+<ul>
+<li>针对特有业务场景对基础大模型做数据训练和微调，以满足特定场景的需求</li>
+</ul>
+</li>
+<li>RAG (Retrieval Augmented Generation)
+<ul>
+<li>给大模型外挂一个知识库，让大模型基于知识库内容做推理和回答</li>
+</ul>
+</li>
+<li><strong><u>ai-programing操作指南↓↓↓</u></strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=&quot;https://nbviewer.org/github/brocademaple/bcmp-hexo-inside-storage/blob/main/ai-programing.ipynb&quot; width=&quot;100%&quot; height=&quot;600&quot;&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>（hexo中插入ipynb的方式：[向Hexo博客中插入Jupyter Notebook | Coder (<a target="_blank" rel="noopener" href="http://lastknightcoder.github.io">lastknightcoder.github.io</a>)](<a target="_blank" rel="noopener" href="https://lastknightcoder.github.io/hexo-blog/2020/10/28/%E5%90%91">https://lastknightcoder.github.io/hexo-blog/2020/10/28/向</a> Hexo 博客中插入 Jupyter Notebook/)）引用一下orz</li>
+<li>现在讲到哪有点晕……</li>
+<li><a target="_blank" rel="noopener" href="https://bailian.console.aliyun.com/#/model-market">阿里云百炼-大模型服务平台</a>     国内国外的都有</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义方法，向大模型发送消息</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_completion</span>(<span class="params">prompt, model = model, temperature = <span class="number">0</span></span>):</span><br><span class="line">    messages = [</span><br><span class="line">        <span class="comment"># 定义角色</span></span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;你是一个旅行达人&quot;</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: prompt&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;assistant&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;answer&quot;</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">    response = client.chat.completions.create(</span><br><span class="line">        model=model,</span><br><span class="line">        messages=messages,</span><br><span class="line">        temperature=temperature, <span class="comment"># 结果的随机性</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message.content</span><br></pre></td></tr></table></figure>
+<h5 id="Prompt问答"><a class="header-anchor" href="#Prompt问答">¶</a>Prompt问答</h5>
+<ol>
+<li>用户提出问题，提交给应用程序</li>
+<li>应用程序发送Prompt给基础大模型</li>
+<li>大模型返回响应给应用程序</li>
+<li>程序返回响应给用户</li>
+</ol>
+<ul>
+<li>特征：利用大模型推理能力完成应用端无法实现或难以实现的功能</li>
+<li>应用场景：
+<ul>
+<li>文本摘要分析</li>
+<li>舆情分析</li>
+<li>坐席检查</li>
+</ul>
+</li>
+</ul>
+<h5 id="Function-Calling"><a class="header-anchor" href="#Function-Calling">¶</a>Function Calling</h5>
+<ol>
+<li>
+<p>用户提出问题，提交给应用程序</p>
+</li>
+<li>
+<p>应用程序发送Prompt和function定义给基础大模型</p>
+<ol>
+<li>大模型Agent进行任务分解</li>
+<li>大模型调用程序API</li>
+</ol>
+</li>
+<li>
+<p>1 程序拼接函数结果，再次发送给Prompt给大模型</p>
+</li>
+<li>
+<p>2 大模型生成回答</p>
+</li>
+</ol>
+<p>（中间可能经过多轮这样的来回）</p>
+<ol start="4">
+<li>大模型返回响应给程序</li>
+<li>程序返回响应给用户</li>
+</ol>
+<ul>
+<li>
+<p>特征：</p>
+<ul>
+<li>将应用端业务能力与AI大模型推理能力结合，简化复杂业务功能开发</li>
+<li>利用应用端能力将AI与外部世界连接起来，弥补AI模型缺陷：
+<ul>
+<li>大模型不是无所不知</li>
+<li>大模型知识往往比较落后</li>
+<li>大模型逻辑是统计规律，不是真逻辑，存在幻觉</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>应用场景：</p>
+<ul>
+<li>智能体（旅行指南、日程安排等）</li>
+<li>数据提取</li>
+<li>数据聚合分析</li>
+</ul>
+</li>
+<li>
+<p>这一段结合.ipynb文件里面的代码讲的。。。所以回头会再细看一下</p>
+</li>
+<li></li>
+</ul>
 <h2 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h2>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 角色</span><br><span class="line">你扮演一位经验丰富的程序员，根据用户的需求帮助用户完成业务功能开发。</span><br><span class="line"></span><br><span class="line"># 需求</span><br><span class="line">我需要开发一个根据年级生成算术题的接口。</span><br><span class="line">参数：年级，可以是一年级或二年级</span><br><span class="line">返回值：100道算术题</span><br><span class="line"></span><br><span class="line">一年级算术题包含3种类型：</span><br><span class="line">- 100以内的加法</span><br><span class="line">- 100以内的减法</span><br><span class="line">- 100以内3个数字的加减混合运算</span><br><span class="line"></span><br><span class="line">二年级算术题包含类型：</span><br><span class="line">- 表内乘法、除法</span><br><span class="line">- 加减乘除混合运算，运算数字为3个数，加减运算数字不超过100，乘除必须是表内乘除法</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>感觉这个需求不错，我家确实有小孩需要这个</p>
@@ -2012,6 +2428,295 @@ PIE:      No PIE (0x8048000)<br>
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-文史哲/世界史/罗马史/【从城邦到帝国】3_平民改革_立法图强"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/07/13/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E7%BD%97%E9%A9%AC%E5%8F%B2/%E3%80%90%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%E3%80%913_%E5%B9%B3%E6%B0%91%E6%94%B9%E9%9D%A9_%E7%AB%8B%E6%B3%95%E5%9B%BE%E5%BC%BA/"
+    >【从城邦到帝国】3_平民改革_立法图强</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/07/13/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E7%BD%97%E9%A9%AC%E5%8F%B2/%E3%80%90%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%E3%80%913_%E5%B9%B3%E6%B0%91%E6%94%B9%E9%9D%A9_%E7%AB%8B%E6%B3%95%E5%9B%BE%E5%BC%BA/" class="article-date">
+  <time datetime="2024-07-12T16:00:00.000Z" itemprop="datePublished">2024-07-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/">文史哲</a> / <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/">世界史</a> / <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E7%BD%97%E9%A9%AC%E5%8F%B2/">罗马史</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wd4y1h7pP/?spm_id_from=333.999.0.0&amp;vd_source=3f0983ef34615b702fec513c41e55a64">视频地址</a>  是之前很喜欢练习打字（×的一段时间，看视频然后一个个字打下来的，当时视频说一句话我打一句，一个二十分钟的视频得看两倍时间，现在想来还真是降低开发效率的一些操作（捂脸）  都存在幕布那边，这回一次性整理一下</p>
+<h3 id="平民改革-立法图强"><a class="header-anchor" href="#平民改革-立法图强">¶</a>平民改革 立法图强</h3>
+<h4 id="背景"><a class="header-anchor" href="#背景">¶</a>背景</h4>
+<ul>
+<li>
+<p><strong>罗马人</strong>通过三次维爱战争，击败了埃特鲁里亚人，迈出了对外征服的第一步。但是好景步长，北方强大的<strong>高卢人</strong>南下，打败罗马军队，罗马城也被洗劫一空。自此之后，高卢人的凶猛给罗马人造成了心理阴影。而罗马经过此次大劫，损失惨重，元气大伤，但她并没有喘息之机。</p>
+</li>
+<li>
+<p>此前臣服于罗马的<strong>沃尔西人</strong>、<strong>厄奎人</strong>和部分埃特鲁里亚城邦趁虚反叛，而与之交好的拉丁同盟和赫尔尼西人也背弃盟约。</p>
+</li>
+<li>
+<p>经过40余年的斗争，罗马解决了自高卢之患后反叛者与近邻的矛盾，稳固了在亚平宁半岛中北部的统治地位。</p>
+</li>
+<li>
+<p>这一段时期的罗马，除了应付外患，还要解决内部激烈的平民与贵族斗争（前494-前287）。并且，其内忧与外患相互影响。</p>
+</li>
+<li>
+<p><u>罗马的<em>共和制</em>是一种<em>贵族执政</em>的共和，其贵族源自氏族时期的显赫世家</u>。</p>
+<ul>
+<li>
+<p>早在罗穆路斯时代，就有所谓的“100名贤能者”处理国是。</p>
+</li>
+<li>
+<p>后来，<strong>萨宾人</strong>的合并加了100，老塔克文上台又加了100，这些人组成了元老院，被人尊称为“元老”。</p>
+</li>
+<li>
+<p>元老们的家族和后代就成为了罗马的早期贵族，而与贵族相对应的是广大平民。</p>
+</li>
+<li>
+<p>平民的来源比较复杂，主要是罗马本地平民、零散迁居的外乡人和被征服的拉丁部落等。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><u>平民与贵族的社会地位十分不平等</u>。</p>
+<ul>
+<li>
+<p>共和早期，政府的公职、神职和元老都是清一色的贵族出身。</p>
+</li>
+<li>
+<p>贵族世家的长期垄断，进而形成了上层社会的小圈子。比如法比乌斯、克劳狄乌斯、埃米利乌斯、科尔涅利乌斯都是当时的显赫世家。</p>
+</li>
+<li>
+<p>并且，贵族在政治、司法、宗教和分配上享有特殊权力。</p>
+</li>
+<li>
+<p>虽然在王政时代，经过塞尔维乌斯改革，贵族权力遭到削弱，但也仅仅只是有所削弱。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><u>另外，平民也是分三六九等的</u>。</p>
+<ul>
+<li>
+<p>比如那些靠经营工商业而发家致富的平民，在积累了一定的财富后，不甘心被罗马的旧贵族排挤在政治生活之外，也想寻求更高的政治权力和社会地位。</p>
+</li>
+<li>
+<p>此外，随着对外扩张，罗马的土地总量确实越来越多。</p>
+</li>
+<li>
+<p>但是由于贵族的特权占有，平民依然是无地少地。</p>
+</li>
+<li>
+<p>加上连年征战，农民频繁服兵役，致使土地荒废，粮食歉收。越来越多的农民经济得不到保障而负债累累，甚至沦为债务奴隶，遭到债权人的任意荼毒、盘剥。</p>
+</li>
+<li>
+<p>那时候的罗马平民无论高低贵贱，都是处在被压迫和被排挤的社会环境中的。</p>
+</li>
+<li>
+<p>所以平民为了切身利益，就不得不联合起来与贵族进行斗争。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="第一次"><a class="header-anchor" href="#第一次">¶</a>第一次</h4>
+<ul>
+<li>
+<p><u>罗马的平贵斗争没有通过暴力革命，而是以一种特别的方式</u>。</p>
+<ul>
+<li>
+<p>公元前494年，罗马对外征战，急需兵源，但是国内的农民却不愿服兵役。</p>
+</li>
+<li>
+<p>于是执政官下令释放因债务纠纷而入狱的犯人，并承诺去前线参战就可以既往不咎。于是，农民和犯人都积极参军、奋勇杀敌。</p>
+</li>
+<li>
+<p>可是，当这些人都脱去戎装，返回罗马时，迎接他们的不是荣耀与欢呼，而是屈辱的牢狱和枷锁。</p>
+</li>
+<li>
+<p>这种言而无信的行为，激起民众的不满。平民要求变法，却又遭到元老院的一致反对。</p>
+</li>
+<li>
+<p>于是平民百姓忍无可忍，集体离开罗马城，撤往不远处的山头上，扬言要另建一座新城。</p>
+</li>
+<li>
+<p>失去了人口，等于失去了一切，这对几乎连年征战的罗马是致命的打击。那些贵族只好与平民谈判，接受平民的请愿。<u>平民<strong>保民官</strong>就这样应运而生</u>（人数从2-5-10）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="保民官"><a class="header-anchor" href="#保民官">¶</a>保民官</h4>
+<ul>
+<li>
+<p><strong>保民官</strong>作为平民的代表，有权向元老院提出申诉和抗议，比如阻止官员滥用职权，否决对平民不利的立法。</p>
+<ul>
+<li>
+<p>并且，保民官的人身安全神圣不可侵犯。</p>
+</li>
+<li>
+<p>自此之后，<u>平民与贵族的矛盾就表现为保民官与贵族之间的斗争</u>。</p>
+</li>
+<li>
+<p>公元前471年，平民保民官<strong>沃来罗·帕波利乌斯</strong>（Volero Publilius）又争取到保民官只能由平民选举的权力，避免了贵族的干涉。</p>
+</li>
+<li>
+<p>但是，罗马平贵斗争远远没有结束。像罗马平民这种不合作的革命方式未来还要上演四次。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>和很多文明一样，那时候的罗马没有<em>成文法</em>，很多判决都是依靠人治和习惯法，致使平民权力常常得不到保障。</p>
+<ul>
+<li>
+<p>公元前462年，保民官<strong>特伦里乌斯·哈尔萨</strong>（Terentilius Harsa）最早提出了编纂成文法的要求。</p>
+</li>
+<li>
+<p>但是，直到公元前451年，才由贵族组成了一个10人立法委员会去编纂法律。</p>
+</li>
+<li>
+<p>这10人研究了一年，弄了10张表，但是没编完；第二年，又换了5个贵族和5个平民接盘，终于搞了12张表；</p>
+</li>
+<li>
+<p>加上后续的一些补充，就形成了著名的**《十二铜表法》**。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="《十二铜表法》"><a class="header-anchor" href="#《十二铜表法》">¶</a>《十二铜表法》</h4>
+<ul>
+<li>
+<p>**《十二铜表法》**是罗马对以往习惯法的汇编，包括诉讼、债务、宗法、监护、遗产、契约、贸易、土地、伤害、宗教、婚姻等方面。</p>
+<ul>
+<li>
+<p>虽然这个法律是明确维护贵族的既得利益，但是也从一定程度上限制了贵族权力，使其不能像过去那样肆意解释法律。</p>
+</li>
+<li>
+<p>从这一点看，这依然是<u>平贵斗争中属于平民的一次重大胜利</u>。</p>
+</li>
+<li>
+<p>让罗马人引以为傲的《十二铜表法》在历史上从未被废除，有些条款一直延续到罗马后期。该法律的语言也成为后世法典的语言典范</p>
+</li>
+<li>
+<p>十二铜表法被认为是现今欧陆法系中“罗马法”的源头之一。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>公元前444年到公元前367年，可能是出于军事需要，也可能是平贵斗争的结果，这近80年之间，罗马只有22年选了执政官，剩下的时间全部由军政官代替。因为这种官职平民也可以担任。</p>
+<ul>
+<li>
+<p>后来又出现了监察官、财务官等职位，均对平民开放。</p>
+</li>
+<li>
+<p><u>贵族对国家公职的垄断从此有所改变</u>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="持续"><a class="header-anchor" href="#持续">¶</a>持续</h4>
+<ul>
+<li>
+<p>高卢战争后，罗马城遭到严重破坏，城市被焚，土地荒芜，不少小农直接破产，沦为佃户。</p>
+<ul>
+<li>
+<p>而贵族为了转嫁损失，就对底层平民进行更重的盘剥和压迫。</p>
+</li>
+<li>
+<p>这就导致土地、债务和政治平权等问题再次以平贵斗争的形势提上日程。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>公元前367年，通过李锡尼-绥克斯图法案，减免债务利息，并且平民可当选执政官。</p>
+<ul>
+<li>
+<p>公元前356年，平民也可以担任独裁官和监察官。</p>
+</li>
+<li>
+<p>公元前342年，通过盖努西乌斯法案，两个执政官均可由平民担任。</p>
+</li>
+<li>
+<p>公元前326年，通过波提利乌斯法案，废除债务奴隶制。</p>
+</li>
+<li>
+<p>公元前300年，通过古尔尼乌斯兄弟法案，平民也可以担任一直由贵族垄断的宗教职务。</p>
+</li>
+<li>
+<p>至此，<u>罗马的平贵之间在担任国家公职方面几乎没有区别</u>。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>公元前287年，罗马爆发第五次<em>平民撤离运动</em>，迫使独裁官承认，平民的决定对全体公民具有法律效力。</p>
+<ul>
+<li>这件事，<u>标志着罗马的平贵斗争彻底结束</u>。</li>
+</ul>
+</li>
+<li>
+<p>会想到公元前494年，发生第一次撤离运动时，彼时的罗马还是一个矛盾激化、几乎分裂的国家；经过两百多年的平民与贵族斗争，到公元前287年的最后一次撤离运动结束时，<u>罗马共和国成功转型</u>，成为一个团结的国家。</p>
+<ul>
+<li>
+<p>旧氏族显贵逐渐衰落，平民的上层成为国家新贵掌握权力，组成新的统治集团；</p>
+</li>
+<li>
+<p>平民的中下层地位也有所改善：土地分配，债务减免，缓和了土地兼并，使罗马的小农生计得以维持。</p>
+</li>
+<li>
+<p>农民有了土地，对外征服的人力资源就有了保障。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>此外，在斗争中，罗马共和国的国家制度也逐渐完善，设立了更多有针对性的官职，以处理日益复杂的国家事务。</p>
+</li>
+<li>
+<p>在罗马的政治体制中，元老院依然是权力中枢，是最重要的国家机关。</p>
+</li>
+<li>
+<p><em>非暴力不合作运动</em>也是解决社会矛盾的一种方式，而那时的罗马恰好有一群和平理性的抗争者，也有一群比较理性、能够自我克制的被抗争者，才能使罗马在如此低的成本之下，完成社会的进步与发展</p>
+</li>
+</ul>
+<h3 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h3>
+<ul>
+<li>很有启发意义的一话</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reading/" rel="tag">reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E5%8F%B2/" rel="tag">世界史</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%97%E9%A9%AC%E5%8F%B2/" rel="tag">罗马史</a></li></ul>
 
     </footer>
   </div>

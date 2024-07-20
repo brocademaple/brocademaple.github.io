@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.7k</span>
+            <span class="post-count">3.7k</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">9 分钟</span>
+            <span class="post-count">13 分钟</span>
         </span>
     </span>
 </div>
@@ -113,7 +113,6 @@
        
   <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
 <p>黑马的知识星球的第一次直播。。。睡前一看，播了四个多小时。。。逆天，不过放在旁边听了两个多小时，还是挺多干货的，故今日开始回放记录</p>
-<p>目前看到183分钟，从回放链接进去继续看</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Miracle_ps/article/details/114791335">Hexo 添加图片——不用插件，超简单_hexo添加图片-CSDN博客</a></p>
 
 	<iframe src="https://www.slideshare.net/slideshow/embed_code/key/fIZ6YhyrfWCZ81?hostedIn=slideshare&amp;page=upload" style="width:100%;height:550px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen> </iframe> <div style="margin-bottom:5px">
@@ -361,7 +360,20 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 角色</span><br><span class="line">你扮演一位经验丰富的程序员，根据用户的需求帮助用户完成业务功能开发。</span><br><span class="line"></span><br><span class="line"># 需求</span><br><span class="line">我需要开发一个根据年级生成算术题的接口。</span><br><span class="line">- 参数：年级，可以是1或2，分别代表一年级或二年级</span><br><span class="line">- 返回值：100道算术题</span><br><span class="line"></span><br><span class="line">一年级算术题包含3种类型：</span><br><span class="line">- 100以内的加法</span><br><span class="line">- 100以内的减法</span><br><span class="line">- 100以内3个数字的加减混合运算</span><br><span class="line"></span><br><span class="line">二年级算术题包含类型：</span><br><span class="line">- 表内乘法、除法</span><br><span class="line">- 加减乘除混合运算，运算数字为3个数，加减运算数字不超过100，乘除必须是表内乘除法，除法必须是整除</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <ul>
 <li>展示了一个IDEA里面的插件：<code>Baidu Comate</code>，还有阿里的通义千问，在<code>Plugins</code>里面搜索下载</li>
-<li></li>
+<li>通过演示的小学口算项目，可以发现AI生成的代码可以辅助完成基础框架，但是细节部分仍需要人工修改bug</li>
+</ul>
+<h5 id="AI代码助手"><a class="header-anchor" href="#AI代码助手">¶</a>AI代码助手</h5>
+<ul>
+<li>
+<h5 id="Baidu-Comate-插件"><a class="header-anchor" href="#Baidu-Comate-插件">¶</a>Baidu Comate 插件</h5>
+<ul>
+<li>打开插件界面，有<code>/指令</code> <code>@插件</code> <code>#知识</code>  三个选项</li>
+<li>举例：<code>知识→API→天气API</code> 选中，然后输入：<code>#天气查询   帮我生成一个查询天气的工具类</code>   即可基于百度的知识库生成代码</li>
+<li>也可以查看腾讯云的API中心：<code>https://cloud.tencent.com/document/api/1004/30616</code>  这个是数学作业批改-速算题目批改接口</li>
+<li>发送整个文档给Baidu Comate</li>
+<li>Prompt：<code>https://cloud.tencent.com/document/api/1004/30616</code> ，请参考链接中的文档，分析一下这个接口的请求地址、请求参数、返回值格式等信息</li>
+</ul>
+</li>
 </ul>
 <h4 id="测试与调试"><a class="header-anchor" href="#测试与调试">¶</a>测试与调试</h4>
 <ul>
@@ -374,11 +386,135 @@
 <li>AI生成部署脚本</li>
 <li>运维智能体</li>
 </ul>
-<h4 id="AI代码助手"><a class="header-anchor" href="#AI代码助手">¶</a>AI代码助手</h4>
-<ul>
-<li>自动生成代码</li>
-</ul>
 <h4 id="AI应用开发"><a class="header-anchor" href="#AI应用开发">¶</a>AI应用开发</h4>
+<ul>
+<li>文本分析
+<ul>
+<li>数据提取和格式化、坐席质检、舆情分析、文本摘要、知识库</li>
+<li>推荐的工具：Coze内搜索相关插件、360AI浏览器</li>
+</ul>
+</li>
+<li>多模态
+<ul>
+<li>Stable Diffusion、文生图、图生图、图像识别、视频生成、语音识别合成、数字人等</li>
+<li></li>
+</ul>
+</li>
+<li>机器人应用
+<ul>
+<li>AI智能客服机器人开发、对话管理、情感分析、个性化回复等</li>
+</ul>
+</li>
+<li>智能体
+<ul>
+<li>AI金融分析、自动化办公、智慧医疗、工业/制造智能体、运维智能体</li>
+</ul>
+</li>
+<li>自动驾驶
+<ul>
+<li>计算机视觉处理、车辆自动驾驶</li>
+</ul>
+</li>
+</ul>
+<h4 id="AI技术架构"><a class="header-anchor" href="#AI技术架构">¶</a>AI技术架构</h4>
+<ul>
+<li>纯Prompt问答
+<ul>
+<li>利用大模型的推理能力，通过Prompt提问来完成业务</li>
+</ul>
+</li>
+<li>Agent + Function Calling
+<ul>
+<li>AI拆解业务，调用业务端提供的接口实现复杂业务</li>
+</ul>
+</li>
+<li>Fine tuning
+<ul>
+<li>针对特有业务场景对基础大模型做数据训练和微调，以满足特定场景的需求</li>
+</ul>
+</li>
+<li>RAG (Retrieval Augmented Generation)
+<ul>
+<li>给大模型外挂一个知识库，让大模型基于知识库内容做推理和回答</li>
+</ul>
+</li>
+<li><strong><u>ai-programing操作指南↓↓↓</u></strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=&quot;https://nbviewer.org/github/brocademaple/bcmp-hexo-inside-storage/blob/main/ai-programing.ipynb&quot; width=&quot;100%&quot; height=&quot;600&quot;&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>（hexo中插入ipynb的方式：[向Hexo博客中插入Jupyter Notebook | Coder (<a target="_blank" rel="noopener" href="http://lastknightcoder.github.io">lastknightcoder.github.io</a>)](<a target="_blank" rel="noopener" href="https://lastknightcoder.github.io/hexo-blog/2020/10/28/%E5%90%91">https://lastknightcoder.github.io/hexo-blog/2020/10/28/向</a> Hexo 博客中插入 Jupyter Notebook/)）引用一下orz</li>
+<li>现在讲到哪有点晕……</li>
+<li><a target="_blank" rel="noopener" href="https://bailian.console.aliyun.com/#/model-market">阿里云百炼-大模型服务平台</a>     国内国外的都有</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义方法，向大模型发送消息</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_completion</span>(<span class="params">prompt, model = model, temperature = <span class="number">0</span></span>):</span><br><span class="line">    messages = [</span><br><span class="line">        <span class="comment"># 定义角色</span></span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;你是一个旅行达人&quot;</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: prompt&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;assistant&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;answer&quot;</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">    response = client.chat.completions.create(</span><br><span class="line">        model=model,</span><br><span class="line">        messages=messages,</span><br><span class="line">        temperature=temperature, <span class="comment"># 结果的随机性</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message.content</span><br></pre></td></tr></table></figure>
+<h5 id="Prompt问答"><a class="header-anchor" href="#Prompt问答">¶</a>Prompt问答</h5>
+<ol>
+<li>用户提出问题，提交给应用程序</li>
+<li>应用程序发送Prompt给基础大模型</li>
+<li>大模型返回响应给应用程序</li>
+<li>程序返回响应给用户</li>
+</ol>
+<ul>
+<li>特征：利用大模型推理能力完成应用端无法实现或难以实现的功能</li>
+<li>应用场景：
+<ul>
+<li>文本摘要分析</li>
+<li>舆情分析</li>
+<li>坐席检查</li>
+</ul>
+</li>
+</ul>
+<h5 id="Function-Calling"><a class="header-anchor" href="#Function-Calling">¶</a>Function Calling</h5>
+<ol>
+<li>
+<p>用户提出问题，提交给应用程序</p>
+</li>
+<li>
+<p>应用程序发送Prompt和function定义给基础大模型</p>
+<ol>
+<li>大模型Agent进行任务分解</li>
+<li>大模型调用程序API</li>
+</ol>
+</li>
+<li>
+<p>1 程序拼接函数结果，再次发送给Prompt给大模型</p>
+</li>
+<li>
+<p>2 大模型生成回答</p>
+</li>
+</ol>
+<p>（中间可能经过多轮这样的来回）</p>
+<ol start="4">
+<li>大模型返回响应给程序</li>
+<li>程序返回响应给用户</li>
+</ol>
+<ul>
+<li>
+<p>特征：</p>
+<ul>
+<li>将应用端业务能力与AI大模型推理能力结合，简化复杂业务功能开发</li>
+<li>利用应用端能力将AI与外部世界连接起来，弥补AI模型缺陷：
+<ul>
+<li>大模型不是无所不知</li>
+<li>大模型知识往往比较落后</li>
+<li>大模型逻辑是统计规律，不是真逻辑，存在幻觉</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>应用场景：</p>
+<ul>
+<li>智能体（旅行指南、日程安排等）</li>
+<li>数据提取</li>
+<li>数据聚合分析</li>
+</ul>
+</li>
+<li>
+<p>这一段结合.ipynb文件里面的代码讲的。。。所以回头会再细看一下</p>
+</li>
+<li></li>
+</ul>
 <h2 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h2>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 角色</span><br><span class="line">你扮演一位经验丰富的程序员，根据用户的需求帮助用户完成业务功能开发。</span><br><span class="line"></span><br><span class="line"># 需求</span><br><span class="line">我需要开发一个根据年级生成算术题的接口。</span><br><span class="line">参数：年级，可以是一年级或二年级</span><br><span class="line">返回值：100道算术题</span><br><span class="line"></span><br><span class="line">一年级算术题包含3种类型：</span><br><span class="line">- 100以内的加法</span><br><span class="line">- 100以内的减法</span><br><span class="line">- 100以内3个数字的加减混合运算</span><br><span class="line"></span><br><span class="line">二年级算术题包含类型：</span><br><span class="line">- 表内乘法、除法</span><br><span class="line">- 加减乘除混合运算，运算数字为3个数，加减运算数字不超过100，乘除必须是表内乘除法</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>感觉这个需求不错，我家确实有小孩需要这个</p>
@@ -448,11 +584,11 @@
    
   <nav class="article-nav">
     
-      <a href="/2024/07/19/%E3%80%90AI-indoor%E3%80%91AI%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="article-nav-link">
+      <a href="/2024/07/20/CS_Notes/Java/%E3%80%90Java%E3%80%91%E5%9D%A4%E7%A1%80%E5%A4%8D%E4%B9%A0%E6%89%AB%E7%9B%B2/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            【AI_indoor】AI编程开发
+            【Java】坤础复习扫盲
           
         </div>
       </a>
