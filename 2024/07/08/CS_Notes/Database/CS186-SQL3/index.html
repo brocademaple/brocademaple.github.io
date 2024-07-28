@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>CS186 SQL3 Berkeley |  BROCADEMAPLE</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/ayer-side.svg" />
+       
+<link rel="stylesheet" href="/project/dist/main.css">
+
+      
+<link rel="stylesheet" href="/project/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/project/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-CS_Notes/Database/CS186-SQL3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  CS186 SQL3 Berkeley
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/project/2024/07/08/CS_Notes/Database/CS186-SQL3/" class="article-date">
+  <time datetime="2024-07-07T16:00:00.000Z" itemprop="datePublished">2024-07-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/project/categories/notes/">notes</a> / <a class="article-category-link" href="/project/categories/notes/SQL-notes/">SQL notes</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">13 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p>Berkeley CS186 Intro to DB Systems</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Q-dxGaR3fH0&amp;list=PLYp4IGUhNFmw8USiYMJvCUjZe79fvyYge&amp;index=6">视频地址</a>  课程记录</p>
+<h1>SQL 3</h1>
+<h2 id="Architecture-of-a-DBMS-SQL-Client"><a class="header-anchor" href="#Architecture-of-a-DBMS-SQL-Client">¶</a>Architecture of a DBMS: SQL Client</h2>
+<ul>
+<li>数据库管理系统的架构：SQL客户端</li>
+<li>Database Management System</li>
+</ul>
+<h3 id="DBMS-Parsing-Optimization"><a class="header-anchor" href="#DBMS-Parsing-Optimization">¶</a>DBMS: Parsing &amp; Optimization</h3>
+<ul>
+<li>数据库管理系统（DBMS）：解析与优化</li>
+</ul>
+<h4 id="Purpose"><a class="header-anchor" href="#Purpose">¶</a>Purpose:</h4>
+<ul>
+<li>
+<p>Parse, check, and verify the SQL, and translate into an efficient relational query plan</p>
+</li>
+<li>
+<p>解析、检查和验证SQL语句，将其转换为高效的关系查询方案</p>
+</li>
+<li>
+<pre><code class="language-sql">SELECT S.sid, S.sname, R.bid
+FROM Sailors S, Reserves R
+WHERE S.sid = R.sid and S.age &gt; 30
+GROUP BY age
+</code></pre>
+</li>
+</ul>
+<h3 id="DBMS-Relational-Operators"><a class="header-anchor" href="#DBMS-Relational-Operators">¶</a>DBMS: Relational Operators</h3>
+<ul>
+<li>数据库管理系统（DBMS）：关系操作符</li>
+</ul>
+<h4 id="Purpose-v2"><a class="header-anchor" href="#Purpose-v2">¶</a>Purpose:</h4>
+<ul>
+<li>Execute a dataflow by operating on records and files</li>
+<li>通过在记录和文件上执行数据流来操作数据</li>
+</ul>
+<h3 id="DBMS-Files-and-Index-Management"><a class="header-anchor" href="#DBMS-Files-and-Index-Management">¶</a>DBMS: Files and Index Management</h3>
+<ul>
+<li>文件和索引管理</li>
+</ul>
+<h4 id="Purpose-v3"><a class="header-anchor" href="#Purpose-v3">¶</a>Purpose:</h4>
+<ul>
+<li>Organize tables and Records as groups of pages in a logical file</li>
+<li>将表和记录组织成逻辑文件中的页面组</li>
+</ul>
+<h3 id="DBMS-Buffer-Management"><a class="header-anchor" href="#DBMS-Buffer-Management">¶</a>DBMS: Buffer Management</h3>
+<ul>
+<li>缓冲区管理层</li>
+</ul>
+<h4 id="Purpose-v4"><a class="header-anchor" href="#Purpose-v4">¶</a>Purpose:</h4>
+<ul>
+<li>Provide the illusion of operating in memory</li>
+<li>提供一种操作内存的假象</li>
+</ul>
+<h3 id="DBMS-Disk-Space-Management"><a class="header-anchor" href="#DBMS-Disk-Space-Management">¶</a>DBMS: Disk Space Management</h3>
+<ul>
+<li>磁盘空间管理</li>
+</ul>
+<h4 id="Purpose-v5"><a class="header-anchor" href="#Purpose-v5">¶</a>Purpose:</h4>
+<ul>
+<li>
+<p>Translate page requests into physical bytes on one or more device(s)</p>
+</li>
+<li>
+<p>将缓冲区管理器的页面请求转换为一个或多个设备（如磁盘、固态磁盘）上的物理字节</p>
+</li>
+</ul>
+<h3 id="Architecture-of-a-DBMS"><a class="header-anchor" href="#Architecture-of-a-DBMS">¶</a>Architecture of a DBMS</h3>
+<ul>
+<li>数据库管理系统的架构
+<ul>
+<li>Organized in layers   层次架构</li>
+<li>Each layer abstracts the layer below  每一层都抽象了其下的层次
+<ul>
+<li>Manage complexity    管理复杂性</li>
+<li>Performance assumptions   性能假设</li>
+</ul>
+</li>
+<li>Example of good systems design   DBMS是良好的系统设计示例</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>SQL CLIENT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Query Parsing &amp; Optimization       <strong>解析与优化</strong></td>
+</tr>
+<tr>
+<td>Relational Operators                         <strong>关系操作符</strong></td>
+</tr>
+<tr>
+<td>Files and Index Management           <strong>文件和索引管理</strong></td>
+</tr>
+<tr>
+<td>Buffer Management                            <strong>缓冲区管理</strong></td>
+</tr>
+<tr>
+<td>Disk Space Management                     <strong>磁盘空间管理</strong></td>
+</tr>
+<tr>
+<td>DBMS的架构通常分为几个层次，每一层都为上层提供服务，同时抽象了下层的复杂性。这种分层的设计有助于提高系统的可维护性和可扩展性</td>
+</tr>
+<tr>
+<td>DATABASE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="DBMS-Concurrency-Recovery"><a class="header-anchor" href="#DBMS-Concurrency-Recovery">¶</a>DBMS: Concurrency &amp; Recovery</h3>
+<ul>
+<li>
+<p>并发控制与恢复（？</p>
+</li>
+<li>
+<p>Two cross-cutting issues related to storage and memory management</p>
+</li>
+</ul>
+<h2 id="Before-we-begin-storage-media"><a class="header-anchor" href="#Before-we-begin-storage-media">¶</a>Before we begin: storage media</h2>
+<h3 id="Disks"><a class="header-anchor" href="#Disks">¶</a>Disks</h3>
+<ul>
+<li>Most database systems were originally designed for magnetic disks   大多数数据库系统最初是为磁盘设计的
+<ul>
+<li>Disk are a mechanical anachronism    磁盘是一种机械性的过时技术</li>
+<li>Instilled design ideas that apply to using solid state disks as well    它所灌输的设计思想也适用于固态硬盘的使用</li>
+</ul>
+</li>
+<li>Major implications   主要影响
+<ul>
+<li><strong>No “pointer derefs”</strong> .Instead, an API:   没有“指针解”引用
+<ul>
+<li>READ: transfer “page” of data from disk to RAM    （读取）将数据的“页面”从磁盘传输到RAM</li>
+<li>WRITE: transfer “page” of data from RAM to disk      （写入）将数据的“页面”从RAM传输到磁盘</li>
+</ul>
+</li>
+<li>Both API calls are very, very slow     这两个API调用都非常非常慢
+<ul>
+<li>Plan carefully   仔细规划</li>
+</ul>
+</li>
+<li>An explicit API can be a good thing   明确的API
+<ul>
+<li>Minimizes the kind of pointer errors you see in C    最小化了你在C语言中看到的指针错误类型</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Storage-Hierarchy"><a class="header-anchor" href="#Storage-Hierarchy">¶</a>Storage Hierarchy</h3>
+<ul>
+<li>存储层次结构</li>
+<li>存储层次结构是计算机系统中不同类型存储设备的层级排列，从最快的到最慢的【从上到下】</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>registers   寄存器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1   Cache       L1缓存</td>
+</tr>
+<tr>
+<td>L2   Cache       L2缓存</td>
+</tr>
+<tr>
+<td>RAM                随机存取存储器</td>
+</tr>
+<tr>
+<td>SSD                  固态硬盘</td>
+</tr>
+<tr>
+<td>Disk                  磁盘</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>emmm，理解下来就是读写到磁盘很慢（？</li>
+</ul>
+<h3 id="Components-of-a-Disk-Pt-6"><a class="header-anchor" href="#Components-of-a-Disk-Pt-6">¶</a>Components of a Disk, Pt. 6</h3>
+<ul>
+<li>
+<p>Platters spin(say 15000 rpm)</p>
+</li>
+<li>
+<p>Arm assembly moved in or out to position a head on a desired track</p>
+<ul>
+<li>Tracks under heads make a “cylinder”</li>
+</ul>
+</li>
+<li>
+<p>Only one head reads/writes at any one time</p>
+</li>
+<li>
+<p>Block/page size is a multiple of (fixed) sector size</p>
+</li>
+<li>
+<p>这个地方是磁盘结构的解释，所以待插入一张结构图，就一览了然了，当然目前我还不会插图片，后面来</p>
+</li>
+</ul>
+<p><img src="https://notes.bencuan.me/cs186/Disks,%20Buffers,%20Files/Untitled%201.png" alt="Untitled|400"></p>
+<h3 id="Accessing-a-Disk-page"><a class="header-anchor" href="#Accessing-a-Disk-page">¶</a>Accessing a Disk page</h3>
+<ul>
+<li>
+<p>访问磁盘界面</p>
+</li>
+<li>
+<p>Time to access (read/write)  a disk block:    读写磁盘块的时间   以下也涉及到磁盘结构那张图</p>
+<ul>
+<li>seek time (moving arms to position disk head on track)
+<ul>
+<li>~2-3 ms on average   寻道时间   磁盘头读取所需的磁道的位置</li>
+</ul>
+</li>
+<li>rotational delay (waiting for block to rotate under head)
+<ul>
+<li>~0-4 ms (15000 RPM)   旋转延迟时间</li>
+</ul>
+</li>
+<li>transfer time (actually moving data to/from disk surface)
+<ul>
+<li>~0.25 ms per 64KB page   将数据从磁盘表面移动到磁盘头/从磁盘头移动到磁盘表面得到时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Key to lower I/O cost: reduce seek/rotational delays    降低I/O成本的关键：减少寻道和旋转延迟的时间</p>
+</li>
+</ul>
+<h3 id="Notes-on-Flash-SSD"><a class="header-anchor" href="#Notes-on-Flash-SSD">¶</a>Notes on Flash(SSD)</h3>
+<ul>
+<li>闪存/固态磁盘Solid State Disks，闪存通常组合在一起形成称为固态磁盘的磁盘驱动器</li>
+<li>Issues in current generation (NAND)
+<ul>
+<li>Fine-grain reads (4-8K reads), coarse-grain writes (1-2 MB writes)    <strong>细粒度读取（Fine-grain reads）</strong>：可以进行4-8KB的细粒度读取;   <strong>粗粒度写入（Coarse-grain writes）</strong>：写入操作通常是1-2MB的粗粒度</li>
+<li>Only 2k-3k erasures before failure, so keep moving hot write units around (“wear leveling”)     闪存的寿命限制：通常在2000到3000次擦除周期后可能发生故障，因此需要不断移动热点写入单元（“磨损均衡” wear leveling）</li>
+<li>write amplification: big units, need to reorg for wear &amp; garbage collection    <strong>写入放大（Write amplification）</strong>：由于写入单元较大，需要重新组织数据以进行磨损均衡和垃圾收集</li>
+</ul>
+</li>
+<li>So <strong>read</strong> is fast and predictable
+<ul>
+<li>Single read access time: 0.03 ms</li>
+<li>4 KB random reads: ~500MB/sec</li>
+<li>Sequential reads: ~525MB/sec</li>
+<li>64K: 0.48 ms</li>
+<li>在闪存中，顺序读取和随机读取的带宽速度大致一样</li>
+</ul>
+</li>
+<li>But write is not . Slower for random
+<ul>
+<li>Single write access time: 0.03 ms   单次写入挺快的</li>
+<li>4 KB random writes: ~120 MB/sec</li>
+<li>Sequential writes: ~480 MB/sec</li>
+<li>顺序写入相比随机写入速度快很多</li>
+</ul>
+</li>
+<li>Flash is faster than disk. But disk offers about 10x the capacity per $就是disk在相等价钱下提供的容量更大（自分の理解）</li>
+</ul>
+<h2 id="Storage-Pragmatics-Trends"><a class="header-anchor" href="#Storage-Pragmatics-Trends">¶</a>Storage Pragmatics &amp; Trends</h2>
+<ul>
+<li>Many significant DBs are not big, but data sizes grow faster than Moore’s Law (“Big Data” is real) , so the role of disk, flash, RAM → to debate</li>
+</ul>
+<h3 id="Bottom-Line-last-few-years"><a class="header-anchor" href="#Bottom-Line-last-few-years">¶</a>Bottom Line (last few years)</h3>
+<ul>
+<li>Very large DBs: relatively traditional   非常大的数据库（Very large DBs）: 相对传统
+<ul>
+<li>Disk still the best cost/MB by a lot    磁盘仍然是成本/每兆字节（cost/MB）比最高的存储介质</li>
+<li>SSDs improve performance and performance variance   固态硬盘（SSDs）提高了性能和性能的一致性</li>
+</ul>
+</li>
+<li>Smaller DB story is changing quickly   小型数据库
+<ul>
+<li>Entry cost for disk is not cheap, so flash wins at the low end     磁盘的入门成本高，在低端市场闪存（flash）√</li>
+<li>Many interesting databases fit in RAM     许多有趣的数据库可以完全装入RAM</li>
+</ul>
+</li>
+</ul>
+<h2 id="Disks-and-Files"><a class="header-anchor" href="#Disks-and-Files">¶</a>Disks and Files</h2>
+<ul>
+<li>Recall, most DBMSs stores information on <strong>Disks</strong> and <strong>SSDs</strong>   <u><strong>对以上Disk和SSD讨论的总结</strong></u>
+<ul>
+<li>Disk are a mechanical anachronism(slow)</li>
+<li>SSDs faster, <strong>slow relative to memory</strong>, costly writes</li>
+</ul>
+</li>
+</ul>
+<h3 id="Block-Level-Storage"><a class="header-anchor" href="#Block-Level-Storage">¶</a>Block Level Storage</h3>
+<ul>
+<li>
+<p><strong>块级存储</strong></p>
+</li>
+<li>
+<p>Read and Write <strong>large chunks of sequential bytes</strong>   读写大顺序字节块：块级存储系统设计为一次读取或写入<strong>大的连续字节块</strong></p>
+</li>
+<li>
+<p>Sequentially: “Next” disk block is fastest   顺序性：在顺序访问中，读取或写入“下一个”磁盘块是最快的</p>
+</li>
+<li>
+<p>Maximize usage of data per Read/Write    最大化每次读写的数据使用量</p>
+<ul>
+<li>“Amortize” seek delays(HDDs) and writes (SSDs)   分摊   硬盘驱动器上的寻道延迟    以及旋转延迟    翻译器：通过<strong>分摊</strong>硬盘驱动器（HDD）上的寻道延迟和固态硬盘（SSD）上的写入放大，来提高效率</li>
+</ul>
+</li>
+<li>
+<p>Predict future behavior   预测未来行为</p>
+<ul>
+<li>Cache popular blocks   缓存热门块，将频繁访问的数据块存储在快速访问的缓存中</li>
+<li>Pre-fetch likely-to-be-accessed blocks    预取可能访问的块，根据访问模式预测并提前加载数据块</li>
+<li>Buffer writes to sequential blocks    缓冲顺序块的写入，将写入操作暂时存储，然后一次性写入到顺序的磁盘块中</li>
+</ul>
+</li>
+</ul>
+<h3 id="A-Note-on-Terminology"><a class="header-anchor" href="#A-Note-on-Terminology">¶</a>A Note on Terminology</h3>
+<ul>
+<li>术语解释</li>
+<li>Block = Unit of transfer for disk read/write   <strong>块</strong>：磁盘读写操作的数据传输单元
+<ul>
+<li>64 KB - 128 KB is a good number today    64KB到128KB是一个常见的块大小</li>
+<li>Book says 4 KB   书籍中可能提到4KB作为块大小的标准</li>
+</ul>
+</li>
+<li>Page: a common synonym for “block”    <strong>页面</strong>：通常是“块”的同义词
+<ul>
+<li>In some texts, “page” = a block-sized chunk of RAM    在某些文献中，“页面”指的是RAM中与块大小相等的数据块</li>
+</ul>
+</li>
+<li>treat “block” and “page” as synonyms     将“块”和“页面”视为可以互换的同义词</li>
+</ul>
+<h3 id="Arranging-Blocks-on-Disk"><a class="header-anchor" href="#Arranging-Blocks-on-Disk">¶</a>Arranging Blocks on Disk</h3>
+<ul>
+<li>
+<p>在磁盘上排列块</p>
+</li>
+<li>
+<p>‘Next’ block concept:</p>
+<ul>
+<li>sequential blocks on same track, followed by     位于同一磁道上的顺序块</li>
+<li>blocks on same cylinder, followed by  位于同一柱面上的块</li>
+<li>blocks on adjacent cylinder   相邻柱面上的块</li>
+</ul>
+</li>
+<li>
+<p>Arrange file pages sequentially by ‘next’ on disk     按磁盘上的“下一个”顺序排列文件页面</p>
+<ul>
+<li>minimize seek and rotational delay     最小化寻道和旋转延迟</li>
+</ul>
+</li>
+<li>
+<p>For a sequential scan, pre-fetch    对于顺序扫描，进行预取</p>
+<ul>
+<li>several blocks at a time    一次预取多个块</li>
+</ul>
+</li>
+<li>
+<p>Read large consecutive blocks     读取大的连续块</p>
+</li>
+</ul>
+<h3 id="Disk-Space-Management"><a class="header-anchor" href="#Disk-Space-Management">¶</a>Disk Space Management</h3>
+<ul>
+<li>
+<p>磁盘空间管理</p>
+</li>
+<li>
+<p>Lowest layer of DBMS, manages space on disk</p>
+</li>
+<li>
+<p>Purpose:</p>
+<ul>
+<li>Map pages to locations on disk    将页面映射到磁盘上的位置</li>
+<li>Load pages from disk to memory   从磁盘加载页面到内存</li>
+<li>Save pages back to disk &amp; ensuring writes    将页面保存回磁盘并确保写入</li>
+</ul>
+</li>
+<li>
+<p>Higher levels call upon this layer to :    更高层级调用这一层来：</p>
+<ul>
+<li>Read/write a page     读写页面</li>
+<li>Allocate/de-allocate logical pages    分配/释放逻辑页面</li>
+</ul>
+</li>
+</ul>
+<h4 id="Requesting-Pages"><a class="header-anchor" href="#Requesting-Pages">¶</a>Requesting Pages</h4>
+<ul>
+<li>
+<p>请求页面</p>
+</li>
+<li>
+<p>Request for s sequences of pages best satisfied by pages stored sequentially on disk     对页面序列的请求最好由磁盘上顺序存储的页面满足</p>
+<ul>
+<li>Physical details hidden from higher levels of systems    物理细节对系统更高层级隐藏</li>
+<li>Higher levels may “safely” assume Next Page is fast, so they will simply expect sequential runs of pages to be quick to scan   更高层级可能“安全地”假设下一页很快，因此他们将期望页面的顺序运行快速扫描</li>
+<li>尼玛好抽象……</li>
+</ul>
+</li>
+</ul>
+<h4 id="Implementation"><a class="header-anchor" href="#Implementation">¶</a>Implementation</h4>
+<ul>
+<li>
+<p>实现</p>
+</li>
+<li>
+<p>Proposal 1：Talk to the storage device directly   数据库存储软件直接与存储设备对话，存储设备绕过操作系统的任何功能导出的协议</p>
+<ul>
+<li>could be very fast if u knew the device well   数据库系统直接连接到硬件，速度尽可能的快</li>
+<li>when devices change    设备可能变换，所以这个proposal不适用了</li>
+</ul>
+</li>
+<li>
+<p>Proposal 2: Run over filesystems (FS)</p>
+<ul>
+<li>Allocate single large “contiguous” file on a nice empty disk and assume sequential / nearby byte access are fast     在一个干净的空磁盘上分配一个大的“连续”文件，并假设顺序/附近的字节访问是快速的</li>
+<li>Most FS optimize disk layout for sequential access    大多数文件系统优化磁盘布局以进行顺序访问
+<ul>
+<li>Gives us more or less what we want if we start with an empty disk</li>
+</ul>
+</li>
+<li>DBMS “file” may span multiple FS files on multiple disks/machines      DBMS的“文件”可能跨越多个磁盘/机器上的多个文件系统文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="Summary-Disk-Space-Management"><a class="header-anchor" href="#Summary-Disk-Space-Management">¶</a>Summary: Disk Space Management</h3>
+<ul>
+<li>provide API to read and write pages to device    提供API以向设备读写页面</li>
+<li>Pages: block level organization of bytes on disk    页面：磁盘上字节的块级组织</li>
+<li>Provides “next” locality and abstracts FS/device details    提供“下一个”局部性并抽象文件系统/设备细节</li>
+</ul>
+<h2 id="Disks-and-Files-Summary"><a class="header-anchor" href="#Disks-and-Files-Summary">¶</a>Disks and Files: Summary</h2>
+<ul>
+<li>Magnetic (hard) disks and SSDs   磁性（硬）磁盘和固态硬盘（SSDs）
+<ul>
+<li>Basic HDD mechanics   基本的HDD机械特性</li>
+<li>SSD write amplification    SSD写入放大</li>
+<li>Concept of “near” pages and how it relates to cost of access   近邻页面的概念以及相对成本</li>
+<li>Relative cost of
+<ul>
+<li>Random vs. sequential disk access (10x)    随机访问与顺序磁盘访问</li>
+<li>Disk (pluto 冥王星) vs RAM (sacramento) vs. registers (your head)     磁盘（以冥王星为例）与RAM（以萨克拉门托为例？不懂）与寄存器（你的头脑）
+<ul>
+<li>Big differences</li>
+<li>不同存储介质的成本和性能有显著差异，寄存器最快但容量最小，RAM容量较大且速度很快，而磁盘提供了巨大的存储容量但速度相对较慢</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DB File storage
+<ul>
+<li>Typically over FS file(s)    通常通过文件系统（FS）上的一个或多个文件来实现</li>
+</ul>
+</li>
+<li>Disk space manager loads and stores pages
+<ul>
+<li>Block level reasoning     基于块级逻辑进行操作</li>
+<li>Abstracts device and file system; provide fast “next”     抽象化了设备和文件系统的细节；提供快速的“下一个”页面访问</li>
+</ul>
+</li>
+</ul>
+<h1>写在后面</h1>
+<p>抽象啊（流口水</p>
+<p>不过也算有所收获</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        share
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/project/2024/07/08/CS_Notes/Database/CS186-SQL3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/project/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/project/tags/Database/" rel="tag">Database</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/project/2024/07/11/CS_Notes/Database/PHP+MySQL_note_and_practice/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            【在xp.cn上】MySQL+PHP复习
+          
+        </div>
+      </a>
+    
+    
+      <a href="/project/2024/07/07/CS_Notes/Database/SQL-practice-record/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">SQL practice record</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2024
+        <i class="ri-heart-fill heart_icon"></i> brocademaple
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/project/"><img src="/images/ayer-side.svg" alt="BROCADEMAPLE"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/categories/notes">笔记库</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/tags/reading">阅读</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/aboutMe">自分</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/project/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/project/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/project/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/project/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/project/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/project/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/project/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/project/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/project/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/project/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=2010857169&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

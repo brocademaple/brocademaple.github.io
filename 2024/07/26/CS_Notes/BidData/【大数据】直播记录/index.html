@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>【大数据】直播记录 |  BROCADEMAPLE</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/ayer-side.svg" />
+       
+<link rel="stylesheet" href="/project/dist/main.css">
+
+      
+<link rel="stylesheet" href="/project/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/project/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-CS_Notes/BidData/【大数据】直播记录"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  【大数据】直播记录
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/project/2024/07/26/CS_Notes/BidData/%E3%80%90%E5%A4%A7%E6%95%B0%E6%8D%AE%E3%80%91%E7%9B%B4%E6%92%AD%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time datetime="2024-07-26T15:45:04.355Z" itemprop="datePublished">2024-07-26</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">5 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<h2 id="大数据行业发展，未来前景"><a class="header-anchor" href="#大数据行业发展，未来前景">¶</a>大数据行业发展，未来前景</h2>
+<h3 id="大数据的诞生"><a class="header-anchor" href="#大数据的诞生">¶</a>大数据的诞生</h3>
+<ul>
+<li>
+<p>大数据的诞生和信息化以及互联网的发展密切相关</p>
+</li>
+<li>
+<p>上世纪70年代→逐步出现了基于TCP/IP协议的小规模的计算机互联互通，多为军事、科研用途</p>
+</li>
+<li>
+<p>上世纪90年代→全球互联的互联网出现，个人企业均可参与，真正逐步实现全球互联</p>
+</li>
+<li>
+<p>2000年后，互联网上的商业行为剧增。在互联网参与者众多的前提下，商业公司、科研单位等，所能获得的数据量剧增</p>
+</li>
+<li>
+<p>剧增的数据量和羸弱的单机性能→让许多科技公司开始尝试以<strong>数量</strong>来解决问题</p>
+</li>
+<li>
+<p>→<strong>分布式处理技术</strong>诞生</p>
+</li>
+</ul>
+<h3 id="分布式处理技术"><a class="header-anchor" href="#分布式处理技术">¶</a>分布式处理技术</h3>
+<ul>
+<li>在<strong>数据量巨大</strong>的基础下，以服务器的<strong>数量</strong>来解决大规模数据处理问题</li>
+</ul>
+<h4 id="分布式处理技术的逐步演化"><a class="header-anchor" href="#分布式处理技术的逐步演化">¶</a>分布式处理技术的逐步演化</h4>
+<ul>
+<li>
+<p>大规模服务器集群下的<strong>大规模数据存储【存】</strong></p>
+</li>
+<li>
+<p>大规模服务器集群下的<strong>大规模数据计算【用】</strong></p>
+</li>
+<li>
+<p>大规模服务器集群下的<strong>大规模数据传输技术【传】</strong></p>
+</li>
+<li>
+<p>08年前分布式技术基本上还处于大企业内部专用且不够成熟</p>
+</li>
+<li>
+<p>08年<strong>Apache Hadoop</strong>开源，广大企业拥有了成熟的、 开源的分布式数据处理解决<strong>方案</strong></p>
+</li>
+</ul>
+<h4 id="大数据的诞生-v2"><a class="header-anchor" href="#大数据的诞生-v2">¶</a>大数据的诞生</h4>
+<ul>
+<li><strong>Apache Hadoop</strong>是一款开源的分布式处理技术栈，提供了：
+<ul>
+<li>基于Hadoop HDFS的：分布式数据存储技术</li>
+<li>基于Hadoop MapReduce的：分布式数据计算技术</li>
+<li>基于Hadoop YARN的：分布式资源调度技术</li>
+</ul>
+</li>
+</ul>
+<h4 id="什么是大数据"><a class="header-anchor" href="#什么是大数据">¶</a>什么是大数据</h4>
+<ul>
+<li>大数据的出现，本质上是为了解决海量数据的处理难题</li>
+<li>大数据就是→
+<ul>
+<li><u><strong>使用分布式技术完成海量数据的处理，得到数据背后蕴含的价值【狭义的（技术思维的）】</strong></u></li>
+<li><u><strong>广义的↓</strong></u></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>海量的数据</th>
+<th>数字时代人人联网，日常活动产生的数据记录是海量的，背后蕴含的价值也是巨大的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础设施</td>
+<td>大数据在技术上，是数字化时代的基础设施。数字化时代的发展离不开大数据技术的支持</td>
+</tr>
+<tr>
+<td>生活</td>
+<td>警务、政务、工业、电商、金融、能源、物流、通讯、科研、教育等。大数据已经渗入生活方方面面</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>狭义上：大数据是一类<strong>技术栈</strong>，是一种用来处理海量数据的<strong>软件技术体系</strong></li>
+<li>广义上：大数据是数字化时代、信息化时代的<strong>基础（技术）支撑</strong>，以数据<strong>为生活赋能</strong></li>
+<li>学习阶段学习的是狭义的大数据技术栈</li>
+<li>工作时广义上为生活赋能</li>
+</ul>
+<h4 id="大数据软件生态"><a class="header-anchor" href="#大数据软件生态">¶</a>大数据软件生态</h4>
+<ul>
+<li>分为三大核心工作体系
+<ul>
+<li><strong>数据存储</strong></li>
+<li><strong>数据计算</strong></li>
+<li><strong>数据传输</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="数据存储"><a class="header-anchor" href="#数据存储">¶</a>数据存储</h4>
+<h5 id="SQL"><a class="header-anchor" href="#SQL">¶</a>SQL</h5>
+<ul>
+<li>
+<p>SQL (Structured Query Language)</p>
+<ul>
+<li>结构化查询语言，是所有关系型数据库的规范</li>
+<li>关系型数据库
+<ul>
+<li>mysql</li>
+<li>oracle</li>
+<li>sqlserver</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>NoSQL：不仅仅是SQL</p>
+<ul>
+<li>SQL主要强调以<strong>二维的表格</strong>存储数据</li>
+<li>NoSQL主要强调以<strong>键值对</strong>形式（KV）存储数据
+<ul>
+<li>java→map集合    python→dict字典</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="大数据软件生态→数据存储"><a class="header-anchor" href="#大数据软件生态→数据存储">¶</a>大数据软件生态→数据存储</h5>
+<ul>
+<li>
+<p>Apache Hadoop -HDFS</p>
+<ul>
+<li>Apache Hadoop框架内的组件HDFS是大数据体系中使用最为广泛的分布式存储结束</li>
+</ul>
+</li>
+<li>
+<p>Apache HBase</p>
+<ul>
+<li>Apache HBase是大数据体系内使用非常广泛的NoSQL KV型数据库技术</li>
+<li>HBase是基于HDFS之上构建的</li>
+</ul>
+</li>
+<li>
+<p>Apache KUDU</p>
+<ul>
+<li>Apache Kudu同样为大数据体系中使用较多的分布式存储引擎</li>
+</ul>
+</li>
+<li>
+<p>云平台存储组件</p>
+<ul>
+<li>除此外，各大云平台厂商也有相应的大数据存储组件</li>
+<li>如：阿里云的OSS、UCloud的US3、AWS的S3、金山云的KS3等等</li>
+</ul>
+</li>
+</ul>
+<h4 id="数据计算"><a class="header-anchor" href="#数据计算">¶</a>数据计算</h4>
+<ul>
+<li>Apache Hadoop -MapReduce
+<ul>
+<li>Apache Hadoop的MapReduce组件是最早一代的大数据分布式计算引擎对大数据的发展做出了卓越贡献</li>
+<li>Java语言写的</li>
+</ul>
+</li>
+<li>Apache Hive
+<ul>
+<li>Apache Hive是一款以SQL为主要开发语言的分布式计算框架</li>
+<li>其底层使用了Hadoop的MapReduce技术</li>
+<li>Apache Hive至今仍活跃在大数据一线，被许多公司使用</li>
+<li>写的是SQL语句，背后运行的是MapReduce程序</li>
+<li>相比用MapReduce，工作量少了很多</li>
+</ul>
+</li>
+<li>Apache Spark
+<ul>
+<li>Apache Spark是目前全球范围内最火热的分布式内存计算引擎，是大数据体系中的明星计算产品</li>
+<li>速度更快，因为主要基于内存，不够的时候会用一部分磁盘；</li>
+<li>而MapReduce是基于磁盘内存不断进行IO操作</li>
+</ul>
+</li>
+<li>Apache Flink
+<ul>
+<li>Apache Flink同样也是一款明星级的大数据分布式内存计算引擎</li>
+<li>特别是在实时计算（流计算）领域占据了大多数国内市场</li>
+<li>例：阿里双11 大屏显示实时数据 用的就是Flink</li>
+<li>目前Flink也是阿里在维护，阿里是国内最大用户</li>
+<li>因为可以支持实时计算显示，所以成本较高，目前市占率较小</li>
+</ul>
+</li>
+</ul>
+<h4 id="数据传输"><a class="header-anchor" href="#数据传输">¶</a>数据传输</h4>
+<ul>
+<li>
+<p>Apache Sqoop</p>
+<ul>
+<li>Apache Sqoop是一款ETL工具，可以协助大数据体系和关系型数据库之间进行数据传输</li>
+<li>ETL：对数据进行抽取、转换、加载的过程</li>
+<li>有个岗位叫ETL工程师</li>
+<li>阿里出的一个工具datax也是一个ETL工具</li>
+<li>用的比较多的ETL根据：Sqoop和datax</li>
+</ul>
+</li>
+<li>
+<p>Apache Flume</p>
+<ul>
+<li>Apache Flume是一款【流式】数据采集工具，可以从非常多的数据源中完成数据采集传输任务</li>
+</ul>
+</li>
+<li>
+<p>Apache Kafka</p>
+<ul>
+<li>Apache Kafka是一款分布式的消息系统，可以完成海量规模的数据传输工作</li>
+<li>Apache Kafka在大数据领域也是明星产品</li>
+</ul>
+</li>
+<li>
+<p>Apache Pulsar</p>
+<ul>
+<li>Apache Pulsar同样是一款分布式的消息系统</li>
+<li>在大数据领域同样有非常多使用者</li>
+</ul>
+</li>
+</ul>
+<h4 id="小结"><a class="header-anchor" href="#小结">¶</a>小结</h4>
+<h5 id="学习阶段"><a class="header-anchor" href="#学习阶段">¶</a>学习阶段</h5>
+<ul>
+<li>学习狭义的大数据技术栈</li>
+</ul>
+<h5 id="大数据核心工作"><a class="header-anchor" href="#大数据核心工作">¶</a>大数据核心工作</h5>
+<ul>
+<li>利用数据存储技术栈解决海量的数据存储问题</li>
+<li>利用数据计算技术栈解决海量的数据计算问题</li>
+<li>利用数据传输技术栈解决海量的数据传输问题</li>
+</ul>
+<h2 id="大数据学习规划"><a class="header-anchor" href="#大数据学习规划">¶</a>大数据学习规划</h2>
+<p>此处缺一张图  72:35</p>
+<p>此处还缺一张图  75:37</p>
+<p>此处又缺一张图  78:49</p>
+<p>81:09</p>
+<p>81:49</p>
+<p>103:36</p>
+<h2 id="大学生秋季招聘"><a class="header-anchor" href="#大学生秋季招聘">¶</a>大学生秋季招聘</h2>
+<ul>
+<li>大学生就业服务平台</li>
+<li>高效人才网</li>
+<li>国聘网</li>
+<li>中国国家人才网</li>
+<li>中国人力资源开发网</li>
+<li>中国就业网</li>
+<li>各大企业官网、公众号</li>
+<li>不止在boss直聘上</li>
+<li>简历上不要写qq邮箱</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        share
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/project/2024/07/26/CS_Notes/BidData/%E3%80%90%E5%A4%A7%E6%95%B0%E6%8D%AE%E3%80%91%E7%9B%B4%E6%92%AD%E8%AE%B0%E5%BD%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/project/2024/07/24/CS_Notes/CSAPP/%E3%80%90CSAPP%E3%80%91%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">【CSAPP】第三章 程序的机器级表示</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2024
+        <i class="ri-heart-fill heart_icon"></i> brocademaple
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/project/"><img src="/images/ayer-side.svg" alt="BROCADEMAPLE"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/categories/notes">笔记库</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/tags/reading">阅读</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/project/aboutMe">自分</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/project/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/project/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/project/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/project/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/project/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/project/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/project/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/project/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/project/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/project/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=2010857169&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
