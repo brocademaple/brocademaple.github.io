@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>coolWebPageDesign |  私の宝庫です</title>
+      <title>【Pvvn】ELF文件基础 |  私の宝庫です</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/images/ayer.png" />
@@ -64,8 +64,8 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="page-"
-  class="article article-type-page"
+  id="post-CS_Notes/PWN/【Pvvn】ELF文件基础"
+  class="article article-type-post"
   itemscope
   itemprop="blogPost"
   data-scroll-reveal
@@ -75,16 +75,85 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  coolWebPageDesign
+  【Pvvn】ELF文件基础
 </h1>
  
 
       
     </header>
-       
+     
+    <div class="article-meta">
+      <a href="/2024/08/24/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91ELF%E6%96%87%E4%BB%B6%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time datetime="2024-08-23T16:00:00.000Z" itemprop="datePublished">2024-08-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/Pwn-notes/">Pwn notes</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">382</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">1 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h3 id="第一个标题"><a class="header-anchor" href="#第一个标题">¶</a>第一个标题</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim hello.c</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hello.c</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> global_int_84;</span><br><span class="line"><span class="type">int</span> global_uninit_var;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func1</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> static_var = <span class="number">85</span>;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> static_var2;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line">    func1(static_var + static_var2 + a + b);</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc -c hello.c -m32  # 生成32位程序</span><br><span class="line"># ls</span><br><span class="line"># hello.c  hello.o</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 查看基本信息</span><br><span class="line"># 显示名为 hello.o 的目标文件的头部信息（header）</span><br><span class="line">objdump -h hello.o</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 用来显示名为 hello.o 的目标文件的ELF头部信息</span><br><span class="line">readelf -h hello.o</span><br></pre></td></tr></table></figure>
+<ul>
+<li>010editor的使用</li>
+</ul>
+<h3 id="链接（LINKING"><a class="header-anchor" href="#链接（LINKING">¶</a>链接（LINKING)</h3>
+<ul>
+<li>链接是将一些指令对其他符号地址的引用加以修正</li>
+<li>链接过程包括了
+<ul>
+<li><strong>地址和空间分配</strong>（Address and Storage Allocation)</li>
+<li><strong>符号决议</strong> (Symbol Resolution) <strong>符号绑定</strong> (Symbol Binding) <strong>名称绑定</strong>(Name Binding)</li>
+<li><strong>重定位</strong> (Relocation)</li>
+</ul>
+</li>
+</ul>
+<h4 id="静态链接"><a class="header-anchor" href="#静态链接">¶</a>静态链接</h4>
+<ul>
+<li>将多个目标文件链接在一起并生成可执行文件的过程</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.c</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> shared;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> *b)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">100</span>;</span><br><span class="line">    swap(&amp;a, &amp;shared);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// b.c</span></span><br><span class="line"><span class="type">int</span> shared = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *a. <span class="type">int</span> *b)</span> &#123;</span><br><span class="line">    *a ^= *b ^= *a ^= *b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -c a.c b.c -fno-stack-protector -m32</span><br><span class="line"># 执行完获得a.o和b.o两个文件</span><br></pre></td></tr></table></figure>
+<ul>
+<li>一个目标文件引用了另一个目标文件，就需要使用静态链接</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x ./a.o    # 给名为 a.o 的文件添加执行权限</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用ld -m elf_i386 a.o b.o -e main -o ab命令进行链接</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ld -m elf_i386 a.o b.o -e main -o ab   # 使用 GNU linker (ld) 将两个目标文件 a.o 和 b.o 链接成一个可执行文件 ab</span><br></pre></td></tr></table></figure>
+ 
       <!-- reward -->
       
     </div>
@@ -136,18 +205,39 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/coolWebPageDesign/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/2024/08/24/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91ELF%E6%96%87%E4%BB%B6%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pwn/" rel="tag">Pwn</a></li></ul>
+
     </footer>
   </div>
 
    
+  <nav class="article-nav">
+    
+    
+      <a href="/2024/08/23/CS_Notes/Linux/%E3%80%90saveMyLinux%E3%80%91Linux%E8%80%83%E5%89%8D%E7%9A%84%E5%A4%8D%E4%B9%A0ing/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">【saveMyLinux】Linux考前的复习ing</div>
+      </a>
+    
+  </nav>
+
   
    
   
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
 </article>
 
 </section>
@@ -286,6 +376,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

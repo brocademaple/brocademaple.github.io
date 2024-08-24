@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>【saveMyLinux】Linux考前的复习ing |  私の宝庫です</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/ayer.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      <canvas class="fireworks"></canvas>
+      <style>
+        .fireworks {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 99999;
+          pointer-events: none;
+        }
+      </style>
+      
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-CS_Notes/Linux/【saveMyLinux】Linux考前的复习ing"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  【saveMyLinux】Linux考前的复习ing
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/08/23/CS_Notes/Linux/%E3%80%90saveMyLinux%E3%80%91Linux%E8%80%83%E5%89%8D%E7%9A%84%E5%A4%8D%E4%B9%A0ing/" class="article-date">
+  <time datetime="2024-08-22T16:00:00.000Z" itemprop="datePublished">2024-08-23</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/Linux-notes/">Linux notes</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">10 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<ul>
+<li>翘佳人的Linux缓考复习伊始</li>
+<li>整理一下友友提供的考试形式和范围</li>
+<li><a target="_blank" rel="noopener" href="https://www.brocademaple.life/2024/07/12/CS_Notes/Linux/%5BsaveMyLinux%5DLinux%E8%AF%BE%E7%A8%8B%E8%A6%81%E7%82%B9%E5%A4%8D%E4%B9%A0/">【saveMyLinux】Linux课程要点复习 | 私の宝庫です (brocademaple.life)</a></li>
+</ul>
+<h3 id="考点整理（混杂版）"><a class="header-anchor" href="#考点整理（混杂版）">¶</a>考点整理（混杂版）</h3>
+<ul>
+<li>shell是干什么的</li>
+<li>背概念：内核、shell、文件系统</li>
+<li>linux人机图形交互ppt   让画两个图
+<ul>
+<li>进程描述图：父进程、兄进程、弟进程</li>
+<li>画进程间的族亲关系   ppt47页</li>
+<li>ppt倒数第三页    要求写程序功能</li>
+</ul>
+</li>
+<li>进程管理部分    fork   wait   exit(?)    克隆进程   创建新进程    代码部分画一行要求写这行的作用</li>
+<li>中断部分    考了    ppt倒数三页的倒二和倒三（？  上半部和下半部    时间片轮转</li>
+<li>ppt57页    io消耗性</li>
+<li>最后三个编程题考的实验手册</li>
+<li>ppt45页   pid部分     划代码考作用重点看  pid_d(?)   pid_t</li>
+<li>shell编程的执行过程？）    要背
+<ul>
+<li>简答 / 画图会考   预处理→编译→汇编→链接</li>
+</ul>
+</li>
+<li>人机交互图形界面   考了     ppt28页     问了windows和linux图形界面的区别     让画出来</li>
+</ul>
+<h3 id="考卷样子"><a class="header-anchor" href="#考卷样子">¶</a>考卷样子</h3>
+<ul>
+<li>一共四页</li>
+<li>第一面判断题和名词解释、填空题</li>
+<li>填空题有考了linux命令    目录什么的（？</li>
+<li>名词解释有：内核、shell、文件系统、时间片轮转</li>
+<li>应用题有画图</li>
+<li>简答题：进程克隆、父进程和子进程   pid</li>
+<li>编程三题是实验手册上的
+<ul>
+<li>前两道有一个是shell   比较简单，还有一道是file脚本（？实验手册页码第三页    有点像switch语句功能    前两道都比较简单</li>
+</ul>
+</li>
+<li><strong>判断题8道、填空题8道、名词解释4道、简答题4道、应用题（加注释、写结果、解释函数含义、画流程图）2道、编程题3道（2easy1hard）</strong></li>
+</ul>
+<h1>知识点的整理开始了喵</h1>
+<h2 id="可能考的概念"><a class="header-anchor" href="#可能考的概念">¶</a>可能考的概念</h2>
+<ul>
+<li><strong><u>内核</u></strong>： 内核是操作系统的核心，具有很多最基本的功能，如虚拟内存、多任务、共享库、需求加载、可执行程序和TCP/IP网络功能。
+<ul>
+<li>还有一个**<u>Linux内核</u>**的概念：操作系统的灵魂，负责管理磁盘上的文件、内存等，负责启动并运行程序，负责从网络上接收和发送数据包等等。</li>
+<li>不知道考试写哪个所以都背吧（逃</li>
+</ul>
+</li>
+<li><u><strong>Shell</strong></u>： Shell是系统的用户界面，提供了用户与内核进行交互操作的一种接口。它接收用户输入的命令并把它送入内核去执行。</li>
+<li><strong><u>文件系统</u></strong>：文件系统是文件存放在磁盘等存储设备上的组织方法。</li>
+<li><strong><u>时间片轮转</u></strong></li>
+<li><strong><u>操作系统</u></strong>：用于管理和控制计算机所有软、硬件资源的一组程序</li>
+</ul>
+<h2 id="可能考的填空"><a class="header-anchor" href="#可能考的填空">¶</a>可能考的填空</h2>
+<ul>
+<li>
+<p><u><strong>Linux目录结构</strong></u>：</p>
+<ul>
+<li><strong><u>/bin</u></strong>： 存放Linux<u>常用操作命令</u>的执行文件</li>
+<li><strong><u>/boot</u></strong>： 存放操作<u>系统启动</u>时所要用到的程序</li>
+<li><strong><u>/dev</u></strong>：包含了所有Linux系统中使用的<u>外部设备</u>（存放的实际上时一个访问这些外部设备的端口）</li>
+<li><strong><u>/etc</u></strong>：存放了<u>系统管理</u>时要用到的各种配置文件和子目录
+<ul>
+<li><strong><u>/etc/rc.d</u></strong>： 主要存放Linux启动和关闭时要用到的脚本</li>
+<li><strong><u>/etc/rc.d/init</u></strong>： 存放所有Linux服务默认的启动脚本</li>
+</ul>
+</li>
+<li><strong><u>/home</u></strong>： Linux系统中默认的用户工具根目录。执行adduser命令后系统会在 /home 目录下为对应账号建立一个同名主目录</li>
+<li><strong><u>/lib</u></strong>： 用来存放系统动态链接共享库</li>
+<li><strong><u>/lost+found</u></strong>： 大多时候为空目录。只有系统异常时会将一些遗失片段放在此目录下</li>
+<li><strong><u>/media</u></strong>： 光驱和软驱的挂载点</li>
+<li><strong><u>/misc</u></strong>： 存放从DOS下进行安装的实用工具，一般为空</li>
+<li><strong><u>/mnt</u></strong>： 软驱、光驱、硬盘的挂载点，也可以临时挂载别的文件系统</li>
+<li><strong><u>/proc</u></strong>： 用于放置系统核心与执行程序所需的一些信息</li>
+<li><strong><u>/root</u></strong>： 超级用户登录时的主目录</li>
+<li><strong><u>/sbin</u></strong>： 存放系统管理员的常用的系统管理程序</li>
+<li><strong><u>/tmp</u></strong>： 存放不同程序执行时产生的临时文件。是Linux安装软件的默认安装路径</li>
+<li><strong><u>/usr</u></strong>： 存放用户的应用程序和文件（类似Windows下的Program Files的目录）</li>
+<li><strong><u>/usr/bin</u></strong>： 系统用户使用的应用程序</li>
+<li><strong><u>/usr/sbin</u></strong>： 超级用户使用的比较高级的管理程序和系统守护程序</li>
+<li><strong><u>/usr/src</u></strong>： 内核源代码默认的放置目录</li>
+<li><strong><u>/srv</u></strong>： 存放一些服务启动之后需要提取的数据</li>
+<li><strong><u>/sys</u></strong>： 该目录下安装的2.6内核中新出现的一个文件系统sysfs</li>
+<li><strong><u>/var</u></strong>： 存放很多服务的日志信息</li>
+</ul>
+</li>
+<li>
+<p><strong><u>Linux基本命令与使用——文件管理与传输</u></strong>：</p>
+<ul>
+<li><strong><u>ls</u></strong>： 列出目录内容，包括文件和子目录的名称</li>
+<li><strong><u>cd</u></strong>： 改变工作目录</li>
+<li><strong><u>pwd</u></strong>： 显示当前工作目录的绝对路径</li>
+<li><strong><u>mkdir</u></strong>： 创建一个目录</li>
+<li><strong><u>rmdir</u></strong>： 删除空的目录
+<ul>
+<li><strong><u>-p</u></strong>   当子目录被删除后使它也成为空目录的话，则一并删除该父目录（？是酱紫吧</li>
+</ul>
+</li>
+<li><strong><u>rm</u></strong>： 删除文件或目录
+<ul>
+<li><strong><u>-f</u></strong>： 强制删除文件或目录</li>
+<li><strong><u>-i</u></strong>： 删除既有文件或目录之前先询问用户</li>
+<li><strong><u>-r</u></strong>： 删除目录，如果目录不为空，则递归处理将该目录下的所有文件及子目录一并处理</li>
+<li><strong><u>-v</u></strong>： 显示指令执行过程</li>
+</ul>
+</li>
+<li><strong><u>cp</u></strong>： 复制文件或目录</li>
+<li><strong><u>mv</u></strong>： 移动或更名现有的文件或目录
+<ul>
+<li><strong>mv [参数] 源文件或目录  目标文件或目录</strong></li>
+</ul>
+</li>
+<li><strong><u>find</u></strong>： 查找文件
+<ul>
+<li>这个命令没咋用过= =</li>
+<li><strong><u>-print</u></strong>： 将匹配的文件输出到标准输出</li>
+<li><strong><u>-exec</u></strong>： 对匹配得到文件执行该参数所给出的shell命令</li>
+<li><strong><u>-ok</u></strong>： 和-exec作用相同，加了执行前确认</li>
+</ul>
+</li>
+<li><strong><u>ln</u></strong>： 链接目录或文件
+<ul>
+<li><strong>ln [参数] 源文件 目标链接</strong></li>
+<li><strong><u>-b</u></strong>： 删除，覆盖目标文件之前的备份</li>
+<li><strong><u>-d</u></strong>： 建立硬链接</li>
+<li><strong><u>-s</u></strong>： 建立符号链接（软链接）</li>
+<li><strong><u>-f</u></strong>： 强行建立文件或目录的链接，不论文件或目录是否存在</li>
+<li><strong><u>-i</u></strong>： 覆盖既有文件之前先询问用户</li>
+<li><strong><u>-n</u></strong>： 把符号链接的目的目录视为一般文件</li>
+</ul>
+</li>
+<li><strong><u>cat</u></strong>： 连接并显示指定的一个和多个文件的有关信息
+<ul>
+<li><strong>cat [选项] 文件1 文件2 …</strong></li>
+<li><strong><u>-n</u></strong>： 由第一行开始对所有输出的行号编号</li>
+</ul>
+</li>
+<li><strong><u>chmod</u></strong>： 改变文件的访问权限
+<ul>
+<li><strong>chmod [选项] [权限] 文件</strong></li>
+<li><strong><u>-c</u></strong>： 该文件权限确定已经更改，才显示其更改动作</li>
+<li><strong><u>-f</u></strong>： 该文件权限无法被更改也不要显示错误信息</li>
+<li><strong><u>-v</u></strong>： 显示权限变更的详细资料</li>
+<li>这个命令没看懂实例= =</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><u>Linux基本命令与使用——磁盘管理与维护</u></strong>：</p>
+<ul>
+<li>
+<p><strong><u>fdisk</u></strong>： 磁盘分区表操作工具</p>
+<ul>
+<li><strong>fdisk [参数]</strong></li>
+<li>好吧这个命令就没搞懂= =</li>
+</ul>
+</li>
+<li>
+<p><strong><u>mount</u></strong>：挂载文件系统</p>
+<ul>
+<li><strong>mount [-参数] [设备名称] [挂载点]</strong></li>
+<li>……看不懂= =！</li>
+<li>后面还有一个嵌入式开发中挂载进行在线调试的例子（考完有空再了解吧！</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><u>Linux基本命令与使用——系统管理与设置</u></strong>：</p>
+<ul>
+<li><strong><u>shutdown</u></strong>：系统关机指令
+<ul>
+<li><strong>shutdown [参数] [-t秒数] 时间 [警告信息]</strong></li>
+</ul>
+</li>
+<li><strong><u>ps</u></strong>： 查看进程</li>
+<li><strong><u>kill</u></strong>： 结束进程
+<ul>
+<li><strong>kill -l [信号]</strong> / <strong>kill [-信号] 进程号</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><u>Linux基本命令与使用——网络相关</u></strong></p>
+<ul>
+<li><strong><u>ifconfig</u></strong>： 查看或设置网络设备
+<ul>
+<li><strong>ifconfig [网络设备]</strong></li>
+<li><strong>ifconfig 网络设备 [IP地址] [netmask&lt;子网掩码&gt;]</strong></li>
+</ul>
+</li>
+<li><strong><u>ping</u></strong>： 检测主机
+<ul>
+<li><strong>ping [参数] [主机名称或IP地址]</strong></li>
+</ul>
+</li>
+<li><strong><u>netstat</u></strong>： 显示网络链接、路由表和网络接口信息
+<ul>
+<li><strong>netstat [参数]</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><u>Linux基本命令与使用——备份压缩</u></strong></p>
+<ul>
+<li><strong><u>tar</u></strong>： 对文件和目录进行打包或解压
+<ul>
+<li><strong>tar [参数] [打包后文件名] 文件目录列表</strong></li>
+</ul>
+</li>
+<li><strong><u>gzip</u></strong>： 压缩或解压缩文件
+<ul>
+<li><strong>gzip [参数] 压缩(解压缩)的文件名</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="可能考的简答"><a class="header-anchor" href="#可能考的简答">¶</a>可能考的简答</h2>
+<ul>
+<li>
+<p><strong><u>操作系统的主要功能</u></strong>：</p>
+<ul>
+<li>处理机管理</li>
+<li>存储管理</li>
+<li>设备管理</li>
+<li>信息（文件）管理</li>
+</ul>
+</li>
+<li>
+<p><strong><u>Linux的特点总结</u></strong>：</p>
+<ul>
+<li>开放性</li>
+<li>多用户</li>
+<li>多任务</li>
+<li>良好的用户界面</li>
+<li>设备独立性</li>
+<li>丰富的网络功能</li>
+<li>可靠的系统安全</li>
+<li>良好的可移植性</li>
+</ul>
+</li>
+<li>
+<p><strong><u>Linux的结构</u></strong>：</p>
+<ul>
+<li>内核</li>
+<li>Shell</li>
+<li>文件系统</li>
+<li>应用程序</li>
+</ul>
+</li>
+<li>
+<p><strong><u>VI的三种工作模式</u></strong></p>
+<ul>
+<li>命令模式
+<ul>
+<li>页面不能编辑，只能接受命令</li>
+</ul>
+</li>
+<li>输入模式
+<ul>
+<li>a→附加命令</li>
+<li>c→修改命令</li>
+<li>i→插入命令</li>
+<li>o→另起新行</li>
+<li>r→替换命令   s→替换命令进入该模式</li>
+<li>esc返回命令模式</li>
+</ul>
+</li>
+<li>行编辑模式
+<ul>
+<li>在命令模式下输入冒号进入一个命令行，可显式地输入命令</li>
+</ul>
+</li>
+<li>三种模式间的切换关系</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>按ESC键</th>
+<th></th>
+<th>按“：”键</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>————————→</td>
+<td></td>
+<td>—————→</td>
+<td></td>
+</tr>
+<tr>
+<td>文本输入状态</td>
+<td></td>
+<td>命令状态</td>
+<td></td>
+<td>行编辑状态</td>
+</tr>
+<tr>
+<td></td>
+<td>←———————</td>
+<td></td>
+<td>←——————</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>按A，I，S，C，O等命令</td>
+<td></td>
+<td>执行非退出命令，如w</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>vi / vim 的更多操作没试过……平时都是i起手:wq结束……（跪</li>
+</ul>
+</li>
+</ul>
+<h2 id="可能考的应用题"><a class="header-anchor" href="#可能考的应用题">¶</a>可能考的应用题</h2>
+<ul>
+<li><strong><u>Linux人机交互——图形界面</u></strong>
+<ul>
+<li>要求会画</li>
+<li><a target="_blank" rel="noopener" href="http://localhost:4000/2024/07/12/CS_Notes/Linux/%5BsaveMyLinux%5DLinux%E8%AF%BE%E7%A8%8B%E8%A6%81%E7%82%B9%E5%A4%8D%E4%B9%A0/">【saveMyLinux】Linux课程要点复习 | 私の宝庫です</a>  第一个pdf27页</li>
+</ul>
+</li>
+</ul>
+<h2 id="可能考的编程题"><a class="header-anchor" href="#可能考的编程题">¶</a>可能考的编程题</h2>
+<h3 id="Linux下Shell脚本编程实验"><a class="header-anchor" href="#Linux下Shell脚本编程实验">¶</a>Linux下Shell脚本编程实验</h3>
+<ul>
+<li>实验任务：
+<ul>
+<li>（1）编写shell脚本程序获取<strong>环境变量</strong>并输出</li>
+<li>（2）编写包含<strong>控制语句</strong>的shell脚本程序</li>
+</ul>
+</li>
+<li>实验原理：
+<ul>
+<li>（1）简单的shell脚本程序类似批处理程序，只执行一些命令</li>
+<li>以下greet程序，显示当前登陆用户名，并显示当前时间</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># this script is used to greet loguser</span></span><br><span class="line"><span class="comment"># and print the hostname</span></span><br><span class="line"><span class="comment"># say goodbye to user and print time when script exit</span></span><br><span class="line"><span class="built_in">echo</span> hello <span class="variable">$USER</span>: <span class="variable">$HOSTNAME</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;goodbye, <span class="variable">$USER</span>&quot;</span></span><br><span class="line"><span class="built_in">date</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>（2）Shell脚本可以有条件、循环等控制语句，以设计较复杂逻辑功能的脚本程序</li>
+<li>以下check程序，判断指定的用户名是否在系统的passwd文件中的shell脚本。
+<ul>
+<li>首先判断用户是否指定了一个要查找的用户名参数</li>
+<li>然后循环在&quot;/etc/passwd&quot;文件中查找</li>
+<li>最后提示是否找到</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">NAME=<span class="variable">$1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [<span class="string">&quot;<span class="variable">$NAME</span>&quot;</span> = <span class="string">&quot;&quot;</span>]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;usage: prog name&quot;</span></span><br><span class="line">	<span class="built_in">exit</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> user <span class="keyword">in</span> $(<span class="built_in">cut</span> -d : -f 1 /etc/passwd)</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="comment">#it must be separate by space</span></span><br><span class="line">	<span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$user</span>&quot;</span> = <span class="string">&quot;<span class="variable">$NAME</span>&quot;</span> ]</span><br><span class="line">	<span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> found <span class="variable">$NAME</span> <span class="keyword">in</span> /etc/passwd</span><br><span class="line">		<span class="built_in">break</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$user</span>&quot;</span> != <span class="string">&quot;<span class="variable">$NAME</span>&quot;</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> user <span class="variable">$NAME</span> is not <span class="keyword">in</span> system</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>（3）Shell脚本程序还能和用户进行交互</li>
+<li>以下five程序：实现对用户输入的百分制的分数进行五分制，即非常优秀、优秀、优良、中等、不及格</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">declare</span> -i score   <span class="comment"># 声明一个整数变量score</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;please input score&quot;</span>   </span><br><span class="line"><span class="built_in">read</span> score   <span class="comment"># 读取用户输入的分数到变量score中</span></span><br><span class="line"><span class="keyword">while</span> [ <span class="string">&quot;<span class="variable">$score</span>&quot;</span> != -1] </span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	score = <span class="variable">$score</span> / 10</span><br><span class="line">	<span class="keyword">case</span> <span class="variable">$score</span> <span class="keyword">in</span> </span><br><span class="line">		9|10)	<span class="built_in">echo</span> <span class="string">&quot;very good&quot;</span></span><br><span class="line">				;;</span><br><span class="line">		8)		<span class="built_in">echo</span> <span class="string">&quot;good&quot;</span></span><br><span class="line">				;;</span><br><span class="line">		7)		<span class="built_in">echo</span> <span class="string">&quot;no good&quot;</span></span><br><span class="line">				;;</span><br><span class="line">		6)		<span class="built_in">echo</span> <span class="string">&quot;no bad&quot;</span></span><br><span class="line">				;;</span><br><span class="line">		*)		<span class="built_in">echo</span> <span class="string">&quot;bad&quot;</span></span><br><span class="line">	<span class="keyword">esac</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;please input score&quot;</span></span><br><span class="line">	<span class="built_in">read</span> score</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;script exiting...  OK&quot;</span></span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        share
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/2024/08/23/CS_Notes/Linux/%E3%80%90saveMyLinux%E3%80%91Linux%E8%80%83%E5%89%8D%E7%9A%84%E5%A4%8D%E4%B9%A0ing/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/08/24/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91ELF%E6%96%87%E4%BB%B6%E5%9F%BA%E7%A1%80/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            【Pvvn】ELF文件基础
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/08/21/CS_Notes/Java/%E3%80%90%E5%BC%80%E5%8F%91%E3%80%91JavaWeb/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">【开发】JavaWeb</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2024
+        <i class="ri-heart-fill heart_icon"></i> brocademaple
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="私の宝庫です"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/aboutMe">自分</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+
+<script src="/js/clickBoom1.js"></script>
+ 
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1983763439&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
