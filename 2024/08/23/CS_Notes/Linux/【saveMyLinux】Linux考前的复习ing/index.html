@@ -95,7 +95,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.7k</span>
+            <span class="post-count">4.4k</span>
         </span>
     </span>
 
@@ -104,7 +104,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">10 分钟</span>
+            <span class="post-count">17 分钟</span>
         </span>
     </span>
 </div>
@@ -344,117 +344,84 @@
 </li>
 </ul>
 </li>
-</ul>
-<h2 id="可能考的简答"><a class="header-anchor" href="#可能考的简答">¶</a>可能考的简答</h2>
+<li>
+<p><strong><u>命令结果重定向</u></strong></p>
 <ul>
 <li>
-<p><strong><u>操作系统的主要功能</u></strong>：</p>
-<ul>
-<li>处理机管理</li>
-<li>存储管理</li>
-<li>设备管理</li>
-<li>信息（文件）管理</li>
-</ul>
+<pre><code>	stdout	标准输出
+  	stderr	标准错误
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 输出重定向到文件file，终端上只能看到标准错误</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+命令  &gt;file
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 错误重定向到文件file，终端上只能看到标准输出</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+命令  2&gt;file
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 标准输出和标准错误都重定向到file，终端上看不到任何信息</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+命令  &gt;file 2&gt;&amp;1
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+# 相当于
+命令 1&gt;file 2&gt;&amp;1
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 屏蔽命令任何输出</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+&gt;/dev/null  2&gt;&amp;1
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  cp /etc/my.conf  &gt;/dev/null  2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+- ```
+  /dev/null		# 空设备
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    - 此句命令的结果是：</span><br><span class="line"></span><br><span class="line">      - cp命令没有目标文件，应该输出错误</span><br><span class="line">      - `2&gt;&amp;1`表示错误重定向指向标准输出</span><br><span class="line">      - `&gt;/dev/null`又使标准输出重定向到空，就是不要输出信息</span><br><span class="line"></span><br><span class="line">    - 即：一个错误的命令执行，什么功能都不实现，且没有任何信息或错误提示输出</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 可能考的简答</span><br><span class="line"></span><br><span class="line">- **&lt;u&gt;操作系统的主要功能&lt;/u&gt;**：</span><br><span class="line">  - 处理机管理</span><br><span class="line">  - 存储管理</span><br><span class="line">  - 设备管理</span><br><span class="line">  - 信息（文件）管理</span><br><span class="line">  </span><br><span class="line">- **&lt;u&gt;Linux的特点总结&lt;/u&gt;**：</span><br><span class="line">  - 开放性</span><br><span class="line">  - 多用户</span><br><span class="line">  - 多任务</span><br><span class="line">  - 良好的用户界面</span><br><span class="line">  - 设备独立性</span><br><span class="line">  - 丰富的网络功能</span><br><span class="line">  - 可靠的系统安全</span><br><span class="line">  - 良好的可移植性</span><br><span class="line"></span><br><span class="line">- **&lt;u&gt;Linux的结构&lt;/u&gt;**：</span><br><span class="line"></span><br><span class="line">  - 内核</span><br><span class="line">  - Shell</span><br><span class="line">  - 文件系统</span><br><span class="line">  - 应用程序</span><br><span class="line"></span><br><span class="line">- **&lt;u&gt;VI的三种工作模式&lt;/u&gt;**</span><br><span class="line"></span><br><span class="line">  - 命令模式</span><br><span class="line">    - 页面不能编辑，只能接受命令</span><br><span class="line">  - 输入模式</span><br><span class="line">    - a→附加命令</span><br><span class="line">    - c→修改命令</span><br><span class="line">    - i→插入命令</span><br><span class="line">    - o→另起新行</span><br><span class="line">    - r→替换命令   s→替换命令进入该模式</span><br><span class="line">    - esc返回命令模式</span><br><span class="line">  - 行编辑模式</span><br><span class="line">    - 在命令模式下输入冒号进入一个命令行，可显式地输入命令</span><br><span class="line">  - 三种模式间的切换关系</span><br><span class="line"></span><br><span class="line">  |              | 按ESC键               |          | 按“：”键            |            |</span><br><span class="line">  | ------------ | --------------------- | -------- | ------------------- | ---------- |</span><br><span class="line">  |              | ————————→             |          | —————→              |            |</span><br><span class="line">  | 文本输入状态 |                       | 命令状态 |                     | 行编辑状态 |</span><br><span class="line">  |              | ←———————              |          | ←——————             |            |</span><br><span class="line">  |              | 按A，I，S，C，O等命令 |          | 执行非退出命令，如w |            |</span><br><span class="line"></span><br><span class="line">  - vi / vim 的更多操作没试过……平时都是i起手:wq结束……（跪</span><br><span class="line">  </span><br><span class="line">- **&lt;u&gt;GCC的执行过程&lt;/u&gt;**</span><br><span class="line"></span><br><span class="line">  - 使用gcc由C语言源代码文件生成可执行文件的过程：</span><br><span class="line">    - **&lt;u&gt;预处理→编译→汇编→连接&lt;/u&gt;**</span><br><span class="line"></span><br><span class="line">  | 预处理 | cpp执行，分析包含文件、预编译语句等 |</span><br><span class="line">  | ------ | ----------------------------------- |</span><br><span class="line">  | ↓      |                                     |</span><br><span class="line">  | 编译   | ccl执行，生成目标文件               |</span><br><span class="line">  | ↓      |                                     |</span><br><span class="line">  | 汇编   | as执行，针对汇编语言                |</span><br><span class="line">  | ↓      |                                     |</span><br><span class="line">  | 连接   | ld执行，安排所有目标文件            |</span><br><span class="line"></span><br><span class="line">  - 设置输出的文件</span><br><span class="line"></span><br><span class="line">    - 默认情况下gcc编译出的程序为当前目录下的文件`a.out`</span><br><span class="line"></span><br><span class="line">    - `-o`参数可以设置输出的目标文件</span><br><span class="line"></span><br><span class="line">    - ```</span><br><span class="line">      gcc HelloWorld.c -o HelloWorld</span><br><span class="line">      # 将代码编译成可执行程序HelloWorld</span><br></pre></td></tr></table></figure>
+
+- ```
+  gcc HelloWorld.c -o /tmp/HelloWorld
+  # 将目录文件设置成/tmp目录下的文件HelloWorld
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 几个常用的后缀名及其对应的功能</span><br><span class="line"></span><br><span class="line">  | 后缀名  | 对应功能                                     |</span><br><span class="line">  | ------- | -------------------------------------------- |</span><br><span class="line">  | -c      | 只编译不链接，生成目标文件&quot; .o&quot; gcc -c       |</span><br><span class="line">  | -S      | 只编译不汇编，生成汇编代码&quot; .s&quot; gcc -S       |</span><br><span class="line">  | -o file | 把输出文件输出到file里    as a.s -o a.o      |</span><br><span class="line">  | -g      | 在执行程序中包含标准调试信息                 |</span><br><span class="line">  | -E      | 只进行预编译，不做其他处理   &quot;.i &quot; gcc -E -o |</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- **&lt;u&gt;链接库&lt;/u&gt;**</span><br><span class="line"></span><br><span class="line">  - 静态链接库</span><br><span class="line"></span><br><span class="line">    - 最简单的函数库形式</span><br><span class="line">    - 以`.a`结尾</span><br><span class="line">    - 链接静态库的可执行文件中包含了库中所链接函数对应的二进制执行代码</span><br><span class="line"></span><br><span class="line">  - 动态函数库</span><br><span class="line"></span><br><span class="line">    - 静态函数库的缺点：同时运行多个使用同一函数库中的函数的程序，必须为每个程序复制一份一样的函数，会占用大量内存和磁盘空间</span><br><span class="line">    - 动态函数库克服了这一缺点</span><br><span class="line"></span><br><span class="line">  - Linux下：使用`ldd`查询某个程序使用了哪些动态库</span><br><span class="line"></span><br><span class="line">  - Windows系统中：都是`dll`库</span><br><span class="line"></span><br><span class="line">  - 编译为**静态**链接库：</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    gcc -c add.c -o add.o</span><br><span class="line">    gcc -c sub.c -o sub.o</span><br><span class="line">    ar -crv libmylib.a add.o sub.o</span><br><span class="line">    # ar的三个参数：</span><br><span class="line">    # r：将文件插入归档文件中</span><br><span class="line">    # c：建立归档文件</span><br><span class="line">    # v：显示信息</span><br></pre></td></tr></table></figure>
+
+</code></pre>
 </li>
 <li>
-<p><strong><u>Linux的特点总结</u></strong>：</p>
-<ul>
-<li>开放性</li>
-<li>多用户</li>
-<li>多任务</li>
-<li>良好的用户界面</li>
-<li>设备独立性</li>
-<li>丰富的网络功能</li>
-<li>可靠的系统安全</li>
-<li>良好的可移植性</li>
-</ul>
+<pre><code># 使用系统默认库路径：
+cp libmylib.a /lib/   # 将库文件 libmylib.a 复制到了系统的 /lib/ 目录下
+
+gcc -o main main.c -static -lmylib  # 编译 main.c 文件，并链接名为 mylib 的静态库
+
+# lib和.a都是系统指定的静态库文件的固定格式，mylib→静态库的名称
+# 编译时，链接器会在标准路径（/usr/lib; /lib)或者用户指定的路径下去找.a的文件
+
+gcc -o main main.c -static -L. -lmylib  # -L.选项：告诉链接器在当前目录 (.) 下寻找库文件
+# 如果 libmylib.a 存在于当前工作目录中，那么链接器就会使用它。如果没有这个选项，链接器将按照默认的搜索路径去寻找库文件
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 编译为动态链接库：</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  gcc -c *.c   // 支持通配符  // 使用 gcc 编译器编译所有 .c 扩展名的源文件，并产生对应的 .o 对象文件</span><br><span class="line">  // -c 选项告诉 gcc 只进行编译阶段的操作，而不进行链接阶段的操作</span><br><span class="line">  // 预编译多个源文件</span><br><span class="line">  </span><br><span class="line">  gcc -shared -fpic -o libmym.so *.o  // 生成一个动态库   // 将之前生成的所有 .o 文件链接成一个共享库（动态链接库），命名为 libmym.so</span><br><span class="line">  </span><br><span class="line">  libmym.so;  （与位置无关代码）</span><br><span class="line">  gcc main.c -lmym -L.  // 链接动态库libmym.so编译main.c的程序</span><br></pre></td></tr></table></figure>
+
+</code></pre>
 </li>
-<li>
-<p><strong><u>Linux的结构</u></strong>：</p>
-<ul>
-<li>内核</li>
-<li>Shell</li>
-<li>文件系统</li>
-<li>应用程序</li>
-</ul>
-</li>
-<li>
-<p><strong><u>VI的三种工作模式</u></strong></p>
-<ul>
-<li>命令模式
-<ul>
-<li>页面不能编辑，只能接受命令</li>
-</ul>
-</li>
-<li>输入模式
-<ul>
-<li>a→附加命令</li>
-<li>c→修改命令</li>
-<li>i→插入命令</li>
-<li>o→另起新行</li>
-<li>r→替换命令   s→替换命令进入该模式</li>
-<li>esc返回命令模式</li>
-</ul>
-</li>
-<li>行编辑模式
-<ul>
-<li>在命令模式下输入冒号进入一个命令行，可显式地输入命令</li>
-</ul>
-</li>
-<li>三种模式间的切换关系</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>按ESC键</th>
-<th></th>
-<th>按“：”键</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td>————————→</td>
-<td></td>
-<td>—————→</td>
-<td></td>
-</tr>
-<tr>
-<td>文本输入状态</td>
-<td></td>
-<td>命令状态</td>
-<td></td>
-<td>行编辑状态</td>
-</tr>
-<tr>
-<td></td>
-<td>←———————</td>
-<td></td>
-<td>←——————</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>按A，I，S，C，O等命令</td>
-<td></td>
-<td>执行非退出命令，如w</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>vi / vim 的更多操作没试过……平时都是i起手:wq结束……（跪</li>
 </ul>
 </li>
 </ul>
 <h2 id="可能考的应用题"><a class="header-anchor" href="#可能考的应用题">¶</a>可能考的应用题</h2>
 <ul>
-<li><strong><u>Linux人机交互——图形界面</u></strong>
+<li>
+<p><strong><u>Linux人机交互——图形界面</u></strong></p>
 <ul>
 <li>要求会画</li>
 <li><a target="_blank" rel="noopener" href="http://localhost:4000/2024/07/12/CS_Notes/Linux/%5BsaveMyLinux%5DLinux%E8%AF%BE%E7%A8%8B%E8%A6%81%E7%82%B9%E5%A4%8D%E4%B9%A0/">【saveMyLinux】Linux课程要点复习 | 私の宝庫です</a>  第一个pdf27页</li>
+</ul>
+</li>
+<li>
+<p>一个带变量的Makefile的例子</p>
+<ul>
+<li>
+<pre><code>OBJS = prog.o code.o
+CC = gcc
+	test: $&#123; OBJS &#125;
+		$&#123; CC &#125; -o test $&#123; OBJS &#125;
+	prog.o: prog.c prog.h code.h
+		$&#123; CC &#125; -c prog.c -o prog.o
+	code.o: code.c code.h
+		$&#123; CC &#125; -c code.c -o code.o
+	clean:
+		rm -f *.o
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  OBJS: 包含了一个列表，列出所有需要编译的对象文件，这里是 prog.o 和 code.o</span><br><span class="line">  CC: 指定了编译器，这里使用的是 gcc</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  test: 这个 Makefile 的默认目标</span><br><span class="line">  $&#123;OBJS&#125;: 包含了所有需要的对象文件</span><br><span class="line">  -$&#123;CC&#125; -o test $&#123;OBJS&#125;: 使用指定的编译器 (gcc) 将所有对象文件链接成一个可执行文件，输出文件名为 test</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  prog.o: 从源文件 prog.c 构建对象文件 prog.o</span><br><span class="line">  prog.c: 源文件</span><br><span class="line">  prog.h, code.h: prog.c 的依赖项，如果有任何这些文件改变，则 prog.o 需要重新编译</span><br><span class="line">  -$&#123;CC&#125; -c prog.c -o prog.o: 使用 gcc 编译 prog.c 成 prog.o</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  code.o: 从源文件 code.c 构建对象文件 code.o</span><br><span class="line">  code.c: 源文件</span><br><span class="line">  code.h: code.c 的依赖项，如果这个头文件有改变，则 code.o 需要重新编译</span><br><span class="line">  -$&#123;CC&#125; -c code.c -o code.o: 使用 gcc 编译 code.c 成 code.o</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  clean: 定义了清理规则，用来删除所有 .o 文件</span><br><span class="line">  rm -f *.o: 删除所有 .o 文件</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+<li>
+<p>使用：在同一个目录下已经放置了<code>Makefile</code>  <code>prog.c</code> <code>code.c</code>  <code>prog.h</code>  <code>code.h</code>      运行<code>sudo make</code>     要删除所有的<code>.o</code>文件：<code>sudo make clean</code></p>
+</li>
 </ul>
 </li>
 </ul>
@@ -491,6 +458,12 @@
 <li>以下five程序：实现对用户输入的百分制的分数进行五分制，即非常优秀、优秀、优良、中等、不及格</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">declare</span> -i score   <span class="comment"># 声明一个整数变量score</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;please input score&quot;</span>   </span><br><span class="line"><span class="built_in">read</span> score   <span class="comment"># 读取用户输入的分数到变量score中</span></span><br><span class="line"><span class="keyword">while</span> [ <span class="string">&quot;<span class="variable">$score</span>&quot;</span> != -1] </span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	score = <span class="variable">$score</span> / 10</span><br><span class="line">	<span class="keyword">case</span> <span class="variable">$score</span> <span class="keyword">in</span> </span><br><span class="line">		9|10)	<span class="built_in">echo</span> <span class="string">&quot;very good&quot;</span></span><br><span class="line">				;;</span><br><span class="line">		8)		<span class="built_in">echo</span> <span class="string">&quot;good&quot;</span></span><br><span class="line">				;;</span><br><span class="line">		7)		<span class="built_in">echo</span> <span class="string">&quot;no good&quot;</span></span><br><span class="line">				;;</span><br><span class="line">		6)		<span class="built_in">echo</span> <span class="string">&quot;no bad&quot;</span></span><br><span class="line">				;;</span><br><span class="line">		*)		<span class="built_in">echo</span> <span class="string">&quot;bad&quot;</span></span><br><span class="line">	<span class="keyword">esac</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;please input score&quot;</span></span><br><span class="line">	<span class="built_in">read</span> score</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;script exiting...  OK&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Makefile文件的编写"><a class="header-anchor" href="#Makefile文件的编写">¶</a>Makefile文件的编写</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Makefile文件的基本结构</span></span><br><span class="line">宏定义（变量定义）</span><br><span class="line">目标：依赖文件列表</span><br><span class="line">	命令  （命令要缩进一个[tab]）</span><br><span class="line">	...</span><br><span class="line">目标：依赖文件列表</span><br><span class="line">	命令</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># find_src_files.sh</span></span><br><span class="line"><span class="comment"># !/bin/bash</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">dir</span> <span class="keyword">in</span> <span class="string">&#x27;find -type d&#x27;</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="built_in">cd</span> <span class="variable">$dir</span>; <span class="built_in">echo</span> -n <span class="string">&#x27;find *.c&#x27;</span>; <span class="built_in">echo</span> -n <span class="string">&quot; &quot;</span>; <span class="built_in">cd</span> - &gt;/dev/nul</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一个较通用的Makefile文件</span></span><br><span class="line">CC = gcc</span><br><span class="line">CFLAGS = </span><br><span class="line">CPPFLAGS = </span><br><span class="line">LINK = gcc</span><br><span class="line">LDFLAGS = </span><br><span class="line"></span><br><span class="line"><span class="comment">## debug or release flag, debug -1, release -0</span></span><br><span class="line">DEBUGorRELEASE = 0</span><br><span class="line"></span><br><span class="line"><span class="comment">## &quot;ifeq&quot; and &quot;(&quot; ,ust be separated by space</span></span><br><span class="line">ifeq ($(DEBUGorRELEASE), 0)</span><br><span class="line">OUTPUT_DIR = ./release</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">CFLAGS += -g</span><br><span class="line">CPPFLAGS += -g</span><br><span class="line">OUTPUT_DIR = ./debug</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">target = a.out</span><br><span class="line"></span><br><span class="line">VPATH = $(shell Find -<span class="built_in">type</span> d)</span><br><span class="line">FIND_SRC_FILES = $(shell find_src_files.sh)</span><br><span class="line">SRC_FILES = $(notdir $(FIND_SRC_FILES))</span><br><span class="line"></span><br><span class="line">OBJ_FILES = $(SRC_FILES:.c=.o)</span><br><span class="line">DEP_FILES = $(OBJ_FILES:.o=.d)</span><br><span class="line">OUTPUT_OBJS = $(addprefix $(OUTPUT_DIR)/, $(OBJ_FILES))</span><br><span class="line">OUTPUT_DEPS = $(addprefix $(OUTPUT_DIR)/, $(DEP_FILES))</span><br><span class="line"></span><br><span class="line">all: $(OUTPUT_DIR)/$(target)</span><br><span class="line"></span><br><span class="line"><span class="comment">## link all objs and libs</span></span><br><span class="line">$(OUTPUT_DIR)/$(target): $(OUTPUT_OBJS)</span><br><span class="line">	<span class="built_in">echo</span> $(SRC_FILES)</span><br><span class="line">	$(LINK) $(LDFLAGS) $(OUTPUT_OBJS) $(CFLAGS) -o <span class="variable">$@</span></span><br><span class="line">	@<span class="built_in">echo</span> <span class="string">&quot;linking...................ok&quot;</span></span><br><span class="line">	</span><br><span class="line"><span class="comment">## check output dir</span></span><br><span class="line"><span class="string">&quot;<span class="subst">$(OUTPUT_DIR)</span>&quot;</span>:</span><br><span class="line">	-@[-d <span class="string">&quot;<span class="subst">$(OUTPUT_DIR)</span>&quot;</span>] || <span class="built_in">mkdir</span> <span class="string">&quot;<span class="subst">$(OUTPUT_DIR)</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>复习提纲到pdf第41页</li>
+</ul>
  
       <!-- reward -->
       
