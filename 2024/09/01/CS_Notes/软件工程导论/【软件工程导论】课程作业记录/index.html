@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>【软件工程导论】课程作业记录 |  私の宝庫です</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/ayer.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      <canvas class="fireworks"></canvas>
+      <style>
+        .fireworks {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 99999;
+          pointer-events: none;
+        }
+      </style>
+      
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-CS_Notes/软件工程导论/【软件工程导论】课程作业记录"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  【软件工程导论】课程作业记录
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/09/01/CS_Notes/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/%E3%80%90%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA%E3%80%91%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time datetime="2024-08-31T16:00:00.000Z" itemprop="datePublished">2024-09-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/Software-Engineering-notes/">Software Engineering notes</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">5 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<ul>
+<li>软件工程导论</li>
+</ul>
+<h1>第一次课程作业</h1>
+<h2 id="软件复杂性问题"><a class="header-anchor" href="#软件复杂性问题">¶</a>软件复杂性问题</h2>
+<ul>
+<li>任务：阅读ppt中关于软件复杂性问题的解释</li>
+</ul>
+<h2 id="对软件科学的贡献"><a class="header-anchor" href="#对软件科学的贡献">¶</a>对软件科学的贡献</h2>
+<ul>
+<li>任务：了解司马贺、图灵等科学家对软件科学的重要贡献</li>
+</ul>
+<h2 id="人月神话节选阅读"><a class="header-anchor" href="#人月神话节选阅读">¶</a>人月神话节选阅读</h2>
+<ul>
+<li>任务：从人月神话中任选1章阅读</li>
+</ul>
+<h2 id="了解软件工程发展前沿"><a class="header-anchor" href="#了解软件工程发展前沿">¶</a>了解软件工程发展前沿</h2>
+<ul>
+<li>任务：阅读软件工程论文，了解软件工程发展前沿</li>
+</ul>
+<h1>技能提升作业报告</h1>
+<blockquote>
+<p>需要实验内容和结果</p>
+</blockquote>
+<h2 id="甘特图"><a class="header-anchor" href="#甘特图">¶</a>甘特图</h2>
+<ul>
+<li>任务：用甘特图制定完成某件事的计划</li>
+</ul>
+<h3 id="what-is-甘特图"><a class="header-anchor" href="#what-is-甘特图">¶</a>what is 甘特图</h3>
+<ul>
+<li>一种条状图，直观展示项目进展随时间的走势及联系</li>
+<li>项目时间由横轴表示，项目活动由纵轴表示</li>
+<li>整体线条表示整个项目期间内，计划和实际的活动完成情况</li>
+<li></li>
+</ul>
+<h3 id="甘特图制作流程"><a class="header-anchor" href="#甘特图制作流程">¶</a>甘特图制作流程</h3>
+<ol>
+<li>创建任务表。其中包含项目主要元素，<strong><u>任务名称</u></strong>、<strong><u>持续时间</u></strong>、**<u>工期</u>**等</li>
+<li>（传统：用Excel制作）</li>
+<li>我用的亿图图示，导入模板，进行调整</li>
+</ol>
+<h2 id="数据流图"><a class="header-anchor" href="#数据流图">¶</a>数据流图</h2>
+<ul>
+<li>任务：根据你熟悉的某一应用，画出系统的数据流图</li>
+</ul>
+<h3 id="数据流图的概念"><a class="header-anchor" href="#数据流图的概念">¶</a>数据流图的概念</h3>
+<ul>
+<li>数据流图（Data Flow Diagram，DFD）是一种图形化技术，它描绘<strong>信息流</strong>和<strong>数据</strong>从<strong>输入移动到输出的过程</strong>中所经受的变换</li>
+</ul>
+<h3 id="数据流图的优点"><a class="header-anchor" href="#数据流图的优点">¶</a>数据流图的优点</h3>
+<ul>
+<li>没有任何具体的物理元素，只是描绘信息在软件中流动和被处理的情况</li>
+<li>是系统逻辑功能的图形表示，易理解，是分析员与用户之间极好的沟通工具</li>
+<li>必须完成的基本逻辑功能，不需考虑怎样具体实现</li>
+<li>可以在任何抽象层次上被用来表示系统或软件；可以被分层次地画，层次越低，表现出的信息流细节和功能细节也越多</li>
+</ul>
+<h3 id="数据流图的基本符号"><a class="header-anchor" href="#数据流图的基本符号">¶</a>数据流图的基本符号</h3>
+<ul>
+<li>正方形（或立方体）表示<strong>数据的源点或终点</strong></li>
+<li>圆角矩形（或圆形）代表<strong>变换数据的处理</strong></li>
+<li>开口矩形（或两条平行横线）代表<strong>数据存储</strong></li>
+<li>箭头表示数据流，即<strong>特定数据的流动方向</strong></li>
+</ul>
+<h3 id="数据流图的注意事项"><a class="header-anchor" href="#数据流图的注意事项">¶</a>数据流图的注意事项</h3>
+<ul>
+<li>在数据流图中应该描绘<u>所有可能的数据流向</u>，而不应该描绘出现某个数据流的条件</li>
+<li><strong>处理</strong>并不一定是一个程序
+<ul>
+<li>一个处理框可以代表一系列程序、单个程序或者程序的一个模块</li>
+</ul>
+</li>
+<li>一个<strong>数据存储</strong>也并不等同于一个文件
+<ul>
+<li>可以表示一个文件、文件的一部分、数据库的元素、记录的一部分等</li>
+</ul>
+</li>
+<li>数据存储和数据流都是数据，仅仅所处的状态不同
+<ul>
+<li><strong>数据存储</strong>是处于静止状态的数据</li>
+<li><strong>数据流</strong>是处于运动中的数据</li>
+</ul>
+</li>
+<li>通常在数据流图中忽略出错处理，也不包括诸如打开或关闭文件之类的内务处理
+<ul>
+<li>数据流图的基本要点：描绘“做什么”而不考虑“怎样做”</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据流图的成分分析"><a class="header-anchor" href="#数据流图的成分分析">¶</a>数据流图的成分分析</h3>
+<ul>
+<li><strong><u>源点和终点</u></strong>、<strong><u>处理</u></strong>、<strong><u>数据存储</u><strong>和</strong><u>数据流</u></strong>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/I_r_o_n_M_a_n/article/details/121309525?ops_request_misc=%7B%22request%5Fid%22%3A%22A7C6EE2F-C1B8-4829-97BC-0D6ECB69352E%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;request_id=A7C6EE2F-C1B8-4829-97BC-0D6ECB69352E&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-121309525-null-null.142%5Ev100%5Epc_search_result_base2&amp;utm_term=%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE&amp;spm=1018.2226.3001.4187">软件工程 – 数据流图的画法_数据流图怎么画-CSDN博客</a>    <strong>2.示例：工厂订单报表</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="画数据流图"><a class="header-anchor" href="#画数据流图">¶</a>画数据流图</h3>
+<ul>
+<li>按照上面四种数据类型进行<strong>成分分离</strong>后，开始着手画数据流图</li>
+</ul>
+<blockquote>
+<p>计算机系统本质上都是把输入数据变换成输出数据</p>
+<p>任何系统的基本模型都由若干个数据源点/终点以及一个处理组成</p>
+</blockquote>
+<ul>
+<li><u>顶层数据流图</u>（<strong>突出表明了数据的源点和终点</strong>）
+<ul>
+<li>是否列出了所有给定的数据源点 / 终点</li>
+</ul>
+</li>
+<li><u>第0层数据流图</u>（<strong>描绘系统的主要功能</strong>）
+<ul>
+<li>给处理和数据存储都加了编号</li>
+<li>目的：便于引用和追踪</li>
+</ul>
+</li>
+<li><u>第1层数据流图</u>（<strong>对功能级数据流图中描绘的系统主要功能进一步细化</strong>）
+<ul>
+<li>当进一步分解将<u>涉及如何具体地实现一个功能</u>时，就不应该再分解了</li>
+<li>在对数据流图分层细化时必须保持<strong>信息连续性</strong>，即当把一个处理分解为一系列处理时，分解前和分解后的<strong>输入/输出数据流</strong>必须相同</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据流图命名规范"><a class="header-anchor" href="#数据流图命名规范">¶</a>数据流图命名规范</h3>
+<h4 id="数据流（或数据存储）命名"><a class="header-anchor" href="#数据流（或数据存储）命名">¶</a>数据流（或数据存储）命名</h4>
+<ul>
+<li>应代表整个数据流（或数据存储）的内容，而不是仅反映某些成分</li>
+<li>不要使用空洞、缺乏具体含义的名字（如“数据”、“信息”、“输入”之类）</li>
+<li>如果在为某个数据流（或数据存储）起名字时遇到了困难，则很可能是因为<u>对数据流图分解不恰当</u>造成的，应该试试<u>重新分解</u>，看是否能克服这个困难</li>
+</ul>
+<h4 id="处理命名"><a class="header-anchor" href="#处理命名">¶</a>处理命名</h4>
+<ul>
+<li>
+<p>通常先为<strong>数据流</strong>命名，然后再为<strong>与之相关联的处理</strong>命名</p>
+<blockquote>
+<p>体现了人类习惯的“由表及里”的思考过程</p>
+</blockquote>
+</li>
+<li>
+<p>反映<strong>整个处理</strong>的功能，而不是它的一部分功能</p>
+</li>
+<li>
+<p>最好由一个具体的<strong>及物动词</strong>加上一个具体的<strong>宾语</strong>组成</p>
+<ul>
+<li>尽量避免使用“加工”、“处理”等空洞笼统的动词作为名字</li>
+</ul>
+</li>
+<li>
+<p>通常名字中<strong>仅包括一个动词</strong></p>
+<ul>
+<li>如果必须用两个动词才能描述整个处理的功能，则把这个处理再分解成两个处理可能更恰当些</li>
+</ul>
+</li>
+<li>
+<p>如果在为某个处理命名时遇到困难，则很可能是发现了<strong>分解不当</strong>的迹象，应考虑重新分解</p>
+</li>
+</ul>
+<h2 id="UML图中的类图和活动图"><a class="header-anchor" href="#UML图中的类图和活动图">¶</a>UML图中的类图和活动图</h2>
+<ul>
+<li>任务：使用绘制数据流图的需求为背景，画出UML图中的类图和活动图</li>
+</ul>
+<h2 id="自动识别不合规范的代码"><a class="header-anchor" href="#自动识别不合规范的代码">¶</a>自动识别不合规范的代码</h2>
+<ul>
+<li>任务：使用Java或其他代码格式控制工具，对不符合规范的代码进行自动识别，给出提示（java代码规范不做要求，但是应当具有权威性，如阿里的java代码规范）</li>
+</ul>
+<h2 id="软件测试"><a class="header-anchor" href="#软件测试">¶</a>软件测试</h2>
+<ul>
+<li>任务：使用Junit 和 Jmeter对某一软件完成相应测试</li>
+</ul>
+<h2 id="Maven打包工具"><a class="header-anchor" href="#Maven打包工具">¶</a>Maven打包工具</h2>
+<ul>
+<li>任务：使用Maven打包工具</li>
+</ul>
+<h2 id="结论分析"><a class="header-anchor" href="#结论分析">¶</a>结论分析</h2>
+<h1>参考材料</h1>
+<h2 id="甘特图-v2"><a class="header-anchor" href="#甘特图-v2">¶</a>甘特图</h2>
+<ul>
+<li>甘特图制作流程学习  <a target="_blank" rel="noopener" href="https://blog.csdn.net/asdn_123/article/details/109539008">如何用Excel快速制作甘特图？（超详细！）_表格如何一键生成甘特图-CSDN博客</a></li>
+<li>快速了解甘特图     <a target="_blank" rel="noopener" href="https://blog.csdn.net/bby2017/article/details/127870882?ops_request_misc=%7B%22request%5Fid%22%3A%22E37E2584-3B6B-408E-8CA9-98DCCD76E8BE%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;request_id=E37E2584-3B6B-408E-8CA9-98DCCD76E8BE&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-127870882-null-null.142%5Ev100%5Epc_search_result_base2&amp;utm_term=%E7%94%98%E7%89%B9%E5%9B%BE&amp;spm=1018.2226.3001.4187">甘特图是什么？如何快速搭建？_甘特图基于什么数据。-CSDN博客</a></li>
+</ul>
+<h2 id="数据流图-v2"><a class="header-anchor" href="#数据流图-v2">¶</a>数据流图</h2>
+<ul>
+<li>数据流图的概念和示例     <a target="_blank" rel="noopener" href="https://blog.csdn.net/I_r_o_n_M_a_n/article/details/121309525?ops_request_misc=%7B%22request%5Fid%22%3A%22A7C6EE2F-C1B8-4829-97BC-0D6ECB69352E%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;request_id=A7C6EE2F-C1B8-4829-97BC-0D6ECB69352E&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-121309525-null-null.142%5Ev100%5Epc_search_result_base2&amp;utm_term=%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE&amp;spm=1018.2226.3001.4187">软件工程 – 数据流图的画法_数据流图怎么画-CSDN博客</a></li>
+<li></li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        share
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/2024/09/01/CS_Notes/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/%E3%80%90%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA%E3%80%91%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A%E8%AE%B0%E5%BD%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/" rel="tag">软件工程导论</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2024/08/31/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%B8%80%E4%BA%9B%E4%B8%93%E9%97%A8%E7%BC%96%E5%86%99%E7%9A%84Prompt%E4%BF%9D%E5%AD%98/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title"></div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2024
+        <i class="ri-heart-fill heart_icon"></i> brocademaple
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="私の宝庫です"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/aboutMe">自分</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+
+<script src="/js/clickBoom1.js"></script>
+ 
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1983763439&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

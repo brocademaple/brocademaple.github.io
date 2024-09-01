@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>【计组】笔记 |  私の宝庫です</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/ayer.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      <canvas class="fireworks"></canvas>
+      <style>
+        .fireworks {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 99999;
+          pointer-events: none;
+        }
+      </style>
+      
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-CS_Notes/computer organization/【计组】笔记"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  【计组】笔记
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/08/29/CS_Notes/computer%20organization/%E3%80%90%E8%AE%A1%E7%BB%84%E3%80%91%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2024-08-28T16:00:00.000Z" itemprop="datePublished">2024-08-29</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/computer-organization/">computer organization</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">8 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<ul>
+<li>计算机组成原理的笔记</li>
+<li>应该是需要很多图</li>
+<li></li>
+</ul>
+<h3 id="前言-计组学什么"><a class="header-anchor" href="#前言-计组学什么">¶</a>前言 / 计组学什么</h3>
+<ul>
+<li>重点讲授：单处理器系统的组成和工作原理
+<ul>
+<li>在此基础上：并行体系结构</li>
+</ul>
+</li>
+<li>理解构成计算机硬件的基本电路的特性和设计方法</li>
+<li>了解计算机系统整体概念</li>
+<li>理解指令在计算机硬件上的执行过程</li>
+<li>理解计算机系统的层次结构</li>
+<li>理解高级语言程序、指令系统体系结构、编译器、操作系统和硬件部件之间的关系</li>
+</ul>
+<h1>第一章 计算机系统概论</h1>
+<h2 id="计算机的分类"><a class="header-anchor" href="#计算机的分类">¶</a>计算机的分类</h2>
+<ul>
+<li>电子模拟计算机</li>
+<li>电子数字计算机 / 电脑 / 电子计算机
+<ul>
+<li>专用计算机</li>
+<li>通用计算机
+<ul>
+<li>超级计算机</li>
+<li>大型机</li>
+<li>服务器</li>
+<li>PC机</li>
+<li>单片机</li>
+<li>多核机</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="完整的计算机系统"><a class="header-anchor" href="#完整的计算机系统">¶</a>完整的计算机系统</h2>
+<ul>
+<li><strong>硬件</strong>：组成计算机的各种设备实体
+<ul>
+<li><strong>硬件系统</strong>：组成一台计算机的各种物理装置，由各种实实在在的器件组成的，是计算机进行工作的物质基础</li>
+</ul>
+</li>
+<li><strong>软件</strong>：泛指各种程序和文件</li>
+</ul>
+<h2 id="计算机系统的硬件组成"><a class="header-anchor" href="#计算机系统的硬件组成">¶</a>计算机系统的硬件组成</h2>
+<ul>
+<li>
+<p>五大功能部件：</p>
+<ul>
+<li><strong><u>运算器</u></strong>、<strong><u>控制器</u></strong>、<strong><u>存储器</u></strong>（<u>高速缓存  主存储器  虚拟存储器</u>）、<strong><u>输入设备</u></strong>、<strong><u>输出设备</u></strong>
+<ul>
+<li>运算器→算盘</li>
+<li>存储器→“记忆”功能的部件</li>
+<li>输入输出设备</li>
+<li>控制器→自动控制整个计算过程</li>
+</ul>
+</li>
+<li>另一种分法：CPU、存储器、输入设备、输出设备、总线</li>
+</ul>
+</li>
+<li>
+<p>设备和部件通过 <strong><u>总线</u></strong> 和 **<u>接口</u>**连结在一起，构成完整的计算机系统</p>
+</li>
+<li>
+<p>此处缺图  ppt合集11页   15页</p>
+</li>
+</ul>
+<h3 id="运算器"><a class="header-anchor" href="#运算器">¶</a>运算器</h3>
+<ul>
+<li>计算机中进行数据加工的部件</li>
+<li>主要功能：
+<ul>
+<li>执行数值数据的加减乘除等<em>算术运算</em>和逻辑数据的与或非等<em>逻辑运算</em>，由一个被称为 ALU 的线路完成</li>
+<li>暂时存放参加运算的数据和中间结果，由多个通用寄存器和乘商寄存器承担</li>
+<li>通常也是数据传输的通路</li>
+</ul>
+</li>
+<li>运算中，数的位数越多，计算的精度越高，但所需电子器件也越多</li>
+<li>运算器长度一般是：8位、16位、32位或64位</li>
+</ul>
+<h3 id="控制器"><a class="header-anchor" href="#控制器">¶</a>控制器</h3>
+<ul>
+<li>
+<p>计算机中控制执行指令的部件，向计算机各功能部件提供每一时刻协同运行所需要的控制信号</p>
+<ul>
+<li>
+<p>正确分析与执行每条指令：</p>
+<blockquote>
+<p>取指令－&gt;分析指令－&gt;执行指令</p>
+</blockquote>
+</li>
+<li>
+<p>保证指令按规定序列自动连续地执行</p>
+</li>
+<li>
+<p>对各种异常情况和请求及时响应和处理</p>
+</li>
+</ul>
+</li>
+<li>
+<p><u>基本任务</u>：按照程序所排的指令序列，从存储器取出一条指令放到控制器中，对该指令的操作码由译码器进行分析判别，然后根据指令性质，执行这条指令，进行相应的操作</p>
+<ul>
+<li><strong>取指周期</strong>：取指令的时间</li>
+<li><strong>执行周期</strong>：执行指令的时间</li>
+<li>控制器反复交替地处在取指周期与执行周期之中。每取出一条指令，控制器中的指令计数器就加1，从而为取下一条指令做好准备</li>
+<li><strong>存储程序</strong>：将指令存放到存储器的程序</li>
+</ul>
+</li>
+</ul>
+<h3 id="存储器"><a class="header-anchor" href="#存储器">¶</a>存储器</h3>
+<ul>
+<li>
+<p>由<em>高速缓冲存储器、主存储器、虚拟存储器</em>所组成的<em>多级存储器系统</em>，是计算机中用于存储程序和数据的部件</p>
+</li>
+<li>
+<p>功能：</p>
+<ul>
+<li>保存或“记忆”解题的<strong>原始数据</strong>和<strong>解题步骤</strong>。在运算前把参加运算的数据和解体步骤通过输入输出设备送到存储器中保存起来</li>
+<li>存储器存储的全是0 / 1的二进制代码</li>
+<li>目前采用半导体器件来作为存储器</li>
+<li>一个半导体触发器（D触发器等）可以记忆一位二进制代码，16位二进制代码就需要16个触发器来保存</li>
+</ul>
+</li>
+<li>
+<p>存储器的任何位置既可以存数据也可以存指令，但是一般将指令和数据分开存</p>
+</li>
+<li>
+<p><strong>程序控制</strong>：控制器依靠存储的的程序来控制全机协调地完成计算任务</p>
+</li>
+<li>
+<p><strong><u>存储程序并按地址执行</u><strong>就是</strong>冯·诺依曼型计算机</strong>的设计思想</p>
+</li>
+<li>
+<p>相关概念</p>
+<ul>
+<li><strong>存储元</strong>：保存一位二进制的触发器，称为一个存储元</li>
+<li><strong>存储单元</strong>：保存一个字的所有存储元，称为一个存储单元</li>
+<li><strong>地址</strong>：每个存储单元的编号</li>
+<li><strong>存储容量</strong>：存储器所有存储单元的总数。通常用单位“KB、MB、GB、TB、PB”  表示</li>
+<li><strong>外存储器</strong>：存储容量更大的磁盘存储器、光盘存储器等
+<ul>
+<li><strong>内存储器</strong>：如半导体存储器</li>
+</ul>
+</li>
+<li><u>关系</u>：由若干个<u>存储元</u>组成一个<u>存储单元</u>（8个bit,即一个字节），然后再由许多存储单元组成一个<u>存储器</u></li>
+</ul>
+</li>
+</ul>
+<h3 id="输入设备"><a class="header-anchor" href="#输入设备">¶</a>输入设备</h3>
+<ul>
+<li>向计算机中送入程序和数据的具有一定独立功能的设备
+<ul>
+<li>通过 接口 和 总线与计算机主机连通，用于人机交互联系</li>
+<li>如：计算机键盘和鼠标等</li>
+</ul>
+</li>
+<li><strong>作用</strong>：把人们所熟悉的信息形式变换为机器内部所能接收和识别的二进制信息形式</li>
+</ul>
+<h3 id="输出设备"><a class="header-anchor" href="#输出设备">¶</a>输出设备</h3>
+<ul>
+<li>
+<p>计算机中用于送出计算机内部信息的设备</p>
+<ul>
+<li>如：打印机、显示器等</li>
+</ul>
+</li>
+<li>
+<p><strong>作用</strong>：把计算机处理的结果变换为人或其他机器所能接收和识别的信息形式</p>
+</li>
+<li>
+<p>计算机的输入/输出设备通常称为<strong>外围设备</strong>（简称<strong>外设</strong>）</p>
+<ul>
+<li>外设通过<strong>适配器</strong>部件与主机相连接</li>
+</ul>
+</li>
+</ul>
+<h2 id="冯·诺依曼思想"><a class="header-anchor" href="#冯·诺依曼思想">¶</a>冯·诺依曼思想</h2>
+<ul>
+<li>
+<p><u><strong>（1）采用二进制形式表示数据和指令</strong></u></p>
+<ul>
+<li><strong>指令</strong>是程序的基本单位，<strong>程序</strong>是若干指令的有序集合</li>
+<li>指令与数据均以二进制代码的形式同存于<strong>存储器</strong>中</li>
+</ul>
+</li>
+<li>
+<p><strong><u>（2）由输入设备、输出设备、运算器、存储器和控制器五大部件组成</u></strong></p>
+<ul>
+<li>运算器和控制器统称为 <strong>CPU</strong></li>
+<li>把CPU与主存储器(内存)统称为<strong>主机</strong></li>
+<li>输入设备、输出设备、外存储器称为<strong>外部设备</strong>，简称为<strong>I/O设备</strong></li>
+</ul>
+</li>
+<li>
+<p><strong><u>（3）采用存储程序方式</u></strong></p>
+<ul>
+<li>指在用计算机解题之前，事先编制好程序，并连同所需的数据预先存入主存储器中</li>
+<li>在解题过程(运行程序)中，由控制器按照事先编好并存入存储器中的程序自动地、连续地从存储器中依次取出指令并执行，直到获得所要求的结果为止</li>
+</ul>
+</li>
+<li>
+<p><u><strong>存储程序方式是诺依曼思想的核心，是计算机能高速自动运行的基础</strong></u></p>
+</li>
+<li>
+<p><strong><u>（4）指令和数据以同等地位存于存储器， 可按地址寻访，程序和数据统一存储</u></strong></p>
+</li>
+<li>
+<p><strong><u>（5）指令由操作码和地址码组成</u></strong></p>
+</li>
+<li>
+<p><strong><u>（6）以运算器为中心</u></strong></p>
+</li>
+</ul>
+<h2 id="计算机的基本功能"><a class="header-anchor" href="#计算机的基本功能">¶</a>计算机的基本功能</h2>
+<ul>
+<li>包括**<u>数据加工</u><strong>、</strong><u>数据保存</u><strong>、</strong><u>数据传送</u><strong>和</strong><u>操作控制</u>**等</li>
+</ul>
+<h2 id="计算机的性能指标"><a class="header-anchor" href="#计算机的性能指标">¶</a>计算机的性能指标</h2>
+<ul>
+<li><strong>机器字长</strong>
+<ul>
+<li>指处理机运算器中<strong>一次</strong>能够完成二进制数运算的位数。当前处理机的字长有8位、16位、32位、64位</li>
+<li>字长越长，表示计算的精度越高</li>
+<li>与 CPU 中的寄存器位数有关</li>
+</ul>
+</li>
+<li><strong>吞吐量</strong>
+<ul>
+<li>表征一台计算机在<strong>某一时间间隔</strong>内能够处理的信息量</li>
+<li>单位是字节/秒（B/S）</li>
+</ul>
+</li>
+<li><strong>响应时间</strong>
+<ul>
+<li>表征从输入有效到系统产生响应之间的时间度量</li>
+<li>用时间单位来度量，例如微秒（10-6S）、纳秒（10-9S）</li>
+</ul>
+</li>
+<li><strong>利用率</strong>
+<ul>
+<li>表示在给定的时间间隔内，系统被实际使用的时间所占的比率</li>
+<li>一般用百分比表示</li>
+</ul>
+</li>
+<li><strong>总线宽度</strong>
+<ul>
+<li>一般指CPU中运算器与存储器之间进行互连的内部总线二进制位数</li>
+</ul>
+</li>
+<li><strong>存储器容量</strong>
+<ul>
+<li>存储器中所有存储单元的总数目</li>
+<li>通常用KB、MB、GB、TB来表示</li>
+<li>其中K=2^10， M=2 ^ 20，G=2 ^ 30，T=2 ^ 40，B=8位（1个字节）</li>
+<li>存储器容量越大，记忆的二进制数越多</li>
+</ul>
+</li>
+<li><strong>存储器带宽</strong>
+<ul>
+<li>存储器的速度指标，单位时间内从存储器读出的二进制数信息量</li>
+<li>一般用字节数/秒表示</li>
+</ul>
+</li>
+<li>*<em><u>主频 / 时钟周期 <em></em></u></em>
+<ul>
+<li>CPU的工作节拍受主时钟控制，主时钟不断产生固定频率的时钟，主时钟的频率（f）叫CPU的主频</li>
+<li>度量单位是MHz（兆赫兹）、GHz（吉赫兹）</li>
+<li>主频的倒数称为CPU时钟周期（T），即T=1/f</li>
+<li>度量单位是微秒、纳秒</li>
+</ul>
+</li>
+<li><strong>CPU执行时间</strong>
+<ul>
+<li>表示CPU执行一段程序所占用的CPU时间</li>
+<li><code> CPU执行时间 ＝ CPU时钟周期数 × CPU时钟周期长</code></li>
+</ul>
+</li>
+<li>*<em><u>CPI <em></em></u></em>
+<ul>
+<li>表示每条指令周期数Cycles Per Instruction ，即执行一条指令所需的平均时钟周期数</li>
+<li><code>CPI  = 执行某段程序所需的CPU时钟周期数 / 该程序包含的指令条数</code></li>
+</ul>
+</li>
+<li>*<em><u>MIPS <em></em></u></em>
+<ul>
+<li>表示每秒百万条指令数</li>
+<li><code>MIPS = (指令条数) / (程序执行时间 × 10 ^ 6)</code></li>
+</ul>
+</li>
+<li><strong>MFLOPS</strong>
+<ul>
+<li>表示每秒百万次浮点操作次数</li>
+<li><code>MFLOPS = (程序中的浮点操作次数) / (程序执行时间 × 10 ^ 6)  </code></li>
+</ul>
+</li>
+<li><strong>TFLOPS</strong>
+<ul>
+<li>表示每秒万亿次浮点操作次数</li>
+<li>该技术指标一般在超级计算机中使用</li>
+</ul>
+</li>
+</ul>
+<h2 id="章末习题"><a class="header-anchor" href="#章末习题">¶</a>章末习题</h2>
+<ul>
+<li>ppt 合集 第46页
+<ul>
+<li>假定基准程序A在某计算机的运行时间为100秒，其中90 秒为CPU时间，其余时间为I/O时间，若CPU速度提高50%，I/O速度不变，则运行基准程序A所消耗的时间为（ 70s ）
+<ul>
+<li>其实这题不懂……</li>
+</ul>
+</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h1>第二章 运算方法和运算器</h1>
+<h1>第三章 存储系统</h1>
+<h1>第四章 指令系统</h1>
+<h1>第五章 中央处理器</h1>
+<h1>第六章 总线系统</h1>
+<h1>第七章 外围设备</h1>
+<h1>第八章 输入/输出系统</h1>
+<h1>第九章 并行组织与结构</h1>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        share
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/2024/08/29/CS_Notes/computer%20organization/%E3%80%90%E8%AE%A1%E7%BB%84%E3%80%91%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/computer-organization/" rel="tag">computer organization</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/08/31/CS_Notes/%E8%93%9D%E9%B2%B8/%E3%80%90%E8%93%9D%E9%B2%B8%E3%80%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E8%BF%87%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            【蓝鲸】环境部署过程知识点记录
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/08/27/CS_Notes/Database/CS186-SQL5-Berkeley/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">CS186 SQL5 Berkeley</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2024
+        <i class="ri-heart-fill heart_icon"></i> brocademaple
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="私の宝庫です"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/aboutMe">自分</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+
+<script src="/js/clickBoom1.js"></script>
+ 
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1983763439&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
