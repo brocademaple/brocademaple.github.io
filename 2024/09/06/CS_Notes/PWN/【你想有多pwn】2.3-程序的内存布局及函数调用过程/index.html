@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>归档: 2024 |  私の宝庫です</title>
+      <title>【你想有多pwn】2.3 程序的内存布局及函数调用过程 |  私の宝庫です</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/images/ayer.png" />
@@ -63,246 +63,169 @@
       
     <main class="content on">
       <section class="outer">
-  
-  
-  <article class="articles">
+  <article
+  id="post-CS_Notes/PWN/【你想有多pwn】2.3-程序的内存布局及函数调用过程"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
     
-    
-    <h1 class="page-type-title">2024</h1>
-    
-    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  【你想有多pwn】2.3 程序的内存布局及函数调用过程
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/09/06/CS_Notes/PWN/%E3%80%90%E4%BD%A0%E6%83%B3%E6%9C%89%E5%A4%9Apwn%E3%80%912.3-%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%8F%8A%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B/" class="article-date">
+  <time datetime="2024-09-05T16:00:00.000Z" itemprop="datePublished">2024-09-06</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/Pwn-notes/">Pwn notes</a>
+  </div>
   
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2024" class="archive-year">2024</a>
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">102</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">1 分钟</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
-    <div class="archives">
       
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/09/06/CS_Notes/PWN/%E3%80%90%E4%BD%A0%E6%83%B3%E6%9C%89%E5%A4%9Apwn%E3%80%912.3-%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%8F%8A%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B/" class="archive-article-date">
-  <time datetime="2024-09-05T16:00:00.000Z" itemprop="datePublished">09/06</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/09/06/CS_Notes/PWN/%E3%80%90%E4%BD%A0%E6%83%B3%E6%9C%89%E5%A4%9Apwn%E3%80%912.3-%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%8F%8A%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B/"
-    >【你想有多pwn】2.3 程序的内存布局及函数调用过程</a> 
-</h2>
- 
+    <div class="tocbot"></div>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/09/04/CS_Notes/Computer%20Network/%E3%80%90%E8%AE%A1%E7%BD%91%EF%BC%88%E6%B9%96%E7%A7%91%E5%A4%A7%E7%89%88%EF%BC%89%E3%80%91%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%A6%82%E8%BF%B0/" class="archive-article-date">
-  <time datetime="2024-09-03T16:00:00.000Z" itemprop="datePublished">09/04</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/09/04/CS_Notes/Computer%20Network/%E3%80%90%E8%AE%A1%E7%BD%91%EF%BC%88%E6%B9%96%E7%A7%91%E5%A4%A7%E7%89%88%EF%BC%89%E3%80%91%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%A6%82%E8%BF%B0/"
-    >【计网（湖科大版）】第一章 概述</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/09/01/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%B8%80%E4%BA%9B%E4%B8%93%E9%97%A8%E7%BC%96%E5%86%99%E7%9A%84Prompt%E4%BF%9D%E5%AD%98/" class="archive-article-date">
-  <time datetime="2024-08-31T16:00:00.000Z" itemprop="datePublished">09/01</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/09/01/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%B8%80%E4%BA%9B%E4%B8%93%E9%97%A8%E7%BC%96%E5%86%99%E7%9A%84Prompt%E4%BF%9D%E5%AD%98/"
-    >【AI】一些专门编写的Prompt保存</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/09/01/CS_Notes/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/%E3%80%90%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA%E3%80%91%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  <time datetime="2024-08-31T16:00:00.000Z" itemprop="datePublished">09/01</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/09/01/CS_Notes/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/%E3%80%90%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA%E3%80%91%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A%E8%AE%B0%E5%BD%95/"
-    >【软件工程导论】课程作业记录</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
   
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/08/31/CS_Notes/%E8%93%9D%E9%B2%B8/%E3%80%90%E8%93%9D%E9%B2%B8%E3%80%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E8%BF%87%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  <time datetime="2024-08-30T16:00:00.000Z" itemprop="datePublished">08/31</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/08/31/CS_Notes/%E8%93%9D%E9%B2%B8/%E3%80%90%E8%93%9D%E9%B2%B8%E3%80%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E8%BF%87%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/"
-    >【蓝鲸】环境部署过程知识点记录</a> 
-</h2>
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mr4y1Y7fW?p=13&amp;vd_source=3f0983ef34615b702fec513c41e55a64">第二章_第3节_程序的内存布局及函数调用过程_x1_哔哩哔哩_bilibili</a></p>
+<h3 id="解题的流程"><a class="header-anchor" href="#解题的流程">¶</a>解题的流程</h3>
+<ul>
+<li>
+<p>假设题目文件名为<code>pwn</code></p>
+</li>
+<li>
+<p>遇到题目：先运行题目文件：<code>./pwn</code></p>
+</li>
+<li>
+<p>然后<code>checksec pwn</code>   看看是个什么程序</p>
+</li>
+<li>
+<p>上一步确认文件是32位还是64位，拖进对应ida反编译一下</p>
+</li>
+<li>
+<p>在命令行中用<code>gdb</code>调试一下：<code>gdb pwn</code></p>
+</li>
+</ul>
  
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/08/29/CS_Notes/computer%20organization/%E3%80%90%E8%AE%A1%E7%BB%84%E3%80%91%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  <time datetime="2024-08-28T16:00:00.000Z" itemprop="datePublished">08/29</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/08/29/CS_Notes/computer%20organization/%E3%80%90%E8%AE%A1%E7%BB%84%E3%80%91%E7%AC%94%E8%AE%B0/"
-    >【计组】前言+第一章 计算机系统概论</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/08/27/CS_Notes/Database/CS186%20SQL6%20B+%20Trees/" class="archive-article-date">
-  <time datetime="2024-08-26T16:00:00.000Z" itemprop="datePublished">08/27</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/08/27/CS_Notes/Database/CS186%20SQL6%20B+%20Trees/"
-    >CS186 SQL6 B+ Trees</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/08/27/CS_Notes/Database/CS186%20SQL5%20Disks,%20Files%20and%20Buffers%20II/" class="archive-article-date">
-  <time datetime="2024-08-26T16:00:00.000Z" itemprop="datePublished">08/27</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/08/27/CS_Notes/Database/CS186%20SQL5%20Disks,%20Files%20and%20Buffers%20II/"
-    >CS186 SQL5 Berkeley</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/08/26/CS_Notes/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/%E3%80%90%E8%AF%BE%E5%86%85%E7%AC%94%E8%AE%B0%E3%80%91%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/" class="archive-article-date">
-  <time datetime="2024-08-25T16:00:00.000Z" itemprop="datePublished">08/26</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/08/26/CS_Notes/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/%E3%80%90%E8%AF%BE%E5%86%85%E7%AC%94%E8%AE%B0%E3%80%91%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/"
-    >【课内】软件工程导论</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/08/24/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91ELF%E6%96%87%E4%BB%B6%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  <time datetime="2024-08-23T16:00:00.000Z" itemprop="datePublished">08/24</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/08/24/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91ELF%E6%96%87%E4%BB%B6%E5%9F%BA%E7%A1%80/"
-    >【Pvvn】ELF文件基础</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
+      <!-- reward -->
       
     </div>
-  </div>
-  
-  
-
-  
-  <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2024/page/2/">2</a><a class="page-number" href="/archives/2024/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2024/page/5/">5</a><a class="extend next" rel="next" href="/archives/2024/page/2/">下一页</a>
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        share
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/2024/09/06/CS_Notes/PWN/%E3%80%90%E4%BD%A0%E6%83%B3%E6%9C%89%E5%A4%9Apwn%E3%80%912.3-%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%8F%8A%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pwn/" rel="tag">Pwn</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2024/09/04/CS_Notes/Computer%20Network/%E3%80%90%E8%AE%A1%E7%BD%91%EF%BC%88%E6%B9%96%E7%A7%91%E5%A4%A7%E7%89%88%EF%BC%89%E3%80%91%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%A6%82%E8%BF%B0/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">【计网（湖科大版）】第一章 概述</div>
+      </a>
+    
   </nav>
+
   
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
@@ -439,6 +362,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link
