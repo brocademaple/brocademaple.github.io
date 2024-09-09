@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>【JavaWeb】Day03--Vue-Element |  私の宝庫です</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/ayer.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      <canvas class="fireworks"></canvas>
+      <style>
+        .fireworks {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 99999;
+          pointer-events: none;
+        }
+      </style>
+      
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-CS_Notes/Java/【JavaWeb】Day03--Vue-Element"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  【JavaWeb】Day03--Vue-Element
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/09/09/CS_Notes/Java/%E3%80%90JavaWeb%E3%80%91Day03--Vue-Element/" class="article-date">
+  <time datetime="2024-09-08T16:00:00.000Z" itemprop="datePublished">2024-09-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/Java-notes/">Java notes</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">15 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://aigz8jy30yo.feishu.cn/docx/BtbOd3c5aotnpdxYTVDcnqQanxd">‍‌‍‍‬‬‌﻿﻿‌‌‬‬‌﻿⁠⁠‍‌⁠‬‍‍⁠‍‬⁠﻿‍JavaWeb 开发教程 - 飞书云文档 (feishu.cn)</a></p>
+</li>
+<li>
+<p>需要记录的内容的标准：</p>
+<ul>
+<li>已掌握的概念不记</li>
+<li>太长的缩短记</li>
+</ul>
+</li>
+<li>
+<p>按照期末考前的笔记选择标准来记：</p>
+<ul>
+<li>只记关键核心内容，有助于复习笔记时快速重温掌握</li>
+<li>对于较长的内容，尽可能用自己的话复述</li>
+</ul>
+</li>
+<li>
+<p>努力克服完美强迫症</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/vue3/vue3-tutorial.html">Vue3 教程 | 菜鸟教程 (runoob.com)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN">Element - 网站快速成型工具</a></p>
+</li>
+</ul>
+<h2 id="Day03-Vue-Element"><a class="header-anchor" href="#Day03-Vue-Element">¶</a>Day03-Vue-Element</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://heuqqdmbyk.feishu.cn/docx/FqzUd6xnho7yDUx2ZTkcdTISnEb">‌⁠‬‌‌﻿‍⁠‍‬‬‍⁠‍‌⁠﻿‬‍⁠⁠‌‌﻿﻿﻿Day03-作业 - 飞书云文档 (feishu.cn)</a></li>
+</ul>
+<h3 id="Ajax"><a class="header-anchor" href="#Ajax">¶</a>Ajax</h3>
+<ul>
+<li>
+<p>即异步的JavaScript和XML</p>
+<ul>
+<li>与服务器进行数据交互</li>
+<li>异步交互：可以在<strong>不重新加载整个页面</strong>的情况下，与服务器交换数据并<strong>更新部分网页</strong>的技术</li>
+</ul>
+</li>
+<li>
+<p>同步异步</p>
+</li>
+<li>
+<p>原生Ajax</p>
+<ul>
+<li>客户端的Ajax请求
+<ul>
+<li>1.在VS Code中创建Ajax文件夹</li>
+<li>2.创建XMLHttpRequest对象，用于和服务器交换数据，也是原生Ajax请求的核心对象</li>
+<li>3.调用对象的open()方法设置请求的参数信息，例如请求地址，请求方式</li>
+<li>4.通过绑定事件的方式，来获取服务器响应的数据</li>
+<li>5.通过浏览器打开页面，请求点击按钮，发送Ajax请求，显示结果</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Axios"><a class="header-anchor" href="#Axios">¶</a>Axios</h3>
+<ul>
+<li>是简单的发送Ajax请求的技术</li>
+<li>对原生的AJAX进行封装，简化书写</li>
+<li>Axios官网：<code>https://www.axios-http.cn</code></li>
+</ul>
+<h4 id="Axios基本使用-1-3-1"><a class="header-anchor" href="#Axios基本使用-1-3-1">¶</a>Axios基本使用   1.3.1</h4>
+<ul>
+<li>
+<p>1.引入Axios文件</p>
+</li>
+<li>
+<p>2.使用Axios发送请求，并获取响应结果</p>
+<ul>
+<li>官方提供很多api</li>
+<li>其中两种：
+<ul>
+<li>get请求     将请求参数拼接到路径的后面</li>
+<li>post请求</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>axios()是用来发送异步请求的，小括号中使用 js的JSON对象传递请求相关的参数</p>
+</li>
+</ul>
+<h4 id="Axios快速入门"><a class="header-anchor" href="#Axios快速入门">¶</a>Axios快速入门</h4>
+<h5 id="后端实现"><a class="header-anchor" href="#后端实现">¶</a>后端实现</h5>
+<ul>
+<li>查询所有员工信息服务器地址：<a target="_blank" rel="noopener" href="http://yapi.smart-xwork.cn/mock/169327/emp/list">http://yapi.smart-xwork.cn/mock/169327/emp/list</a></li>
+<li>根据员工id删除员工信息服务器地址：<a target="_blank" rel="noopener" href="http://yapi.smart-xwork.cn/mock/169327/emp/deleteById">http://yapi.smart-xwork.cn/mock/169327/emp/deleteById</a></li>
+</ul>
+<h5 id="前端实现"><a class="header-anchor" href="#前端实现">¶</a>前端实现</h5>
+<ul>
+<li>
+<p>创建js文件夹，与html同级，然后将axios所依赖的js拷贝到js目录下</p>
+</li>
+<li>
+<p>在html中引入axios所依赖的js文件，并提供两个按钮绑定单击事件，分别用于点击时发送ajax请求</p>
+</li>
+<li>
+<p>分别使用axios的方法发送完整的get请求和post请求</p>
+</li>
+<li>
+<p><code>get请求代码</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过axios发送异步请求-get</span></span><br><span class="line"> <span class="title function_">axios</span>(&#123;</span><br><span class="line">     <span class="attr">method</span>: <span class="string">&quot;get&quot;</span>,</span><br><span class="line">     <span class="attr">url</span>: <span class="string">&quot;http://yapi.smart-xwork.cn/mock/169327/emp/list&quot;</span></span><br><span class="line"> &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="property">data</span>);</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><code>post请求</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过axios发送异步请求-post</span></span><br><span class="line"><span class="title function_">axios</span>(&#123;</span><br><span class="line">       <span class="attr">method</span>: <span class="string">&quot;post&quot;</span>,</span><br><span class="line">       <span class="attr">url</span>: <span class="string">&quot;http://yapi.smart-xwork.cn/mock/169327/emp/deleteById&quot;</span>,</span><br><span class="line">       <span class="attr">data</span>: <span class="string">&quot;id=1&quot;</span></span><br><span class="line">   &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="property">data</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>打开浏览器，f12抓包，点击按钮后查看控制台效果</p>
+</li>
+</ul>
+<h4 id="请求方法的别名"><a class="header-anchor" href="#请求方法的别名">¶</a>请求方法的别名</h4>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>axios.get(url [, config])</td>
+<td>发送get请求</td>
+</tr>
+<tr>
+<td>axios.delete(url [, config])</td>
+<td>发送delete请求</td>
+</tr>
+<tr>
+<td>axios.post(url [, data[, config]])</td>
+<td>发送post请求</td>
+</tr>
+<tr>
+<td>axios.put(url [, data[, config]])</td>
+<td>发送put请求</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<pre><code class="language-javascript">// get请求的两种写法  
+
+//通过axios发送异步请求-get
+axios(&#123;
+       method: &quot;get&quot;,
+       url: &quot;http://yapi.smart-xwork.cn/mock/169327/emp/list&quot;
+   &#125;).then(result =&gt; &#123;
+       console.log(result.data);
+&#125;)
+
+axios.get(&quot;http://yapi.smart-xwork.cn/mock/169327/emp/list&quot;).then(result =&gt; &#123;
+    console.log(result.data);
+&#125;)
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```javascript</span><br><span class="line">  // post请求的两种写法</span><br><span class="line">  </span><br><span class="line">  //通过axios发送异步请求-post</span><br><span class="line">  axios(&#123;</span><br><span class="line">         method: &quot;post&quot;,</span><br><span class="line">         url: &quot;http://yapi.smart-xwork.cn/mock/169327/emp/deleteById&quot;,</span><br><span class="line">         data: &quot;id=1&quot;</span><br><span class="line">     &#125;).then(result =&gt; &#123;</span><br><span class="line">         console.log(result.data);</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  axios.post(&quot;http://yapi.smart-xwork.cn/mock/169327/emp/deleteById&quot;,&quot;id=1&quot;).then(result =&gt; &#123;</span><br><span class="line">      console.log(result.data);</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<h4 id="案例"><a class="header-anchor" href="#案例">¶</a>案例</h4>
+<ul>
+<li>需求：
+<ul>
+<li>基于Vue及Axios完成数据的动态加载展示</li>
+</ul>
+</li>
+<li>步骤
+<ol>
+<li>首先创建文件，提前准备基础代码，包括表格以及vue.js和axios.js文件的引入</li>
+<li>我们需要在vue的mounted钩子函数中发送ajax请求，获取数据</li>
+<li>拿到数据，数据需要绑定给vue的data属性</li>
+<li>在tr标签上通过v-for指令遍历数据，展示数据</li>
+</ol>
+</li>
+<li>具体步骤略</li>
+</ul>
+<h3 id="前后台分离开发"><a class="header-anchor" href="#前后台分离开发">¶</a>前后台分离开发</h3>
+<h4 id="前后台分离开发介绍"><a class="header-anchor" href="#前后台分离开发介绍">¶</a>前后台分离开发介绍</h4>
+<ul>
+<li><strong><u>接口文档</u></strong>：后台开发者根据产品经理提供的产品原型和需求文档所撰写的</li>
+<li><strong><u>流程</u></strong>：【需求分析】→【接口定义（API接口文档）】→【前后端并行开发（遵守规范】→【测试（前端、后端）】→前后端联调测试
+<ol>
+<li>需求分析：阅读需求文档，分析、理解需求</li>
+<li>接口定义：查询接口文档中关于需求的接口的定义，包括地址，参数，响应数据类型等等</li>
+<li>前后台并行开发：各自按照接口文档进行开发，实现需求</li>
+<li>测试：前后台开发完毕，各自按照接口文档进行测试</li>
+<li>前后段联调测试：前端工程请求后端工程，测试功能</li>
+</ol>
+</li>
+</ul>
+<h4 id="YAPI"><a class="header-anchor" href="#YAPI">¶</a>YAPI</h4>
+<h5 id="YAPI介绍"><a class="header-anchor" href="#YAPI介绍">¶</a>YAPI介绍</h5>
+<ul>
+<li>官网地址：<a target="_blank" rel="noopener" href="https://yapi.pro/#">YApi Pro-高效、易用、功能强大的可视化接口管理平台</a></li>
+<li>主要提供2个功能：
+<ul>
+<li>API接口管理：根据需求撰写接口，包括接口的地址，参数，响应等等信息</li>
+<li>Mock服务：模拟真实接口，生成接口的模拟测试数据，用于前端的测试</li>
+</ul>
+</li>
+</ul>
+<h5 id="接口文档管理"><a class="header-anchor" href="#接口文档管理">¶</a>接口文档管理</h5>
+<ul>
+<li>个人空间，选择项目列表→添加测试项目</li>
+<li>点击进入创建的项目，先添加接口的分类</li>
+<li>选择当前创建的分类，创建接口信息</li>
+<li>来到接口的编辑界面，对接口做生层次的定制。例如：接口的参数，接口的返回值等</li>
+<li>添加接口的请求参数</li>
+<li>来到返回数据设置，选择导入json，编写和添加json格式的返回值</li>
+<li>保存上述设置后，来到接口预览界面，查询接口的信息</li>
+<li>最后，还可以设置接口的mock信息</li>
+<li>完成后来到接口的预览界面，点击Mock地址，发现浏览器可以直接打开并返回前面设置的期望数据</li>
+</ul>
+<h3 id="前端工程化"><a class="header-anchor" href="#前端工程化">¶</a>前端工程化</h3>
+<h4 id="前端工程化的特点"><a class="header-anchor" href="#前端工程化的特点">¶</a>前端工程化的特点</h4>
+<ul>
+<li>
+<p>模块化：将js和css等，做成一个个可复用模块</p>
+</li>
+<li>
+<p>组件化：我们将UI组件，css样式，js行为封装成一个个的组件，便于管理</p>
+</li>
+<li>
+<p>规范化：我们提供一套标准的规范的目录接口和编码规范，所有开发人员遵循这套规范</p>
+</li>
+<li>
+<p>自动化：项目的构建，测试，部署全部都是自动完成</p>
+</li>
+<li>
+<p>即：在企业级的前端项目开发中，把前端开发所需要的工具、技术、流程、经验进行规范化和标准化</p>
+</li>
+<li>
+<p>↓↓↓vue官方提供的脚手架→完成前端的工程化</p>
+</li>
+</ul>
+<h4 id="前端工程化入门"><a class="header-anchor" href="#前端工程化入门">¶</a>前端工程化入门</h4>
+<h5 id="环境准备"><a class="header-anchor" href="#环境准备">¶</a>环境准备</h5>
+<ul>
+<li>使用：vue官方使用的脚手架Vue-cli
+<ul>
+<li>Vue-cli提供功能：
+<ol>
+<li>统一的目录结构</li>
+<li>本地调试</li>
+<li>热部署</li>
+<li>单元测试</li>
+<li>集成打包上线</li>
+</ol>
+</li>
+<li>需要的依赖：NodeJS</li>
+</ul>
+</li>
+</ul>
+<h5 id="Vue项目简介"><a class="header-anchor" href="#Vue项目简介">¶</a>Vue项目简介</h5>
+<h6 id="2种方式创建vue项目"><a class="header-anchor" href="#2种方式创建vue项目">¶</a>2种方式创建vue项目</h6>
+<ul>
+<li>
+<p>命令行：直接通过命令创建vue项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create vue-project01</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>图形化界面：先通过命令进入图形化界面，然后再进行vue工程的创建</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue ui</span><br></pre></td></tr></table></figure>
+<ul>
+<li>感觉这个方式更直观。</li>
+</ul>
+</li>
+</ul>
+<h6 id="vue项目目录结构"><a class="header-anchor" href="#vue项目目录结构">¶</a>vue项目目录结构</h6>
+<table>
+<thead>
+<tr>
+<th>Vue-project01</th>
+<th></th>
+<th></th>
+<th>src</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>node_modules</td>
+<td>整个项目的依赖包</td>
+<td></td>
+<td>assets</td>
+<td>静态资源</td>
+</tr>
+<tr>
+<td>public</td>
+<td>存放项目的静态文件</td>
+<td></td>
+<td>components</td>
+<td>可重用的组件</td>
+</tr>
+<tr>
+<td>src</td>
+<td>存放项目的源代码❤❤❤❤❤（平时开发位置）</td>
+<td></td>
+<td>router</td>
+<td>路由配置</td>
+</tr>
+<tr>
+<td>.gitignore</td>
+<td></td>
+<td></td>
+<td>views</td>
+<td>视图组件（页面）</td>
+</tr>
+<tr>
+<td>babel.config.js</td>
+<td></td>
+<td></td>
+<td>App.vue</td>
+<td>入口页面（根组件）</td>
+</tr>
+<tr>
+<td>jsconfig.json</td>
+<td></td>
+<td></td>
+<td>main.js</td>
+<td>入口js文件</td>
+</tr>
+<tr>
+<td>package-lock.json</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>package.json</td>
+<td>模块基本信息，项目开发所需要模块，版本信息</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://README.md">README.md</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>vue.config.js</td>
+<td>保存vue配置的文件，如：代理、端口的配置</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h6 id="运行vue项目"><a class="header-anchor" href="#运行vue项目">¶</a>运行vue项目</h6>
+<ul>
+<li>
+<p>第一种：通过VS Code的图形化界面</p>
+<ul>
+<li>
+<p>左栏工具栏→NPM脚本→点击▷运行→查看终端→访问localhost:port</p>
+</li>
+<li>
+<p>此时访问的是<code>src/App.vue</code>这个根组件</p>
+</li>
+<li>
+<p>对<code>App.vue</code>中的内容进行更改，通过vue项目的热更新，可以直接显示改后内容</p>
+</li>
+<li>
+<p>修改端口：在<code>vue.config.js</code>中添加内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">devServer</span>:&#123;</span><br><span class="line">    <span class="attr">port</span>:<span class="number">7000</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>第二种：命令行方式</p>
+<ul>
+<li>基于cmd窗口，在vue目录下，输入<code>npm run serve</code></li>
+</ul>
+</li>
+<li>
+<p>补充：将NPM脚本窗口调试出来</p>
+<ol>
+<li>VS Code→左下角设置</li>
+<li>用户→扩展→Npm</li>
+<li>Npm→Auto Detect：on</li>
+<li>Enable Run From Folder ：√</li>
+<li>重启VS Code→双击package.json→点击<strong>资源管理器处的3个小点</strong>，<strong>勾选npm脚本选项</strong></li>
+<li>即能够显示NPM脚本小窗口</li>
+</ol>
+</li>
+</ul>
+<h5 id="Vue项目开发流程"><a class="header-anchor" href="#Vue项目开发流程">¶</a>Vue项目开发流程</h5>
+<ul>
+<li>
+<p><code>public/index.html</code></p>
+<ul>
+<li>
+<p>对于vue项目，<code>index.html</code>默认引入了入口函数<code>main.js</code>文件</p>
+</li>
+<li>
+<p>在<code>src/main.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property">config</span>.<span class="property">productionTip</span> = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">  router,</span><br><span class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> <span class="title function_">h</span>(<span class="title class_">App</span>)</span><br><span class="line">&#125;).$mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<pre><code>import: 【导入】指定文件，并且【重新起名】。例如上述代码import App from './App.vue'导入当前目录下得App.vue并且起名为App
+new Vue(): 创建vue对象
+$mount('#app');将vue对象创建的dom对象挂载到id=app的这个标签区域中，作用和之前学习的vue对象的le属性一致。
+router:  路由，详细在后面的小节讲解
+render: 主要使用视图的渲染的。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 总结：`main.js`中通过代码**挂载**到`index.html`的`ip=app`的标签区域</span><br><span class="line"></span><br><span class="line">- 重点：render中的APP</span><br><span class="line"></span><br><span class="line">  - `render: h =&gt; h(App)`</span><br><span class="line"></span><br><span class="line">- 以`.vue`结尾的都是vue组件，包含三个部分：</span><br><span class="line"></span><br><span class="line">  - `template`：模板部分，主要是HTML代码，用来展示页面主体结构的</span><br><span class="line">  - `script`: js代码区域，主要是通过js代码来控制模板的数据来源和行为的</span><br><span class="line">  - `style`: css样式部分，主要通过css样式控制模板的页面效果得</span><br><span class="line"></span><br><span class="line">### Vue组件库Element</span><br><span class="line"></span><br><span class="line">#### Element介绍</span><br><span class="line"></span><br><span class="line">- `MVVM`中→vue侧重于`VM`开发</span><br><span class="line">- `ElementUI`→侧重于`V`开发，用来开发美观页面</span><br><span class="line">- `Element`→一套基于Vue的网站组件库，用于快速构建网页</span><br><span class="line">  - `Element`提供了很多组成网页的部件，例如：超链接、图片、表格等</span><br><span class="line">  - 学`Element`的好处：便利后端开发者，只需要学会如何从`ElementUI`官网拷贝组件到自己页面并略作修改</span><br><span class="line">- [Element官网](https://element.eleme.cn/#/zh-CN)</span><br><span class="line"></span><br><span class="line">#### Element快速入门</span><br><span class="line"></span><br><span class="line">- 安装ElementUI的组件库</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<p>选中项目并右击<br>
+“在集成终端中打开”<br>
+来到终端，输入命令↓</p>
+<p>npm install element-ui@2.15.3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 在`main.js`这个入口js文件中引入`ElementUI`的组件库</span><br><span class="line"></span><br><span class="line">  ```js</span><br><span class="line">  // 在原有代码中添加如下部分</span><br><span class="line">  </span><br><span class="line">  import ElementUI from &#x27;element-ui&#x27;;</span><br><span class="line">  import &#x27;element-ui/lib/theme-chalk/index.css&#x27;;</span><br><span class="line">  </span><br><span class="line">  Vue.use(ElementUI);</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>按照vue项目的开发规范，在<strong>src/views</strong>目录下创建一个vue组件文件</p>
+<ul>
+<li>注意组件名称后缀是.vue，并且在组件文件中编写之前介绍过的基本组件语法【模板、脚本、样式】</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>在<code>ElementUI</code>的官网，找到组件库，选择对应组件并复制代码即可</p>
+</li>
+<li>
+<p>在默认访问的根组件<strong>src/App.vue</strong>中引入自定义的组件</p>
+</li>
+</ul>
+<h4 id="Element组件"><a class="header-anchor" href="#Element组件">¶</a>Element组件</h4>
+<h5 id="Table表格"><a class="header-anchor" href="#Table表格">¶</a>Table表格</h5>
+<ul>
+<li>【注意】：组件包括了3个部分，如果官方有除了template部分之外的style和script都需要复制</li>
+</ul>
+<h6 id="Table组件属性详解"><a class="header-anchor" href="#Table组件属性详解">¶</a>Table组件属性详解</h6>
+<ul>
+<li>ElementUI将数据模型绑定到视图：
+<ul>
+<li>data: 主要定义table组件的数据模型</li>
+<li>prop: 定义列的数据应该绑定data中定义的具体的数据模型</li>
+<li>label: 定义列的标题</li>
+<li>width: 定义列的宽度</li>
+</ul>
+</li>
+<li>Element组件的所有属性都可以在组件页面最下方找到</li>
+</ul>
+<h5 id="Pagination分页"><a class="header-anchor" href="#Pagination分页">¶</a>Pagination分页</h5>
+<ul>
+<li>分页组件，主要通过提供分页工具条相关功能</li>
+</ul>
+<h6 id="Pagination组件属性详解"><a class="header-anchor" href="#Pagination组件属性详解">¶</a>Pagination组件属性详解</h6>
+<ul>
+<li>background: 添加背景颜色</li>
+<li>layout: 分页工具条的布局，其具体值包含<code>sizes</code>, <code>prev</code>, <code>pager</code>, <code>next</code>, <code>jumper</code>, <code>-&gt;</code>, <code>total</code>, <code>slot</code> 这些值</li>
+<li>total: 数据的总数量</li>
+</ul>
+<h6 id="Pagination组件事件详解"><a class="header-anchor" href="#Pagination组件事件详解">¶</a>Pagination组件事件详解</h6>
+<ul>
+<li>
+<p>size-change ： pageSize 改变时会触发</p>
+</li>
+<li>
+<p>current-change ：currentPage 改变时会触发</p>
+</li>
+<li>
+<p>注意：在script代码复制时，methods属性和data同级</p>
+</li>
+</ul>
+<h5 id="Dialog对话框"><a class="header-anchor" href="#Dialog对话框">¶</a>Dialog对话框</h5>
+<ul>
+<li>Dialog：在保留当前页面状态的情况下，告知用户并承载相关操作</li>
+</ul>
+<h6 id="Dialog组件属性详解"><a class="header-anchor" href="#Dialog组件属性详解">¶</a>Dialog组件属性详解</h6>
+<ul>
+<li>
+<p>visible.sync ：是否显示 Dialog</p>
+</li>
+<li>
+<pre><code class="language-HTML">在data中声明新的变量dialogFormVisible来控制对话框的隐藏与显示 
+
+dialogFormVisible: false,
+</code></pre>
+</li>
+</ul>
+<h3 id="案例-v2"><a class="header-anchor" href="#案例-v2">¶</a>案例</h3>
+<ul>
+<li>员工管理界面</li>
+</ul>
+<h4 id="需求说明"><a class="header-anchor" href="#需求说明">¶</a>需求说明</h4>
+<ul>
+<li>制作类似格式的页面
+<ul>
+<li>上面是标题栏，左侧栏是搜索栏，右侧是数据展示区域</li>
+<li>右侧：需要搜索表单</li>
+<li>右侧表格数据为动态展示，数据来自后台</li>
+</ul>
+</li>
+</ul>
+<h4 id="案例分析"><a class="header-anchor" href="#案例分析">¶</a>案例分析</h4>
+<ul>
+<li>
+<p>原则：先整体，后局部细节</p>
+</li>
+<li>
+<p>主要步骤：</p>
+<ul>
+<li>创建页面，完成页面的整体布局规划</li>
+<li>然后分别针对3个部分进行各自组件的具体实现</li>
+<li>针对于右侧核心内容展示区域，需要使用异步加载数据，以表格渲染数据</li>
+</ul>
+</li>
+</ul>
+<h4 id="代码实现-4-4-3"><a class="header-anchor" href="#代码实现-4-4-3">¶</a>代码实现  4.4.3</h4>
+<ul>
+<li>在做Day03任务的时候可以复现一下hhhh</li>
+<li>包含部分：
+<ul>
+<li>环境搭建</li>
+<li>整体布局</li>
+<li>顶部标题</li>
+<li>左侧导航栏</li>
+<li>右侧核心内容：【表格、表单、分页工具栏】</li>
+<li>异步数据加载</li>
+</ul>
+</li>
+</ul>
+<h5 id="异步数据加载"><a class="header-anchor" href="#异步数据加载">¶</a>异步数据加载</h5>
+<ul>
+<li>使用axios发送ajax请求</li>
+<li>在vue项目中使用axios：
+<ul>
+<li>安装axios：<code>npm install axios</code></li>
+<li>使用axios：<code>import axios from 'axios'</code></li>
+<li>发送axios请求的时间：页面加载完成，自动加载数据</li>
+<li>可以使用：mounted钩子函数   4.4.3.6.1</li>
+</ul>
+</li>
+</ul>
+<h3 id="Vue路由"><a class="header-anchor" href="#Vue路由">¶</a>Vue路由</h3>
+<h4 id="路由介绍"><a class="header-anchor" href="#路由介绍">¶</a>路由介绍</h4>
+<ul>
+<li>点击页面不同功能界面，浏览器的地址栏会发生变化，路由自动更新显示与<code>url</code>所对应的vue组件</li>
+<li>Vue官方提供了<code>路由插件Vue Router</code>，主要组成：
+<ul>
+<li><code>VueRouter</code>：路由器类，根据路由请求在路由视图中动态渲染选中的组件</li>
+<li><code>router-link</code>：请求链接组件，浏览器会解析成a</li>
+<li><code>router-view</code>：动态视图组件，用来渲染展示与路由路径对应的组件</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>路由链接组件router-link</td>
+<td><router-link to="/emp">员工管理</router-link></td>
+</tr>
+<tr>
+<td>/user : UserView.vue</td>
+<td></td>
+<td>←路由请求——</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>/emp : EmpView.vue</td>
+<td>路由器VueRouter</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>/order : OrderView.vue</td>
+<td>路由表</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>——更新→</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>路由展示组件router-view</td>
+<td><router-view></router-view></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>VueRouter根据配置的url的hash片段和路由的组件关系去维护一张路由表</li>
+<li>页面提供一个router-link组件，用户点击，发出路由请求</li>
+<li>接着VueRouter根据路由请求，在路由表中找到对应的vue组件</li>
+<li>最后VueRouter会切换router-view中的组件，从而进行视图的更新</li>
+</ul>
+<h4 id="路由入门"><a class="header-anchor" href="#路由入门">¶</a>路由入门</h4>
+<ul>
+<li>
+<p>安装vue-router插件：<code>npm install vue-router@3.5.1</code></p>
+</li>
+<li>
+<p>然后在<code>src/router/index.js</code>文件中定义路由表，根据其提供的模板代码进行修改</p>
+</li>
+<li>
+<p>在<code>main.js</code>中，引入router功能：<code>import router from './router'</code></p>
+</li>
+<li>
+<p>修改页面，将按钮标签换为<router-link></router-link></p>
+</li>
+<li>
+<p>然后再内容展示区域<code>App.vue</code>中定义<code>router-view</code>，作为组件的切换</p>
+</li>
+<li>
+<p>在路由中配置<code>/</code>对应的路由组件</p>
+</li>
+</ul>
+<h3 id="打包部署"><a class="header-anchor" href="#打包部署">¶</a>打包部署</h3>
+<ul>
+<li>主要分为两步：【前端工程打包】【通过nginx服务器发布前端工程】</li>
+</ul>
+<h4 id="前端工程打包"><a class="header-anchor" href="#前端工程打包">¶</a>前端工程打包</h4>
+<ul>
+<li>直接通过VS Code的NPM脚本中提供的build按钮来完成</li>
+<li>然后会在工程目录下生成一个dist目录，用于存放需要发布的前端资源</li>
+</ul>
+<h4 id="部署前端工程"><a class="header-anchor" href="#部署前端工程">¶</a>部署前端工程</h4>
+<h5 id="nginx介绍"><a class="header-anchor" href="#nginx介绍">¶</a>nginx介绍</h5>
+<ul>
+<li>一款轻量级的Web服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器</li>
+<li>在Windows的安装：直接解压到无中文目录</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>nginx目录结构</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>conf</td>
+<td>配置文件目录</td>
+</tr>
+<tr>
+<td>contrib</td>
+<td></td>
+</tr>
+<tr>
+<td>docs</td>
+<td></td>
+</tr>
+<tr>
+<td>html</td>
+<td>静态资源文件目录</td>
+</tr>
+<tr>
+<td>logs</td>
+<td>日志文件目录</td>
+</tr>
+<tr>
+<td>temp</td>
+<td>临时文件目录</td>
+</tr>
+<tr>
+<td>nginx.exe</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>发布则将资源放入到html目录</li>
+</ul>
+<h5 id="部署"><a class="header-anchor" href="#部署">¶</a>部署</h5>
+<ul>
+<li>
+<p>将之前打包的前端工程<code>vue/vue-rpoject/dist</code>目录下的内容拷贝到nginx的html目录下</p>
+</li>
+<li>
+<p>双击<code>nginx,exe</code>启动<code>nginx</code></p>
+</li>
+<li>
+<p>nginx服务器的端口号是80，启动成功后浏览器访问<a target="_blank" rel="noopener" href="http://localhost:80">http://localhost:80</a>，80端口可省略</p>
+</li>
+<li>
+<p>访问成功，前端工程发布成功</p>
+</li>
+<li>
+<p>注：如果80端口被占用，修改<code>conf/nginx.conf</code>配置文件来修改端口号</p>
+</li>
+</ul>
+<h3 id="Day03-作业"><a class="header-anchor" href="#Day03-作业">¶</a>Day03-作业</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://heuqqdmbyk.feishu.cn/docx/FqzUd6xnho7yDUx2ZTkcdTISnEb">‌⁠‬‌‌﻿‍⁠‍‬‬‍⁠‍‌⁠﻿‬‍⁠⁠‌‌﻿﻿﻿Day03-作业 - 飞书云文档 (feishu.cn)</a></li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        share
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/2024/09/09/CS_Notes/Java/%E3%80%90JavaWeb%E3%80%91Day03--Vue-Element/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaWeb/" rel="tag">JavaWeb</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/09/09/CS_Notes/Java/%E3%80%90JavaWeb%E3%80%91Day02--JS-Vue/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            【JavaWeb】Day02--JS-Vue
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/09/09/CS_Notes/Java/%E3%80%90JavaWeb%E3%80%91Day04--Vue-Element/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">【JavaWeb】Day04--Vue-Element</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2024
+        <i class="ri-heart-fill heart_icon"></i> brocademaple
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="私の宝庫です"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/aboutMe">自分</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+
+<script src="/js/clickBoom1.js"></script>
+ 
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1983763439&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
