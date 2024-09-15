@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>【中国神话-冥界篇】1_三魂七魄 |  私の宝庫です</title>
+      <title>【AI】云服务器部署大模型+知识库问答 |  私の宝庫です</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/images/ayer.png" />
@@ -64,7 +64,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-文史哲/中国史/中国神话/冥界篇/[中国神话-冥界篇]-1-三魂七魄"
+  id="post-CS_Notes/AI/【AI】云服务器部署大模型+知识库问答"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -75,7 +75,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  【中国神话-冥界篇】1_三魂七魄
+  【AI】云服务器部署大模型+知识库问答
 </h1>
  
 
@@ -83,11 +83,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2024/07/07/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%AD%E5%9B%BD%E5%8F%B2/%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D/%E5%86%A5%E7%95%8C%E7%AF%87/%5B%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D-%E5%86%A5%E7%95%8C%E7%AF%87%5D-1-%E4%B8%89%E9%AD%82%E4%B8%83%E9%AD%84/" class="article-date">
-  <time datetime="2024-07-06T16:00:00.000Z" itemprop="datePublished">2024-07-07</time>
+      <a href="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/" class="article-date">
+  <time datetime="2024-09-15T16:00:00.000Z" itemprop="datePublished">2024-09-16</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/">文史哲</a> / <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%AD%E5%9B%BD%E5%8F%B2/">中国史</a> / <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%AD%E5%9B%BD%E5%8F%B2/%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D/">中国神话</a> / <a class="article-category-link" href="/categories/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%AD%E5%9B%BD%E5%8F%B2/%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D/%E5%86%A5%E7%95%8C%E7%AF%87/">冥界篇</a>
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/AI-notes/">AI notes</a>
   </div>
   
 <div class="word_count">
@@ -95,7 +95,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.5k</span>
+            <span class="post-count">1.6k</span>
         </span>
     </span>
 
@@ -119,82 +119,161 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p>[视频地址](<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yA411V7ko/?spm_id_from=333.337.search-card.all.click&amp;vd_source=3f0983ef34615b702fec513c41e55a64">[中国神话-冥界篇 合集]中国古代魂魄观念大盘点！让你理清中国人的灵魂观！_哔哩哔哩_bilibili</a>)    感觉自分乃亚文化爱好者HHH</p>
-<h3 id="冥界篇-1"><a class="header-anchor" href="#冥界篇-1">¶</a>冥界篇 1</h3>
+  <h1>本地部署大模型+测试已有数据集</h1>
+<h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<ul>
+<li>本地部署大模型+测试已有数据集</li>
+<li>大致环境:云服务器+Langchain-Chatchat社区镜像v0.2.10(Ubuntu+PyTorch2.0+CUDA12.2)</li>
+<li>镜像大小27.18G</li>
+</ul>
+<h3 id="第一步-创建容器实例"><a class="header-anchor" href="#第一步-创建容器实例">¶</a>第一步: 创建容器实例</h3>
 <ul>
 <li>
-<p>由于中国人喜欢记录历史，神话人物大部分以历史人物为雏形衍生的，例如三皇五帝就是以部落或者部落首领的名字来创作的神话。</p>
+<p><a target="_blank" rel="noopener" href="https://www.autodl.com/create">https://www.autodl.com/create</a></p>
 </li>
 <li>
-<p>中华民族还有着楚国屈原记录的《九歌》神话。</p>
+<p>选项:</p>
 <ul>
 <li>
-<p>在九歌之中，东皇太一是至高主神；</p>
+<p>按量计费</p>
+<blockquote>
+<p>部署环境和训练尽量用无卡模式</p>
+</blockquote>
 </li>
 <li>
-<p>而在《山海经》中，则以女娲、帝俊为主神；</p>
+<p>西北区(自动选择)</p>
 </li>
 <li>
-<p>盘古开天的神话却要直到三国时期由徐整所著的《三五历纪》中才出现，比在战国时期的《山海经》雏形要晚了几百年。</p>
+<p>GPU型号:RTX 4090D</p>
+</li>
+<li>
+<p>选择有空闲GPU的主机</p>
 </li>
 </ul>
 </li>
 <li>
-<p>十几代人的时间差使得中国神话主神与诸神的关系模糊不清，再加上道教、佛教、儒家思想对于神话的梳理与编纂，中国神话的主要脉络很难梳理。</p>
+<p>需要事先充值一点钱</p>
+</li>
+</ul>
+<p><img src="https://github.com/brocademaple/pic_of_hexo/blob/main/%E7%AC%AC%E4%B8%80%E6%AC%A1%E9%83%A8%E7%BD%B2%E6%9C%AC%E5%9C%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B/10.png?raw=true" alt="镜像创建界面"></p>
+<ul>
+<li>选择镜像: 社区镜像 --&gt; <code>chatchat-space/Langchain-Chatchat</code> --&gt; 选择下载最多的<code>v0.2.10</code>版本</li>
+</ul>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240915203843988.png" alt="image-20240915203843988"></p>
+<ul>
+<li>选择基础镜像也可以, 不过笔者之前多次尝试, 总是遇到大大小小的问题, 索性就选择环境比较完备的<code>Langchain-chatchat</code>了</li>
+</ul>
+<h4 id="小扩展"><a class="header-anchor" href="#小扩展">¶</a>小扩展</h4>
+<ul>
+<li>社区镜像, <code>Langchain-chatchat</code>下面有一个<code>Akegarasu/lora-scripts/lora-train</code>, 用于<code>Stable Diffusion LoRA</code> 训练, 下载量也很多</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">## 回答来自: ChatGPT</span><br><span class="line"></span><br><span class="line">Stable Diffusion LoRA（Low-Rank Adaptation）是一种技术，主要用于微调大型图像生成模型，如Stable Diffusion。LoRA的目标是通过较少的计算资源和较小的数据集，快速、高效地调整模型的权重，使其能够生成特定风格或主题的图像。</span><br><span class="line"></span><br><span class="line">具体来说，LoRA通过引入低秩矩阵来调整模型的部分权重，从而减少需要更新的参数量。这意味着，用户可以在不必重新训练整个模型的情况下，使用LoRA微调模型来适应某个特定的任务或数据集，例如生成特定风格的图片或处理某类视觉任务。</span><br><span class="line"></span><br><span class="line">应用场景包括：</span><br><span class="line"></span><br><span class="line">风格定制：用户可以用LoRA快速微调模型，生成符合特定艺术风格的图像。</span><br><span class="line">特定主题生成：通过LoRA，模型可以更好地生成特定主题（如特定类型的物体、人物、景观等）相关的图片。</span><br><span class="line">效率提升：相比从头训练模型，LoRA可以大大降低微调的计算成本和时间开销。</span><br><span class="line">这使得LoRA特别适用于资源有限但需要灵活调整的场景，例如艺术创作、定制图像生成等。</span><br></pre></td></tr></table></figure>
+<h3 id="第二步-无卡模式开机"><a class="header-anchor" href="#第二步-无卡模式开机">¶</a>第二步: 无卡模式开机</h3>
+<ul>
+<li>平时环境配置+模型训练, 尽量用无卡模式</li>
+<li>下单后等一会,实例创建完成,自动开机</li>
+<li>但是开机默认开始扣费,所以等创建完实例马上关机</li>
+<li>关机需要一小会</li>
+<li>关机完成后,点击实例右边的[更多],选择无卡模式开机</li>
+</ul>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240915195818158.png" alt="image-20240915195818158"></p>
+<ul>
+<li>成功开机后, 点击<code>JupterLab</code>进入命令行环境</li>
+</ul>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240915201027237.png" alt="image-20240915201027237"></p>
+<h3 id="第二点五步-JupyterLab服务异常-修bug"><a class="header-anchor" href="#第二点五步-JupyterLab服务异常-修bug">¶</a>第二点五步: JupyterLab服务异常[修bug]</h3>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240915201429840.png" alt="image-20240915201429840"></p>
+<ul>
+<li>可能遇到这种情况, 不过不用慌</li>
+<li>先打开帮助文档: <a target="_blank" rel="noopener" href="https://www.autodl.com/docs/qa2/">https://www.autodl.com/docs/qa2/</a></li>
+</ul>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240915201626484.png" alt="image-20240915201626484"></p>
+<ul>
+<li>解决方案: ssh登录
+<ul>
+<li>打开本地终端, 复制登录指令粘贴</li>
+<li>出现<code>....@ ...... password:</code>的提示后再cv密码</li>
+<li>成功登录后, 终端出现如下界面:</li>
+</ul>
+</li>
+</ul>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240915203028218.png" alt="image-20240915203028218"></p>
+<ul>
+<li>
+<p>根据帮助文档, 在终端界面输入<code>jupyter-lab</code> , 报错:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># jupyter-lab</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;/root/miniconda3/bin/jupyter-lab&quot;</span>, line 5, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from jupyterlab.labapp import main</span><br><span class="line">ModuleNotFoundError: No module named <span class="string">&#x27;jupyterlab&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>则对应文档提示出错原因: 安装某些依赖导致JupyterLab的依赖被动升级或降级，从而影响了JupyterLab的运行</p>
+</li>
+<li>
+<p>解决: <code>pip install jupyterlab</code> 再次安装后重启实例恢复</p>
+</li>
+<li>
+<p>笔者在这一步<code>pip</code>之后, 再点击<code>JupyterLab</code> , 就可以成功进入了</p>
+</li>
+</ul>
+<h3 id="第三步-把模型运行起来"><a class="header-anchor" href="#第三步-把模型运行起来">¶</a>第三步: 把模型运行起来</h3>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240915204800351.png" alt="image-20240915204800351"></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.codewithgpu.com/i/chatchat-space/Langchain-Chatchat/Langchain-Chatchat">Langchain-Chatchat的AutoDL镜像-README</a></li>
+<li>启动命令:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line"></span><br><span class="line">conda activate chatchat</span><br><span class="line"></span><br><span class="line">bash startup.sh</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>cd /root    登录进去默认已经在根目录下了, 这一步可忽略</p>
+<p>conda activate chatchat    激活名为 <code>chatchat</code> 的 Anaconda 环境, 需要的依赖都已经提前安装好了, 直接启动环境</p>
+<p>bash <a target="_blank" rel="noopener" href="http://startup.sh">startup.sh</a>  运行脚本, 等待片刻即可启动</p>
+</blockquote>
+<ul>
+<li>启动脚本后, 等一阵子, 会闪过很多东西</li>
+<li>看到以下提示, 就稳了</li>
+</ul>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240915205620072.png" alt="image-20240915205620072"></p>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240915205644780.png" alt="image-20240915205644780"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">## 辅助理解工具: 通义千问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">URL: http: // ...... : ....</span><br><span class="line">--&gt; 表示应用通过Streamlit框架启动了一个Web服务, 监听在本地机器(此处指云服务器)的所有网络接口上, 并使用端口xxxx, 意味着可以通过浏览器访问此URL来使用Langchain应用</span><br><span class="line">--&gt; 当然因为这个服务器没有提供web服务, 所以启动成功了也没法直接从云服务器访问</span><br><span class="line">--&gt; 之前因为这个问题, 笔者一度很崩溃, 又尝试了Ollama, LLaMaFactory等, 以及换了其他云服务器, 但是从0到1搭建环境的繁琐又让笔者回到这个最接近成功的方法......</span><br></pre></td></tr></table></figure>
+<h3 id="第四步-将远程服务器上的服务代理到本地"><a class="header-anchor" href="#第四步-将远程服务器上的服务代理到本地">¶</a>第四步: 将远程服务器上的服务代理到本地</h3>
+<blockquote>
+<p>note:</p>
+<p>善用大模型, 把自己的思考+思路+尝试+命令行报错信息整理一下丢给模型, 往往会得到有效的解决方案</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">## 辅助工具: ChatGPT</span><br><span class="line"></span><br><span class="line">使用SSH将实例中的端口代理到本地，具体步骤：</span><br><span class="line">Step.1 在实例中启动您的服务（比如您的服务监听6006端口）</span><br><span class="line"></span><br><span class="line">Step.2 在本地电脑的终端(cmd / powershell / terminal等)中执行代理命令：</span><br><span class="line"></span><br><span class="line">ssh -CNg -L 6006:127.0.0.1:6006 root@123.125.240.150 -p 42151</span><br><span class="line"></span><br><span class="line">其中root@123.125.240.150和42151分别是实例中SSH指令的访问地址与端口，请找到自己实例的ssh指令做相应替换</span><br><span class="line">6006:127.0.0.1:6006是指代理实例内6006端口到本地的6006端口。</span><br><span class="line"></span><br><span class="line">注意：执行完这条ssh命令，没有任何日志是正常的，只要没有要求重新输入密码或错误退出</span><br></pre></td></tr></table></figure>
+<ul>
+<li>过程截图:</li>
+</ul>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240915201626484.png" alt="image-20240915201626484"></p>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240916094546688.png" alt="image-20240916094546688"></p>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240916094642818.png" alt="image-20240916094642818"></p>
+<ul>
+<li>代理成功之后, 本地访问<code>127.0.0.1:6006</code>, 成功进入<code>langchain</code>的<code>webui</code>界面</li>
+</ul>
+<h3 id="第五步-上传知识文件-尝试问答"><a class="header-anchor" href="#第五步-上传知识文件-尝试问答">¶</a>第五步: 上传知识文件+ 尝试问答</h3>
+<ul>
+<li>上传指定类型的知识文件, 并选择添加该文件到知识库</li>
+</ul>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240916095257466.png" alt="image-20240916095257466"></p>
+<p><img src="/home/brocademaple/.config/Typora/typora-user-images/image-20240916095406213.png" alt="image-20240916095406213"></p>
+<ul>
+<li>
+<p>经过几次尝试, 发现源文件[v]和向量库[v]的文件才算有效的知识库文件</p>
+</li>
+<li>
+<p>即将测试的内容: 红高粱的内容提要是什么?</p>
+</li>
+<li>
+<p>无卡模式跑的有点慢, 所以此处为第一次测试结果(RTX3090 开机状态, 读者在创建时直接上4090)</p>
+</li>
+</ul>
+<p><img src="/.io//brocademaple/%E5%9B%BE%E7%89%87/207.jpeg" alt="207"></p>
+<ul>
+<li>到此处初步测试算是完成了</li>
+</ul>
+<h3 id="扩展部分"><a class="header-anchor" href="#扩展部分">¶</a>扩展部分</h3>
+<ul>
+<li>
+<p>将xlsx转换为json格式 --&gt; python代码</p>
 </li>
 <li></li>
-<li>
-<p>传说商朝人好鬼神，每逢有战事或国家大事，帝王都会去往祖陵或祭台由祭司进行占卜。最为主流的占卜是将龟甲打磨抛光之后，由祭司投入紫荆木点燃的火焰之中，以龟甲之上的裂痕来判断吉凶，并以吉凶来判断接下来人们该怎样行事。这里的占卜出的结果，就是上天和鬼神们所给人的答案。</p>
-</li>
-<li>
-<p>“社稷大事，唯祀与戎”</p>
-</li>
-<li>
-<p>但随着时间的流逝，这一类的占卜之术逐渐的失传，变为了其他形式。</p>
-</li>
-<li>
-<p>到了汉朝时，帝王独尊儒术，圣人孔子不说鬼神。此时，对于鬼神的解释之权落到了道家的手中。道家以老子学说，结合阴阳五行，乾坤八卦思想，再加上古人对于天地自然的观测与想象，这才衍生出了三魂七魄的观念。</p>
-</li>
-<li>
-<p>这个观念之所以能保留下来，也是因为皇权与儒家选择的结果。中国人敬拜祖先，因此还有了清明节和中元节这一类祭奠逝者的节日。</p>
-</li>
-<li>
-<p>在三魂七魄的观念未出现之前，不说鬼神的儒家一直无法解释大家到底在祭拜什么。直到三魂七魄观念的出现，才打破这一僵局。</p>
-</li>
-<li></li>
-<li></li>
-<li>
-<p>三魂，分别是天魂胎光、地魂爽灵、人魂幽精。</p>
-</li>
-<li>
-<p>传说在人没有出生之前，人魂由神明专司保管。当人体形成，人魂就会进入到肉体之中，此时，天地阴阳之精气也会形成人的魂魄，从而辅助人魂的成长。随着人本身的成长，天地人三魂也会有着同样的记忆、行为与性格。</p>
-</li>
-<li></li>
-<li>
-<p>一个传说之中的故事：明太祖朱元璋有一次被一个冒失的太监吓了一跳，于是命人将太监拖出去斩首，当时这个太监吓得面无血色。在斩首之时，人们惊讶的发现，斩首台之下竟然有一个长的和太监一模一样的人在那里看热闹。在太监被斩首的前一刻，朱元璋又下旨赦免了这个太监。也是这一吓，将太监的一个魂吓掉了，幻化出来另一个一模一样的自己并较有兴致的观看自己被斩首。</p>
-</li>
-<li>
-<p>而在人死后，天魂和地魂的精气会再度回归到天地之中。丧失本源精气的这两个魂，一个会守护在自己的尸身旁边，一个会去到子孙后代供奉的牌位之中，接受子孙的敬拜与祭祀，而人魂则会被专司灵魂的神明拘走，从而为自己生前的善果和恶行负责；依附在尸身与牌位旁的魂，会像是一个监视器一样在灵位与坟墓旁边观看子孙的言行，观察子孙是否遵纪守法，心向善而不作恶，并保佑这些子孙健康的成长</p>
-</li>
-<li>
-<p>这套说法之所以能够大面积地流行，很大原因取决于儒家接受了三魂这一设定，认为人每当清明节祭祀祖先的时候，都是在祭祀祖先肉体死亡后留下来的那个魂（此处可以指先祖的精神）</p>
-</li>
-<li>
-<p>但对于祖先的祭祀也有规矩：先祖们只能够接受自己直系血脉的祭祀。这个观点来自于古代人对血缘观念的认识。</p>
-</li>
-<li>
-<p>民间也有流传这样一个传说故事：据说一个地方的县太守手下有一个异人，这个人天生可以看到各家祖先的祭祀情况，县太守便命此人观察自家祭祀香火情况。当县太守的儿子为自家祖先上香之后，这个人却说他看到一个屠夫模样的魂进入到太守的祖庙大吃大喝，而旁边穿着官服的县太守本家的祖先，却饿的瘦骨嶙峋在家庙前徘徊。县太守于是逼问妻子，才得知当年生的是女儿，与屠夫家的女人换了孩子。</p>
-</li>
-<li>
-<p>由这个故事可见中国文化中对直系子孙的重视，因此还产生了“不孝有三，无后为大”的言论。虽然故事中由重男轻女的陈腐观念，但也可以从中看出鬼神文化对古人生活的影响。</p>
-</li>
-<li>
-<p>在<strong>道家</strong>系统中，三魂是阳之所属，相对应的七魄则是阴所在。七魄各自都有名称，分别是尸狗、伏矢、雀阴、吞贼、非毒、除秽、臭肺。七魄各自负责人们的喜、怒、哀、惧、爱、恶、欲七种主要的情绪。</p>
-</li>
-<li>
-<p>传说在平日里，都是由三魂来掌控七魄，致使七魄不敢为非作歹使人沉浸于情欲之中。但当三魂受到严重打击而衰弱之时，三魂无力掌控七魄，</p>
-</li>
 </ul>
  
       <!-- reward -->
@@ -248,12 +327,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/2024/07/07/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%AD%E5%9B%BD%E5%8F%B2/%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D/%E5%86%A5%E7%95%8C%E7%AF%87/[%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D-%E5%86%A5%E7%95%8C%E7%AF%87]-1-%E4%B8%89%E9%AD%82%E4%B8%83%E9%AD%84/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reading/" rel="tag">reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E5%8F%B2/" rel="tag">世界史</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BD%E7%A5%9E%E8%AF%9D/" rel="tag">中国神话</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%A5%E7%95%8C%E7%AF%87/" rel="tag">冥界篇</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li></ul>
 
     </footer>
   </div>
@@ -261,19 +340,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2024/07/07/CS_Notes/RuoYi/%E3%80%90RuoYi-+-AI%E3%80%912_%E8%8B%A5%E4%BC%8A%E6%90%AD%E5%BB%BA/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            【RuoYi + AI】2_若伊搭建
-          
-        </div>
-      </a>
     
-    
-      <a href="/2024/07/06/%E6%96%87%E5%8F%B2%E5%93%B2/%E4%B8%96%E7%95%8C%E5%8F%B2/%E7%BD%97%E9%A9%AC%E5%8F%B2/%E3%80%90%E4%BB%8E%E5%9F%8E%E9%82%A6%E5%88%B0%E5%B8%9D%E5%9B%BD%E3%80%91-1-%E7%BD%97%E9%A9%AC%E8%B5%B7%E6%BA%90-%E7%8E%8B%E6%94%BF%E6%97%B6%E4%BB%A3/" class="article-nav-link">
+      <a href="/2024/09/11/CS_Notes/my0wn/%E3%80%90My0vvn%E3%80%91%E5%89%8D%E6%9C%9F%E6%9E%84%E6%80%9D/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">【从城邦到帝国】1_罗马起源_王政时代</div>
+        <div class="article-nav-title">【My0vvn】前期构思</div>
       </a>
     
   </nav>
