@@ -1,127 +1,567 @@
 <!DOCTYPE html>
-
-
 <html lang="zh-CN">
-  
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="The Redefine Team">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <head>
-      <meta charset="utf-8" />
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://brocademaple.github.io/2024/07/19/cs_notes/ai/【ai_indoor】ai编程开发/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="¶写在前面 黑马的知识星球的第一次直播。。。睡前一看，播了四个多小时。。。逆天，不过放在旁边听了两个多小时，还是挺多干货的，故今日开始回放记录 Hexo 添加图片——不用插件，超简单_hexo添加图片-CSDN博客   	     ¶引入 ¶一些知名的AI工具  ChatGPT Suno Copilot 通义千问 Midjourney Stable Diffusion 文心一言 ……  ¶认识AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【AI_indoor】AI编程开发">
+<meta property="og:url" content="https://brocademaple.github.io/2024/07/19/CS_Notes/AI/%E3%80%90AI_indoor%E3%80%91AI%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="私の宝庫です">
+<meta property="og:description" content="¶写在前面 黑马的知识星球的第一次直播。。。睡前一看，播了四个多小时。。。逆天，不过放在旁边听了两个多小时，还是挺多干货的，故今日开始回放记录 Hexo 添加图片——不用插件，超简单_hexo添加图片-CSDN博客   	     ¶引入 ¶一些知名的AI工具  ChatGPT Suno Copilot 通义千问 Midjourney Stable Diffusion 文心一言 ……  ¶认识AI">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-20T16:21:46.536Z">
+<meta property="article:author" content="brocademaple">
+<meta property="article:tag" content="CS Notes">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
         
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1"
-      />
-      <title>【AI_indoor】AI编程开发 |  私の宝庫です</title>
-  <meta name="generator" content="hexo-theme-ayer">
-      
-      <link rel="shortcut icon" href="/images/ayer.png" />
-       
-<link rel="stylesheet" href="/dist/main.css">
+            【AI_indoor】AI编程开发 -
+        
+        Theme Redefine
+    </title>
 
-      
-<link rel="stylesheet" href="/css/fonts/remixicon.css">
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
 
-      
-<link rel="stylesheet" href="/css/custom.css">
- 
-      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
-       
- 
 
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
-      />
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+    <!--- Inject Part-->
+    
 
-      <!-- mermaid -->
-      
-      <style>
-        .swal2-styled.swal2-confirm {
-          font-size: 1.6rem;
-        }
-      </style>
-    </head>
-  </html>
-</html>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"brocademaple.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Theme Redefine","subtitle":{"text":["云淡风轻近午天，傍花随柳过前川","青山不墨千秋画，绿水无弦万古琴","同来不得同归去，故国逢春一寂寥"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"meting":true,"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null},{"name":"Something Just Like This","artist":"Coldplay","url":"https://evan.beee.top/music/Something%20Just%20Like%20This%20-%20The%20Chainsmokers%E3%80%81Coldplay.mp3","cover":"https://evan.beee.top/music/covers/Something_Just_Like_This.png"}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.7.1","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-solid fa-archive"},"Categories":{"path":"/categories","icon":"fa-solid fa-list"},"Tags":{"path":"/tags/","icon":"fa-solid fa-tags"},"Friends":{"path":"/links/","icon":"fa-solid fa-user-group"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/aboutMe","Github":"https://github.com/brocademaple"}}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.2.0"></head>
 
 
 <body>
-  <div id="app">
+<div class="progress-bar-container">
     
-      <canvas class="fireworks"></canvas>
-      <style>
-        .fireworks {
-          position: fixed;
-          left: 0;
-          top: 0;
-          z-index: 99999;
-          pointer-events: none;
-        }
-      </style>
-      
-      
-    <main class="content on">
-      <section class="outer">
-  <article
-  id="post-CS_Notes/AI/【AI_indoor】AI编程开发"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
+
     
-    <header class="article-header">
-       
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  【AI_indoor】AI编程开发
-</h1>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/07/19/CS_Notes/AI/%E3%80%90AI_indoor%E3%80%91AI%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="article-date">
-  <time datetime="2024-07-18T16:00:00.000Z" itemprop="datePublished">2024-07-19</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/AI-notes/">AI notes</a>
-  </div>
-  
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3.7k</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">13 分钟</span>
-        </span>
-    </span>
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
 </div>
- 
+
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Theme Redefine
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-solid fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/categories"
+                                        >
+                                    <i class="fa-solid fa-list fa-fw"></i>
+                                    分类
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags/"
+                                        >
+                                    <i class="fa-solid fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/links/"
+                                        >
+                                    <i class="fa-solid fa-user-group fa-fw"></i>
+                                    友情链接
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/aboutMe">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/brocademaple">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
     </div>
-      
-    <div class="tocbot"></div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-solid fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/categories"
+                        >
+                            <span>
+                                分类
+                            </span>
+                            
+                                <i class="fa-solid fa-list fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags/"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-solid fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/links/"
+                        >
+                            <span>
+                                友情链接
+                            </span>
+                            
+                                <i class="fa-solid fa-user-group fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/aboutMe">ME</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/brocademaple">GITHUB</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">34</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">33</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">77</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
 
 
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">【AI_indoor】AI编程开发</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/redefine-avatar.svg">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">The Redefine Team</span>
+                        
+                            <span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv5</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-07-19</span>
+        <span class="mobile">2024-07-19</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-07-21 00:21:46</span>
+            <span class="mobile">2024-07-21 00:21:46</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/notes/">notes</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/notes/AI-notes/">AI notes</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/CS-Notes/">CS Notes</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/AI/">AI</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.7k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>13 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
 
 
-  
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
 <p>黑马的知识星球的第一次直播。。。睡前一看，播了四个多小时。。。逆天，不过放在旁边听了两个多小时，还是挺多干货的，故今日开始回放记录</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Miracle_ps/article/details/114791335">Hexo 添加图片——不用插件，超简单_hexo添加图片-CSDN博客</a></p>
+<p><a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/Miracle_ps/article/details/114791335">Hexo 添加图片——不用插件，超简单_hexo添加图片-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 
 	<iframe src="https://www.slideshare.net/slideshow/embed_code/key/fIZ6YhyrfWCZ81?hostedIn=slideshare&amp;page=upload" style="width:100%;height:550px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen> </iframe> <div style="margin-bottom:5px">
 
@@ -162,49 +602,49 @@
 <td>GPT-3.5、GPT-4o</td>
 <td>ChatGPT</td>
 <td>OpenAI</td>
-<td><a target="_blank" rel="noopener" href="https://chatgpt.com/">https://chatgpt.com/</a></td>
+<td><a class="link" target="_blank" rel="noopener" href="https://chatgpt.com/">https://chatgpt.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></td>
 </tr>
 <tr>
 <td>Gemini-1.5 Pro</td>
 <td>Gemini</td>
 <td>Google</td>
-<td><a target="_blank" rel="noopener" href="https://gemini.google.com/">https://gemini.google.com/</a></td>
+<td><a class="link" target="_blank" rel="noopener" href="https://gemini.google.com/">https://gemini.google.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></td>
 </tr>
 <tr>
 <td>Claude 3.5</td>
 <td>Claude AI</td>
 <td>Anthropic</td>
-<td><a target="_blank" rel="noopener" href="https://claude.ai/chats">https://claude.ai/chats</a></td>
+<td><a class="link" target="_blank" rel="noopener" href="https://claude.ai/chats">https://claude.ai/chats <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></td>
 </tr>
 <tr>
 <td>文心大模型3.5</td>
 <td>文心一言</td>
 <td>百度</td>
-<td><a target="_blank" rel="noopener" href="https://yiyan.baidu.com/">https://yiyan.baidu.com/</a></td>
+<td><a class="link" target="_blank" rel="noopener" href="https://yiyan.baidu.com/">https://yiyan.baidu.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></td>
 </tr>
 <tr>
 <td>星火3.5</td>
 <td>讯飞星火</td>
 <td>科大讯飞</td>
-<td><a target="_blank" rel="noopener" href="https://xinghuo.xfyun.cn/desk">https://xinghuo.xfyun.cn/desk</a></td>
+<td><a class="link" target="_blank" rel="noopener" href="https://xinghuo.xfyun.cn/desk">https://xinghuo.xfyun.cn/desk <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></td>
 </tr>
 <tr>
 <td>Qwen-Max</td>
 <td>通义千问</td>
 <td>阿里巴巴</td>
-<td><a target="_blank" rel="noopener" href="https://tongyi.aliyun.com/qianwen/">https://tongyi.aliyun.com/qianwen/</a></td>
+<td><a class="link" target="_blank" rel="noopener" href="https://tongyi.aliyun.com/qianwen/">https://tongyi.aliyun.com/qianwen/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></td>
 </tr>
 <tr>
 <td>Moonshoot</td>
 <td>Kimi</td>
 <td>月之暗面</td>
-<td><a target="_blank" rel="noopener" href="https://kimi.moonshot.cn/">https://kimi.moonshot.cn/</a></td>
+<td><a class="link" target="_blank" rel="noopener" href="https://kimi.moonshot.cn/">https://kimi.moonshot.cn/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></td>
 </tr>
 <tr>
 <td>Yi-Large</td>
 <td>零一万物</td>
 <td>零一万物</td>
-<td><a target="_blank" rel="noopener" href="https://platform.lingyiwanwu.com/">https://platform.lingyiwanwu.com/</a></td>
+<td><a class="link" target="_blank" rel="noopener" href="https://platform.lingyiwanwu.com/">https://platform.lingyiwanwu.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></td>
 </tr>
 </tbody>
 </table>
@@ -317,12 +757,12 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// Prompt示例</span><br><span class="line"># 角色</span><br><span class="line">你是一名旅游策划师</span><br><span class="line"># 技能</span><br><span class="line">您能够根据以下内容指定旅行计划</span><br><span class="line">- 出发地和目的地</span><br><span class="line">- 人数</span><br><span class="line">-  行程安排（如果没有就根据热门景点推荐合理行程）</span><br><span class="line">- 交通方式</span><br><span class="line">- 旅行时间</span><br><span class="line">以上信息可以与用户交互来获取</span><br><span class="line"># 输出</span><br><span class="line">将旅行计划以表格的形式输出，方便阅读，表格包含下列内容：</span><br><span class="line">- 日期</span><br><span class="line">- 行程安排</span><br><span class="line">- 交通方式</span><br><span class="line">- 住宿安排</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// Prompt示例</span><br><span class="line"># 角色</span><br><span class="line">你是一名旅游策划师</span><br><span class="line"># 技能</span><br><span class="line">您能够根据以下内容指定旅行计划</span><br><span class="line">- 出发地和目的地</span><br><span class="line">- 人数</span><br><span class="line">-  行程安排（如果没有就根据热门景点推荐合理行程）</span><br><span class="line">- 交通方式</span><br><span class="line">- 旅行时间</span><br><span class="line">以上信息可以与用户交互来获取</span><br><span class="line"># 输出</span><br><span class="line">将旅行计划以表格的形式输出，方便阅读，表格包含下列内容：</span><br><span class="line">- 日期</span><br><span class="line">- 行程安排</span><br><span class="line">- 交通方式</span><br><span class="line">- 住宿安排</span><br></pre></td></tr></table></figure></div>
 <ul>
 <li>斯国一啊</li>
-<li>优质提示词：<a target="_blank" rel="noopener" href="https://github.com/ai-boost/awesome-prompts">https://github.com/ai-boost/awesome-prompts</a></li>
+<li>优质提示词：<a class="link" target="_blank" rel="noopener" href="https://github.com/ai-boost/awesome-prompts">https://github.com/ai-boost/awesome-prompts <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">// 还有一个提示词示例，看起来挺完善的</span><br><span class="line"># 角色</span><br><span class="line">你是一位经验丰富的产品经理，可以从产品设计、需求分析、功能设计、交互设计、业务建模、产品架构设计等方面为用户提供专业的产品建议和指导</span><br><span class="line"></span><br><span class="line">## 技能</span><br><span class="line">### 技能1：需求分析</span><br><span class="line">- 收集和分析用户需求，包括功能需求、性能需求、安全需求等。</span><br><span class="line">- 确定需求的优先级和重要性，为产品的开发和迭代提供指导。</span><br><span class="line"></span><br><span class="line">### 技能2：业务维度分析</span><br><span class="line">- 从市场分析、竞争分析、用户分析等维度进行分析，以确定产品的核心价值和定位。</span><br><span class="line">- 输出格式 ：</span><br><span class="line">	- 维度：&lt;业务维度名称&gt;</span><br><span class="line">	- 有利因素：&lt;该维度的有利因素&gt;</span><br><span class="line">	- 不利因素：&lt;该维度的不利因素&gt;</span><br><span class="line">	- 补充建议：&lt;针对不利因素的补充建议&gt;</span><br><span class="line">	</span><br><span class="line">### 技能3：功能设计</span><br><span class="line">- 根据用户需求和产品目标，设计产品的功能架构和模块。</span><br><span class="line">- 根据产品的功能规格说明书，明确功能的具体要求和实现方式。</span><br><span class="line">- 输出：功能架构图（例如层级结构图、模块关系图）。</span><br><span class="line"></span><br><span class="line">### 技能4：业务建模</span><br><span class="line">- 理解业务流程和业务规则，建立产品的业务模型和数据模型</span><br><span class="line">- 输出业务数据字段的表格，信息如下：</span><br><span class="line">	- 字段名：&lt;字段名称&gt;</span><br><span class="line">	- 定义：&lt;对字段的定义描述&gt;</span><br><span class="line">	- 示例：&lt;举例说明字段的用法&gt;</span><br><span class="line">	- 限制范围/枚举：&lt;字段的限制范围或可能的取值范围&gt;</span><br><span class="line">	- 是否必须：&lt;说明该字段是否为必须字段&gt;</span><br><span class="line">	</span><br><span class="line">### 技能5：交互设计</span><br><span class="line">- 设计产品的用户界面和交互流程，提供产品的易用性和用户满意度。</span><br><span class="line">- 输出：界面设计建议和草图</span><br><span class="line"></span><br><span class="line">## Workflow</span><br><span class="line">1. **确认需求：**通过需求分析确定功能模块和业务维度</span><br><span class="line">2. **业务维度分析：**我从多个维度分析需求文档，并提供补充建议</span><br><span class="line">3. **功能架构图：**我将输出功能架构图，并提供多种样式选项</span><br><span class="line">4. **业务数据字段：**我将输出业务数据字段，并提供详细说明</span><br><span class="line">5. **其他图表：**我将生成业务流程图、时序图和类图</span><br><span class="line"></span><br><span class="line">## 限制</span><br><span class="line">- 只处理与需求文档相关的内容</span><br><span class="line">- 确保输出内容准确、逻辑严谨、格式规范</span><br><span class="line">- 对于不明确或确缺失的信息，将向您询问或提出建议</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">// 还有一个提示词示例，看起来挺完善的</span><br><span class="line"># 角色</span><br><span class="line">你是一位经验丰富的产品经理，可以从产品设计、需求分析、功能设计、交互设计、业务建模、产品架构设计等方面为用户提供专业的产品建议和指导</span><br><span class="line"></span><br><span class="line">## 技能</span><br><span class="line">### 技能1：需求分析</span><br><span class="line">- 收集和分析用户需求，包括功能需求、性能需求、安全需求等。</span><br><span class="line">- 确定需求的优先级和重要性，为产品的开发和迭代提供指导。</span><br><span class="line"></span><br><span class="line">### 技能2：业务维度分析</span><br><span class="line">- 从市场分析、竞争分析、用户分析等维度进行分析，以确定产品的核心价值和定位。</span><br><span class="line">- 输出格式 ：</span><br><span class="line">	- 维度：&lt;业务维度名称&gt;</span><br><span class="line">	- 有利因素：&lt;该维度的有利因素&gt;</span><br><span class="line">	- 不利因素：&lt;该维度的不利因素&gt;</span><br><span class="line">	- 补充建议：&lt;针对不利因素的补充建议&gt;</span><br><span class="line">	</span><br><span class="line">### 技能3：功能设计</span><br><span class="line">- 根据用户需求和产品目标，设计产品的功能架构和模块。</span><br><span class="line">- 根据产品的功能规格说明书，明确功能的具体要求和实现方式。</span><br><span class="line">- 输出：功能架构图（例如层级结构图、模块关系图）。</span><br><span class="line"></span><br><span class="line">### 技能4：业务建模</span><br><span class="line">- 理解业务流程和业务规则，建立产品的业务模型和数据模型</span><br><span class="line">- 输出业务数据字段的表格，信息如下：</span><br><span class="line">	- 字段名：&lt;字段名称&gt;</span><br><span class="line">	- 定义：&lt;对字段的定义描述&gt;</span><br><span class="line">	- 示例：&lt;举例说明字段的用法&gt;</span><br><span class="line">	- 限制范围/枚举：&lt;字段的限制范围或可能的取值范围&gt;</span><br><span class="line">	- 是否必须：&lt;说明该字段是否为必须字段&gt;</span><br><span class="line">	</span><br><span class="line">### 技能5：交互设计</span><br><span class="line">- 设计产品的用户界面和交互流程，提供产品的易用性和用户满意度。</span><br><span class="line">- 输出：界面设计建议和草图</span><br><span class="line"></span><br><span class="line">## Workflow</span><br><span class="line">1. **确认需求：**通过需求分析确定功能模块和业务维度</span><br><span class="line">2. **业务维度分析：**我从多个维度分析需求文档，并提供补充建议</span><br><span class="line">3. **功能架构图：**我将输出功能架构图，并提供多种样式选项</span><br><span class="line">4. **业务数据字段：**我将输出业务数据字段，并提供详细说明</span><br><span class="line">5. **其他图表：**我将生成业务流程图、时序图和类图</span><br><span class="line"></span><br><span class="line">## 限制</span><br><span class="line">- 只处理与需求文档相关的内容</span><br><span class="line">- 确保输出内容准确、逻辑严谨、格式规范</span><br><span class="line">- 对于不明确或确缺失的信息，将向您询问或提出建议</span><br></pre></td></tr></table></figure></div>
 <h5 id="Coze"><a class="header-anchor" href="#Coze">¶</a>Coze</h5>
 <p>Coze中的机器人，有人设与回复逻辑，说明Prompt结构已经提前设计好，直接开始对话即可</p>
 <h4 id="设计阶段"><a class="header-anchor" href="#设计阶段">¶</a>设计阶段</h4>
@@ -365,7 +805,7 @@
 <li>文心快码</li>
 <li>Copilot</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 角色</span><br><span class="line">你扮演一位经验丰富的程序员，根据用户的需求帮助用户完成业务功能开发。</span><br><span class="line"></span><br><span class="line"># 需求</span><br><span class="line">我需要开发一个根据年级生成算术题的接口。</span><br><span class="line">- 参数：年级，可以是1或2，分别代表一年级或二年级</span><br><span class="line">- 返回值：100道算术题</span><br><span class="line"></span><br><span class="line">一年级算术题包含3种类型：</span><br><span class="line">- 100以内的加法</span><br><span class="line">- 100以内的减法</span><br><span class="line">- 100以内3个数字的加减混合运算</span><br><span class="line"></span><br><span class="line">二年级算术题包含类型：</span><br><span class="line">- 表内乘法、除法</span><br><span class="line">- 加减乘除混合运算，运算数字为3个数，加减运算数字不超过100，乘除必须是表内乘除法，除法必须是整除</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 角色</span><br><span class="line">你扮演一位经验丰富的程序员，根据用户的需求帮助用户完成业务功能开发。</span><br><span class="line"></span><br><span class="line"># 需求</span><br><span class="line">我需要开发一个根据年级生成算术题的接口。</span><br><span class="line">- 参数：年级，可以是1或2，分别代表一年级或二年级</span><br><span class="line">- 返回值：100道算术题</span><br><span class="line"></span><br><span class="line">一年级算术题包含3种类型：</span><br><span class="line">- 100以内的加法</span><br><span class="line">- 100以内的减法</span><br><span class="line">- 100以内3个数字的加减混合运算</span><br><span class="line"></span><br><span class="line">二年级算术题包含类型：</span><br><span class="line">- 表内乘法、除法</span><br><span class="line">- 加减乘除混合运算，运算数字为3个数，加减运算数字不超过100，乘除必须是表内乘除法，除法必须是整除</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
 <ul>
 <li>展示了一个IDEA里面的插件：<code>Baidu Comate</code>，还有阿里的通义千问，在<code>Plugins</code>里面搜索下载</li>
 <li>通过演示的小学口算项目，可以发现AI生成的代码可以辅助完成基础框架，但是细节部分仍需要人工修改bug</li>
@@ -448,13 +888,13 @@
 </li>
 <li><strong><u>ai-programing操作指南↓↓↓</u></strong></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=&quot;https://nbviewer.org/github/brocademaple/bcmp-hexo-inside-storage/blob/main/ai-programing.ipynb&quot; width=&quot;100%&quot; height=&quot;600&quot;&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=&quot;https://nbviewer.org/github/brocademaple/bcmp-hexo-inside-storage/blob/main/ai-programing.ipynb&quot; width=&quot;100%&quot; height=&quot;600&quot;&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure></div>
 <ul>
-<li>（hexo中插入ipynb的方式：[向Hexo博客中插入Jupyter Notebook | Coder (<a target="_blank" rel="noopener" href="http://lastknightcoder.github.io">lastknightcoder.github.io</a>)](<a target="_blank" rel="noopener" href="https://lastknightcoder.github.io/hexo-blog/2020/10/28/%E5%90%91">https://lastknightcoder.github.io/hexo-blog/2020/10/28/向</a> Hexo 博客中插入 Jupyter Notebook/)）引用一下orz</li>
+<li>（hexo中插入ipynb的方式：[向Hexo博客中插入Jupyter Notebook | Coder (<a class="link" target="_blank" rel="noopener" href="http://lastknightcoder.github.io">lastknightcoder.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)](<a class="link" target="_blank" rel="noopener" href="https://lastknightcoder.github.io/hexo-blog/2020/10/28/%E5%90%91">https://lastknightcoder.github.io/hexo-blog/2020/10/28/向 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> Hexo 博客中插入 Jupyter Notebook/)）引用一下orz</li>
 <li>现在讲到哪有点晕……</li>
-<li><a target="_blank" rel="noopener" href="https://bailian.console.aliyun.com/#/model-market">阿里云百炼-大模型服务平台</a>     国内国外的都有</li>
+<li><a class="link" target="_blank" rel="noopener" href="https://bailian.console.aliyun.com/#/model-market">阿里云百炼-大模型服务平台 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>     国内国外的都有</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义方法，向大模型发送消息</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_completion</span>(<span class="params">prompt, model = model, temperature = <span class="number">0</span></span>):</span><br><span class="line">    messages = [</span><br><span class="line">        <span class="comment"># 定义角色</span></span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;你是一个旅行达人&quot;</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: prompt&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;assistant&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;answer&quot;</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">    response = client.chat.completions.create(</span><br><span class="line">        model=model,</span><br><span class="line">        messages=messages,</span><br><span class="line">        temperature=temperature, <span class="comment"># 结果的随机性</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message.content</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义方法，向大模型发送消息</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_completion</span>(<span class="params">prompt, model = model, temperature = <span class="number">0</span></span>):</span><br><span class="line">    messages = [</span><br><span class="line">        <span class="comment"># 定义角色</span></span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;你是一个旅行达人&quot;</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: prompt&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;assistant&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;answer&quot;</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">    response = client.chat.completions.create(</span><br><span class="line">        model=model,</span><br><span class="line">        messages=messages,</span><br><span class="line">        temperature=temperature, <span class="comment"># 结果的随机性</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message.content</span><br></pre></td></tr></table></figure></div>
 <h5 id="Prompt问答"><a class="header-anchor" href="#Prompt问答">¶</a>Prompt问答</h5>
 <ol>
 <li>用户提出问题，提交给应用程序</li>
@@ -524,506 +964,429 @@
 <li></li>
 </ul>
 <h2 id="写在后面"><a class="header-anchor" href="#写在后面">¶</a>写在后面</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 角色</span><br><span class="line">你扮演一位经验丰富的程序员，根据用户的需求帮助用户完成业务功能开发。</span><br><span class="line"></span><br><span class="line"># 需求</span><br><span class="line">我需要开发一个根据年级生成算术题的接口。</span><br><span class="line">参数：年级，可以是一年级或二年级</span><br><span class="line">返回值：100道算术题</span><br><span class="line"></span><br><span class="line">一年级算术题包含3种类型：</span><br><span class="line">- 100以内的加法</span><br><span class="line">- 100以内的减法</span><br><span class="line">- 100以内3个数字的加减混合运算</span><br><span class="line"></span><br><span class="line">二年级算术题包含类型：</span><br><span class="line">- 表内乘法、除法</span><br><span class="line">- 加减乘除混合运算，运算数字为3个数，加减运算数字不超过100，乘除必须是表内乘除法</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 角色</span><br><span class="line">你扮演一位经验丰富的程序员，根据用户的需求帮助用户完成业务功能开发。</span><br><span class="line"></span><br><span class="line"># 需求</span><br><span class="line">我需要开发一个根据年级生成算术题的接口。</span><br><span class="line">参数：年级，可以是一年级或二年级</span><br><span class="line">返回值：100道算术题</span><br><span class="line"></span><br><span class="line">一年级算术题包含3种类型：</span><br><span class="line">- 100以内的加法</span><br><span class="line">- 100以内的减法</span><br><span class="line">- 100以内3个数字的加减混合运算</span><br><span class="line"></span><br><span class="line">二年级算术题包含类型：</span><br><span class="line">- 表内乘法、除法</span><br><span class="line">- 加减乘除混合运算，运算数字为3个数，加减运算数字不超过100，乘除必须是表内乘除法</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
 <p>感觉这个需求不错，我家确实有小孩需要这个</p>
 <p>或许可以作为这个博客的学习项目^ ^?</p>
-</div> 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        share
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
 </div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/2024/07/19/CS_Notes/AI/%E3%80%90AI_indoor%E3%80%91AI%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-  <nav class="article-nav">
-    
-      <a href="/2024/07/20/CS_Notes/Java/%E3%80%90Java%E3%80%91%E5%9D%A4%E7%A1%80%E5%A4%8D%E4%B9%A0%E6%89%AB%E7%9B%B2/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            【Java】坤础复习扫盲
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2024/07/17/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91000-036%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">【Pvvn】000-036知识点记录</div>
-      </a>
-    
-  </nav>
-
-  
-   
-  
-   
-    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
-    <div id="twikoo" class="twikoo"></div>
-    <script>
-        twikoo.init({
-            envId: ""
-        })
-    </script>
- 
-</article>
-
-</section>
-      <footer class="footer">
-  <div class="outer">
-    <ul>
-      <li>
-        Copyrights &copy;
-        2024
-        <i class="ri-heart-fill heart_icon"></i> brocademaple
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-        
-        <span>
-  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
-  <span class="division">|</span>
-  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
-</span>
-        
-      </li>
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      <li>
-        <!-- cnzz统计 -->
-        
-        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
-        
-      </li>
-    </ul>
-  </div>
-</footer>    
-    </main>
-    <div class="float_btns">
-      <div class="totop" id="totop">
-  <i class="ri-arrow-up-line"></i>
-</div>
-
-<div class="todark" id="todark">
-  <i class="ri-moon-line"></i>
-</div>
-
-    </div>
-    <aside class="sidebar on">
-      <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-  <div class="logo">
-    <a href="/"><img src="/images/ayer.png" alt="私の宝庫です"></a>
-  </div>
-  
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/">主页</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/archives">归档</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories">分类</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/tags">标签</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/friends">友链</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/aboutMe">自分</a>
-    </li>
-    
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      
-      <a class="nav-item-link nav-item-search"  title="搜索">
-        <i class="ri-search-line"></i>
-      </a>
-      
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-    </aside>
-    <div id="mask"></div>
-
-<!-- #reward -->
-<div id="reward">
-  <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
-  <div class="reward-box">
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
-    
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/wechat.jpg">
-      <span class="reward-type">微信</span>
-    </div>
-    
-  </div>
-</div>
-    
-<script src="/js/jquery-3.6.0.min.js"></script>
- 
-<script src="/js/lazyload.min.js"></script>
-
-<!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
-
-<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
-<link
-  rel="stylesheet"
-  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
-/>
-<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
-
-<script src="/dist/main.js"></script>
-
-<!-- ImageViewer -->
- <!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
         </div>
 
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 【AI_indoor】AI编程开发</li>
+        <li><strong>作者:</strong> The Redefine Team</li>
+        <li><strong>创建于
+                :</strong> 2024-07-19 00:00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2024-07-21 00:21:46
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://redefine.ohevan.com/2024/07/19/CS_Notes/AI/【AI_indoor】AI编程开发/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
 
-            <div class="pswp__top-bar">
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
 
-                <!--  Controls are self-explanatory. Order can be changed. -->
+            </div>
+        
 
-                <div class="pswp__counter"></div>
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/CS-Notes/">#CS Notes</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/AI/">#AI</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        
 
-                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2024/07/20/CS_Notes/Java/%E3%80%90Java%E3%80%91%E5%9D%A4%E7%A1%80%E5%A4%8D%E4%B9%A0%E6%89%AB%E7%9B%B2/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">【Java】坤础复习扫盲</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
                     </div>
-                </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2024/07/17/CS_Notes/PWN/%E3%80%90Pvvn%E3%80%91000-036%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">【Pvvn】000-036知识点记录</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://example.example.com',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">目录</div>
+        <div class="page-title">【AI_indoor】AI编程开发</div>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-text">写在前面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5"><span class="nav-text">引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%9F%A5%E5%90%8D%E7%9A%84AI%E5%B7%A5%E5%85%B7"><span class="nav-text">一些知名的AI工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A4%E8%AF%86AI"><span class="nav-text">认识AI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="nav-text">大语言模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPT%E5%8E%9F%E7%90%86"><span class="nav-text">GPT原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%90%91%E9%87%8F%E5%8C%96"><span class="nav-text">文本向量化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPT%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">GPT的应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI%E7%BC%96%E7%A8%8B"><span class="nav-text">AI编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%90%8E%E9%9D%A2"><span class="nav-text">写在后面</span></a>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
             </div>
 
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
+            
 
         </div>
 
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">The Redefine Team</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 77 篇文章
+                    </span>
+                    
+                        <span>
+                            共 293.4k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.7.1</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
 </div>
 
-<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
-<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
-<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+        </div>
+    
 
-<script>
-    function viewer_init() {
-        let pswpElement = document.querySelectorAll('.pswp')[0];
-        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
 
-        $imgArr.forEach(($em, i) => {
-            $em.onclick = () => {
-                // slider展开状态
-                // todo: 这样不好，后面改成状态
-                if (document.querySelector('.left-col.show')) return
-                let items = []
-                $imgArr.forEach(($em2, i2) => {
-                    let img = $em2.getAttribute('data-idx', i2)
-                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
-                    let title = $em2.getAttribute('alt')
-                    // 获得原图尺寸
-                    const image = new Image()
-                    image.src = src
-                    items.push({
-                        src: src,
-                        w: image.width || $em2.width,
-                        h: image.height || $em2.height,
-                        title: title
-                    })
-                })
-                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
-                    index: parseInt(i)
-                });
-                gallery.init()
-            }
-        })
-    }
-    viewer_init()
-</script> 
-<!-- MathJax -->
- <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-      tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-  });
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
 
-  MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for(i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-  });
-</script>
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
 
-<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
-<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
-<script>
-  var ayerConfig = {
-    mathjax: true,
-  };
-</script>
-
-<!-- Katex -->
-
-<!-- busuanzi  -->
- 
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
- 
-<!-- ClickLove -->
-
-<!-- ClickBoom1 -->
-
-<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
-
-<script src="/js/clickBoom1.js"></script>
- 
-<!-- ClickBoom2 -->
-
-<!-- CodeCopy -->
- 
-<link rel="stylesheet" href="/css/clipboard.css">
- <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
-<script>
-  function wait(callback, seconds) {
-    var timelag = null;
-    timelag = window.setTimeout(callback, seconds);
-  }
-  !function (e, t, a) {
-    var initCopyCode = function(){
-      var copyHtml = '';
-      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
-      copyHtml += '</button>';
-      $(".highlight .code pre").before(copyHtml);
-      $(".article pre code").before(copyHtml);
-      var clipboard = new ClipboardJS('.btn-copy', {
-        target: function(trigger) {
-          return trigger.nextElementSibling;
-        }
-      });
-      clipboard.on('success', function(e) {
-        let $btn = $(e.trigger);
-        $btn.addClass('copied');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-checkbox-circle-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPIED';
+        <!-- rss -->
         
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-checkbox-circle-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-      clipboard.on('error', function(e) {
-        e.clearSelection();
-        let $btn = $(e.trigger);
-        $btn.addClass('copy-failed');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-time-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPY FAILED';
+
         
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-time-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-    }
-    initCopyCode();
-  }(window, document);
-</script>
- 
-<!-- CanvasBackground -->
- 
-<script src="/js/dz.js"></script>
- 
-<script>
-  if (window.mermaid) {
-    mermaid.initialize({ theme: "forest" });
-  }
-</script>
 
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
 
-    
-    <div id="music">
-    
-    
-    
-    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
-        src="//music.163.com/outchain/player?type=2&id=1983763439&auto=1&height=32"></iframe>
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
 </div>
 
-<style>
-    #music {
-        position: fixed;
-        right: 15px;
-        bottom: 0;
-        z-index: 998;
-    }
-</style>
-    
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
     
 
-  </div>
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/js/libs/anime.min.js"></script>
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
 </body>
-
 </html>

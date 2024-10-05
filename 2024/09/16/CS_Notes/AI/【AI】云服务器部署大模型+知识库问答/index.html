@@ -1,137 +1,597 @@
 <!DOCTYPE html>
-
-
 <html lang="zh-CN">
-  
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="The Redefine Team">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <head>
-      <meta charset="utf-8" />
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://brocademaple.github.io/2024/09/16/cs_notes/ai/【ai】云服务器部署大模型+知识库问答/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="本地部署大模型+测试已有数据集 ¶写在前面  本地部署大模型+测试已有数据集 大致环境:云服务器+Langchain-Chatchat社区镜像v0.2.10(Ubuntu+PyTorch2.0+CUDA12.2) 镜像大小27.18G Langchain-Chatchat&#x2F;README.md-Docker部署    ¶第一步: 创建容器实例   AutoDL算力云 | 弹性、好用、省钱。租GPU就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【AI】云服务器部署大模型+知识库问答">
+<meta property="og:url" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/index.html">
+<meta property="og:site_name" content="私の宝庫です">
+<meta property="og:description" content="本地部署大模型+测试已有数据集 ¶写在前面  本地部署大模型+测试已有数据集 大致环境:云服务器+Langchain-Chatchat社区镜像v0.2.10(Ubuntu+PyTorch2.0+CUDA12.2) 镜像大小27.18G Langchain-Chatchat&#x2F;README.md-Docker部署    ¶第一步: 创建容器实例   AutoDL算力云 | 弹性、好用、省钱。租GPU就">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/10.png">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/6.jpg">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/8.png">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/7.jpg">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/4.jpg">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/14.png">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/13.png">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/9.jpg">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/11.jpg">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/11-1726427041532.jpg">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/12.jpg">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/15.jpg">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/17.png">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/16.jpg">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/2.jpg">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/18.png">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/19.png">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/21.jpg">
+<meta property="og:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/20.png">
+<meta property="article:published_time" content="2024-09-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-16T04:09:20.051Z">
+<meta property="article:author" content="brocademaple">
+<meta property="article:tag" content="CS Notes">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/10.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
         
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1"
-      />
-      <title>【AI】云服务器部署大模型+知识库问答 |  私の宝庫です</title>
-  <meta name="generator" content="hexo-theme-ayer">
-      
-      <link rel="shortcut icon" href="/images/ayer.png" />
-       
-<link rel="stylesheet" href="/dist/main.css">
+            【AI】云服务器部署大模型+知识库问答 -
+        
+        Theme Redefine
+    </title>
 
-      
-<link rel="stylesheet" href="/css/fonts/remixicon.css">
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
 
-      
-<link rel="stylesheet" href="/css/custom.css">
- 
-      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
-       
- 
 
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
-      />
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+    <!--- Inject Part-->
+    
 
-      <!-- mermaid -->
-      
-      <style>
-        .swal2-styled.swal2-confirm {
-          font-size: 1.6rem;
-        }
-      </style>
-    </head>
-  </html>
-</html>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"brocademaple.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Theme Redefine","subtitle":{"text":["云淡风轻近午天，傍花随柳过前川","青山不墨千秋画，绿水无弦万古琴","同来不得同归去，故国逢春一寂寥"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"meting":true,"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null},{"name":"Something Just Like This","artist":"Coldplay","url":"https://evan.beee.top/music/Something%20Just%20Like%20This%20-%20The%20Chainsmokers%E3%80%81Coldplay.mp3","cover":"https://evan.beee.top/music/covers/Something_Just_Like_This.png"}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.7.1","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-solid fa-archive"},"Categories":{"path":"/categories","icon":"fa-solid fa-list"},"Tags":{"path":"/tags/","icon":"fa-solid fa-tags"},"Friends":{"path":"/links/","icon":"fa-solid fa-user-group"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/aboutMe","Github":"https://github.com/brocademaple"}}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.2.0"></head>
 
 
 <body>
-  <div id="app">
+<div class="progress-bar-container">
     
-      <canvas class="fireworks"></canvas>
-      <style>
-        .fireworks {
-          position: fixed;
-          left: 0;
-          top: 0;
-          z-index: 99999;
-          pointer-events: none;
-        }
-      </style>
-      
-      
-    <main class="content on">
-      <section class="outer">
-  <article
-  id="post-CS_Notes/AI/【AI】云服务器部署大模型+知识库问答"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
+
     
-    <header class="article-header">
-       
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  【AI】云服务器部署大模型+知识库问答
-</h1>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/" class="article-date">
-  <time datetime="2024-09-15T16:00:00.000Z" itemprop="datePublished">2024-09-16</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/notes/">notes</a> / <a class="article-category-link" href="/categories/notes/AI-notes/">AI notes</a>
-  </div>
-  
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2k</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">7 分钟</span>
-        </span>
-    </span>
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
 </div>
- 
+
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Theme Redefine
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-solid fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/categories"
+                                        >
+                                    <i class="fa-solid fa-list fa-fw"></i>
+                                    分类
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags/"
+                                        >
+                                    <i class="fa-solid fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/links/"
+                                        >
+                                    <i class="fa-solid fa-user-group fa-fw"></i>
+                                    友情链接
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/aboutMe">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/brocademaple">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
     </div>
-      
-    <div class="tocbot"></div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-solid fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/categories"
+                        >
+                            <span>
+                                分类
+                            </span>
+                            
+                                <i class="fa-solid fa-list fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags/"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-solid fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/links/"
+                        >
+                            <span>
+                                友情链接
+                            </span>
+                            
+                                <i class="fa-solid fa-user-group fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/aboutMe">ME</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/brocademaple">GITHUB</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">34</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">33</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">77</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
 
 
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">【AI】云服务器部署大模型+知识库问答</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/redefine-avatar.svg">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">The Redefine Team</span>
+                        
+                            <span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv5</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-09-16</span>
+        <span class="mobile">2024-09-16</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-09-16 12:09:20</span>
+            <span class="mobile">2024-09-16 12:09:20</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/notes/">notes</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/notes/AI-notes/">AI notes</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/CS-Notes/">CS Notes</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/AI/">AI</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>7 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
 
 
-  
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1>本地部署大模型+测试已有数据集</h1>
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h1>本地部署大模型+测试已有数据集</h1>
 <h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
 <ul>
 <li>本地部署大模型+测试已有数据集</li>
 <li>大致环境:云服务器+Langchain-Chatchat社区镜像v0.2.10(Ubuntu+PyTorch2.0+CUDA12.2)</li>
 <li>镜像大小27.18G</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/chatchat-space/Langchain-Chatchat/blob/master/README.md#docker-%E9%83%A8%E7%BD%B2">Langchain-Chatchat/README.md-Docker部署</a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://github.com/chatchat-space/Langchain-Chatchat/blob/master/README.md#docker-%E9%83%A8%E7%BD%B2">Langchain-Chatchat/README.md-Docker部署 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 <li></li>
 </ul>
 <h3 id="第一步-创建容器实例"><a class="header-anchor" href="#第一步-创建容器实例">¶</a>第一步: 创建容器实例</h3>
 <ul>
 <li>
-<p><a target="_blank" rel="noopener" href="https://www.autodl.com/create">AutoDL算力云 | 弹性、好用、省钱。租GPU就上AutoDL</a></p>
+<p><a class="link" target="_blank" rel="noopener" href="https://www.autodl.com/create">AutoDL算力云 | 弹性、好用、省钱。租GPU就上AutoDL <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 </li>
 <li>
 <p>选项:</p>
@@ -157,11 +617,11 @@
 <p>需要事先充值一点钱</p>
 </li>
 </ul>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/10.png" alt="10"></p>
+<p><img lazyload src="/images/loading.svg" data-src="10.png" alt="10"></p>
 <ul>
 <li>选择镜像: 社区镜像 --&gt; <code>chatchat-space/Langchain-Chatchat</code> --&gt; 选择下载最多的<code>v0.2.10</code>版本</li>
 </ul>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/6.jpg" alt="6"></p>
+<p><img lazyload src="/images/loading.svg" data-src="6.jpg" alt="6"></p>
 <ul>
 <li>选择基础镜像也可以, 不过笔者之前多次尝试, 总是遇到大大小小的问题, 索性就选择环境比较完备的<code>Langchain-chatchat</code>了</li>
 </ul>
@@ -169,9 +629,9 @@
 <ul>
 <li>社区镜像, <code>Langchain-chatchat</code>下面有一个<code>Akegarasu/lora-scripts/lora-train</code>, 用于<code>Stable Diffusion LoRA</code> 训练, 下载量也很多</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">## 回答来自: ChatGPT</span><br><span class="line"></span><br><span class="line">Stable Diffusion LoRA（Low-Rank Adaptation）是一种技术，主要用于微调大型图像生成模型，如Stable Diffusion。LoRA的目标是通过较少的计算资源和较小的数据集，快速、高效地调整模型的权重，使其能够生成特定风格或主题的图像。</span><br><span class="line"></span><br><span class="line">具体来说，LoRA通过引入低秩矩阵来调整模型的部分权重，从而减少需要更新的参数量。这意味着，用户可以在不必重新训练整个模型的情况下，使用LoRA微调模型来适应某个特定的任务或数据集，例如生成特定风格的图片或处理某类视觉任务。</span><br><span class="line"></span><br><span class="line">应用场景包括：</span><br><span class="line"></span><br><span class="line">风格定制：用户可以用LoRA快速微调模型，生成符合特定艺术风格的图像。</span><br><span class="line">特定主题生成：通过LoRA，模型可以更好地生成特定主题（如特定类型的物体、人物、景观等）相关的图片。</span><br><span class="line">效率提升：相比从头训练模型，LoRA可以大大降低微调的计算成本和时间开销。</span><br><span class="line">这使得LoRA特别适用于资源有限但需要灵活调整的场景，例如艺术创作、定制图像生成等。</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">## 回答来自: ChatGPT</span><br><span class="line"></span><br><span class="line">Stable Diffusion LoRA（Low-Rank Adaptation）是一种技术，主要用于微调大型图像生成模型，如Stable Diffusion。LoRA的目标是通过较少的计算资源和较小的数据集，快速、高效地调整模型的权重，使其能够生成特定风格或主题的图像。</span><br><span class="line"></span><br><span class="line">具体来说，LoRA通过引入低秩矩阵来调整模型的部分权重，从而减少需要更新的参数量。这意味着，用户可以在不必重新训练整个模型的情况下，使用LoRA微调模型来适应某个特定的任务或数据集，例如生成特定风格的图片或处理某类视觉任务。</span><br><span class="line"></span><br><span class="line">应用场景包括：</span><br><span class="line"></span><br><span class="line">风格定制：用户可以用LoRA快速微调模型，生成符合特定艺术风格的图像。</span><br><span class="line">特定主题生成：通过LoRA，模型可以更好地生成特定主题（如特定类型的物体、人物、景观等）相关的图片。</span><br><span class="line">效率提升：相比从头训练模型，LoRA可以大大降低微调的计算成本和时间开销。</span><br><span class="line">这使得LoRA特别适用于资源有限但需要灵活调整的场景，例如艺术创作、定制图像生成等。</span><br></pre></td></tr></table></figure></div>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://developer.aliyun.com/adc/tutorial/2261127?spm=a2c4g.2261126.0.0.3a511d2dkuBhR9">快速启动Stable Diffusion WebUI-试用教程-试用中心-阿里云 (aliyun.com)</a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://developer.aliyun.com/adc/tutorial/2261127?spm=a2c4g.2261126.0.0.3a511d2dkuBhR9">快速启动Stable Diffusion WebUI-试用教程-试用中心-阿里云 (aliyun.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 </ul>
 <h3 id="第二步-无卡模式开机"><a class="header-anchor" href="#第二步-无卡模式开机">¶</a>第二步: 无卡模式开机</h3>
 <ul>
@@ -181,19 +641,19 @@
 <li>关机需要一小会</li>
 <li>关机完成后,点击实例右边的[更多],选择无卡模式开机</li>
 </ul>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/8.png" alt="8"></p>
+<p><img lazyload src="/images/loading.svg" data-src="8.png" alt="8"></p>
 <ul>
 <li>成功开机后, 点击<code>JupterLab</code>进入命令行环境</li>
 </ul>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/7.jpg" alt="7"></p>
+<p><img lazyload src="/images/loading.svg" data-src="7.jpg" alt="7"></p>
 <h3 id="第二点五步-JupyterLab服务异常-修bug"><a class="header-anchor" href="#第二点五步-JupyterLab服务异常-修bug">¶</a>第二点五步: JupyterLab服务异常[修bug]</h3>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/4.jpg" alt="4"></p>
+<p><img lazyload src="/images/loading.svg" data-src="4.jpg" alt="4"></p>
 <ul>
 <li>
 <p>可能遇到这种情况, 不过不用慌</p>
 </li>
 <li>
-<p>先打开帮助文档: <a target="_blank" rel="noopener" href="https://www.autodl.com/docs/qa2/">AutoDL帮助文档</a></p>
+<p>先打开帮助文档: <a class="link" target="_blank" rel="noopener" href="https://www.autodl.com/docs/qa2/">AutoDL帮助文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 </li>
 <li>
 <p>解决方案: ssh登录</p>
@@ -204,11 +664,11 @@
 </ul>
 </li>
 </ul>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/14.png" alt="14"></p>
+<p><img lazyload src="/images/loading.svg" data-src="14.png" alt="14"></p>
 <ul>
 <li>
 <p>根据帮助文档, 在终端界面输入<code>jupyter-lab</code> , 报错:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># jupyter-lab</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;/root/miniconda3/bin/jupyter-lab&quot;</span>, line 5, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from jupyterlab.labapp import main</span><br><span class="line">ModuleNotFoundError: No module named <span class="string">&#x27;jupyterlab&#x27;</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># jupyter-lab</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;/root/miniconda3/bin/jupyter-lab&quot;</span>, line 5, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from jupyterlab.labapp import main</span><br><span class="line">ModuleNotFoundError: No module named <span class="string">&#x27;jupyterlab&#x27;</span></span><br></pre></td></tr></table></figure></div>
 </li>
 <li>
 <p>则对应文档提示出错原因: 安装某些依赖导致JupyterLab的依赖被动升级或降级，从而影响了JupyterLab的运行</p>
@@ -221,36 +681,36 @@
 </li>
 </ul>
 <h3 id="第三步-把模型运行起来"><a class="header-anchor" href="#第三步-把模型运行起来">¶</a>第三步: 把模型运行起来</h3>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/13.png" alt="13"></p>
+<p><img lazyload src="/images/loading.svg" data-src="13.png" alt="13"></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.codewithgpu.com/i/chatchat-space/Langchain-Chatchat/Langchain-Chatchat">Langchain-Chatchat的AutoDL镜像-README</a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://www.codewithgpu.com/i/chatchat-space/Langchain-Chatchat/Langchain-Chatchat">Langchain-Chatchat的AutoDL镜像-README <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 <li>启动命令:</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line"></span><br><span class="line">conda activate chatchat</span><br><span class="line"></span><br><span class="line">bash startup.sh</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line"></span><br><span class="line">conda activate chatchat</span><br><span class="line"></span><br><span class="line">bash startup.sh</span><br></pre></td></tr></table></figure></div>
 <blockquote>
 <p>cd /root    登录进去默认已经在根目录下了, 这一步可忽略</p>
 <p>conda activate chatchat    激活名为 <code>chatchat</code> 的 Anaconda 环境, 需要的依赖都已经提前安装好了, 直接启动环境</p>
-<p>bash <a target="_blank" rel="noopener" href="http://startup.sh">startup.sh</a>  运行脚本, 等待片刻即可启动</p>
+<p>bash <a class="link" target="_blank" rel="noopener" href="http://startup.sh">startup.sh <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>  运行脚本, 等待片刻即可启动</p>
 </blockquote>
 <ul>
 <li>启动脚本后, 等一阵子, 会闪过很多东西</li>
 <li>看到以下提示, 就稳了</li>
 </ul>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/9.jpg" alt="9"></p>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/11.jpg" alt="11"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">## 辅助理解工具: 通义千问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">URL: http: // ...... : ....</span><br><span class="line">--&gt; 表示应用通过Streamlit框架启动了一个Web服务, 监听在本地机器(此处指云服务器)的所有网络接口上, 并使用端口xxxx, 意味着可以通过浏览器访问此URL来使用Langchain应用</span><br><span class="line">--&gt; 当然因为这个服务器没有提供web服务, 所以启动成功了也没法直接从云服务器访问</span><br><span class="line">--&gt; 之前因为这个问题, 笔者一度很崩溃, 又尝试了Ollama, LLaMaFactory等, 以及换了其他云服务器, 但是从0到1搭建环境的繁琐又让笔者回到这个最接近成功的方法......</span><br></pre></td></tr></table></figure>
+<p><img lazyload src="/images/loading.svg" data-src="9.jpg" alt="9"></p>
+<p><img lazyload src="/images/loading.svg" data-src="11.jpg" alt="11"></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">## 辅助理解工具: 通义千问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">URL: http: // ...... : ....</span><br><span class="line">--&gt; 表示应用通过Streamlit框架启动了一个Web服务, 监听在本地机器(此处指云服务器)的所有网络接口上, 并使用端口xxxx, 意味着可以通过浏览器访问此URL来使用Langchain应用</span><br><span class="line">--&gt; 当然因为这个服务器没有提供web服务, 所以启动成功了也没法直接从云服务器访问</span><br><span class="line">--&gt; 之前因为这个问题, 笔者一度很崩溃, 又尝试了Ollama, LLaMaFactory等, 以及换了其他云服务器, 但是从0到1搭建环境的繁琐又让笔者回到这个最接近成功的方法......</span><br></pre></td></tr></table></figure></div>
 <h3 id="第四步-将远程服务器上的服务代理到本地"><a class="header-anchor" href="#第四步-将远程服务器上的服务代理到本地">¶</a>第四步: 将远程服务器上的服务代理到本地</h3>
 <blockquote>
 <p>note:</p>
 <p>善用大模型, 把自己的思考+思路+尝试+命令行报错信息整理一下丢给模型, 往往会得到有效的解决方案</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">## 辅助工具: ChatGPT</span><br><span class="line"></span><br><span class="line">使用SSH将实例中的端口代理到本地，具体步骤：</span><br><span class="line">Step.1 在实例中启动您的服务（比如您的服务监听6006端口）</span><br><span class="line"></span><br><span class="line">Step.2 在本地电脑的终端(cmd / powershell / terminal等)中执行代理命令：</span><br><span class="line"></span><br><span class="line">ssh -CNg -L 6006:127.0.0.1:6006 root@123.125.240.150 -p 42151</span><br><span class="line"></span><br><span class="line">其中root@123.125.240.150和42151分别是实例中SSH指令的访问地址与端口，请找到自己实例的ssh指令做相应替换</span><br><span class="line">6006:127.0.0.1:6006是指代理实例内6006端口到本地的6006端口。</span><br><span class="line"></span><br><span class="line">注意：执行完这条ssh命令，没有任何日志是正常的，只要没有要求重新输入密码或错误退出</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">## 辅助工具: ChatGPT</span><br><span class="line"></span><br><span class="line">使用SSH将实例中的端口代理到本地，具体步骤：</span><br><span class="line">Step.1 在实例中启动您的服务（比如您的服务监听6006端口）</span><br><span class="line"></span><br><span class="line">Step.2 在本地电脑的终端(cmd / powershell / terminal等)中执行代理命令：</span><br><span class="line"></span><br><span class="line">ssh -CNg -L 6006:127.0.0.1:6006 root@123.125.240.150 -p 42151</span><br><span class="line"></span><br><span class="line">其中root@123.125.240.150和42151分别是实例中SSH指令的访问地址与端口，请找到自己实例的ssh指令做相应替换</span><br><span class="line">6006:127.0.0.1:6006是指代理实例内6006端口到本地的6006端口。</span><br><span class="line"></span><br><span class="line">注意：执行完这条ssh命令，没有任何日志是正常的，只要没有要求重新输入密码或错误退出</span><br></pre></td></tr></table></figure></div>
 <ul>
 <li>过程截图:</li>
 </ul>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/11-1726427041532.jpg" alt="11"></p>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/12.jpg" alt="12"></p>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/15.jpg" alt="15"></p>
+<p><img lazyload src="/images/loading.svg" data-src="11-1726427041532.jpg" alt="11"></p>
+<p><img lazyload src="/images/loading.svg" data-src="12.jpg" alt="12"></p>
+<p><img lazyload src="/images/loading.svg" data-src="15.jpg" alt="15"></p>
 <ul>
 <li>代理成功之后, 本地访问<code>127.0.0.1:6006</code>, 成功进入<code>langchain</code>的<code>webui</code>界面</li>
 </ul>
@@ -258,8 +718,8 @@
 <ul>
 <li>上传指定类型的知识文件, 并选择添加该文件到知识库</li>
 </ul>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/17.png" alt="17"></p>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/16.jpg" alt="16"></p>
+<p><img lazyload src="/images/loading.svg" data-src="17.png" alt="17"></p>
+<p><img lazyload src="/images/loading.svg" data-src="16.jpg" alt="16"></p>
 <ul>
 <li>
 <p>经过几次尝试, 发现<strong>源文件</strong>[√]和<strong>向量库</strong>[√]的文件才算有效的知识库文件</p>
@@ -271,7 +731,7 @@
 <p>无卡模式跑的有点慢, 所以此处为第一次测试结果(RTX3090 开机状态, 读者在创建时直接上4090)</p>
 </li>
 </ul>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/2.jpg" alt="2"></p>
+<p><img lazyload src="/images/loading.svg" data-src="2.jpg" alt="2"></p>
 <ul>
 <li>到此处初步测试算是完成了</li>
 </ul>
@@ -285,20 +745,20 @@
 </blockquote>
 </li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取Excel文件</span></span><br><span class="line">df = pd.read_excel(<span class="string">&#x27;人工标记问答对.xlsx&#x27;</span>, engine=<span class="string">&#x27;openpyxl&#x27;</span>)</span><br><span class="line"><span class="comment"># 此处图片和py代码文件放在同一级目录下</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将DataFrame转换为JSON格式</span></span><br><span class="line">json_data = df.to_json(orient=<span class="string">&#x27;records&#x27;</span>, force_ascii=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将JSON数据保存到文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;人工标记问答对.json&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> json_file:</span><br><span class="line">    json_file.write(json_data)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;JSON文件已保存。&quot;</span>)</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取Excel文件</span></span><br><span class="line">df = pd.read_excel(<span class="string">&#x27;人工标记问答对.xlsx&#x27;</span>, engine=<span class="string">&#x27;openpyxl&#x27;</span>)</span><br><span class="line"><span class="comment"># 此处图片和py代码文件放在同一级目录下</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将DataFrame转换为JSON格式</span></span><br><span class="line">json_data = df.to_json(orient=<span class="string">&#x27;records&#x27;</span>, force_ascii=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将JSON数据保存到文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;人工标记问答对.json&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> json_file:</span><br><span class="line">    json_file.write(json_data)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;JSON文件已保存。&quot;</span>)</span><br></pre></td></tr></table></figure></div>
 <ul>
 <li>可能是转换后的json格式缺了点啥，导致在导入知识库的时候<strong>源文件</strong>[√]和<strong>向量库</strong>[×]，遂放弃此做法</li>
 <li>仅供参考 --&gt; <code>用大模型辅助数据格式转换</code></li>
 </ul>
 <h4 id="另一个简单易部署的模型（ollama-llama3）"><a class="header-anchor" href="#另一个简单易部署的模型（ollama-llama3）">¶</a>另一个简单易部署的模型（ollama&amp;llama3）</h4>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/ollama/ollama">ollama/ollama: Get up and running with Llama 3.1, Mistral, Gemma 2, and other large language models. (github.com)</a></li>
-<li><a target="_blank" rel="noopener" href="https://docker.openeeds.com/r/ollama/ollama">ollama/ollama - Docker Image | Docker Hub (openeeds.com)（DockerHub国内版）</a></li>
-<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2411429">本地部署大模型的几种方式-腾讯云开发者社区-腾讯云 (tencent.com)</a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://github.com/ollama/ollama">ollama/ollama: Get up and running with Llama 3.1, Mistral, Gemma 2, and other large language models. (github.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://docker.openeeds.com/r/ollama/ollama">ollama/ollama - Docker Image | Docker Hub (openeeds.com)（DockerHub国内版） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2411429">本地部署大模型的几种方式-腾讯云开发者社区-腾讯云 (tencent.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 </ul>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/18.png" alt="18"></p>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/19.png" alt="19"></p>
-<p><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/21.jpg" alt="21"><img src="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/20.png" alt="20"></p>
+<p><img lazyload src="/images/loading.svg" data-src="18.png" alt="18"></p>
+<p><img lazyload src="/images/loading.svg" data-src="19.png" alt="19"></p>
+<p><img lazyload src="/images/loading.svg" data-src="21.jpg" alt="21"><img lazyload src="/images/loading.svg" data-src="20.png" alt="20"></p>
 <blockquote>
 <p>当时是直接用CPU方式部署在笔者的分系统Ubuntu上，虽然如上图，部署成功了，但是跑起来……一是胡言乱语，二是电脑过热死机了……</p>
 <p>但是在上述的云服务器中可以尝试，毕竟部署起来很方便，下一个Dokcer，再运行在CPU/GPU下安装的命令即可</p>
@@ -306,510 +766,433 @@
 </blockquote>
 <h4 id="找到的其他教程"><a class="header-anchor" href="#找到的其他教程">¶</a>找到的其他教程</h4>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/2329850.html?spm=a2c4g.2261126.0.0.3a511d2dtl4m4l">如何对ChatGLM模型进行轻量微调和推理-阿里云帮助中心 (aliyun.com)</a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/2329850.html?spm=a2c4g.2261126.0.0.3a511d2dtl4m4l">如何对ChatGLM模型进行轻量微调和推理-阿里云帮助中心 (aliyun.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 </ul>
 <h1>尾</h1>
 <blockquote>
 <p>xaut-brocademaple</p>
 <p>240915-240916</p>
 </blockquote>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        share
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://brocademaple.github.io/2024/09/16/CS_Notes/AI/%E3%80%90AI%E3%80%91%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS-Notes/" rel="tag">CS Notes</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-  <nav class="article-nav">
-    
-      <a href="/2024/09/17/CS_Notes/ProjectDev/%E3%80%90%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E3%80%91Vue+Django%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%BB%BA%E8%AE%AE/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            【项目开发】Vue+Django前后端分离开发建议
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E8%BE%85%E5%8A%A9%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E3%80%91%E7%AC%AC%E4%B8%80%E7%AF%87-Python%E5%9F%BA%E7%A1%80/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">【AI辅助自动化办公】第一篇 Python基础</div>
-      </a>
-    
-  </nav>
-
-  
-   
-  
-   
-    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
-    <div id="twikoo" class="twikoo"></div>
-    <script>
-        twikoo.init({
-            envId: ""
-        })
-    </script>
- 
-</article>
-
-</section>
-      <footer class="footer">
-  <div class="outer">
-    <ul>
-      <li>
-        Copyrights &copy;
-        2024
-        <i class="ri-heart-fill heart_icon"></i> brocademaple
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-        
-        <span>
-  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
-  <span class="division">|</span>
-  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
-</span>
-        
-      </li>
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      <li>
-        <!-- cnzz统计 -->
-        
-        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
-        
-      </li>
-    </ul>
-  </div>
-</footer>    
-    </main>
-    <div class="float_btns">
-      <div class="totop" id="totop">
-  <i class="ri-arrow-up-line"></i>
-</div>
-
-<div class="todark" id="todark">
-  <i class="ri-moon-line"></i>
-</div>
-
-    </div>
-    <aside class="sidebar on">
-      <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-  <div class="logo">
-    <a href="/"><img src="/images/ayer.png" alt="私の宝庫です"></a>
-  </div>
-  
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/">主页</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/archives">归档</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories">分类</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/tags">标签</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/friends">友链</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/aboutMe">自分</a>
-    </li>
-    
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      
-      <a class="nav-item-link nav-item-search"  title="搜索">
-        <i class="ri-search-line"></i>
-      </a>
-      
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-    </aside>
-    <div id="mask"></div>
-
-<!-- #reward -->
-<div id="reward">
-  <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
-  <div class="reward-box">
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
-    
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/wechat.jpg">
-      <span class="reward-type">微信</span>
-    </div>
-    
-  </div>
-</div>
-    
-<script src="/js/jquery-3.6.0.min.js"></script>
- 
-<script src="/js/lazyload.min.js"></script>
-
-<!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
-
-<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
-<link
-  rel="stylesheet"
-  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
-/>
-<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
-
-<script src="/dist/main.js"></script>
-
-<!-- ImageViewer -->
- <!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
         </div>
 
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 【AI】云服务器部署大模型+知识库问答</li>
+        <li><strong>作者:</strong> The Redefine Team</li>
+        <li><strong>创建于
+                :</strong> 2024-09-16 00:00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2024-09-16 12:09:20
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://redefine.ohevan.com/2024/09/16/CS_Notes/AI/【AI】云服务器部署大模型+知识库问答/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
 
-            <div class="pswp__top-bar">
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
 
-                <!--  Controls are self-explanatory. Order can be changed. -->
+            </div>
+        
 
-                <div class="pswp__counter"></div>
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/CS-Notes/">#CS Notes</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/AI/">#AI</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        
 
-                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2024/09/17/CS_Notes/ProjectDev/%E3%80%90%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E3%80%91Vue+Django%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%BB%BA%E8%AE%AE/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">【项目开发】Vue+Django前后端分离开发建议</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
                     </div>
-                </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2024/09/16/CS_Notes/AI/%E3%80%90AI%E8%BE%85%E5%8A%A9%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E3%80%91%E7%AC%AC%E4%B8%80%E7%AF%87-Python%E5%9F%BA%E7%A1%80/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">【AI辅助自动化办公】第一篇 Python基础</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://example.example.com',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">目录</div>
+        <div class="page-title">【AI】云服务器部署大模型+知识库问答</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">本地部署大模型+测试已有数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8%E5%AE%9E%E4%BE%8B"><span class="nav-text">第一步: 创建容器实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E6%97%A0%E5%8D%A1%E6%A8%A1%E5%BC%8F%E5%BC%80%E6%9C%BA"><span class="nav-text">第二步: 无卡模式开机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%82%B9%E4%BA%94%E6%AD%A5-JupyterLab%E6%9C%8D%E5%8A%A1%E5%BC%82%E5%B8%B8-%E4%BF%AEbug"><span class="nav-text">第二点五步: JupyterLab服务异常[修bug]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-%E6%8A%8A%E6%A8%A1%E5%9E%8B%E8%BF%90%E8%A1%8C%E8%B5%B7%E6%9D%A5"><span class="nav-text">第三步: 把模型运行起来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E5%B0%86%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E6%9C%8D%E5%8A%A1%E4%BB%A3%E7%90%86%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="nav-text">第四步: 将远程服务器上的服务代理到本地</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5-%E4%B8%8A%E4%BC%A0%E7%9F%A5%E8%AF%86%E6%96%87%E4%BB%B6-%E5%B0%9D%E8%AF%95%E9%97%AE%E7%AD%94"><span class="nav-text">第五步: 上传知识文件+ 尝试问答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%EF%BC%9F%E6%AD%A5-%E6%89%A9%E5%B1%95%E9%83%A8%E5%88%86"><span class="nav-text">第？步: 扩展部分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">尾</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
             </div>
 
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
+            
 
         </div>
 
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">The Redefine Team</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 77 篇文章
+                    </span>
+                    
+                        <span>
+                            共 293.4k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.7.1</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
 </div>
 
-<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
-<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
-<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+        </div>
+    
 
-<script>
-    function viewer_init() {
-        let pswpElement = document.querySelectorAll('.pswp')[0];
-        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
 
-        $imgArr.forEach(($em, i) => {
-            $em.onclick = () => {
-                // slider展开状态
-                // todo: 这样不好，后面改成状态
-                if (document.querySelector('.left-col.show')) return
-                let items = []
-                $imgArr.forEach(($em2, i2) => {
-                    let img = $em2.getAttribute('data-idx', i2)
-                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
-                    let title = $em2.getAttribute('alt')
-                    // 获得原图尺寸
-                    const image = new Image()
-                    image.src = src
-                    items.push({
-                        src: src,
-                        w: image.width || $em2.width,
-                        h: image.height || $em2.height,
-                        title: title
-                    })
-                })
-                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
-                    index: parseInt(i)
-                });
-                gallery.init()
-            }
-        })
-    }
-    viewer_init()
-</script> 
-<!-- MathJax -->
- <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-      tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-  });
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
 
-  MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for(i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-  });
-</script>
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
 
-<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
-<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
-<script>
-  var ayerConfig = {
-    mathjax: true,
-  };
-</script>
-
-<!-- Katex -->
-
-<!-- busuanzi  -->
- 
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
- 
-<!-- ClickLove -->
-
-<!-- ClickBoom1 -->
-
-<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
-
-<script src="/js/clickBoom1.js"></script>
- 
-<!-- ClickBoom2 -->
-
-<!-- CodeCopy -->
- 
-<link rel="stylesheet" href="/css/clipboard.css">
- <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
-<script>
-  function wait(callback, seconds) {
-    var timelag = null;
-    timelag = window.setTimeout(callback, seconds);
-  }
-  !function (e, t, a) {
-    var initCopyCode = function(){
-      var copyHtml = '';
-      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
-      copyHtml += '</button>';
-      $(".highlight .code pre").before(copyHtml);
-      $(".article pre code").before(copyHtml);
-      var clipboard = new ClipboardJS('.btn-copy', {
-        target: function(trigger) {
-          return trigger.nextElementSibling;
-        }
-      });
-      clipboard.on('success', function(e) {
-        let $btn = $(e.trigger);
-        $btn.addClass('copied');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-checkbox-circle-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPIED';
+        <!-- rss -->
         
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-checkbox-circle-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-      clipboard.on('error', function(e) {
-        e.clearSelection();
-        let $btn = $(e.trigger);
-        $btn.addClass('copy-failed');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-time-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPY FAILED';
+
         
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-time-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-    }
-    initCopyCode();
-  }(window, document);
-</script>
- 
-<!-- CanvasBackground -->
- 
-<script src="/js/dz.js"></script>
- 
-<script>
-  if (window.mermaid) {
-    mermaid.initialize({ theme: "forest" });
-  }
-</script>
 
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
 
-    
-    <div id="music">
-    
-    
-    
-    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
-        src="//music.163.com/outchain/player?type=2&id=1983763439&auto=1&height=32"></iframe>
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
 </div>
 
-<style>
-    #music {
-        position: fixed;
-        right: 15px;
-        bottom: 0;
-        z-index: 998;
-    }
-</style>
-    
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
     
 
-  </div>
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/js/libs/anime.min.js"></script>
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
 </body>
-
 </html>
