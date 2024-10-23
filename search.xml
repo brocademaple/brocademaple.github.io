@@ -24505,11 +24505,151 @@ PIE:      No PIE (0x8048000)<br>
       </tags>
   </entry>
   <entry>
-    <title>【课内】软件工程导论</title>
-    <url>/2024/08/26/CS_Notes/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/%E3%80%90%E8%AF%BE%E5%86%85%E7%AC%94%E8%AE%B0%E3%80%91%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/</url>
+    <title>【课内-期末复习】软件工程导论</title>
+    <url>/2024/10/23/CS_Notes/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/%E3%80%90%E8%AF%BE%E5%86%85%E7%AC%94%E8%AE%B0%E3%80%91%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
-<p>1</p>
-<h1>软件工程导论</h1>
+<ul>
+<li>要期末了，开始预习</li>
+<li>结合老师给的期末复习提纲</li>
+</ul>
+<h1>第一章 软件工程学概述</h1>
+<h3 id="软件危机的概念（没说考不考）"><a class="header-anchor" href="#软件危机的概念（没说考不考）">¶</a>软件危机的概念（没说考不考）</h3>
+<ul>
+<li>
+<p>****软件危机****是指在计算机软件开发和维护过程中所遇到的一系列严重问题</p>
+</li>
+<li>
+<p>鉴于软件危机的长期性和症状不明显的特点，近年来有人建议将软件危机更名为：<em><strong>*软件萧条*</strong></em></p>
+<p>（ Software depression）/<em><strong>*软件困扰*</strong></em>（Software affliction）</p>
+</li>
+</ul>
+<h3 id="软件危机的主要表现（必考）"><a class="header-anchor" href="#软件危机的主要表现（必考）">¶</a>软件危机的主要表现（必考）</h3>
+<ol>
+<li>
+<p>对软件<strong>开发成本和进度的估计</strong>常常不准确。开发成本超出预算，实际进度比预定计划一再拖延的现象并不罕见。</p>
+</li>
+<li>
+<p><strong>用户</strong>对“已完成”系统<strong>不满意</strong>的现象经常发生。</p>
+</li>
+<li>
+<p>软件<strong>产品的质量</strong>往往靠不住。</p>
+</li>
+<li>
+<p>软件的<strong>可维护程度</strong>非常之低。</p>
+</li>
+<li>
+<p>软件通常没有适当的<strong>文档资料</strong>。</p>
+</li>
+<li>
+<p>软件的<strong>成本不断提高</strong>。在计算机总成本占比不断提高。</p>
+</li>
+<li>
+<p>软件开发生产率的提高<strong>赶不上</strong>硬件的发展和人们需求的增长。</p>
+</li>
+</ol>
+<h3 id="软件危机的原因（没说考不考）"><a class="header-anchor" href="#软件危机的原因（没说考不考）">¶</a>软件危机的原因（没说考不考）</h3>
+<ol>
+<li>
+<p>与软件本身的特点有关</p>
+</li>
+<li>
+<p>由软件开发和维护的方法不正确有关</p>
+</li>
+</ol>
+<h3 id="软件复杂性（软件危机的根本原因）的组成（没说考不考）"><a class="header-anchor" href="#软件复杂性（软件危机的根本原因）的组成（没说考不考）">¶</a>软件复杂性（软件危机的根本原因）的组成（没说考不考）</h3>
+<p>(1)  软件固有复杂性（克服不了）</p>
+<p>(2)  管理开发过程的困难</p>
+<p>(3)  软件可能的灵活性</p>
+<p>(4)  表征离散系统行为的困难（克服不了）</p>
+<h3 id="软件工程的概念（必考）"><a class="header-anchor" href="#软件工程的概念（必考）">¶</a>软件工程的概念（必考）</h3>
+<ul>
+<li><strong>软件工程</strong>: 是指导计算机软件****开发*<em><strong>和</strong></em>*维护*<em><strong>的一门</strong></em>*工程学科**** 是为了经济地获得可靠的且能在实际机器上高效运行的软件，而建立和使用完善的工程原理（方法）</li>
+<li>把系统的、规范的、可度量的****途径****应用于软件开发、运行和维护过程，也就是把工程应用于软件。并研究以上提到的途径</li>
+<li>软件工程的**<u>目的</u>**是提高开发质量、降低成本</li>
+</ul>
+<h3 id="软件工程技术两个明显特点"><a class="header-anchor" href="#软件工程技术两个明显特点">¶</a>软件工程技术两个明显特点</h3>
+<ul>
+<li>强调规范化</li>
+<li>强调文档化</li>
+</ul>
+<h3 id="软件工程三要素"><a class="header-anchor" href="#软件工程三要素">¶</a>软件工程三要素</h3>
+<p>过程—决定—&gt;方法—决定—&gt;工具</p>
+<h3 id="软件生命周期"><a class="header-anchor" href="#软件生命周期">¶</a>软件生命周期</h3>
+<ul>
+<li>由<strong>软件定义</strong>、<strong>软件开发</strong>、<strong>运行维护</strong>（软件维护）三个时期组成</li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023190927543.png" alt="软件生命周期"></p>
+<h3 id="软件生命周期模型-瀑布模型"><a class="header-anchor" href="#软件生命周期模型-瀑布模型">¶</a>软件生命周期模型-瀑布模型</h3>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023193312545.png" alt="传统的瀑布模型"></p>
+<h1>第二章 可行性研究</h1>
+<h3 id="可行性分析的两个观点（需要记住）"><a class="header-anchor" href="#可行性分析的两个观点（需要记住）">¶</a>可行性分析的两个观点（需要记住）</h3>
+<ol>
+<li>可行性分析的用处</li>
+</ol>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023194951077.png" alt="可行性分析的用处"></p>
+<ol start="2">
+<li>可行性分析方法</li>
+</ol>
+<blockquote>
+<p>【注意：</p>
+<p>软工课程提出的可行性方法必须能够<strong>结合现实案例进行分析</strong>】</p>
+</blockquote>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023195023888.png" alt="可行性分析方法"></p>
+<h3 id="数据流图（应该会考吧）"><a class="header-anchor" href="#数据流图（应该会考吧）">¶</a>数据流图（应该会考吧）</h3>
+<blockquote>
+<p>描绘信息流和数据从输入移动到输出的过程中所经受的变换</p>
+</blockquote>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023202918890.png" alt="数据流图四种基本符号"></p>
+<h3 id="加工逻辑说明（应该会考吧）"><a class="header-anchor" href="#加工逻辑说明（应该会考吧）">¶</a>加工逻辑说明（应该会考吧）</h3>
+<p>（1）结构化语言</p>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023203615403.png" alt="结构化语言"></p>
+<p>（2）判定表</p>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023203644517.png" alt="判定表"></p>
+<p>（3）判定树</p>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023203707981.png" alt="判定树"></p>
+<h1>第三章 需求分析</h1>
+<h3 id="实体-联系图（ER）（可能会考吧）"><a class="header-anchor" href="#实体-联系图（ER）（可能会考吧）">¶</a>实体-联系图（ER）（可能会考吧）</h3>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023204724290.png" alt="实体-联系图（ER）"></p>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023204805084.png" alt="ER图举例"></p>
+<h3 id="为什么要数据规范化"><a class="header-anchor" href="#为什么要数据规范化">¶</a>为什么要数据规范化</h3>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023204910769.png" alt="数据规范化的目的"></p>
+<h3 id="范式（其实没看懂）"><a class="header-anchor" href="#范式（其实没看懂）">¶</a>范式（其实没看懂）</h3>
+<h4 id="第一范式"><a class="header-anchor" href="#第一范式">¶</a>第一范式</h4>
+<h4 id="第二范式"><a class="header-anchor" href="#第二范式">¶</a>第二范式</h4>
+<h4 id="第三范式"><a class="header-anchor" href="#第三范式">¶</a>第三范式</h4>
+<h3 id="状态转换图"><a class="header-anchor" href="#状态转换图">¶</a>状态转换图</h3>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023205541455.png" alt="状态转换图"></p>
+<h3 id="补充（非考试）–人月神话"><a class="header-anchor" href="#补充（非考试）–人月神话">¶</a>补充（非考试）–人月神话</h3>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023210124940.png" alt="补充（非考试）--人月神话"></p>
+<blockquote>
+<p>啊啊啊啊啊啊啊啊啊啊啊啊啊我觉得你是对的尤其是在经历了这个困难之后</p>
+</blockquote>
+<h3 id="团队需求管理方法：需求工程"><a class="header-anchor" href="#团队需求管理方法：需求工程">¶</a>团队需求管理方法：需求工程</h3>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023210412073.png" alt="团队需求管理方法：需求工程"></p>
+<h3 id="需求分析补充知识"><a class="header-anchor" href="#需求分析补充知识">¶</a>需求分析补充知识</h3>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023210950800.png" alt="需求分析补充知识"></p>
+<h1>第四章 形式化说明技术</h1>
+<h1>第五章  总体设计</h1>
+<h3 id="总体设计的任务"><a class="header-anchor" href="#总体设计的任务">¶</a>总体设计的任务</h3>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023211439007.png" alt="总体设计的任务"></p>
+<h3 id="典型的总体设计过程"><a class="header-anchor" href="#典型的总体设计过程">¶</a>典型的总体设计过程</h3>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023211512386.png" alt="典型的总体设计过程"></p>
+<h3 id="总体设计所书写的文档"><a class="header-anchor" href="#总体设计所书写的文档">¶</a>总体设计所书写的文档</h3>
+<blockquote>
+<p>对我现阶段项目设计还是挺有帮助的看起来</p>
+</blockquote>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023211730811.png" alt="总体设计所书写的文档"></p>
+<h3 id="总体设计原理"><a class="header-anchor" href="#总体设计原理">¶</a>总体设计原理</h3>
+<ul>
+<li>模块化</li>
+<li>抽象</li>
+<li>逐步求精</li>
+<li>信息隐藏和局部化</li>
+<li>模块独立</li>
+</ul>
+<h4 id="模块独立"><a class="header-anchor" href="#模块独立">¶</a>模块独立</h4>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023212037240.png" alt="模块独立"></p>
+<h1>第六章  详细设计</h1>
 ]]></content>
       <categories>
         <category>notes</category>
@@ -27776,9 +27916,10 @@ print(person)  # &#123;'name': 'aa', 'age': 18&#125;
 <li>
 <pre><code>第二种更好
 
-因为当前大模型并不是万能的，你丢给它的一连串指令并不能全部完美地执行
+因为当前大模型并不是万能的，丢给它的一连串指令并不能全部完美地执行
 
-[提示工程]是把大模型当成人来指导去完成一些任务，不同模型就对应着不同能力的人，不同阶段的人
+[提示工程]是把大模型当成人来指导去完成一些任务，
+不同模型就对应着不同能力的人，不同阶段的人
 
 比如：OpenAI的o1模型在理科方面的能力达到了人类博士级水平，
 
@@ -27794,7 +27935,283 @@ print(person)  # &#123;'name': 'aa', 'age': 18&#125;
 <p>–&gt; 第三个联网搜索相关主题的内容并获取第一个网页的所有content</p>
 <p>–&gt; 第四个是查询当前国内精确到区/县/镇的未来n天的天气情况并让LLM生成出行建议</p>
 <p>–&gt; 除此之外：希望有其它需求的时候可以询问大模型获得答案</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 设计思路</span><br><span class="line"></span><br><span class="line">- 通过了解coze上[工作流的组件使用](https://www.coze.cn/docs/guides/workflow)，初步设计出如下的流程图</span><br><span class="line"></span><br><span class="line">![image-20241019164757443](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019164757443.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 动手实践</span><br><span class="line"></span><br><span class="line">- 首先登入[COZE网站](https://www.coze.cn/) </span><br><span class="line">- 打开工作空间，进入后默认是个人空间</span><br><span class="line">- 在其下方选择资源库</span><br><span class="line">- 最后在右上角点击资源按钮，在弹出的列表中点击**工作流**</span><br><span class="line"></span><br><span class="line">![动手实践操作流程1](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019170044397.png)</span><br><span class="line"></span><br><span class="line">- 填写工作流名称和工作流描述</span><br><span class="line"></span><br><span class="line">![填写工作流详细信息](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019175716300.png)</span><br><span class="line"></span><br><span class="line">- **`点击确定`**进入了工作流设计界面，画板中默认出现**开始和结束节点**</span><br><span class="line">- 按照设计出的流程图，在左侧的组件中选择了**意图识别节点**，并依次增加了四个意图：</span><br><span class="line"></span><br><span class="line">1. 用户想要对输入文本进行情感分析；</span><br><span class="line">2. 用户想要生成随机数；</span><br><span class="line">3. 用户想要联网搜索相关资料；</span><br><span class="line">4. 用户想要查询天气。</span><br><span class="line"></span><br><span class="line">- 这样就搭建好了一个初步的框架，只需要专注于思考如何解决每个子任务</span><br><span class="line"></span><br><span class="line">![工作流设计界面](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019180557311.png)</span><br><span class="line"></span><br><span class="line">- 两个工作流概念：【简单工作流】【复杂工作流】</span><br><span class="line"></span><br><span class="line">- **&lt;u&gt;简单工作流&lt;/u&gt;**</span><br><span class="line"></span><br><span class="line">  &gt; 除了开始和结束，仅添加一个节点所构建的工作流。</span><br><span class="line"></span><br><span class="line">- **&lt;u&gt;复杂工作流&lt;/u&gt;**</span><br><span class="line"></span><br><span class="line">  &gt; 通过多节点组合所构建的逻辑较复杂的工作流。</span><br><span class="line"></span><br><span class="line">- 于是考虑把每个子任务做成&lt;u&gt;简单工作流&lt;/u&gt;或者是&lt;u&gt;由多节点组成但不算特别复杂的工作流&lt;/u&gt;，然后把它们通过**工作流组件**导入到**意图识别工作流**中</span><br><span class="line">- 这样每个子任务对应的工作流还可以在以后的场景中**复用**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 情感分析工作流</span><br><span class="line"></span><br><span class="line">- 工作流名称：`sentiment_classify`</span><br><span class="line">- 工作流描述：`Useful for when you want to classify the sentiment of a context`</span><br><span class="line">- 工作流节点组成：`开始节点，大模型节点，结束节点`</span><br><span class="line"></span><br><span class="line">![情感分析工作流](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019181516125.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### 开始节点</span><br><span class="line"></span><br><span class="line">![开始节点](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019181750854.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### 大模型节点（用于生成情感分析结果）</span><br><span class="line"></span><br><span class="line">- 模型选择和输入</span><br><span class="line"></span><br><span class="line">![模型选择](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019183716308.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 提示词</span><br><span class="line"></span><br><span class="line">```Python</span><br><span class="line">DEFINE ROLE AS &quot;NLP专家&quot;:</span><br><span class="line">    知识领域 = [&quot;语言学&quot;, &quot;互联网&quot;, &quot;人工智能&quot;]</span><br><span class="line">    技能 = [&quot;自然语言理解&quot;, &quot;信息提取&quot;, &quot;情感分析&quot;, &quot;意图识别&quot;, &quot;知识推理&quot;, &quot;上下文关联学习&quot;, &quot;实体识别&quot;]</span><br><span class="line">    经验 = &quot;资深&quot;</span><br><span class="line">    任务 = &quot;对文本进行情感分类，将其分类至对应的情感类别&quot;</span><br><span class="line"></span><br><span class="line"># 定义情感类别</span><br><span class="line">sentiment_category_infos = [</span><br><span class="line">    &#123;&quot;category&quot;: &quot;积极&quot;, &quot;description&quot;: &quot;文本内容表达正面情绪或态度，如快乐、满意、希望等。通常包含赞扬、鼓励或对未来的乐观预期等内容。&quot;&#125;,</span><br><span class="line">    &#123;&quot;category&quot;: &quot;消极&quot;, &quot;description&quot;: &quot;文本内容体现负面情绪或态度，如悲伤、愤怒、失望等。通常反映批评、不满或对现状或未来的悲观看法等内容。&quot;&#125;,</span><br><span class="line">    &#123;&quot;category&quot;: &quot;中性&quot;, &quot;description&quot;: &quot;文本内容既不表达明显的正面情绪，也不体现明显的负面情绪。通常包含客观陈述、信息传递或对事物的中立评价等内容。&quot;&#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># 判断文本表达的情感是否符合给定的情感类别描述</span><br><span class="line">def match_description(context, description):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Step1: 一步步思考，仔细分析并理解$&#123;context&#125;的特征和含义，判断是否和$&#123;description&#125;的描述一致。</span><br><span class="line">    Step2: 给出你判断的思考路径$&#123;thought&#125;，在思考路径下给出你将$&#123;context&#125;分类为$&#123;category&#125;的理由。</span><br><span class="line">    Step3：根据你Step1的判断结果和Step2的分类理由，给出此次分类的置信度$&#123;confidence&#125;，置信度的取值范围为：0 &lt;= confidence &lt;= 1。</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    return confidence</span><br><span class="line"></span><br><span class="line"># 根据文本表达的情感分类，并返回对应的情感类别</span><br><span class="line">def classify(context, sentiment_category_infos):</span><br><span class="line">    # 初始化最高置信度</span><br><span class="line">    max_confidence = 0</span><br><span class="line"></span><br><span class="line">    # 遍历所有的类别及其描述</span><br><span class="line">    for sentiment_category_info in sentiment_category_infos:</span><br><span class="line">        # 获取当前类别的置信度</span><br><span class="line">        confidence = match_description(context, sentiment_category_info[&quot;description&quot;])</span><br><span class="line"></span><br><span class="line">        # 如果当前置信度高于之前的最高置信度，更新分类结果</span><br><span class="line">        if confidence &gt; max_confidence:</span><br><span class="line">            max_confidence = confidence</span><br><span class="line">            category = sentiment_category_info[&quot;category&quot;]</span><br><span class="line"></span><br><span class="line">    return &#123;&quot;classify_result&quot;: category&#125;</span><br><span class="line"></span><br><span class="line">MAIN PROCESS:</span><br><span class="line">    # 初始化文本变量，作为输入数据</span><br><span class="line">    context = 读取(&quot;&quot;&quot;&#123;&#123;input&#125;&#125;&quot;&quot;&quot;)</span><br><span class="line"></span><br><span class="line">    # 执行分类任务，输出分类结果</span><br><span class="line">    classify(context, sentiment_category_infos)</span><br><span class="line"></span><br><span class="line">执行工作流程，严格按照json格式输出MAIN PROCESS的分类结果，禁止附加任何的解释和文字描述：</span><br></pre></td></tr></table></figure></div>]]></content>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 设计思路</span><br><span class="line"></span><br><span class="line">- 通过了解coze上[工作流的组件使用](https://www.coze.cn/docs/guides/workflow)，初步设计出如下的流程图</span><br><span class="line"></span><br><span class="line">![image-20241019164757443](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019164757443.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 动手实践</span><br><span class="line"></span><br><span class="line">- 首先登入[COZE网站](https://www.coze.cn/) </span><br><span class="line">- 打开工作空间，进入后默认是个人空间</span><br><span class="line">- 在其下方选择资源库</span><br><span class="line">- 最后在右上角点击资源按钮，在弹出的列表中点击**工作流**</span><br><span class="line"></span><br><span class="line">![动手实践操作流程1](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019170044397.png)</span><br><span class="line"></span><br><span class="line">- 填写工作流名称和工作流描述</span><br><span class="line"></span><br><span class="line">![填写工作流详细信息](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019175716300.png)</span><br><span class="line"></span><br><span class="line">- **`点击确定`**进入了工作流设计界面，画板中默认出现**开始和结束节点**</span><br><span class="line">- 按照设计出的流程图，在左侧的组件中选择了**意图识别节点**，并依次增加了四个意图：</span><br><span class="line"></span><br><span class="line">1. 用户想要对输入文本进行情感分析；</span><br><span class="line">2. 用户想要生成随机数；</span><br><span class="line">3. 用户想要联网搜索相关资料；</span><br><span class="line">4. 用户想要查询天气。</span><br><span class="line"></span><br><span class="line">- 这样就搭建好了一个初步的框架，只需要专注于思考如何解决每个子任务</span><br><span class="line"></span><br><span class="line">![工作流设计界面](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019180557311.png)</span><br><span class="line"></span><br><span class="line">- 两个工作流概念：【简单工作流】【复杂工作流】</span><br><span class="line"></span><br><span class="line">- **&lt;u&gt;简单工作流&lt;/u&gt;**</span><br><span class="line"></span><br><span class="line">  &gt; 除了开始和结束，仅添加一个节点所构建的工作流</span><br><span class="line"></span><br><span class="line">- **&lt;u&gt;复杂工作流&lt;/u&gt;**</span><br><span class="line"></span><br><span class="line">  &gt; 通过多节点组合所构建的逻辑较复杂的工作流</span><br><span class="line"></span><br><span class="line">- 于是考虑把每个子任务做成&lt;u&gt;简单工作流&lt;/u&gt;或者是&lt;u&gt;由多节点组成但不算特别复杂的工作流&lt;/u&gt;，然后把它们通过**工作流组件**导入到**意图识别工作流**中</span><br><span class="line">- 这样每个子任务对应的工作流还可以在以后的场景中**复用**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 情感分析工作流</span><br><span class="line"></span><br><span class="line">- 工作流名称：`sentiment_classify`</span><br><span class="line">- 工作流描述：`Useful for when you want to classify the sentiment of a context`</span><br><span class="line">- 工作流节点组成：`开始节点，大模型节点，结束节点`</span><br><span class="line"></span><br><span class="line">![情感分析工作流](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019181516125.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### 开始节点</span><br><span class="line"></span><br><span class="line">![开始节点](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019181750854.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### 大模型节点（用于生成情感分析结果）</span><br><span class="line"></span><br><span class="line">- 模型选择和输入</span><br><span class="line"></span><br><span class="line">![模型选择](C:\Users\ACADIA\Desktop\hexo\source\_posts\CS_Notes\AI\DataWhale学习笔记\【DataWhale--大模型Bot应用开发】Task3--工作流\image-20241019183716308.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 提示词</span><br><span class="line"></span><br><span class="line">```Python</span><br><span class="line">DEFINE ROLE AS &quot;NLP专家&quot;:</span><br><span class="line">    知识领域 = [&quot;语言学&quot;, &quot;互联网&quot;, &quot;人工智能&quot;]</span><br><span class="line">    技能 = [&quot;自然语言理解&quot;, &quot;信息提取&quot;, &quot;情感分析&quot;, &quot;意图识别&quot;, &quot;知识推理&quot;, &quot;上下文关联学习&quot;, &quot;实体识别&quot;]</span><br><span class="line">    经验 = &quot;资深&quot;</span><br><span class="line">    任务 = &quot;对文本进行情感分类，将其分类至对应的情感类别&quot;</span><br><span class="line"></span><br><span class="line"># 定义情感类别</span><br><span class="line">sentiment_category_infos = [</span><br><span class="line">    &#123;&quot;category&quot;: &quot;积极&quot;, &quot;description&quot;: &quot;文本内容表达正面情绪或态度，如快乐、满意、希望等。通常包含赞扬、鼓励或对未来的乐观预期等内容。&quot;&#125;,</span><br><span class="line">    &#123;&quot;category&quot;: &quot;消极&quot;, &quot;description&quot;: &quot;文本内容体现负面情绪或态度，如悲伤、愤怒、失望等。通常反映批评、不满或对现状或未来的悲观看法等内容。&quot;&#125;,</span><br><span class="line">    &#123;&quot;category&quot;: &quot;中性&quot;, &quot;description&quot;: &quot;文本内容既不表达明显的正面情绪，也不体现明显的负面情绪。通常包含客观陈述、信息传递或对事物的中立评价等内容。&quot;&#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># 判断文本表达的情感是否符合给定的情感类别描述</span><br><span class="line">def match_description(context, description):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Step1: 一步步思考，仔细分析并理解$&#123;context&#125;的特征和含义，判断是否和$&#123;description&#125;的描述一致。</span><br><span class="line">    Step2: 给出你判断的思考路径$&#123;thought&#125;，在思考路径下给出你将$&#123;context&#125;分类为$&#123;category&#125;的理由。</span><br><span class="line">    Step3：根据你Step1的判断结果和Step2的分类理由，给出此次分类的置信度$&#123;confidence&#125;，置信度的取值范围为：0 &lt;= confidence &lt;= 1。</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    return confidence</span><br><span class="line"></span><br><span class="line"># 根据文本表达的情感分类，并返回对应的情感类别</span><br><span class="line">def classify(context, sentiment_category_infos):</span><br><span class="line">    # 初始化最高置信度</span><br><span class="line">    max_confidence = 0</span><br><span class="line"></span><br><span class="line">    # 遍历所有的类别及其描述</span><br><span class="line">    for sentiment_category_info in sentiment_category_infos:</span><br><span class="line">        # 获取当前类别的置信度</span><br><span class="line">        confidence = match_description(context, sentiment_category_info[&quot;description&quot;])</span><br><span class="line"></span><br><span class="line">        # 如果当前置信度高于之前的最高置信度，更新分类结果</span><br><span class="line">        if confidence &gt; max_confidence:</span><br><span class="line">            max_confidence = confidence</span><br><span class="line">            category = sentiment_category_info[&quot;category&quot;]</span><br><span class="line"></span><br><span class="line">    return &#123;&quot;classify_result&quot;: category&#125;</span><br><span class="line"></span><br><span class="line">MAIN PROCESS:</span><br><span class="line">    # 初始化文本变量，作为输入数据</span><br><span class="line">    context = 读取(&quot;&quot;&quot;&#123; &#123;input&#125; &#125;&quot;&quot;&quot;)</span><br><span class="line"></span><br><span class="line">    # 执行分类任务，输出分类结果</span><br><span class="line">    classify(context, sentiment_category_infos)</span><br><span class="line"></span><br><span class="line">执行工作流程，严格按照json格式输出MAIN PROCESS的分类结果，禁止附加任何的解释和文字描述：</span><br></pre></td></tr></table></figure></div>
+<h5 id="结束节点"><a class="header-anchor" href="#结束节点">¶</a>结束节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022143001005.png" alt="结束节点设置"></p>
+<ul>
+<li>测试数据和结果</li>
+</ul>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">测试数据1：</span><br><span class="line">这款产品真是太棒了！👍从外观设计到使用体验，都让我非常满意。😍细节之处体现了厂家的用心，使用起来非常便捷，大大提高了我的工作效率。🚀售后服务也非常到位，遇到问题时，客服人员耐心解答，让我感受到了贴心的关怀。🌟总之，这是一次非常愉快的购物体验，强烈推荐给大家！👏继续保持，期待更多优质产品！🎉</span><br><span class="line">测试数据1结果：</span><br><span class="line">&#123;&quot;classify_result&quot;:&quot;积极&quot;&#125;</span><br><span class="line"></span><br><span class="line">测试数据2：</span><br><span class="line">这次的旅行体验实在让我感到失望。🙁首先，行程安排得非常不合理，几乎每天都在赶路，没有足够的时间去好好欣赏景点，更别提休息了。🚗住宿条件也远低于预期，房间不仅小而且卫生状况令人担忧。🛏️导游的态度也让人不敢恭维，讲解敷衍了事，对于我们的问题也是爱理不理。🙉餐饮方面更是让人失望，所谓的特色菜肴不仅口味一般，卫生状况也让人担忧。🍽️整个旅行过程中，我感觉像是被赶鸭子一样，完全没有享受到旅游的乐趣。🥱总之，这次旅行体验非常差，我不会推荐给我的朋友，希望旅行社能够改进服务，以免让更多的游客失望。📉</span><br><span class="line">测试数据2结果：</span><br><span class="line">&#123;&quot;classify_result&quot;:&quot;消极&quot;&#125;</span><br><span class="line"></span><br><span class="line">测试数据3：</span><br><span class="line">我今天吃了饭。</span><br><span class="line">测试数据3结果：</span><br><span class="line">&#123;&quot;classify_result&quot;:&quot;中性&quot;&#125;</span><br></pre></td></tr></table></figure></div>
+<h4 id="生成随机数工作流"><a class="header-anchor" href="#生成随机数工作流">¶</a>生成随机数工作流</h4>
+<ul>
+<li>工作流名称：<code>random_number</code></li>
+<li>工作流描述：<code>Useful for when you want to generate a random number </code></li>
+<li>工作流节点组成：<code>开始节点，大模型节点，代码节点1，代码节点2，结束节点</code></li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022143829336.png" alt="生成随机数工作流的流程图"></p>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022143854795.png" alt="生成随机数工作流的最后效果"></p>
+<h5 id="开始节点"><a class="header-anchor" href="#开始节点">¶</a>开始节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022144021757.png" alt="开始节点"></p>
+<h5 id="大模型节点"><a class="header-anchor" href="#大模型节点">¶</a>大模型节点</h5>
+<blockquote>
+<p>用于提取出随机数长度</p>
+</blockquote>
+<ul>
+<li>模型选择和输入</li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022144059298.png" alt="模型选择和输入"></p>
+<ul>
+<li>提示词</li>
+</ul>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line">DEFINE ROLE AS <span class="string">&quot;信息提取专家&quot;</span>:</span><br><span class="line">    任务 = <span class="string">&quot;提取出用户随机数需求中的随机数长度&quot;</span></span><br><span class="line"></span><br><span class="line">complete_user_input: <span class="built_in">str</span> = 补全用户输入(&#123; &#123;<span class="built_in">input</span>&#125; &#125;)</span><br><span class="line">input_length: <span class="built_in">int</span> =  提取随机位数(complete_user_input) <span class="keyword">if</span> 提取随机位数(complete_user_input) != <span class="literal">None</span> <span class="keyword">else</span> Default(<span class="number">8</span>) </span><br><span class="line"></span><br><span class="line">识别用户的输入，严格按照json格输出input_length的结果，禁止输出任何附加的解释和文字描述：</span><br><span class="line">​```json</span><br><span class="line">&#123;<span class="string">&quot;input_length&quot;</span>: input_length&#125;</span><br><span class="line">​```</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>输出</li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022144405253.png" alt="输出节点设置"></p>
+<h5 id="代码节点1"><a class="header-anchor" href="#代码节点1">¶</a>代码节点1</h5>
+<blockquote>
+<p>用于解析出input_length</p>
+</blockquote>
+<ul>
+<li>输入</li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022144458873.png" alt="输入节点效果"></p>
+<ul>
+<li>代码</li>
+</ul>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">main</span>(<span class="params">args: Args</span>) -&gt; Output:</span><br><span class="line">    params = args.params[<span class="string">&#x27;input&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">extracted_json</span>(<span class="params">text</span>):</span><br><span class="line">        code_pattern = <span class="string">r&#x27;&#123;.*&#125;&#x27;</span></span><br><span class="line">        code_match = re.search(code_pattern, text, re.DOTALL)</span><br><span class="line">        Extracted_json = code_match.group() <span class="keyword">if</span> code_match <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            res = json.loads(Extracted_json)[<span class="string">&#x27;input_length&#x27;</span>]</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            res = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    ret: Output= &#123;<span class="string">&quot;input_length&quot;</span>: extracted_json(params)&#125;</span><br><span class="line">    <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure></div>
+<h5 id="代码节点2"><a class="header-anchor" href="#代码节点2">¶</a>代码节点2</h5>
+<blockquote>
+<p>用于生成随机位数</p>
+</blockquote>
+<ul>
+<li>输入</li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022144825802.png" alt="代码节点2的输入"></p>
+<ul>
+<li>代码</li>
+</ul>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">main</span>(<span class="params">args: Args</span>) -&gt; Output:</span><br><span class="line">    params = <span class="built_in">int</span>(args.params[<span class="string">&#x27;length&#x27;</span>])</span><br><span class="line">    characters = string.ascii_lowercase + string.digits</span><br><span class="line">    ret: Output = &#123;<span class="string">&quot;random&quot;</span>: <span class="string">&#x27;&#x27;</span>.join(random.choice(characters) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(params))&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>输出</li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022144920775.png" alt="代码节点2的输出"></p>
+<h5 id="结束节点-v2"><a class="header-anchor" href="#结束节点-v2">¶</a>结束节点</h5>
+<ul>
+<li>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022144952295.png" alt="结束节点的设置"></p>
+</li>
+<li>
+<p>测试数据和结果</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">测试数据1：</span><br><span class="line">生成一个随机数</span><br><span class="line">测试数据1结果：</span><br><span class="line">13a9111a</span><br><span class="line"></span><br><span class="line">测试数据2：</span><br><span class="line">生成一个5位随机数</span><br><span class="line">测试数据2结果：</span><br><span class="line">11169</span><br><span class="line"></span><br><span class="line">测试数据3：</span><br><span class="line">生成一个20位随机数</span><br><span class="line">测试数据3结果：</span><br><span class="line">13a9111a1e0129172121</span><br><span class="line"></span><br><span class="line">测试数据4：</span><br><span class="line">生成一个8随机数</span><br><span class="line">测试数据4结果：</span><br><span class="line">12221f21</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>运行结果1</li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022163604961.png" alt="运行结果1"></p>
+<h4 id="必应搜索工作流"><a class="header-anchor" href="#必应搜索工作流">¶</a>必应搜索工作流</h4>
+<h5 id="插件参数情况"><a class="header-anchor" href="#插件参数情况">¶</a>插件参数情况</h5>
+<ul>
+<li>
+<p>Coze官方介绍：</p>
+</li>
+<li>
+<p>其中插件输出参数的信息如下：</p>
+</li>
+<li>
+<p>输出返回值字段介绍</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>参数类型</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>Number</td>
+<td>响应的状态码。不同的数值代表不同的状态，例如成功(0)、错误、异常等</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>包含实际请求数据的响应部分，在请求成功时使用，返回的是调用结果的数据</td>
+</tr>
+<tr>
+<td>log_id</td>
+<td>String</td>
+<td>日志标识符：这是一个唯一的标识符，用于追踪和识别特定的API请求或操作。在日志记录和调试过程中，<code>log_id</code> 非常有用，因为它允许开发人员或支持团队通过这个标识符在系统日志中查找与特定请求相关的详细信息</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>String</td>
+<td>消息：这是一个描述性的字段，它提供了关于API调用结果的额外信息，用以解释code的具体含义。这通常包括成功操作的确认、错误描述、警告或其他任何需要通知用户的信息。例如，如果API调用成功，msg 返回<code>Success</code>；如果调用失败，则返回<code>Failure</code></td>
+</tr>
+<tr>
+<td>response_for_model</td>
+<td>String</td>
+<td>根据用户问题搜索返回得到的结果：[5个问题对应的链接和网页内容描述]</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>其中data参数包含了问题query搜索出的网页的信息，其内部参数描述如下：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>参数类型</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>data的返回值为字符串文本</td>
+</tr>
+<tr>
+<td>images</td>
+<td>Object</td>
+<td>根据用户问题搜索出的网页中内含的图片信息，重点信息在value参数里</td>
+</tr>
+<tr>
+<td>queryContext</td>
+<td>Object</td>
+<td>其下有originalQuery,对应用户原始问题的文本</td>
+</tr>
+<tr>
+<td>rankingResponse</td>
+<td>Object</td>
+<td>在输入参数里count值对应搜索网页个数的结果响应并排序</td>
+</tr>
+<tr>
+<td>videos</td>
+<td>Object</td>
+<td>根据用户问题搜索出的网页中内含的视频信息，重点信息在value参数里</td>
+</tr>
+<tr>
+<td>webPages</td>
+<td>Object</td>
+<td>根据用户问题搜索出的网页中内含的网页信息，重点信息在value参数里</td>
+</tr>
+</tbody>
+</table>
+<h5 id="工作流创建信息"><a class="header-anchor" href="#工作流创建信息">¶</a>工作流创建信息</h5>
+<ul>
+<li>工作流名称：<code>search_test</code></li>
+<li>工作流描述：<code>Useful for when you want to use search_test </code></li>
+<li>工作流节点组成：<code>开始节点，插件节点1，代码节点，插件节点2，结束节点</code></li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022150314296.png" alt="工作流示意图"></p>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022161211599.png" alt="必应搜索插件"></p>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022161228542.png" alt="链接读取插件"></p>
+<h5 id="开始节点-v2"><a class="header-anchor" href="#开始节点-v2">¶</a>开始节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022161258775.png" alt="开始节点设置"></p>
+<h5 id="必应搜索插件"><a class="header-anchor" href="#必应搜索插件">¶</a>必应搜索插件</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022161327996.png" alt="必应搜索插件"></p>
+<h5 id="代码节点"><a class="header-anchor" href="#代码节点">¶</a>代码节点</h5>
+<ul>
+<li>引用必应搜索插件输出的<code>response_for_model</code>参数</li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022161415769.png" alt="代码节点设置"></p>
+<ul>
+<li>代码</li>
+</ul>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">main</span>(<span class="params">args: <span class="built_in">dict</span></span>) -&gt; Output:</span><br><span class="line">    parsed_data = json.loads(args.params[<span class="string">&#x27;input&#x27;</span>])</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> parsed_data:</span><br><span class="line">        regex = <span class="string">r&quot;link:(http[s]?://[^\s]+)&quot;</span></span><br><span class="line">        <span class="keyword">match</span> = re.search(regex, item)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">match</span>:</span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="string">&quot;url&quot;</span>: <span class="keyword">match</span>.group(<span class="number">1</span>).replace(<span class="string">&#x27;\n&#x27;</span>,<span class="string">&#x27;&#x27;</span>)&#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;url&quot;</span>: <span class="string">&quot;&quot;</span>&#125;  </span><br></pre></td></tr></table></figure></div>
+<h5 id="链接读取插件"><a class="header-anchor" href="#链接读取插件">¶</a>链接读取插件</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022161520658.png" alt="链接读取插件"></p>
+<h5 id="结束节点-v3"><a class="header-anchor" href="#结束节点-v3">¶</a>结束节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022161545532.png" alt="结束节点设置"></p>
+<ul>
+<li>回答内容</li>
+</ul>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 搜索网页</span></span><br><span class="line">[&#123; &#123;output.title&#125; &#125;](&#123; &#123;url&#125; &#125;)</span><br><span class="line"><span class="comment">## 网页全文</span></span><br><span class="line">&#123; &#123;output.content&#125; &#125;</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>测试数据和结果</li>
+</ul>
+<div class="highlight-container" data-rel="Markdown"><figure class="iseeu highlight markdown"><table><tr><td class="code"><pre><span class="line">测试数据1：</span><br><span class="line">什么是AI？</span><br><span class="line">测试数据1结果：</span><br><span class="line"><span class="section">## 搜索网页</span></span><br><span class="line">[<span class="string">AI知识科普①：AI的定义、起源、发展、案例</span>](<span class="link">http://m.toutiao.com/group/7372498851418260006/</span>)</span><br><span class="line"><span class="section">## 网页全文</span></span><br><span class="line">发布时间为2024-05-24 17:40:57AI时代到来，你是否了解AI的定义及其起源？这篇文章里，作者做了相关的分享，或许可以帮你更加了解AI这个行业。大家好，今天的更新是AI科普系列的第一期。首先我们要知道：AI和人工智能是完全一致的概念，AI即Artificial Intelligence是人工智能英文单词的缩写。（在所有以后的分享中，作者将优先使用汉语进行表达，避免给大家带来认知负担。）一、AI的定义人工智能（AI）是模拟人类智能，使计算机系统能够学习、推理、感知、以解决问题的一门科学。在人工智能的早期阶段，主要是模拟人类的能力，一个最简单的例子是计算机能像人一样计算出2+3的结果是5，但这种能力仅仅是固定的程序，还远不是我们今天所说的人工智能。在这个过程中，参考人类的能力分类，逐渐把人工智能的能力分成了：认知、处理、表达、决策等等方面的能力。拿设计师非常熟悉的MJ产品而言，就是【表达】这一方面中细分的【通过图像进行表达】的能力。而ChatGPT则是融合了认知、处理、表达等等多方面能力的产品，加上极高的成熟程度，才在近年引爆了人工智能概</span><br><span class="line">.......（此处省略若干字）</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022163421360.png" alt="自分の运行结果"></p>
+<h4 id="天气查询工作流"><a class="header-anchor" href="#天气查询工作流">¶</a>天气查询工作流</h4>
+<h5 id="工作流创建设置"><a class="header-anchor" href="#工作流创建设置">¶</a>工作流创建设置</h5>
+<ul>
+<li>工作流名称：<code>weather_search</code></li>
+<li>工作流描述：<code>useful for when you want to search for weather information</code></li>
+<li>工作流节点组成：<code>开始节点，代码节点，大模型节点1，天气插件，大模型节点2，结束节点</code></li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022164240507.png" alt="天气查询工作流示意图"></p>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022164303192.png" alt="天气插件添加"></p>
+<h5 id="开始节点-v3"><a class="header-anchor" href="#开始节点-v3">¶</a>开始节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022164324965.png" alt="开始节点设置"></p>
+<h5 id="代码节点-v2"><a class="header-anchor" href="#代码节点-v2">¶</a>代码节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022164345428.png" alt="代码节点设置"></p>
+<ul>
+<li>代码：</li>
+</ul>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">main</span>(<span class="params">args: <span class="built_in">dict</span></span>) -&gt; Output:</span><br><span class="line">    current_date :Output= &#123;<span class="string">&quot;date&quot;</span>: datetime.now().strftime(<span class="string">&quot;%Y-%m-%d&quot;</span>)&#125;</span><br><span class="line">    <span class="keyword">return</span> current_date</span><br></pre></td></tr></table></figure></div>
+<h5 id="大模型节点1"><a class="header-anchor" href="#大模型节点1">¶</a>大模型节点1</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022164422351.png" alt="大模型节点1-设置"></p>
+<ul>
+<li>提示词</li>
+</ul>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line">你现在要完成一个信息提取任务，请根据用户输入提取相关天气参数。</span><br><span class="line"></span><br><span class="line">用户输入: &#123; &#123;<span class="built_in">input</span>&#125; &#125;</span><br><span class="line"></span><br><span class="line">待提取的天气参数:</span><br><span class="line"><span class="number">1.</span> city: 从用户输入中提取市名，包括直辖市，比如：北京市、天津市、上海市、重庆市</span><br><span class="line"><span class="number">2.</span> province: 从用户输入中提取省份名（如果有），不要包括直辖市(比如：北京、北京市、北京省、天津市、上海市、重庆市)</span><br><span class="line"><span class="number">3.</span> towns: 从用户输入中提取区/县/镇名（如果有）</span><br><span class="line"><span class="number">4.</span> villages: 从用户输入中提取乡/村名（如果有）</span><br><span class="line"><span class="number">5.</span> start_time: 根据用户输入的时间信息提取开始日期（格式: YYYY-MM-DD）</span><br><span class="line"><span class="number">6.</span> end_time: 根据用户输入的时间信息提取结束日期（格式: YYYY-MM-DD）</span><br><span class="line"></span><br><span class="line">示例提取:</span><br><span class="line">  - 输入: <span class="string">&quot;青岛市即墨区的天气如何？&quot;</span></span><br><span class="line">  - city: <span class="string">&quot;青岛市&quot;</span></span><br><span class="line">  - province: <span class="string">&quot;山东省&quot;</span></span><br><span class="line">  - towns: <span class="string">&quot;即墨区&quot;</span></span><br><span class="line">  - start_time: <span class="string">&quot;2024-10-7&quot;</span></span><br><span class="line">  - end_time: <span class="string">&quot;2024-10-13&quot;</span></span><br><span class="line"></span><br><span class="line">用户查询天气的当前时间：&#123; &#123;date&#125; &#125;</span><br></pre></td></tr></table></figure></div>
+<h5 id="天气插件节点"><a class="header-anchor" href="#天气插件节点">¶</a>天气插件节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022164728880.png" alt="天气插件节点设置"></p>
+<h5 id="大模型节点2"><a class="header-anchor" href="#大模型节点2">¶</a>大模型节点2</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022165053478.png" alt="大模型节点2-设置"></p>
+<ul>
+<li>提示词</li>
+</ul>
+<div class="highlight-container" data-rel="Markdown"><figure class="iseeu highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># Role: 出行提示小助手</span></span><br><span class="line"><span class="section">## Profile:</span></span><br><span class="line"><span class="bullet">-</span> author: kie</span><br><span class="line"><span class="bullet">-</span> version: 0.1</span><br><span class="line"><span class="bullet">-</span> language: 中文</span><br><span class="line"><span class="bullet">-</span> description: 根据天气插件返回的天气信息，生成针对用户的出行提示和建议。</span><br><span class="line"></span><br><span class="line"><span class="section">## Goals:</span></span><br><span class="line"><span class="bullet">-</span> 理解天气信息，结合用户可能的活动，生成实用的出行提示和建议。</span><br><span class="line"></span><br><span class="line"><span class="section">## Constrains:</span></span><br><span class="line"><span class="bullet">-</span> 生成的提示和建议需要根据具体的天气情况来定制。</span><br><span class="line"></span><br><span class="line"><span class="section">## Skills:</span></span><br><span class="line"><span class="bullet">-</span> 擅长理解并应用天气信息。</span><br><span class="line"><span class="bullet">-</span> 精通用户行为分析，能够根据天气情况提出合理的出行建议。</span><br><span class="line"></span><br><span class="line"><span class="section">## Workflows:</span></span><br><span class="line"><span class="bullet">1.</span> 分析天气插件返回的天气信息。</span><br><span class="line"><span class="bullet">2.</span> 根据天气情况，结合用户可能的活动，生成出行提示和建议。</span><br><span class="line"><span class="bullet">3.</span> 输出提示和建议。</span><br><span class="line"></span><br><span class="line"><span class="section">## Example:</span></span><br><span class="line"><span class="bullet">-</span> Weather<span class="emphasis">_info：</span></span><br><span class="line"><span class="emphasis">&#123;</span></span><br><span class="line"><span class="emphasis">  &quot;data&quot;: [</span></span><br><span class="line"><span class="emphasis">    &#123;</span></span><br><span class="line"><span class="emphasis">      &quot;condition&quot;: &quot;小雨&quot;,</span></span><br><span class="line"><span class="emphasis">      &quot;humidity&quot;: 91,</span></span><br><span class="line"><span class="emphasis">      &quot;predict_</span>date&quot;: &quot;2024-07-18&quot;,</span><br><span class="line"><span class="code">      &quot;temp_high&quot;: 29.66,</span></span><br><span class="line"><span class="code">      &quot;temp_low&quot;: 25.98,</span></span><br><span class="line"><span class="code">      &quot;weather_day&quot;: &quot;小雨&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_dir_day&quot;: &quot;东南风&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_dir_night&quot;: &quot;东南风&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_level_day&quot;: &quot;3&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_level_night&quot;: &quot;3&quot;</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">    &#123;</span></span><br><span class="line"><span class="code">      &quot;condition&quot;: &quot;小雨&quot;,</span></span><br><span class="line"><span class="code">      &quot;humidity&quot;: 91,</span></span><br><span class="line"><span class="code">      &quot;predict_date&quot;: &quot;2024-07-19&quot;,</span></span><br><span class="line"><span class="code">      &quot;temp_high&quot;: 29.95,</span></span><br><span class="line"><span class="code">      &quot;temp_low&quot;: 25.73,</span></span><br><span class="line"><span class="code">      &quot;weather_day&quot;: &quot;小雨&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_dir_day&quot;: &quot;东南风&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_dir_night&quot;: &quot;东南风&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_level_day&quot;: &quot;3&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_level_night&quot;: &quot;3&quot;</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">    &#123;</span></span><br><span class="line"><span class="code">      &quot;condition&quot;: &quot;小雨&quot;,</span></span><br><span class="line"><span class="code">      &quot;humidity&quot;: 90,</span></span><br><span class="line"><span class="code">      &quot;predict_date&quot;: &quot;2024-07-20&quot;,</span></span><br><span class="line"><span class="code">      &quot;temp_high&quot;: 29.96,</span></span><br><span class="line"><span class="code">      &quot;temp_low&quot;: 25.86,</span></span><br><span class="line"><span class="code">      &quot;weather_day&quot;: &quot;小雨&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_dir_day&quot;: &quot;东南风&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_dir_night&quot;: &quot;东南风&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_level_day&quot;: &quot;3&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_level_night&quot;: &quot;3&quot;</span></span><br><span class="line"><span class="code">    &#125;</span></span><br><span class="line"><span class="code">  ]</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code">- OutputFormat：</span></span><br><span class="line"><span class="code">| 日期 | 天气状况 | 相对湿度 | 温度(最低~最高) | 白天风向 | 白天风力 |</span></span><br><span class="line"><span class="code">|----------|--------|--------|------------|--------|--------|</span></span><br><span class="line"><span class="code">| 2024-07-18 | 小雨 | 91 | 25.98~29.66 | 东南风 | 3 |</span></span><br><span class="line"><span class="code">| 2024-07-19 | 小雨 | 91 | 25.73~29.95 | 东南风 | 3 |</span></span><br><span class="line"><span class="code">| 2024-07-20 | 小雨 | 90 | 25.86~29.96 | 东南风 | 3 |</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">根据2024年7月18日到2024年7月20日的天气情况，我将给您如下出行提示和建议:</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> <span class="strong">**天气状况**</span>: 未来三天均为小雨，湿度较高（约90%）。</span><br><span class="line"><span class="bullet">2.</span> <span class="strong">**温度范围**</span>: 最高气温在29.96°C左右，最低气温在25.73°C左右，适合穿着轻便的雨具。</span><br><span class="line"><span class="bullet">3.</span> <span class="strong">**风向与风力**</span>: 风向为东南风，风力等级为3级，出行时注意风力对雨伞的影响。</span><br><span class="line"><span class="bullet">4.</span> <span class="strong">**出行建议**</span>:</span><br><span class="line"><span class="bullet">   -</span> 建议携带雨具（雨伞或雨衣），以应对小雨天气。</span><br><span class="line"><span class="bullet">   -</span> 注意路面湿滑，行车或步行时请小心。</span><br><span class="line"><span class="bullet">   -</span> 如果有户外活动计划，建议选择室内活动或适当调整时间。</span><br><span class="line"><span class="bullet">5.</span> <span class="strong">**健康提示**</span>: 高湿度天气可能导致不适，保持适当的水分摄入，避免长时间在潮湿环境中逗留。</span><br><span class="line"></span><br><span class="line">请根据以上信息合理安排出行计划，确保安全与舒适。</span><br><span class="line"></span><br><span class="line"><span class="section">## 天气信息</span></span><br><span class="line">&#123;&#123;input&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">## OutputFormat:</span></span><br><span class="line">| 日期 | 天气状况 | 相对湿度 | 温度(最高/最低) | 白天风向 | 白天风力 |</span><br><span class="line">|----------|--------|--------|------------|--------|--------|</span><br><span class="line">| 日期1 | 天气状况1 | 相对湿度1 | 最低温度1~最高温度1 | 白天风向1 | 白天风力1 |</span><br><span class="line">...</span><br><span class="line">| 日期n | 天气状况n | 相对湿度n | 最低温度n~最高温度n | 白天风向n | 白天风力n |</span><br><span class="line"></span><br><span class="line">根据&#123;&#123;start<span class="emphasis">_time&#125;&#125;到&#123;&#123;end_</span>time&#125;&#125;的天气情况，我将给您如下出行提示和建议:</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> <span class="strong">**天气状况**</span>: </span><br><span class="line"><span class="bullet">2.</span> <span class="strong">**温度范围**</span>: </span><br><span class="line"><span class="bullet">3.</span> <span class="strong">**风向与风力**</span>: </span><br><span class="line"><span class="bullet">4.</span> <span class="strong">**出行建议**</span>:</span><br><span class="line"><span class="bullet">5.</span> <span class="strong">**健康提示**</span>:</span><br><span class="line"></span><br><span class="line">请根据以上信息合理安排出行计划，确保安全与舒适。</span><br></pre></td></tr></table></figure></div>
+<h5 id="结束节点-v4"><a class="header-anchor" href="#结束节点-v4">¶</a>结束节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022171331461.png" alt="结束节点设置"></p>
+<h5 id="测试数据和结果"><a class="header-anchor" href="#测试数据和结果">¶</a>测试数据和结果</h5>
+<div class="highlight-container" data-rel="Markdown"><figure class="iseeu highlight markdown"><table><tr><td class="code"><pre><span class="line">测试数据1：</span><br><span class="line">查询杭州滨江市明天的天气</span><br><span class="line">测试数据1结果：</span><br><span class="line">| 日期 | 天气状况 | 相对湿度 | 温度(最高/最低) | 白天风向 | 白天风力 |</span><br><span class="line">|----------|--------|--------|------------|--------|--------|</span><br><span class="line">| 2024-10-12 | 小雨 | 82 | 19~25 | 东北风 | 4 |</span><br><span class="line"></span><br><span class="line">根据 2024 年 10 月 12 日的天气情况，我将给您如下出行提示和建议:</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> <span class="strong">**天气状况**</span>: 2024 年 10 月 12 日为小雨天气，相对湿度较高为 82%。</span><br><span class="line"><span class="bullet">2.</span> <span class="strong">**温度范围**</span>: 最高气温 25°C，最低气温 19°C，温度较为适宜，但由于小雨天气，体感可能会稍凉。</span><br><span class="line"><span class="bullet">3.</span> <span class="strong">**风向与风力**</span>: 白天风向为东北风，风力等级为 4 级。夜间风向为西风，风力等级为 3 级。出行时注意风力较大可能对雨伞等雨具的影响。</span><br><span class="line"><span class="bullet">4.</span> <span class="strong">**出行建议**</span>:</span><br><span class="line"><span class="bullet">   -</span> 携带雨具，如雨伞或雨衣，以应对小雨天气。</span><br><span class="line"><span class="bullet">   -</span> 由于风力较大，注意固定好容易被风吹走的物品。</span><br><span class="line"><span class="bullet">   -</span> 路面可能会因雨水而湿滑，行车或步行时要小心谨慎。</span><br><span class="line"><span class="bullet">5.</span> <span class="strong">**健康提示**</span>: 高湿度天气可能会让人感觉不适，注意保持适当的水分摄入，避免长时间在潮湿环境中逗留，以防感冒等疾病。</span><br><span class="line"></span><br><span class="line">请根据以上信息合理安排出行计划，确保安全与舒适。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">测试数据2：</span><br><span class="line">查询杭州滨江市未来一周的天气</span><br><span class="line">测试数据2结果：</span><br><span class="line">| 日期       | 天气状况 | 相对湿度 | 温度(最高/最低) | 白天风向 | 白天风力 |</span><br><span class="line">|----------|--------|--------|------------|--------|--------|</span><br><span class="line">| 2024-10-11 | 晴       | 65     | 15~26       | 东北风   | 3       |</span><br><span class="line">| 2024-10-12 | 多云     | 79     | 18~25       | 东风     | 4       |</span><br><span class="line">| 2024-10-13 | 小雨     | 84     | 20~26       | 东风     | 4       |</span><br><span class="line">| 2024-10-14 | 小雨     | 84     | 20~27       | 东北风   | 3       |</span><br><span class="line">| 2024-10-15 | 小雨     | 90     | 21~26       | 东北风   | 3       |</span><br><span class="line">| 2024-10-16 | 小到中雨 | 92     | 21~24       | 北风     | 1       |</span><br><span class="line">| 2024-10-17 | 阴       | 86     | 21~28       | 东风     | 3       |</span><br><span class="line"></span><br><span class="line">根据 2024-10-11 到 2024-10-17 的天气情况，我将给您如下出行提示和建议:</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> <span class="strong">**天气状况**</span>：未来几天天气多变，有晴、多云、小雨和阴等不同天气状况，且在周末及下周初有连续的小雨和小到中雨天气。</span><br><span class="line"><span class="bullet">2.</span> <span class="strong">**温度范围**</span>：最高气温在 28°C 左右，最低气温在 15°C 左右，早晚温差较大，注意适时增减衣物。</span><br><span class="line"><span class="bullet">3.</span> <span class="strong">**风向与风力**</span>：风向主要为东北风、东风和北风，风力在 1 到 4 级之间，风力不大，但仍需注意风向对出行的影响。</span><br><span class="line"><span class="bullet">4.</span> <span class="strong">**出行建议**</span>：</span><br><span class="line"><span class="bullet">    -</span> 晴和多云天气时，可以适当进行户外活动，但需注意防晒。</span><br><span class="line"><span class="bullet">    -</span> 小雨和小到中雨天气时，携带雨具（雨伞或雨衣），注意路面湿滑，行车和步行时要小心谨慎。</span><br><span class="line"><span class="bullet">    -</span> 由于天气变化较大，出行前查看天气预报，合理安排行程。</span><br><span class="line"><span class="bullet">5.</span> <span class="strong">**健康提示**</span>：较高的相对湿度可能会让人感觉不适，注意保持室内通风，避免长时间处于潮湿环境中。同时，注意根据天气变化及时调整穿着，预防感冒等疾病。</span><br><span class="line"></span><br><span class="line">请根据以上信息合理安排出行计划，确保安全与舒适。</span><br></pre></td></tr></table></figure></div>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022172434127.png" alt="自分の运行结果"></p>
+<h4 id="意图识别工作流"><a class="header-anchor" href="#意图识别工作流">¶</a>意图识别工作流</h4>
+<h5 id="工作流创建"><a class="header-anchor" href="#工作流创建">¶</a>工作流创建</h5>
+<ul>
+<li>工作流名称：<code>Intent_Recognition</code></li>
+<li>工作流描述：<code>Useful for when you want to use Intent_Recognition</code></li>
+<li>工作流节点组成：<code>开始节点，意图识别节点，工作流节点1~4，大模型节点，代码节点，结束节点</code></li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022172739356.png" alt="意图识别工作流示意图"></p>
+<h5 id="开始节点-v4"><a class="header-anchor" href="#开始节点-v4">¶</a>开始节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022174533130.png" alt="开始节点"></p>
+<h5 id="意图识别节点"><a class="header-anchor" href="#意图识别节点">¶</a>意图识别节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022174611587.png" alt="意图识别节点设置"></p>
+<h5 id="五个并列节点"><a class="header-anchor" href="#五个并列节点">¶</a>五个并列节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022174702480.png" alt="第一个并列节点"></p>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022174929054.png" alt="第二个并列节点"></p>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022174944414.png" alt="第三个并列节点"></p>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022174958083.png" alt="第四个并列节点"></p>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022175019766.png" alt="第五个并列节点"></p>
+<h5 id="代码节点-v3"><a class="header-anchor" href="#代码节点-v3">¶</a>代码节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022175256016.png" alt="代码节点设置"></p>
+<ul>
+<li>代码</li>
+</ul>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">main</span>(<span class="params">args: Args</span>) -&gt; Output:</span><br><span class="line">    params = args.params</span><br><span class="line">    res = [params[key] <span class="keyword">for</span> key <span class="keyword">in</span> params <span class="keyword">if</span> params[key] <span class="keyword">and</span> key!=<span class="string">&quot;TAKO_BOT_HISTORY&quot;</span> <span class="keyword">and</span> key!=<span class="string">&quot;FLOW:workflow:called_plugin_ids&quot;</span>][<span class="number">0</span>]</span><br><span class="line">    ret: Output = &#123;</span><br><span class="line">        <span class="string">&quot;res&quot;</span>: res</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure></div>
+<h5 id="结束节点-v5"><a class="header-anchor" href="#结束节点-v5">¶</a>结束节点</h5>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022175341188.png" alt="结束节点设置"></p>
+<ul>
+<li>自分の尝试</li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022174450596.png" alt="自分の创建结果"></p>
+<h3 id="工作流智能体"><a class="header-anchor" href="#工作流智能体">¶</a>工作流智能体</h3>
+<ul>
+<li>在coze中，工作流可以被嵌入在单Agent模式中，也可以作为一个工作流Agent单独使用，<a class="link" href="https://www.coze.cn/docs/guides/workflow_mode">具体看官方文档介绍 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CAI%5CDataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8BBot%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E3%80%91Task3--%E5%B7%A5%E4%BD%9C%E6%B5%81%5Cimage-20241022205720605.png" alt="工作流模式Agent"></p>
+<h4 id="效果呈现"><a class="header-anchor" href="#效果呈现">¶</a>效果呈现</h4>
+<div class="highlight-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="code"><pre><span class="line">测试数据<span class="number">1</span>：</span><br><span class="line">分析如下文本情感：这款产品真是太棒了！👍从外观设计到使用体验，都让我非常满意。😍细节之处体现了厂家的用心，使用起来非常便捷，大大提高了我的工作效率。🚀售后服务也非常到位，遇到问题时，客服人员耐心解答，让我感受到了贴心的关怀。🌟总之，这是一次非常愉快的购物体验，强烈推荐给大家！👏继续保持，期待更多优质产品！🎉</span><br><span class="line"></span><br><span class="line">测试数据<span class="number">2</span>：</span><br><span class="line">生成一个随机数</span><br><span class="line"></span><br><span class="line">测试数据<span class="number">3</span>：</span><br><span class="line">搜索如下内容：什么AI</span><br><span class="line"></span><br><span class="line">测试数据<span class="number">4</span>：</span><br><span class="line">查询杭州未来三天的天气</span><br><span class="line"></span><br><span class="line">测试数据<span class="number">5</span>：</span><br><span class="line">帮我生成一首以国庆为主题的现代诗</span><br></pre></td></tr></table></figure></div>
+]]></content>
       <categories>
         <category>notes</category>
         <category>AI notes</category>
@@ -34713,6 +35130,639 @@ mysql -u root -p
         <tag>CS Notes</tag>
         <tag>AI</tag>
         <tag>Data Extraction</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Conda】用Conda管理环境</title>
+    <url>/2024/10/21/CS_Notes/Conda/2024-10-21-%E3%80%90Conda%E3%80%91%E7%94%A8Conda%E7%AE%A1%E7%90%86%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>notes</category>
+        <category>Conda notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>AI</tag>
+        <tag>Python</tag>
+        <tag>Conda</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Conda】用Conda管理环境</title>
+    <url>/2024/10/21/CS_Notes/Conda/%E3%80%90Conda%E3%80%91%E7%94%A8Conda%E7%AE%A1%E7%90%86%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>notes</category>
+        <category>Conda notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>AI</tag>
+        <tag>Python</tag>
+        <tag>Conda</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Excel】数据量大的Excel表格的数据提取</title>
+    <url>/2024/10/21/CS_Notes/Excel/%E3%80%90Excel%E3%80%91%E6%95%B0%E6%8D%AE%E9%87%8F%E5%A4%A7%E7%9A%84Excel%E8%A1%A8%E6%A0%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>Excel notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>Excel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【数据库】《高性能MySQL》摘记</title>
+    <url>/2024/10/21/CS_Notes/Database/%E3%80%90%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%91%E3%80%8A%E9%AB%98%E6%80%A7%E8%83%BDMySQL%E3%80%8B%E6%91%98%E8%AE%B0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="写在前面-链接存档"><a class="header-anchor" href="#写在前面-链接存档">¶</a>写在前面 / 链接存档</h3>
+<ul>
+<li><a class="link" href="https://dev.mysql.com/doc/">MySQL在线官方文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" href="http://www.highperfmysql.com/">High Performance MySQL - Learn to Build Fast, Reliable, Scalable Systems with MySQL (highperfmysql.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>   书中示例代码的维护网址</li>
+<li></li>
+</ul>
+<h2 id="序言"><a class="header-anchor" href="#序言">¶</a>序言</h2>
+<h3 id="InnoDB"><a class="header-anchor" href="#InnoDB">¶</a>InnoDB</h3>
+<p>InnoDB 是 MySQL 数据库的一个存储引擎。它是 MySQL 默认的事务型存储引擎，广泛用于处理大量短期锁定的事务。InnoDB 提供了对 ACID（原子性、一致性、隔离性、持久性）事务的支持，并且支持行级锁定和外键约束。</p>
+<h4 id="主要特点"><a class="header-anchor" href="#主要特点">¶</a>主要特点</h4>
+<ol>
+<li><strong>事务支持</strong>：
+<ul>
+<li>InnoDB 支持 ACID 事务，确保数据的一致性和完整性。</li>
+<li>支持回滚、提交和崩溃恢复能力。</li>
+</ul>
+</li>
+<li><strong>行级锁定</strong>：
+<ul>
+<li>行级锁定可以提高并发性能，允许多个事务同时访问不同的行。</li>
+<li>减少了锁争用，提高了系统的吞吐量。</li>
+</ul>
+</li>
+<li><strong>外键约束</strong>：
+<ul>
+<li>InnoDB 支持外键，可以确保数据的引用完整性。</li>
+<li>外键可以定义表之间的关系，确保数据的一致性。</li>
+</ul>
+</li>
+<li><strong>MVCC（多版本并发控制）</strong>：
+<ul>
+<li>MVCC 通过保存数据的多个版本，允许多个事务同时读取数据而不会相互干扰。</li>
+<li>这种机制提高了读取操作的并发性能。</li>
+</ul>
+</li>
+<li><strong>崩溃恢复</strong>：
+<ul>
+<li>InnoDB 具有自动崩溃恢复功能，可以在数据库意外关闭或崩溃后自动恢复到一致的状态。</li>
+</ul>
+</li>
+<li><strong>全文索引</strong>：
+<ul>
+<li>从 MySQL 5.6 开始，InnoDB 支持全文索引，可以用于全文搜索。</li>
+</ul>
+</li>
+<li><strong>存储优化</strong>：
+<ul>
+<li>InnoDB 支持表空间管理，可以将数据和索引存储在单独的文件中，便于管理和备份。</li>
+</ul>
+</li>
+</ol>
+<h4 id="使用场景"><a class="header-anchor" href="#使用场景">¶</a>使用场景</h4>
+<ul>
+<li><strong>高并发读写</strong>：InnoDB 的行级锁定和 MVCC 特性使其非常适合高并发读写的应用场景。</li>
+<li><strong>事务处理</strong>：对于需要事务支持的应用，如金融系统、电子商务等，InnoDB 是一个很好的选择。</li>
+<li><strong>数据完整性</strong>：InnoDB 的外键约束和支持事务的特性确保了数据的完整性和一致性。</li>
+</ul>
+<h4 id="配置和优化"><a class="header-anchor" href="#配置和优化">¶</a>配置和优化</h4>
+<ul>
+<li><strong>缓冲池（Buffer Pool）</strong>：InnoDB 使用缓冲池来缓存数据和索引，提高读写性能。</li>
+<li><strong>日志文件（Redo Log）</strong>：用于记录事务的更改，支持崩溃恢复。</li>
+<li><strong>双写缓冲区（Doublewrite Buffer）</strong>：用于防止部分页写入导致的数据损坏。</li>
+<li><strong>InnoDB 参数调优</strong>：可以通过调整各种参数（如 <code>innodb_buffer_pool_size</code>、<code>innodb_log_file_size</code> 等）来优化性能。</li>
+</ul>
+<h4 id="总结"><a class="header-anchor" href="#总结">¶</a>总结</h4>
+<p>InnoDB 是一个功能强大且高效的存储引擎，特别适合需要事务支持和高并发处理的场景。它的行级锁定、MVCC 和外键约束等功能使其成为 MySQL 数据库中最常用的存储引擎之一。</p>
+<h3 id="第一章-MySQL架构与历史"><a class="header-anchor" href="#第一章-MySQL架构与历史">¶</a>第一章 MySQL架构与历史</h3>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CDatabase%5C%E3%80%90%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%91%E3%80%8A%E9%AB%98%E6%80%A7%E8%83%BDMySQL%E3%80%8B%E6%91%98%E8%AE%B0%5Cimage-20241021161455351.png" alt="MySQL服务器逻辑架构图"></p>
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>Database notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>Database</tag>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Java】代码格式控制工具</title>
+    <url>/2024/10/23/CS_Notes/Java/%E3%80%90Java%E3%80%91%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<ul>
+<li>
+<p>是作业的要求，顺便记一下</p>
+</li>
+<li>
+<p>作业</p>
+<blockquote>
+<p>使用Java或其他代码格式控制工具，对不符合规范的代码进行自动识别，给出提示（java代码规范不做要求，但是应当具有权威性，如阿里的java代码规范）。</p>
+</blockquote>
+</li>
+<li>
+<p><a class="link" href="https://developer.aliyun.com/ebook/386">《阿里巴巴Java开发手册（终极版）》免费下载_在线阅读_藏经阁-阿里云开发者社区 (aliyun.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+</li>
+<li>
+<p><a class="link" href="https://developer.aliyun.com/ebook/?spm=a2c6h.26392459.ebook-detail.2.63392867wN2CPN">藏经阁_阿里云开发者社区_云计算社区-阿里云 (aliyun.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>   我勒个很多好东西啊</p>
+</li>
+</ul>
+<h2 id="操作过程"><a class="header-anchor" href="#操作过程">¶</a>操作过程</h2>
+<blockquote>
+<p>为了实现对不符合规范的Java代码进行自动识别并给出提示，可以采用静态代码分析工具</p>
+<p>这些工具能够帮助开发者遵守特定的编码标准，提高代码质量</p>
+</blockquote>
+<ul>
+<li>通义回答的三种工具：<code>Checkstyle</code> | <code>PMD</code> | <code>SpotBugs</code> | <code>IntelliJ IDEA 或 Eclipse 插件</code></li>
+</ul>
+<h3 id="Checkstyle"><a class="header-anchor" href="#Checkstyle">¶</a>Checkstyle</h3>
+<blockquote>
+<p>Checkstyle 是一个用于检查 Java 源代码是否符合编码标准的开发工具</p>
+<p>它可以配置为遵循多种不同的编码规范，包括阿里巴巴的《Java开发手册》</p>
+</blockquote>
+<h4 id="安装与配置"><a class="header-anchor" href="#安装与配置">¶</a>安装与配置</h4>
+<h5 id="Maven配置"><a class="header-anchor" href="#Maven配置">¶</a>Maven配置</h5>
+<blockquote>
+<p>在<code>pom.xml</code>文件中添加插件配置</p>
+</blockquote>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-checkstyle-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">configLocation</span>&gt;</span>ali-checkstyle.xml<span class="tag">&lt;/<span class="name">configLocation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">consoleOutput</span>&gt;</span>true<span class="tag">&lt;/<span class="name">consoleOutput</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">failsOnError</span>&gt;</span>true<span class="tag">&lt;/<span class="name">failsOnError</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">linkXRef</span>&gt;</span>false<span class="tag">&lt;/<span class="name">linkXRef</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>check<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<blockquote>
+<p><code>ali-checkstyle.xml</code> 是阿里巴巴的 Checkstyle 规则文件</p>
+</blockquote>
+<h5 id="运行"><a class="header-anchor" href="#运行">¶</a>运行</h5>
+<blockquote>
+<p>使用Maven命令行运行Checkstyle</p>
+</blockquote>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">mvn checkstyle:check</span><br></pre></td></tr></table></figure></div>
+<h3 id="PMD"><a class="header-anchor" href="#PMD">¶</a>PMD</h3>
+<blockquote>
+<p>PMD 是一个源代码分析工具，它可以帮助查找常见的编程缺陷，如未使用的变量、空的 catch 块、不必要的对象创建等</p>
+</blockquote>
+<h4 id="安装与配置-v2"><a class="header-anchor" href="#安装与配置-v2">¶</a>安装与配置</h4>
+<h5 id="Maven配置-v2"><a class="header-anchor" href="#Maven配置-v2">¶</a>Maven配置</h5>
+<ul>
+<li>在<code>pom.xml</code>文件中添加插件配置</li>
+</ul>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-pmd-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.16.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rulesets</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">ruleset</span>&gt;</span>/path/to/your/ruleset.xml<span class="tag">&lt;/<span class="name">ruleset</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">rulesets</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">targetJdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">targetJdk</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">phase</span>&gt;</span>validate<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>check<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<blockquote>
+<p>可以根据需要自定义规则集文件</p>
+</blockquote>
+<h5 id="运行-v2"><a class="header-anchor" href="#运行-v2">¶</a>运行</h5>
+<blockquote>
+<p>使用Maven命令行运行PMD</p>
+</blockquote>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">mvn pmd:check</span><br></pre></td></tr></table></figure></div>
+<h3 id="SpotBugs"><a class="header-anchor" href="#SpotBugs">¶</a>SpotBugs</h3>
+<blockquote>
+<p>SpotBugs 是一个用于静态分析 Java 字节码的工具，它可以帮助发现潜在的错误</p>
+</blockquote>
+<h4 id="安装与配置-v3"><a class="header-anchor" href="#安装与配置-v3">¶</a>安装与配置</h4>
+<h5 id="Maven配置-v3"><a class="header-anchor" href="#Maven配置-v3">¶</a>Maven配置</h5>
+<ul>
+<li>在<code>pom.xml</code>文件中添加插件配置</li>
+</ul>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.spotbugs<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spotbugs-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.7.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">effort</span>&gt;</span>Max<span class="tag">&lt;/<span class="name">effort</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">threshold</span>&gt;</span>Low<span class="tag">&lt;/<span class="name">threshold</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">failOnError</span>&gt;</span>false<span class="tag">&lt;/<span class="name">failOnError</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>check<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<h5 id="运行-v3"><a class="header-anchor" href="#运行-v3">¶</a>运行</h5>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">mvn spotbugs:check</span><br></pre></td></tr></table></figure></div>
+<h3 id="IntelliJ-IDEA-或-Eclipse-插件"><a class="header-anchor" href="#IntelliJ-IDEA-或-Eclipse-插件">¶</a>IntelliJ IDEA 或 Eclipse 插件</h3>
+<blockquote>
+<p>IntelliJ IDEA 或 Eclipse都提供了内置的静态代码分析工具</p>
+<p>也可以安装 Checkstyle、PMD 和 SpotBugs 的插件来增强代码检查功能</p>
+</blockquote>
+<h4 id="IntelliJ-IDEA"><a class="header-anchor" href="#IntelliJ-IDEA">¶</a>IntelliJ IDEA</h4>
+<ul>
+<li><strong>安装插件</strong>：
+<ol>
+<li>打开 IntelliJ IDEA</li>
+<li>进入 <code>File</code> -&gt; <code>Settings</code> -&gt; <code>Plugins</code></li>
+<li>搜索并安装 Checkstyle、PMD 和 SpotBugs 插件</li>
+</ol>
+</li>
+<li><strong>配置 Checkstyle</strong>：
+<ol>
+<li>进入 <code>File</code> -&gt; <code>Settings</code> -&gt; <code>Editor</code> -&gt; <code>Inspections</code></li>
+<li>添加 Checkstyle 检查规则文件路径</li>
+</ol>
+</li>
+</ul>
+<h4 id="Eclipse"><a class="header-anchor" href="#Eclipse">¶</a>Eclipse</h4>
+<ul>
+<li><strong>安装插件</strong>：
+<ol>
+<li>打开 Eclipse。</li>
+<li>进入 <code>Help</code> -&gt; <code>Eclipse Marketplace</code>。</li>
+<li>搜索并安装 Checkstyle、PMD 和 SpotBugs 插件。</li>
+</ol>
+</li>
+<li><strong>配置 Checkstyle</strong>：
+<ol>
+<li>进入 <code>Window</code> -&gt; <code>Preferences</code> -&gt; <code>Checkstyle</code>。</li>
+<li>添加 Checkstyle 检查规则文件路径</li>
+</ol>
+</li>
+</ul>
+<h2 id="自分の实际操作"><a class="header-anchor" href="#自分の实际操作">¶</a>自分の实际操作</h2>
+<ul>
+<li><a class="link" href="https://blog.csdn.net/qq_20042935/article/details/112602107">IDEA下安装与使用CheckStyle_idea checkstyle commit-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+<p><img lazyload src="/images/loading.svg" data-src="image-20241023143606756.png" alt="在Plugins marketplace寻找插件并下载"></p>
+<p><img lazyload src="/images/loading.svg" data-src="wps2.jpg" alt="checkstyle.xml文件创建"></p>
+<p><img lazyload src="/images/loading.svg" data-src="wps3.jpg" alt="在Tools→CheckStyle中设置"></p>
+<p><img lazyload src="/images/loading.svg" data-src="wps4.jpg" alt="在Java文件中右击选择CheckStyle"></p>
+<p><img lazyload src="/images/loading.svg" data-src="wps5.jpg" alt="插件运行结果"></p>
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>Java notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Java】使用Junit和Jmeter测试软件</title>
+    <url>/2024/10/23/CS_Notes/Java/%E3%80%90Java%E3%80%91%E4%BD%BF%E7%94%A8Junit%E5%92%8CJmeter%E6%B5%8B%E8%AF%95%E8%BD%AF%E4%BB%B6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h3>
+<ul>
+<li>
+<p>是软件工程导论作业</p>
+</li>
+<li>
+<p>作业内容：使用<code>Junit </code>和 <code>JMeter</code>对某一软件完成相应测试</p>
+</li>
+<li>
+<p>使用<code>JUnit</code>和<code>JMeter</code>对软件进行测试是两个不同的测试领域，但它们可以互补以确保软件的全面质量</p>
+</li>
+</ul>
+<h2 id="使用JUnit进行单元测试"><a class="header-anchor" href="#使用JUnit进行单元测试">¶</a>使用JUnit进行单元测试</h2>
+<blockquote>
+<p><code>JUnit</code>是一个流行的<code>Java</code>单元测试框架，主要用于测试代码的各个组件是否按预期工作</p>
+</blockquote>
+<h3 id="安装JUnit"><a class="header-anchor" href="#安装JUnit">¶</a>安装JUnit</h3>
+<h4 id="Maven项目"><a class="header-anchor" href="#Maven项目">¶</a>Maven项目</h4>
+<ul>
+<li>在<code>pom.xml</code>中添加JUnit依赖</li>
+</ul>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.13.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<h4 id="Gradle项目"><a class="header-anchor" href="#Gradle项目">¶</a>Gradle项目</h4>
+<ul>
+<li>在<code>build.gradle</code>中添加JUnit依赖</li>
+</ul>
+<div class="highlight-container" data-rel="Groovy"><figure class="iseeu highlight groovy"><table><tr><td class="code"><pre><span class="line">testImplementation <span class="string">&#x27;junit:junit:4.13.2&#x27;</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="编写测试类"><a class="header-anchor" href="#编写测试类">¶</a>编写测试类</h3>
+<ul>
+<li>
+<p>创建一个测试类，通常命名为<code>ClassNameTest</code>，其中<code>ClassName</code>是想要测试的类名</p>
+</li>
+<li>
+<p>使用<code>@Test</code>注解标记测试方法</p>
+</li>
+<li>
+<p>在测试方法中调用被测类的方法，并使用断言（如<code>assertEquals</code>、<code>assertTrue</code>等）验证结果</p>
+</li>
+<li>
+<p>示例代码</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CalculatorTest</span> &#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAdd</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Calculator</span> <span class="variable">calculator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Calculator</span>();</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> calculator.add(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">        assertEquals(<span class="number">5</span>, result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSubtract</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Calculator</span> <span class="variable">calculator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Calculator</span>();</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> calculator.subtract(<span class="number">5</span>, <span class="number">3</span>);</span><br><span class="line">        assertEquals(<span class="number">2</span>, result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h3 id="运行测试"><a class="header-anchor" href="#运行测试">¶</a>运行测试</h3>
+<ul>
+<li>在IDE中右键点击测试类或测试方法，选择“Run”或“Debug”。</li>
+<li>使用Maven命令行运行所有测试</li>
+</ul>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">mvn <span class="built_in">test</span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>使用Gradle命令行运行所有测试：</li>
+</ul>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">gradle <span class="built_in">test</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="使用JMeter进行性能测试"><a class="header-anchor" href="#使用JMeter进行性能测试">¶</a>使用JMeter进行性能测试</h2>
+<blockquote>
+<p><code>JMeter</code>是一个开源的性能测试工具，主要用于测试<code>Web</code>应用程序的性能</p>
+</blockquote>
+<h3 id="下载和安装JMeter"><a class="header-anchor" href="#下载和安装JMeter">¶</a>下载和安装JMeter</h3>
+<ul>
+<li>从Apache JMeter官方网站下载最新版本的JMeter</li>
+<li>解压下载的文件到一个目录</li>
+</ul>
+<h3 id="启动JMeter"><a class="header-anchor" href="#启动JMeter">¶</a>启动JMeter</h3>
+<ul>
+<li>在解压后的目录中，双击<code>jmeter.bat</code>（Windows）或<code>jmeter.sh</code>（Linux/Mac）启动JMeter</li>
+</ul>
+<h3 id="创建测试计划"><a class="header-anchor" href="#创建测试计划">¶</a>创建测试计划</h3>
+<ul>
+<li>在<code>JMeter</code>中，选择“<code>File</code>” -&gt; “<code>New</code>”创建一个新的测试计划</li>
+<li>右键点击“<code>Test Plan</code>”，选择“<code>Add</code>” -&gt; “<code>Threads (Users)</code>” -&gt; “<code>Thread Group</code>”添加线程组</li>
+<li>在线程组中配置用户数、循环次数等参数</li>
+</ul>
+<h3 id="添加采样器"><a class="header-anchor" href="#添加采样器">¶</a>添加采样器</h3>
+<ul>
+<li>右键点击“<code>Thread Group</code>”，选择“<code>Add</code>” -&gt; “<code>Sampler</code>” -&gt; “<code>HTTP Request</code>”添加<code>HTTP</code>请求采样器</li>
+<li>配置请求的<code>URL</code>、方法（<code>GET/POST</code>）、参数等</li>
+</ul>
+<h3 id="添加监听器"><a class="header-anchor" href="#添加监听器">¶</a>添加监听器</h3>
+<ul>
+<li>右键点击“<code>Thread Group</code>”，选择“<code>Add</code>” -&gt; “<code>Listener</code>” -&gt; “<code>View Results Tree</code>”添加结果查看器</li>
+<li>右键点击“<code>Thread Group</code>”，选择“<code>Add</code>” -&gt; “<code>Listener</code>” -&gt; “<code>Summary Report</code>”添加汇总报告</li>
+</ul>
+<h3 id="运行测试-v2"><a class="header-anchor" href="#运行测试-v2">¶</a>运行测试</h3>
+<ul>
+<li>点击工具栏上的“Start”按钮运行测试</li>
+<li>查看监听器中的结果，分析性能指标</li>
+</ul>
+<h2 id="JUnit和JMeter的综合使用"><a class="header-anchor" href="#JUnit和JMeter的综合使用">¶</a>JUnit和JMeter的综合使用</h2>
+<ul>
+<li>
+<p><strong>单元测试</strong>：确保代码逻辑正确，功能按预期工作</p>
+</li>
+<li>
+<p><strong>性能测试</strong>：确保系统在高负载下仍然稳定，响应时间在可接受范围内</p>
+</li>
+<li>
+<p>通过结合使用JUnit和JMeter，可以全面地测试软件的功能和性能，确保其质量和可靠性</p>
+</li>
+</ul>
+<h2 id="自分の尝试"><a class="header-anchor" href="#自分の尝试">¶</a>自分の尝试</h2>
+<h3 id="使用JUnit进行单元测试-v2"><a class="header-anchor" href="#使用JUnit进行单元测试-v2">¶</a>使用JUnit进行单元测试</h3>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CJava%5C%E3%80%90Java%E3%80%91%E4%BD%BF%E7%94%A8Junit%E5%92%8CJmeter%E6%B5%8B%E8%AF%95%E8%BD%AF%E4%BB%B6%5Cwps6.jpg" alt="导入JUnit"></p>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CJava%5C%E3%80%90Java%E3%80%91%E4%BD%BF%E7%94%A8Junit%E5%92%8CJmeter%E6%B5%8B%E8%AF%95%E8%BD%AF%E4%BB%B6%5Cwps7.jpg" alt="测试代码"></p>
+<p><img lazyload src="/images/loading.svg" data-src="C:%5CUsers%5CACADIA%5CDesktop%5Chexo%5Csource_posts%5CCS_Notes%5CJava%5C%E3%80%90Java%E3%80%91%E4%BD%BF%E7%94%A8Junit%E5%92%8CJmeter%E6%B5%8B%E8%AF%95%E8%BD%AF%E4%BB%B6%5Cwps8.jpg" alt="测试结果"></p>
+<h3 id="使用JMeter进行性能测试-v2"><a class="header-anchor" href="#使用JMeter进行性能测试-v2">¶</a>使用JMeter进行性能测试</h3>
+<ul>
+<li><a class="link" href="https://blog.csdn.net/weixin_40943297/article/details/96480607">JMeter性能测试，完整入门篇教程-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>Java notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【AI-Prompt】出行提示小助手</title>
+    <url>/2024/10/22/CS_Notes/AI/Prompt/%E3%80%90AI-Prompt%E3%80%91%E5%87%BA%E8%A1%8C%E6%8F%90%E7%A4%BA%E5%B0%8F%E5%8A%A9%E6%89%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div class="highlight-container" data-rel="Markdown"><figure class="iseeu highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># Role: 出行提示小助手</span></span><br><span class="line"><span class="section">## Profile:</span></span><br><span class="line"><span class="bullet">-</span> author: kie</span><br><span class="line"><span class="bullet">-</span> version: 0.1</span><br><span class="line"><span class="bullet">-</span> language: 中文</span><br><span class="line"><span class="bullet">-</span> description: 根据天气插件返回的天气信息，生成针对用户的出行提示和建议。</span><br><span class="line"></span><br><span class="line"><span class="section">## Goals:</span></span><br><span class="line"><span class="bullet">-</span> 理解天气信息，结合用户可能的活动，生成实用的出行提示和建议。</span><br><span class="line"></span><br><span class="line"><span class="section">## Constrains:</span></span><br><span class="line"><span class="bullet">-</span> 生成的提示和建议需要根据具体的天气情况来定制。</span><br><span class="line"></span><br><span class="line"><span class="section">## Skills:</span></span><br><span class="line"><span class="bullet">-</span> 擅长理解并应用天气信息。</span><br><span class="line"><span class="bullet">-</span> 精通用户行为分析，能够根据天气情况提出合理的出行建议。</span><br><span class="line"></span><br><span class="line"><span class="section">## Workflows:</span></span><br><span class="line"><span class="bullet">1.</span> 分析天气插件返回的天气信息。</span><br><span class="line"><span class="bullet">2.</span> 根据天气情况，结合用户可能的活动，生成出行提示和建议。</span><br><span class="line"><span class="bullet">3.</span> 输出提示和建议。</span><br><span class="line"></span><br><span class="line"><span class="section">## Example:</span></span><br><span class="line"><span class="bullet">-</span> Weather<span class="emphasis">_info：</span></span><br><span class="line"><span class="emphasis">&#123;</span></span><br><span class="line"><span class="emphasis">  &quot;data&quot;: [</span></span><br><span class="line"><span class="emphasis">    &#123;</span></span><br><span class="line"><span class="emphasis">      &quot;condition&quot;: &quot;小雨&quot;,</span></span><br><span class="line"><span class="emphasis">      &quot;humidity&quot;: 91,</span></span><br><span class="line"><span class="emphasis">      &quot;predict_</span>date&quot;: &quot;2024-07-18&quot;,</span><br><span class="line"><span class="code">      &quot;temp_high&quot;: 29.66,</span></span><br><span class="line"><span class="code">      &quot;temp_low&quot;: 25.98,</span></span><br><span class="line"><span class="code">      &quot;weather_day&quot;: &quot;小雨&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_dir_day&quot;: &quot;东南风&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_dir_night&quot;: &quot;东南风&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_level_day&quot;: &quot;3&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_level_night&quot;: &quot;3&quot;</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">    &#123;</span></span><br><span class="line"><span class="code">      &quot;condition&quot;: &quot;小雨&quot;,</span></span><br><span class="line"><span class="code">      &quot;humidity&quot;: 91,</span></span><br><span class="line"><span class="code">      &quot;predict_date&quot;: &quot;2024-07-19&quot;,</span></span><br><span class="line"><span class="code">      &quot;temp_high&quot;: 29.95,</span></span><br><span class="line"><span class="code">      &quot;temp_low&quot;: 25.73,</span></span><br><span class="line"><span class="code">      &quot;weather_day&quot;: &quot;小雨&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_dir_day&quot;: &quot;东南风&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_dir_night&quot;: &quot;东南风&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_level_day&quot;: &quot;3&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_level_night&quot;: &quot;3&quot;</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">    &#123;</span></span><br><span class="line"><span class="code">      &quot;condition&quot;: &quot;小雨&quot;,</span></span><br><span class="line"><span class="code">      &quot;humidity&quot;: 90,</span></span><br><span class="line"><span class="code">      &quot;predict_date&quot;: &quot;2024-07-20&quot;,</span></span><br><span class="line"><span class="code">      &quot;temp_high&quot;: 29.96,</span></span><br><span class="line"><span class="code">      &quot;temp_low&quot;: 25.86,</span></span><br><span class="line"><span class="code">      &quot;weather_day&quot;: &quot;小雨&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_dir_day&quot;: &quot;东南风&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_dir_night&quot;: &quot;东南风&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_level_day&quot;: &quot;3&quot;,</span></span><br><span class="line"><span class="code">      &quot;wind_level_night&quot;: &quot;3&quot;</span></span><br><span class="line"><span class="code">    &#125;</span></span><br><span class="line"><span class="code">  ]</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code">- OutputFormat：</span></span><br><span class="line"><span class="code">| 日期 | 天气状况 | 相对湿度 | 温度(最低~最高) | 白天风向 | 白天风力 |</span></span><br><span class="line"><span class="code">|----------|--------|--------|------------|--------|--------|</span></span><br><span class="line"><span class="code">| 2024-07-18 | 小雨 | 91 | 25.98~29.66 | 东南风 | 3 |</span></span><br><span class="line"><span class="code">| 2024-07-19 | 小雨 | 91 | 25.73~29.95 | 东南风 | 3 |</span></span><br><span class="line"><span class="code">| 2024-07-20 | 小雨 | 90 | 25.86~29.96 | 东南风 | 3 |</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">根据2024年7月18日到2024年7月20日的天气情况，我将给您如下出行提示和建议:</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> <span class="strong">**天气状况**</span>: 未来三天均为小雨，湿度较高（约90%）。</span><br><span class="line"><span class="bullet">2.</span> <span class="strong">**温度范围**</span>: 最高气温在29.96°C左右，最低气温在25.73°C左右，适合穿着轻便的雨具。</span><br><span class="line"><span class="bullet">3.</span> <span class="strong">**风向与风力**</span>: 风向为东南风，风力等级为3级，出行时注意风力对雨伞的影响。</span><br><span class="line"><span class="bullet">4.</span> <span class="strong">**出行建议**</span>:</span><br><span class="line"><span class="bullet">   -</span> 建议携带雨具（雨伞或雨衣），以应对小雨天气。</span><br><span class="line"><span class="bullet">   -</span> 注意路面湿滑，行车或步行时请小心。</span><br><span class="line"><span class="bullet">   -</span> 如果有户外活动计划，建议选择室内活动或适当调整时间。</span><br><span class="line"><span class="bullet">5.</span> <span class="strong">**健康提示**</span>: 高湿度天气可能导致不适，保持适当的水分摄入，避免长时间在潮湿环境中逗留。</span><br><span class="line"></span><br><span class="line">请根据以上信息合理安排出行计划，确保安全与舒适。</span><br><span class="line"></span><br><span class="line"><span class="section">## 天气信息</span></span><br><span class="line">&#123;&#123;input&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">## OutputFormat:</span></span><br><span class="line">| 日期 | 天气状况 | 相对湿度 | 温度(最高/最低) | 白天风向 | 白天风力 |</span><br><span class="line">|----------|--------|--------|------------|--------|--------|</span><br><span class="line">| 日期1 | 天气状况1 | 相对湿度1 | 最低温度1~最高温度1 | 白天风向1 | 白天风力1 |</span><br><span class="line">...</span><br><span class="line">| 日期n | 天气状况n | 相对湿度n | 最低温度n~最高温度n | 白天风向n | 白天风力n |</span><br><span class="line"></span><br><span class="line">根据&#123;&#123;start<span class="emphasis">_time&#125;&#125;到&#123;&#123;end_</span>time&#125;&#125;的天气情况，我将给您如下出行提示和建议:</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> <span class="strong">**天气状况**</span>: </span><br><span class="line"><span class="bullet">2.</span> <span class="strong">**温度范围**</span>: </span><br><span class="line"><span class="bullet">3.</span> <span class="strong">**风向与风力**</span>: </span><br><span class="line"><span class="bullet">4.</span> <span class="strong">**出行建议**</span>:</span><br><span class="line"><span class="bullet">5.</span> <span class="strong">**健康提示**</span>:</span><br><span class="line"></span><br><span class="line">请根据以上信息合理安排出行计划，确保安全与舒适。</span><br></pre></td></tr></table></figure></div>]]></content>
+      <categories>
+        <category>notes</category>
+        <category>AI notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>AI</tag>
+        <tag>Prompt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【AI-Prompt】天气查询工作流</title>
+    <url>/2024/10/22/CS_Notes/AI/Prompt/%E3%80%90AI-Prompt%E3%80%91%E5%A4%A9%E6%B0%94%E6%9F%A5%E8%AF%A2%E5%B7%A5%E4%BD%9C%E6%B5%81/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line">你现在要完成一个信息提取任务，请根据用户输入提取相关天气参数。</span><br><span class="line"></span><br><span class="line">用户输入: &#123;&#123;<span class="built_in">input</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line">待提取的天气参数:</span><br><span class="line"><span class="number">1.</span> city: 从用户输入中提取市名，包括直辖市，比如：北京市、天津市、上海市、重庆市</span><br><span class="line"><span class="number">2.</span> province: 从用户输入中提取省份名（如果有），不要包括直辖市(比如：北京、北京市、北京省、天津市、上海市、重庆市)</span><br><span class="line"><span class="number">3.</span> towns: 从用户输入中提取区/县/镇名（如果有）</span><br><span class="line"><span class="number">4.</span> villages: 从用户输入中提取乡/村名（如果有）</span><br><span class="line"><span class="number">5.</span> start_time: 根据用户输入的时间信息提取开始日期（格式: YYYY-MM-DD）</span><br><span class="line"><span class="number">6.</span> end_time: 根据用户输入的时间信息提取结束日期（格式: YYYY-MM-DD）</span><br><span class="line"></span><br><span class="line">示例提取:</span><br><span class="line">  - 输入: <span class="string">&quot;青岛市即墨区的天气如何？&quot;</span></span><br><span class="line">  - city: <span class="string">&quot;青岛市&quot;</span></span><br><span class="line">  - province: <span class="string">&quot;山东省&quot;</span></span><br><span class="line">  - towns: <span class="string">&quot;即墨区&quot;</span></span><br><span class="line">  - start_time: <span class="string">&quot;2024-10-7&quot;</span></span><br><span class="line">  - end_time: <span class="string">&quot;2024-10-13&quot;</span></span><br><span class="line"></span><br><span class="line">用户查询天气的当前时间：&#123;&#123;date&#125;&#125;</span><br></pre></td></tr></table></figure></div>]]></content>
+      <categories>
+        <category>notes</category>
+        <category>AI notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>AI</tag>
+        <tag>Prompt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【AI-Prompt】情感分析工作流</title>
+    <url>/2024/10/22/CS_Notes/AI/Prompt/%E3%80%90AI-Prompt%E3%80%91%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90%E5%B7%A5%E4%BD%9C%E6%B5%81/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line">DEFINE ROLE AS <span class="string">&quot;NLP专家&quot;</span>:</span><br><span class="line">    知识领域 = [<span class="string">&quot;语言学&quot;</span>, <span class="string">&quot;互联网&quot;</span>, <span class="string">&quot;人工智能&quot;</span>]</span><br><span class="line">    技能 = [<span class="string">&quot;自然语言理解&quot;</span>, <span class="string">&quot;信息提取&quot;</span>, <span class="string">&quot;情感分析&quot;</span>, <span class="string">&quot;意图识别&quot;</span>, <span class="string">&quot;知识推理&quot;</span>, <span class="string">&quot;上下文关联学习&quot;</span>, <span class="string">&quot;实体识别&quot;</span>]</span><br><span class="line">    经验 = <span class="string">&quot;资深&quot;</span></span><br><span class="line">    任务 = <span class="string">&quot;对文本进行情感分类，将其分类至对应的情感类别&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义情感类别</span></span><br><span class="line">sentiment_category_infos = [</span><br><span class="line">    &#123;<span class="string">&quot;category&quot;</span>: <span class="string">&quot;积极&quot;</span>, <span class="string">&quot;description&quot;</span>: <span class="string">&quot;文本内容表达正面情绪或态度，如快乐、满意、希望等。通常包含赞扬、鼓励或对未来的乐观预期等内容。&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;category&quot;</span>: <span class="string">&quot;消极&quot;</span>, <span class="string">&quot;description&quot;</span>: <span class="string">&quot;文本内容体现负面情绪或态度，如悲伤、愤怒、失望等。通常反映批评、不满或对现状或未来的悲观看法等内容。&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;category&quot;</span>: <span class="string">&quot;中性&quot;</span>, <span class="string">&quot;description&quot;</span>: <span class="string">&quot;文本内容既不表达明显的正面情绪，也不体现明显的负面情绪。通常包含客观陈述、信息传递或对事物的中立评价等内容。&quot;</span>&#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 判断文本表达的情感是否符合给定的情感类别描述</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">match_description</span>(<span class="params">context, description</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Step1: 一步步思考，仔细分析并理解$&#123;context&#125;的特征和含义，判断是否和$&#123;description&#125;的描述一致。</span></span><br><span class="line"><span class="string">    Step2: 给出你判断的思考路径$&#123;thought&#125;，在思考路径下给出你将$&#123;context&#125;分类为$&#123;category&#125;的理由。</span></span><br><span class="line"><span class="string">    Step3：根据你Step1的判断结果和Step2的分类理由，给出此次分类的置信度$&#123;confidence&#125;，置信度的取值范围为：0 &lt;= confidence &lt;= 1。</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> confidence</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据文本表达的情感分类，并返回对应的情感类别</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">classify</span>(<span class="params">context, sentiment_category_infos</span>):</span><br><span class="line">    <span class="comment"># 初始化最高置信度</span></span><br><span class="line">    max_confidence = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 遍历所有的类别及其描述</span></span><br><span class="line">    <span class="keyword">for</span> sentiment_category_info <span class="keyword">in</span> sentiment_category_infos:</span><br><span class="line">        <span class="comment"># 获取当前类别的置信度</span></span><br><span class="line">        confidence = match_description(context, sentiment_category_info[<span class="string">&quot;description&quot;</span>])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 如果当前置信度高于之前的最高置信度，更新分类结果</span></span><br><span class="line">        <span class="keyword">if</span> confidence &gt; max_confidence:</span><br><span class="line">            max_confidence = confidence</span><br><span class="line">            category = sentiment_category_info[<span class="string">&quot;category&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;classify_result&quot;</span>: category&#125;</span><br><span class="line"></span><br><span class="line">MAIN PROCESS:</span><br><span class="line">    <span class="comment"># 初始化文本变量，作为输入数据</span></span><br><span class="line">    context = 读取(<span class="string">&quot;&quot;&quot;&#123;&#123;input&#125;&#125;&quot;&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 执行分类任务，输出分类结果</span></span><br><span class="line">    classify(context, sentiment_category_infos)</span><br><span class="line"></span><br><span class="line">执行工作流程，严格按照json格式输出MAIN PROCESS的分类结果，禁止附加任何的解释和文字描述：</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>AI notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>AI</tag>
+        <tag>Prompt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DataWhale | 大模型】大模型技术实践内测</title>
+    <url>/2024/10/22/CS_Notes/AI/DataWhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E3%80%90DataWhale--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E3%80%91%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5%E5%86%85%E6%B5%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="写在前面-链接留档"><a class="header-anchor" href="#写在前面-链接留档">¶</a>写在前面 / 链接留档</h3>
+<ul>
+<li><a class="link" href="https://datawhaler.feishu.cn/wiki/CS8nwMHVci3aiEkBLz3cN86jnfh">‌﻿﻿‌⁠⁠﻿‌‍‍﻿‍‌‍‍‍⁠﻿﻿‌10分钟：大模型技术实践内测文档 - 飞书云文档 (feishu.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link" href="https://challenge.xfyun.cn/topic/info?type=interpretation-challenge&amp;option=tjjg&amp;ch=dw24_tjsmU3">2024 iFLYTEK A.I.开发者大赛-讯飞开放平台 (xfyun.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>    结果提交界面</li>
+</ul>
+<h2 id="代码和结果解析"><a class="header-anchor" href="#代码和结果解析">¶</a>代码和结果解析</h2>
+<h3 id="baseline"><a class="header-anchor" href="#baseline">¶</a>baseline</h3>
+<h4 id="步骤1：更新或安装所需环境"><a class="header-anchor" href="#步骤1：更新或安装所需环境">¶</a>步骤1：更新或安装所需环境</h4>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line">!pip install --upgrade modelscope requests urllib3 tqdm pandas</span><br><span class="line">!apt update &gt; /dev/null; apt install aria2 git-lfs axel -y &gt; /dev/null</span><br></pre></td></tr></table></figure></div>
+<h4 id="步骤2：下载数据集"><a class="header-anchor" href="#步骤2：下载数据集">¶</a>步骤2：下载数据集</h4>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line">!axel -n <span class="number">12</span> -a https://ai-contest-static.xfyun.cn/<span class="number">2024</span>/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%<span class="number">83</span>%BD%E5%8A%9B%E8%AF%<span class="number">84</span>%E6%B5%8B%EF%BC%9A%E4%B8%AD%E6%<span class="number">96</span>%<span class="number">87</span>%E6%<span class="number">88</span>%<span class="number">90</span>%E8%AF%AD%E9%<span class="number">87</span>%8A%E4%B9%<span class="number">89</span>%E4%B8%8E%E8%A7%A3%E6%9E%<span class="number">90</span>%E6%8C%<span class="number">91</span>%E6%<span class="number">88</span>%<span class="number">98</span>%E8%B5%9B/test_input.csv</span><br></pre></td></tr></table></figure></div>
+<h4 id="步骤3：构建模型（使用Qwen1-5-4B模型）"><a class="header-anchor" href="#步骤3：构建模型（使用Qwen1-5-4B模型）">¶</a>步骤3：构建模型（使用Qwen1.5-4B模型）</h4>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> modelscope <span class="keyword">import</span> AutoModelForCausalLM, AutoTokenizer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定加载模型的设备</span></span><br><span class="line">device = <span class="string">&quot;cuda&quot;</span>  <span class="comment"># the device to load the model onto</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载预训练的模型和tokenizer</span></span><br><span class="line">model = AutoModelForCausalLM.from_pretrained(</span><br><span class="line">    <span class="string">&quot;qwen/Qwen1.5-4B-Chat&quot;</span>,</span><br><span class="line">    torch_dtype=<span class="string">&quot;auto&quot;</span>,</span><br><span class="line">    device_map=<span class="string">&quot;auto&quot;</span></span><br><span class="line">)</span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;qwen/Qwen1.5-4B-Chat&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义提示信息</span></span><br><span class="line">prompt = <span class="string">&quot;hello&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建聊天消息列表</span></span><br><span class="line">messages = [</span><br><span class="line">    &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;You are a helpful assistant.&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: prompt&#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用tokenizer将聊天消息转换为模型输入格式</span></span><br><span class="line">text = tokenizer.apply_chat_template(</span><br><span class="line">    messages,</span><br><span class="line">    tokenize=<span class="literal">False</span>,</span><br><span class="line">    add_generation_prompt=<span class="literal">True</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将输入文本转换为模型所需的tensor格式并加载到指定设备</span></span><br><span class="line">model_inputs = tokenizer([text], return_tensors=<span class="string">&quot;pt&quot;</span>).to(device)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成回复</span></span><br><span class="line">generated_ids = model.generate(</span><br><span class="line">    model_inputs.input_ids,</span><br><span class="line">    max_new_tokens=<span class="number">512</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取生成的回复部分</span></span><br><span class="line">generated_ids = [</span><br><span class="line">    output_ids[<span class="built_in">len</span>(input_ids):] <span class="keyword">for</span> input_ids, output_ids <span class="keyword">in</span> <span class="built_in">zip</span>(model_inputs.input_ids, generated_ids)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解码生成的回复并移除特殊标记</span></span><br><span class="line">response = tokenizer.batch_decode(generated_ids, skip_special_tokens=<span class="literal">True</span>)[<span class="number">0</span>]</span><br></pre></td></tr></table></figure></div>
+<h4 id="步骤4：读取数据集"><a class="header-anchor" href="#步骤4：读取数据集">¶</a>步骤4：读取数据集</h4>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">test = pd.read_csv(<span class="string">&#x27;./test_input.csv&#x27;</span>, header=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看数据集大小</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;数据集的大小为: <span class="subst">&#123;test.shape[<span class="number">0</span>]&#125;</span>\n前50条数据如下：\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看前50条赛事数据集（赛题要求根据每行句子，给出5个可能匹配的成语）</span></span><br><span class="line"><span class="keyword">for</span> test_prompt <span class="keyword">in</span> test[<span class="number">0</span>].values[:<span class="number">50</span>]:</span><br><span class="line">    <span class="built_in">print</span>(test_prompt)</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>单元格输出：</li>
+</ul>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">数据集的大小为: 2972</span><br><span class="line">前50条数据如下：</span><br><span class="line"></span><br><span class="line">双方心往一处想，意志坚定。</span><br><span class="line">两端都极为艰难，难以作出决定。</span><br><span class="line">雄浑深远的意旨。细腻微妙。高超巧妙。</span><br><span class="line">描述水流湍急，且快速且深远。</span><br><span class="line">避免被引诱做出不道德或可疑的行为。</span><br><span class="line">肘部肩窝。比喻事物发生于身边。</span><br><span class="line">他张开嘴巴，吞咽着口水。</span><br><span class="line">仅见一面，不足以深入了解。</span><br><span class="line">向四处散发施舍，同时手中拿着碗盆。</span><br><span class="line">比喻把装备脱下，放下武器。</span><br><span class="line">对于任何战役，都要一败涂地。</span><br><span class="line">阴谋真相已经昭然于众。</span><br><span class="line">比喻因为无能为力而写下了好文章。</span><br><span class="line">古代文人士大夫经常举行诗歌朗诵会。</span><br><span class="line">不能形容为不高兴，只能说明没劲儿。</span><br><span class="line">表现得举止端庄，很有教养。</span><br><span class="line">1.洗刷兵器2.喂养战马3.准备作战</span><br><span class="line">关注生命垂危者，关怀濒危者。</span><br><span class="line">比喻面对挑战，坚韧不拔地前行。</span><br><span class="line">过去的科举考试中被选拔为进士的称号。</span><br><span class="line">相似程度极高或相差无几。</span><br><span class="line">比喻不断地补充、堆砌和延伸。</span><br><span class="line">以安逸快乐的生活和劳动为重。</span><br><span class="line">她仍然每天教导她的儿子。</span><br><span class="line">犹以火为耕，比喻原始、简朴的农耕方式。</span><br><span class="line">指困境中处于不利地位。</span><br><span class="line">搜集和研究其内在道理。</span><br><span class="line">没有任何人帮助和支持。</span><br><span class="line">这位作者的文章风格与自己非常相似。</span><br><span class="line">国力强大，军事力量已经停止。</span><br><span class="line">相互勾结维持；相互利用。</span><br><span class="line">比喻进程飞快，日行千里。</span><br><span class="line">只有一个目的，追求利润。</span><br><span class="line">务必谨慎对待，慎重处理事务。</span><br><span class="line">无法言表，只能感慨万千。</span><br><span class="line">形容气势磅礴的文章风格。</span><br><span class="line">根据贡献的大小给予奖励。</span><br><span class="line">让国家蒙羞，民众蒙难。</span><br><span class="line">形容有权势的人极其残忍和无礼。</span><br><span class="line">坚决要求再次向某人强调。</span><br><span class="line">采取措施；采取办法；采取行动；实行</span><br><span class="line">心中充满了疑惑，还没有找到解答。</span><br><span class="line">累累罪行，遍历无穷。形容罪恶极重。</span><br><span class="line">形容人的容貌清爽俊雅，风度翩翩。</span><br><span class="line">辞掉本职工作去做其他的事情。</span><br><span class="line">秦汉时期，勋位至高者都佩戴金印和紫绶。</span><br><span class="line">创立独特的风格，与众不同。</span><br><span class="line">到处都是冰雪覆盖的环境，形容严冬天气。</span><br><span class="line">旧事物被废弃；为了新事物而采取措施。</span><br><span class="line">①向人行礼。②用作哀悼词或祭奠语。</span><br></pre></td></tr></table></figure></div>
+<h4 id="步骤5：输出成语"><a class="header-anchor" href="#步骤5：输出成语">¶</a>步骤5：输出成语</h4>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">i = <span class="number">1</span></span><br><span class="line"><span class="comment"># 假设 test 是一个 DataFrame</span></span><br><span class="line"><span class="comment"># 遍历测试数据集的第一项的值，目的是生成与给定句子最相关的五个成语</span></span><br><span class="line"><span class="keyword">for</span> test_prompt <span class="keyword">in</span> tqdm(test[<span class="number">0</span>].values, total=<span class="built_in">len</span>(test[<span class="number">0</span>].values), desc=<span class="string">&quot;处理进度&quot;</span>):</span><br><span class="line">    i = i + <span class="number">1</span></span><br><span class="line">    <span class="comment"># 构造提示信息，要求模型输出与句子最相关的五个成语</span></span><br><span class="line">    prompt = <span class="string">f&quot;列举与下面句子最相关的五个成语。只需要输出五个成语，不需要有其他的输出，写在一行中：<span class="subst">&#123;test_prompt&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 初始化一个长度为5的列表，填充默认成语“同舟共济”</span></span><br><span class="line">    words = [<span class="string">&#x27;同舟共济&#x27;</span>] * <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 构建聊天消息格式，用于提示模型进行生成</span></span><br><span class="line">    messages = [</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: prompt&#125;,</span><br><span class="line">    ]</span><br><span class="line">    <span class="comment"># 应用聊天模板对消息进行处理，准备模型输入</span></span><br><span class="line">    text = tokenizer.apply_chat_template(</span><br><span class="line">        messages,</span><br><span class="line">        tokenize=<span class="literal">False</span>,</span><br><span class="line">        add_generation_prompt=<span class="literal">True</span></span><br><span class="line">    )</span><br><span class="line">    <span class="comment"># 对输入文本进行编码，准备模型输入数据</span></span><br><span class="line">    model_inputs = tokenizer([text], return_tensors=<span class="string">&quot;pt&quot;</span>).to(device)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 生成回答，限制最大生成长度</span></span><br><span class="line">    generated_ids = model.generate(</span><br><span class="line">        model_inputs.input_ids,</span><br><span class="line">        max_new_tokens=<span class="number">512</span></span><br><span class="line">    )</span><br><span class="line">    <span class="comment"># 提取模型输出，去除输入部分</span></span><br><span class="line">    generated_ids = [</span><br><span class="line">        output_ids[<span class="built_in">len</span>(input_ids):] <span class="keyword">for</span> input_ids, output_ids <span class="keyword">in</span> <span class="built_in">zip</span>(model_inputs.input_ids, generated_ids)</span><br><span class="line">    ]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 解码模型输出，去除特殊标记</span></span><br><span class="line">    response = tokenizer.batch_decode(generated_ids, skip_special_tokens=<span class="literal">True</span>)[<span class="number">0</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 清理回答文本，确保格式统一</span></span><br><span class="line">    response = response.replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27; &#x27;</span>).replace(<span class="string">&#x27;、&#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    <span class="comment"># 提取回答中的成语，确保每个成语长度为4且非空</span></span><br><span class="line">    words = [x <span class="keyword">for</span> x <span class="keyword">in</span> response.split() <span class="keyword">if</span> <span class="built_in">len</span>(x) == <span class="number">4</span> <span class="keyword">and</span> x.strip() != <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果生成的成语列表长度不满足要求（即20个字符），则使用默认成语列表</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(<span class="string">&#x27; &#x27;</span>.join(words).strip()) != <span class="number">24</span>:</span><br><span class="line">        words = [<span class="string">&#x27;同舟共济&#x27;</span>] * <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将最终的成语列表写入提交文件</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;submit.csv&#x27;</span>, <span class="string">&#x27;a+&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> up:</span><br><span class="line">        up.write(<span class="string">&#x27; &#x27;</span>.join(words) + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 查看阶段性结果</span></span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">50</span> == <span class="number">0</span>:</span><br><span class="line">        tqdm.write(<span class="string">f&quot;大模型第<span class="subst">&#123;i&#125;</span>次返回的结果是：\n   <span class="subst">&#123;response&#125;</span>\n&quot;</span>)</span><br><span class="line">        tqdm.write(<span class="string">f&quot;submit.cvs第<span class="subst">&#123;i&#125;</span>行输出结果：\n   <span class="subst">&#123;words&#125;</span>\n&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 为了尽快拿到结果，我们暂时仅获得500个结果（如果有时间的话，可以删除这两行）</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">500</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;submit.csv 已生成&#x27;</span>)</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>单元格输出</li>
+</ul>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">大模型第50次返回的结果是：</span><br><span class="line">   革故鼎新 与时俱进 因势利导 扬长避短 新陈代谢</span><br><span class="line"></span><br><span class="line">submit.cvs第50行输出结果：</span><br><span class="line">   [&#x27;革故鼎新&#x27;, &#x27;与时俱进&#x27;, &#x27;因势利导&#x27;, &#x27;扬长避短&#x27;, &#x27;新陈代谢&#x27;]</span><br><span class="line"></span><br><span class="line">处理进度:   3%|▎         | 99/2972 [01:22&lt;36:26,  1.31it/s]    大模型第100次返回的结果是：</span><br><span class="line">   非常感谢您的邀请，但我已经决定离开座位。</span><br><span class="line"></span><br><span class="line">submit.cvs第100行输出结果：</span><br><span class="line">   [&#x27;同舟共济&#x27;, &#x27;同舟共济&#x27;, &#x27;同舟共济&#x27;, &#x27;同舟共济&#x27;, &#x27;同舟共济&#x27;]</span><br><span class="line"></span><br><span class="line">处理进度:   5%|▌         | 149/2972 [01:59&lt;42:03,  1.12it/s]    大模型第150次返回的结果是：</span><br><span class="line">   1. 一目了然 2. 明白易懂 3. 显而易见 4. 情至义尽 5. 不言而喻</span><br><span class="line"></span><br><span class="line">submit.cvs第150行输出结果：</span><br><span class="line">   [&#x27;一目了然&#x27;, &#x27;明白易懂&#x27;, &#x27;显而易见&#x27;, &#x27;情至义尽&#x27;, &#x27;不言而喻&#x27;]</span><br><span class="line"></span><br><span class="line">处理进度:   7%|▋         | 199/2972 [02:39&lt;36:28,  1.27it/s]    大模型第200次返回的结果是：</span><br><span class="line">   社会动荡 人心惶惶 世风日下 道德沦丧 民不聊生。</span><br><span class="line"></span><br><span class="line">submit.cvs第200行输出结果：</span><br><span class="line">   [&#x27;同舟共济&#x27;, &#x27;同舟共济&#x27;, &#x27;同舟共济&#x27;, &#x27;同舟共济&#x27;, &#x27;同舟共济&#x27;]</span><br><span class="line"></span><br><span class="line">处理进度:   8%|▊         | 249/2972 [03:17&lt;43:39,  1.04it/s]    大模型第250次返回的结果是：</span><br><span class="line">   1. 表里不一 2. 张扬跋扈 3. 龙飞凤舞 4. 粗枝大叶 5. 装腔作势</span><br><span class="line"></span><br><span class="line">submit.cvs第250行输出结果：</span><br><span class="line">   [&#x27;表里不一&#x27;, &#x27;张扬跋扈&#x27;, &#x27;龙飞凤舞&#x27;, &#x27;粗枝大叶&#x27;, &#x27;装腔作势&#x27;]</span><br><span class="line"></span><br><span class="line">处理进度:  10%|█         | 298/2972 [03:55&lt;32:41,  1.36it/s]</span><br></pre></td></tr></table></figure></div>
+<h3 id="README-md"><a class="header-anchor" href="#README-md">¶</a><a class="link" href="http://README.md">README.md <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></h3>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">license: Apache License 2.0</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">数据集文件元信息以及数据文件，请浏览“数据集文件”页面获取。</span><br><span class="line"></span><br><span class="line">当前数据集卡片使用的是默认模版，数据集的贡献者未提供更加详细的数据集介绍，但是您可以通过如下GIT Clone命令，或者ModelScope SDK来下载数据集</span><br><span class="line"></span><br><span class="line">#### 下载方法 </span><br><span class="line"></span><br><span class="line">:modelscope-code[]&#123;type=&quot;sdk&quot;&#125;</span><br><span class="line">:modelscope-code[]&#123;type=&quot;git&quot;&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h3 id="test-input-csv（节选）"><a class="header-anchor" href="#test-input-csv（节选）">¶</a>test_input.csv（节选）</h3>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">双方心往一处想，意志坚定。</span><br><span class="line">两端都极为艰难，难以作出决定。</span><br><span class="line">雄浑深远的意旨。细腻微妙。高超巧妙。</span><br><span class="line">描述水流湍急，且快速且深远。</span><br><span class="line">避免被引诱做出不道德或可疑的行为。</span><br><span class="line">肘部肩窝。比喻事物发生于身边。</span><br><span class="line">他张开嘴巴，吞咽着口水。</span><br><span class="line">仅见一面，不足以深入了解。</span><br><span class="line">向四处散发施舍，同时手中拿着碗盆。</span><br><span class="line">比喻把装备脱下，放下武器。</span><br><span class="line">对于任何战役，都要一败涂地。</span><br><span class="line">阴谋真相已经昭然于众。</span><br><span class="line">比喻因为无能为力而写下了好文章。</span><br><span class="line">古代文人士大夫经常举行诗歌朗诵会。</span><br><span class="line">不能形容为不高兴，只能说明没劲儿。</span><br><span class="line">表现得举止端庄，很有教养。</span><br><span class="line">1.洗刷兵器2.喂养战马3.准备作战</span><br><span class="line">关注生命垂危者，关怀濒危者。</span><br><span class="line">比喻面对挑战，坚韧不拔地前行。</span><br><span class="line">过去的科举考试中被选拔为进士的称号。</span><br><span class="line">相似程度极高或相差无几。</span><br><span class="line">比喻不断地补充、堆砌和延伸。</span><br><span class="line">以安逸快乐的生活和劳动为重。</span><br><span class="line">她仍然每天教导她的儿子。</span><br><span class="line">犹以火为耕，比喻原始、简朴的农耕方式。</span><br><span class="line">指困境中处于不利地位。</span><br><span class="line">搜集和研究其内在道理。</span><br><span class="line">没有任何人帮助和支持。</span><br><span class="line">这位作者的文章风格与自己非常相似。</span><br></pre></td></tr></table></figure></div>
+<h3 id="submit-csv（节选）"><a class="header-anchor" href="#submit-csv（节选）">¶</a>submit.csv（节选）</h3>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">深沉含蓄 清晰晓畅 精炼准确 天马行空 高屋建瓴</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">望梅止渴 垂涎欲滴 狼吞虎咽 馋猫偷腥 饥肠辘辘</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">遍地开花 四面楚歌 五谷丰登 七零八落 三头六臂</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">一败涂地 惨败而归 全军覆没 寸土不让 重蹈覆辙</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">无能为力 徒劳无功 枉费心机 纸上谈兵 笔走龙蛇</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">洗刷兵器 喂养战马 准备作战 装备器械 集结队伍</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">安土重迁 乐在其中 养生保健 津津有味 忙里偷闲</span><br><span class="line">教育子女 学业有成 父母之爱 承前启后 师道尊严</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">同舟共济 同舟共济 同舟共济 同舟共济 同舟共济</span><br><span class="line">一拍即合 如出一辙 如获至宝 如日中天 相得益章</span><br></pre></td></tr></table></figure></div>
+<h2 id="知识点学习记录"><a class="header-anchor" href="#知识点学习记录">¶</a>知识点学习记录</h2>
+<h3 id="Tokenizer"><a class="header-anchor" href="#Tokenizer">¶</a>Tokenizer</h3>
+<ul>
+<li>
+<p><code>Tokenizer </code>是自然语言处理（<code>NLP</code>）中的一种工具或算法，用于将文本分割成更小的单元，这些单元被称为<code>tokens</code>（标记）</p>
+</li>
+<li>
+<p>这些 <code>tokens </code>可以是单词、子词、字符，甚至是特定的短语</p>
+</li>
+<li>
+<p><code>Tokenization </code>是 <code>NLP </code>中的一个基本步骤，为后续的文本处理任务（如词性标注、命名实体识别、情感分析、机器翻译等）提供基础。</p>
+</li>
+</ul>
+<h4 id="主要功能"><a class="header-anchor" href="#主要功能">¶</a>主要功能</h4>
+<ol>
+<li>
+<p><strong>文本分割</strong>：</p>
+<ul>
+<li>
+<p>将输入的文本字符串分割成一个个独立的 <code>token</code></p>
+<blockquote>
+<p>例如，句子 “Hello, world!”</p>
+<p>可以被分割成 [“Hello”, “,”, “world”, “!”]。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>规范化</strong>：</p>
+<ul>
+<li>
+<p>对 <code>tokens </code>进行一些预处理，如转换为小写、去除标点符号等</p>
+<blockquote>
+<p>例如，将 “Hello, World!” 转换为 [“hello”, “world”]。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>子词分割</strong>：</p>
+<ul>
+<li>
+<p>有些 <code>tokenizer </code>会将单词进一步分割成子词，特别是对于词汇量较大的语言（如中文、日文）</p>
+<blockquote>
+<p>例如，BERT 使用 WordPiece 分词器</p>
+<p>将 “unhappy” 分割成 [“un”, “hap”, “py”]。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="常见的-Tokenizer-类型"><a class="header-anchor" href="#常见的-Tokenizer-类型">¶</a>常见的 Tokenizer 类型</h4>
+<ol>
+<li>
+<p><strong>基于规则的 Tokenizer</strong>：</p>
+<ul>
+<li>
+<p>使用预定义的规则来分割文本</p>
+<blockquote>
+<p>例如，使用空格、标点符号等作为分隔符</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>基于统计的 Tokenizer</strong>：</p>
+<ul>
+<li>
+<p>使用统计方法来确定最佳的分词方式</p>
+<blockquote>
+<p>例如，使用最大匹配算法、条件随机场（CRF）等</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>基于模型的 Tokenizer</strong>：</p>
+<ul>
+<li>
+<p>使用机器学习模型来预测最佳的分词方式</p>
+<blockquote>
+<p>例如，WordPiece、Byte-Pair Encoding (BPE) 等</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="应用示例"><a class="header-anchor" href="#应用示例">¶</a>应用示例</h4>
+<ol>
+<li>
+<p><strong>词性标注</strong>：</p>
+<ul>
+<li>
+<p>在进行词性标注时，首先需要将文本分割成单词或子词</p>
+<blockquote>
+<p>例如，句子 “The cat is on the mat.” 可能被分割成 [“The”, “cat”, “is”, “on”, “the”, “mat”, “.”]</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>命名实体识别</strong>：</p>
+<ul>
+<li>
+<p>在识别命名实体时，需要将文本分割成有意义的单元</p>
+<blockquote>
+<p>例如，句子 &quot;Apple is looking at buying U.K. startup for 1billion&quot;可能被分割成[“Apple”,“is”,“looking”,“at”,“buying”,“U.K.”,“startup”,“for”,&quot;1<em>bi<strong>ll</strong>i<strong>o</strong>n</em>&quot;可能被分割成[“<em>A<strong>ppl</strong>e</em>”,“<em>i**s</em>”,“<em>l<strong>oo</strong>kin**g</em>”,“<em>a**t</em>”,“<em>b<strong>u</strong>y<strong>in</strong>g</em>”,“<em>U</em>.<em>K</em>.”,“<em>s<strong>t</strong>a<strong>r</strong>t<strong>u</strong>p</em>”,“<em>f**or</em>”,“1”, “billion”]</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>情感分析</strong>：</p>
+<ul>
+<li>
+<p>在进行情感分析时，需要将文本分割成单词或短语，以便进行特征提取。</p>
+<blockquote>
+<p>例如，句子 “I love this movie!”</p>
+<p>可能被分割成 [“I”, “love”, “this”, “movie”, “!”]</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="常用的-Tokenizer-工具"><a class="header-anchor" href="#常用的-Tokenizer-工具">¶</a>常用的 Tokenizer 工具</h4>
+<ol>
+<li><strong>NLTK（Natural Language Toolkit）</strong>：
+<ul>
+<li>Python 中的一个流行 NLP 库，提供了多种分词器。</li>
+<li>例如，<code>nltk.word_tokenize</code>。</li>
+</ul>
+</li>
+<li><strong>spaCy</strong>：
+<ul>
+<li>另一个强大的 NLP 库，提供了高效且准确的分词器。</li>
+<li>例如，<code>spacy.tokenizer</code>。</li>
+</ul>
+</li>
+<li><strong>Hugging Face Transformers</strong>：
+<ul>
+<li>提供了许多预训练模型的分词器，支持多种语言和模型。</li>
+<li>例如，<code>BertTokenizer</code>、<code>RobertaTokenizer</code> 等。</li>
+</ul>
+</li>
+</ol>
+<h4 id="总结"><a class="header-anchor" href="#总结">¶</a>总结</h4>
+<ul>
+<li>Tokenizer 是 NLP 中的一个关键组件，负责将文本分割成更小的单元，为后续的文本处理任务提供基础。不同的 tokenizer 有不同的特点和适用场景，选择合适的 tokenizer 可以显著提升 NLP 任务的效果</li>
+</ul>
+<h2 id="可能的改进方法"><a class="header-anchor" href="#可能的改进方法">¶</a>可能的改进方法</h2>
+<ul>
+<li>
+<p>更换模型</p>
+<blockquote>
+<p>现在的模型是Qwen1.5:4B</p>
+</blockquote>
+<ul>
+<li>更换为其他模型 / 参数更大的 / 版本更新的模型</li>
+</ul>
+</li>
+<li>
+<p>调整baseline</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>notes</category>
+        <category>AI notes</category>
+      </categories>
+      <tags>
+        <tag>CS Notes</tag>
+        <tag>AI</tag>
       </tags>
   </entry>
 </search>
