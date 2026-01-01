@@ -1,12 +1,154 @@
 baseURL = 'https://example.org/'
 languageCode = 'zh-cn'
-title = 'My New Hugo Site'
+title = 'BCMP 的技术博客'
 theme = 'hugo-theme-stack'
+
+# 新版本的分页设置
+# [pagination]
+#  pagerSize = 5
+
+# 设置时区
+timeZone = 'Asia/Shanghai'
+
+# 启用 emoji
+enableEmoji = true
+
+# 启用 Git 信息
+enableGitInfo = false
+
+# 多语言设置
+[languages.zh-cn]
+  languageName = '中文'
+  weight = 1
+  title = 'BCMP 的技术博客'
+
 [params]
-  mainSections = ['posts']  # 👈 关键：告诉主题去哪找文章
+  # 主要内容部分
+  mainSections = ['posts']
   
+  # 特色图片字段
+  featuredImageField = 'image'
+  
+  # RSS 全文输出
+  rssFullContent = true
+  
+  # 网站图标
+  favicon = '/favicon.png'
+  
+  # 文章
+  [params.article]
+    math = false
+    toc = true
+    readingTime = true
+    [params.article.license]
+      enabled = false
+  
+  # 评论系统（暂时禁用）
+  [params.comments]
+    enabled = false
+  
+  # 侧边栏设置
   [params.sidebar]
-    emoji = '🍥'
+    emoji = '🚀'
+    subtitle = '记录学习与成长'
+    
+    # 头像设置
+    [params.sidebar.avatar]
+      enabled = true
+      local = true
+      src = 'img/avatar.png'
   
+  # 页脚设置
   [params.footer]
     since = 2026
+    customText = ''
+  
+  # 日期格式
+  [params.dateFormat]
+    published = 'Jan 02, 2006'
+    lastUpdated = 'Jan 02, 2006 15:04 MST'
+  
+  # 网站配色
+  [params.colorScheme]
+    toggle = true
+    default = 'auto'
+  
+  # 图片处理
+  [params.imageProcessing.cover]
+    enabled = true
+  [params.imageProcessing.content]
+    enabled = true
+
+# 菜单配置
+[[menus.main]]
+  identifier = 'home'
+  name = '首页'
+  url = '/'
+  weight = 1
+  [menus.main.params]
+    icon = 'home'
+
+[[menus.main]]
+  identifier = 'archives'
+  name = '归档'
+  url = '/archives/'
+  weight = 2
+  [menus.main.params]
+    icon = 'archives'
+
+[[menus.main]]
+  identifier = 'categories'
+  name = '分类'
+  url = '/categories/'
+  weight = 3
+  [menus.main.params]
+    icon = 'categories'
+
+[[menus.main]]
+  identifier = 'tags'
+  name = '标签'
+  url = '/tags/'
+  weight = 4
+  [menus.main.params]
+    icon = 'tag'
+
+[[menus.main]]
+  identifier = 'about'
+  name = '关于'
+  url = '/about/'
+  weight = 5
+  [menus.main.params]
+    icon = 'user'
+
+# 社交链接
+[[menus.social]]
+  identifier = 'github'
+  name = 'GitHub'
+  url = 'https://github.com/你的用户名'
+  [menus.social.params]
+    icon = 'brand-github'
+
+[[menus.social]]
+  identifier = 'email'
+  name = 'Email'
+  url = 'mailto:your@email.com'
+  [menus.social.params]
+    icon = 'messages'  # 使用 messages 图标代替 mail（主题中没有 mail.svg）
+
+# Markdown 设置
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    endLevel = 4
+    ordered = true
+    startLevel = 2
+  [markup.highlight]
+    noClasses = false
+    codeFences = true
+    guessSyntax = true
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = true
+    tabWidth = 4
