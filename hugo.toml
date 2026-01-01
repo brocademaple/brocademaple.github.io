@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://brocademaple.github.io/'
 languageCode = 'zh-cn'
 title = 'BCMP 的技术博客'
 theme = 'hugo-theme-stack'
