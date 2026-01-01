@@ -2,7 +2,9 @@ baseURL = 'https://brocademaple.github.io/'
 languageCode = 'zh-cn'
 defaultContentLanguage = 'zh-cn'
 title = 'BCMP 的技术博客'
-theme = 'hugo-theme-stack'
+[module]
+  [[module.imports]]
+    path = "github.com/CaiJimmy/hugo-theme-stack/v3"
 
 # 新版本的分页设置
 # [pagination]
