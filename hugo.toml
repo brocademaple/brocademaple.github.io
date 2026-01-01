@@ -2,3 +2,11 @@ baseURL = 'https://example.org/'
 languageCode = 'zh-cn'
 title = 'My New Hugo Site'
 theme = 'hugo-theme-stack'
+[params]
+  mainSections = ['posts']  # 👈 关键：告诉主题去哪找文章
+  
+  [params.sidebar]
+    emoji = '🍥'
+  
+  [params.footer]
+    since = 2026
