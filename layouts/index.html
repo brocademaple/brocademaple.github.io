@@ -1,703 +1,981 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brocade Maple | Selected Works</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23082f57'/%3E%3Ccircle cx='43' cy='21' r='12' fill='%23d8ae52'/%3E%3Ctext x='12' y='43' font-size='22' font-family='Arial' font-weight='700' fill='white'%3EBM%3C/text%3E%3C/svg%3E">
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://esm.sh/three@0.184.0",
-        "animejs": "https://esm.sh/animejs@4.5.0",
-        "animejs/adapters/three": "https://esm.sh/animejs@4.5.0/adapters/three"
-      }
-    }
-  </script>
-  <style>
-    :root {
-      --ink: #071326;
-      --muted: #58677d;
-      --sea: #082f57;
-      --sea-soft: #a7cddd;
-      --gold: #d8ae52;
-      --gold-soft: #f4dc9a;
-      --violet: #51318a;
-      --green: #2f7c62;
-      --surface: rgba(248, 252, 255, 0.74);
-      --line: rgba(8, 47, 87, 0.16);
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brocade Maple</title>
+<style>
+  /* HANDOFF NOTE FOR CODEX:
+     Fonts below load from Google Fonts CDN. If this needs to work offline or
+     reliably in mainland China, replace this @import with local @font-face
+     declarations using self-hosted .woff2 files for:
+       - Cormorant Garamond: 400, 500, italic 500, italic 600
+       - Playfair Display: 600, 700, italic 500, italic 600
+       - Inter: 400, 500, 600, 700
+       - Noto Serif SC: 400, 500, 600, 700, 900 — this is now the ONLY
+         Chinese font on the page (used for body text and headings alike,
+         not just display headings). Full CJK charset is large — subset
+         to only the characters actually used on the page, or use a
+         dynamic-subsetting service, or first paint will be slow.
+     Do not swap these fonts for different ones without checking with design —
+     the italic-script vs. CJK-serif contrast is the visual signature of the page.
+  */
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500;1,600&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap');
 
-    * { box-sizing: border-box; }
+  :root{
+    /* ---- 海蓝金 — Mediterranean noon, sun on water ---- */
+    --bg-0:#04243f;
+    --bg-1:#0a4f7a;
+    --mist:#1f8fc4;
+    --mist-soft:#0d6694;
+    --gold:#e8b54a;
+    --gold-bright:#ffe29a;
+    --card:#fbf4e2;
+    --card-2:#f3e6c8;
+    --ink:#13202c;
+    --ink-soft:#4c5d6b;
+    --particle-a:255,206,107; /* warm gold dust rgb */
+    --particle-b:255,255,255; /* sun-glitter white rgb */
+    --particle-c:255,225,140; /* bright gold rgb */
+    --accent-text:#bfe6ff;
+    --sun-glow:#ffe9b0;
+  }
 
-    body {
-      margin: 0;
-      min-height: 100dvh;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 24% 20%, rgba(167, 205, 221, 0.64), transparent 34rem),
-        radial-gradient(circle at 78% 12%, rgba(244, 220, 154, 0.34), transparent 30rem),
-        linear-gradient(135deg, #f2f9fc 0%, #fbfdff 48%, #edf7f6 100%);
-      overflow-x: hidden;
-    }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{
+    background:var(--bg-0);
+    color:var(--ink);
+    font-family:'Inter','Noto Serif SC',serif;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+  }
+  body{
+    background:
+      radial-gradient(ellipse 60% 50% at 72% 6%, color-mix(in srgb, var(--sun-glow) 70%, transparent), transparent 60%),
+      radial-gradient(ellipse 95% 70% at 50% 28%, color-mix(in srgb, var(--mist) 75%, transparent), transparent 78%),
+      radial-gradient(ellipse 75% 55% at 15% 88%, color-mix(in srgb, var(--gold) 30%, transparent), transparent 72%),
+      linear-gradient(165deg, var(--bg-1), var(--bg-0) 65%, var(--bg-0));
+    transition: background 1.2s ease;
+    min-height:100vh;
+    position:relative;
+  }
+  /* sun-glitter sheen sweeping across the sea-blue field */
+  body::before{
+    content:'';
+    position:fixed; inset:0;
+    background:repeating-linear-gradient(
+      115deg,
+      transparent 0px,
+      color-mix(in srgb, var(--sun-glow) 22%, transparent) 2px,
+      transparent 5px,
+      transparent 30px
+    );
+    opacity:.75;
+    mix-blend-mode:overlay;
+    pointer-events:none;
+    z-index:1;
+    transition:background 1.2s ease;
+  }
 
-    body[data-palette="violet"] {
-      background:
-        radial-gradient(circle at 16% 14%, rgba(81, 49, 138, 0.36), transparent 31rem),
-        radial-gradient(circle at 82% 16%, rgba(47, 124, 98, 0.34), transparent 30rem),
-        radial-gradient(circle at 52% 82%, rgba(244, 220, 154, 0.3), transparent 36rem),
-        linear-gradient(135deg, #f8f5ff 0%, #f7fbf6 56%, #fff9ea 100%);
-    }
+  canvas#field{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:1;
+    pointer-events:none;
+  }
 
-    #scene {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
+  .wrap{
+    position:relative;
+    z-index:2;
+    max-width:1280px;
+    margin:0 auto;
+    padding:0 64px;
+  }
 
-    .mist {
-      position: fixed;
-      inset: -10% -8% auto;
-      height: 78vh;
-      z-index: 1;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse at 38% 46%, rgba(255, 255, 255, 0.88), transparent 30rem),
-        radial-gradient(ellipse at 74% 34%, rgba(167, 205, 221, 0.5), transparent 34rem),
-        radial-gradient(ellipse at 52% 78%, rgba(255, 255, 255, 0.78), transparent 34rem);
-      filter: blur(22px);
-      animation: mistDrift 18s ease-in-out infinite alternate;
-    }
+  /* ---------- NAV ---------- */
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:34px 0 0;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:13px;
+  }
+  .brand-mark{
+    width:38px;height:38px;border-radius:11px;
+    background:linear-gradient(135deg, var(--gold-bright), var(--mist));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Playfair Display',serif;
+    font-weight:700;font-size:15px;color:var(--bg-0);
+    box-shadow:0 4px 18px color-mix(in srgb, var(--gold) 50%, transparent);
+  }
+  .brand-name{
+    font-size:15px;font-weight:600;letter-spacing:.01em;
+    color:#e9eef3;
+  }
 
-    @keyframes mistDrift {
-      from { transform: translate3d(-2%, -1%, 0) scale(1); }
-      to { transform: translate3d(2%, 1%, 0) scale(1.04); }
-    }
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:28px;
+  }
+  .nav-links a{
+    font-family:'Noto Serif SC',serif;
+    font-size:13.5px;
+    font-weight:500;
+    color:rgba(255,255,255,.65);
+    text-decoration:none;
+    transition:color .25s ease;
+  }
+  .nav-links a:hover{color:#fff;}
+  .nav-links .nav-cta{
+    padding:9px 20px;
+    border-radius:100px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.16);
+    color:#fff;
+  }
+  .nav-links .nav-cta:hover{background:rgba(255,255,255,.14);}
 
-    @media (prefers-reduced-motion: reduce) {
-      .mist { animation: none; }
-    }
+  /* ---------- HERO ---------- */
+  .hero{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:48px;
+    align-items:center;
+    padding:88px 0 70px;
+    min-height:78vh;
+  }
+  .eyebrow{
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent-text);
+    margin-bottom:22px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px;height:1px;
+    background:var(--accent-text);
+    opacity:.7;
+  }
+  h1.title{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:88px;
+    line-height:1.0;
+    letter-spacing:-.01em;
+    color:#f5f3ee;
+    margin-bottom:30px;
+  }
+  h1.title em{
+    font-style:italic;
+    font-weight:600;
+    background:linear-gradient(120deg, var(--gold-bright), var(--gold) 60%, var(--mist));
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  /* hero signature words — float directly in the particle field, no card boundary */
+  .hero-signature{
+    position:relative;
+    min-height:420px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:20px 10px;
+  }
+  .script{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-weight:600;
+    line-height:1;
+    position:relative;
+    z-index:1;
+    text-decoration:none;
+    display:inline-block;
+    background:linear-gradient(120deg, var(--gold-bright), var(--gold) 55%, var(--mist));
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 2px 18px rgba(0,0,0,.35));
+    transition:transform .3s cubic-bezier(.2,.8,.2,1), filter .3s ease;
+  }
+  .script::after{
+    content:'';
+    position:absolute;
+    left:0; bottom:-4px;
+    width:0; height:2px;
+    background:var(--gold-bright);
+    opacity:.8;
+    transition:width .35s ease;
+  }
+  .script:hover{
+    transform:translateY(-2px);
+    filter:drop-shadow(0 4px 22px rgba(0,0,0,.45));
+  }
+  .script:hover::after{ width:100%; }
+  /* Modular scale, ratio 1.15, anchored at 44px — each word one step up, reading top-to-bottom like a rising signature */
+  .s1{font-size:50px; align-self:flex-start;}
+  .s2{font-size:57.5px; align-self:flex-end; margin-top:18px;}
+  .s3{font-size:66.1px; align-self:flex-start; margin-top:14px;}
 
-    .page {
-      position: relative;
-      z-index: 2;
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 28px 0 76px;
-    }
+  /* ---------- INDEX SECTION ---------- */
+  .index-section{padding:40px 0 130px; scroll-margin-top:90px;}
+  .index-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:46px;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  h2.index-title{
+    font-family:'Noto Serif SC', 'Playfair Display', serif;
+    font-weight:900;
+    font-size:46px;
+    letter-spacing:.02em;
+    color:#fdfaf2;
+    text-shadow:0 2px 24px rgba(0,0,0,.25);
+  }
+  .index-sub{
+    font-family:'Noto Serif SC',serif;
+    font-size:14.5px;
+    color:rgba(232,236,240,.55);
+  }
+  .catalog-no{
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.12em;
+    color:#9c7a2e;
+    margin-bottom:8px;
+  }
+  .index-status{
+    font-family:'Noto Serif SC',serif;
+    font-size:12.5px;
+    color:rgba(255,255,255,.45);
+  }
 
-    header {
-      min-height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+  }
+  .proj-card{
+    position:relative;
+    border-radius:16px;
+    background:linear-gradient(155deg, #f8edd2, #ecd9a3);
+    padding:22px 22px 50px;
+    min-height:172px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    cursor:pointer;
+    overflow:hidden;
+    border:1px solid color-mix(in srgb, var(--gold-bright) 55%, transparent);
+    box-shadow:
+      0 14px 32px -16px rgba(0,0,0,.55),
+      0 6px 22px -8px color-mix(in srgb, var(--gold) 45%, transparent),
+      inset 0 1px 0 rgba(255,255,255,.5);
+    transition:box-shadow .35s ease, border-color .35s ease, transform .35s ease;
+    text-decoration:none;
+    color:inherit;
+    appearance:none;
+    font:inherit;
+    text-align:left;
+    width:100%;
+  }
+  .proj-card::before{
+    content:'';
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 88% -10%, color-mix(in srgb, var(--gold) 30%, transparent), transparent 60%);
+    pointer-events:none;
+  }
+  .proj-card:hover{
+    transform:translateY(-3px);
+    border-color:color-mix(in srgb, var(--gold-bright) 85%, transparent);
+    box-shadow:
+      0 20px 44px -16px rgba(0,0,0,.6),
+      0 10px 30px -8px color-mix(in srgb, var(--gold) 60%, transparent),
+      inset 0 1px 0 rgba(255,255,255,.55);
+  }
+  .proj-tag{
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    z-index:1;
+    position:relative;
+  }
+  .proj-script{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:30px;
+    line-height:1.12;
+    color:var(--ink);
+    margin:8px 0 9px;
+    z-index:1;
+    position:relative;
+  }
+  .proj-desc{
+    font-family:'Noto Serif SC',serif;
+    font-size:13px;
+    line-height:1.65;
+    color:var(--ink-soft);
+    z-index:1;
+    position:relative;
+  }
+  .proj-arrow{
+    position:absolute;
+    bottom:18px; right:18px;
+    width:30px;height:30px;
+    border-radius:50%;
+    background:rgba(15,23,34,.07);
+    display:flex;align-items:center;justify-content:center;
+    transition:all .3s ease;
+    z-index:1;
+  }
+  .proj-card:hover .proj-arrow{
+    background:var(--ink);
+    transform:rotate(45deg);
+  }
+  .proj-arrow svg{stroke:var(--ink); transition:stroke .3s ease;}
+  .proj-card:hover .proj-arrow svg{stroke:#f8edd2;}
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 760;
-    }
+  /* ---------- PROJECT DETAIL MODAL ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0;
+    background:rgba(4,16,28,.68);
+    backdrop-filter:blur(6px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    z-index:100;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .3s ease, visibility .3s ease;
+  }
+  .modal-backdrop.is-open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+  }
+  .modal-panel{
+    position:relative;
+    width:100%;
+    max-width:560px;
+    max-height:85vh;
+    overflow-y:auto;
+    border-radius:20px;
+    background:linear-gradient(165deg, #f8edd2, #ecd9a3);
+    border:1px solid color-mix(in srgb, var(--gold-bright) 55%, transparent);
+    box-shadow:0 40px 90px -20px rgba(0,0,0,.6), 0 0 60px -10px color-mix(in srgb, var(--gold) 40%, transparent);
+    transform:scale(.94) translateY(10px);
+    transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .modal-backdrop.is-open .modal-panel{
+    transform:scale(1) translateY(0);
+  }
+  .modal-close{
+    position:absolute;
+    top:16px; right:16px;
+    width:32px; height:32px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    background:rgba(15,23,34,.08);
+    color:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    z-index:2;
+    transition:background .25s ease;
+  }
+  .modal-close:hover{ background:rgba(15,23,34,.16); }
+  .modal-image{
+    aspect-ratio:16/8;
+    border-radius:20px 20px 0 0;
+    background:
+      repeating-linear-gradient(115deg, transparent 0px, color-mix(in srgb, var(--gold-bright) 18%, transparent) 2px, transparent 5px, transparent 26px),
+      linear-gradient(150deg, var(--bg-1), var(--mist) 60%, var(--bg-0));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+  }
+  .modal-image span{
+    font-family:'Noto Serif SC',serif;
+    font-size:13px;
+    font-weight:500;
+    letter-spacing:.04em;
+    color:rgba(255,255,255,.55);
+    border:1px dashed rgba(255,255,255,.3);
+    border-radius:100px;
+    padding:8px 18px;
+  }
+  .modal-body{ padding:30px 32px 32px; }
+  .modal-meta{
+    display:flex; align-items:center; gap:12px;
+    margin-bottom:10px;
+  }
+  .modal-catalog{
+    font-family:'Inter',sans-serif;
+    font-size:11px; font-weight:700; letter-spacing:.12em;
+    color:#9c7a2e;
+  }
+  .modal-tag{
+    font-family:'Inter',sans-serif;
+    font-size:11px; font-weight:600; letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .modal-title{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:42px;
+    line-height:1.1;
+    color:var(--ink);
+    margin-bottom:14px;
+  }
+  .modal-desc{
+    font-family:'Noto Serif SC',serif;
+    font-size:14.5px;
+    line-height:1.8;
+    color:var(--ink-soft);
+    margin-bottom:26px;
+  }
+  .modal-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+  .modal-btn{
+    font-family:'Noto Serif SC',serif;
+    font-size:13.5px;
+    font-weight:600;
+    padding:11px 22px;
+    border-radius:100px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    transition:all .25s ease;
+  }
+  .modal-btn-primary{
+    background:linear-gradient(135deg, var(--mist), var(--mist-soft));
+    color:#fff;
+    box-shadow:0 6px 18px color-mix(in srgb, var(--mist) 45%, transparent);
+  }
+  .modal-btn-primary:hover{ transform:translateY(-2px); }
+  .modal-btn-disabled{
+    background:rgba(15,23,34,.06);
+    color:var(--ink-soft);
+    cursor:default;
+  }
+  .modal-btn-secondary{
+    background:rgba(15,23,34,.08);
+    color:var(--ink);
+    border:1px solid rgba(15,23,34,.14);
+  }
+  .modal-btn-secondary:hover{ background:rgba(15,23,34,.14); }
 
-    .mark {
-      width: 36px;
-      height: 36px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      color: #fff;
-      background: linear-gradient(145deg, var(--sea), var(--gold));
-      box-shadow: 0 18px 44px rgba(8, 47, 87, 0.16);
-    }
+  @media (max-width:560px){
+    .modal-body{ padding:24px 22px 26px; }
+    .modal-title{ font-size:34px; }
+  }
 
-    .palette {
-      display: inline-flex;
-      gap: 5px;
-      padding: 5px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.58);
-      backdrop-filter: blur(16px);
-    }
+  footer{
+    padding:40px 0 60px;
+    text-align:center;
+    font-family:'Noto Serif SC',serif;
+    font-size:12.5px;
+    color:rgba(255,255,255,.3);
+  }
 
-    .palette button {
-      border: 0;
-      border-radius: 999px;
-      padding: 8px 13px;
-      color: var(--muted);
-      background: transparent;
-      font: inherit;
-      cursor: pointer;
-    }
+  @media (max-width: 900px){
+    .wrap{padding:0 24px;}
+    .hero{grid-template-columns:1fr; padding-top:50px;}
+    h1.title{font-size:52px;}
+    .grid{grid-template-columns:1fr;}
+    nav{padding-top:24px;}
+  }
 
-    .palette button[aria-pressed="true"] {
-      color: #fff;
-      background: var(--sea);
-    }
-
-    body[data-palette="violet"] .palette button[aria-pressed="true"] {
-      background: linear-gradient(135deg, var(--violet), var(--green));
-    }
-
-    .hero {
-      min-height: calc(100dvh - 112px);
-      display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
-      gap: 42px;
-      align-items: center;
-      padding: 36px 0 72px;
-    }
-
-    .label {
-      margin: 0 0 18px;
-      color: #0b6096;
-      font-size: 13px;
-      font-weight: 780;
-    }
-
-    h1 {
-      max-width: 680px;
-      margin: 0;
-      font-size: clamp(44px, 7vw, 88px);
-      line-height: 0.98;
-      letter-spacing: 0;
-    }
-
-    .hero p:not(.label) {
-      max-width: 520px;
-      margin: 22px 0 0;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.72;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .button {
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(7, 19, 38, 0.16);
-      color: var(--ink);
-      text-decoration: none;
-      background: rgba(255, 255, 255, 0.72);
-      box-shadow: 0 14px 34px rgba(8, 47, 87, 0.12);
-      cursor: pointer;
-    }
-
-    .button.primary {
-      color: #fff;
-      border-color: transparent;
-      background: linear-gradient(135deg, #082f57, #0c6ca9);
-    }
-
-    .stage {
-      position: relative;
-      min-height: 560px;
-      border-radius: 32px;
-      border: 1px solid rgba(255, 255, 255, 0.74);
-      background:
-        radial-gradient(circle at 48% 42%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.18) 48%, transparent 70%),
-        linear-gradient(145deg, rgba(8, 47, 87, 0.12), rgba(216, 174, 82, 0.18));
-      box-shadow: 0 42px 96px rgba(8, 47, 87, 0.18);
-      backdrop-filter: blur(18px);
-      overflow: hidden;
-    }
-
-    .stage-word {
-      position: absolute;
-      z-index: 2;
-      color: rgba(7, 19, 38, 0.56);
-      font-family: "Snell Roundhand", "Zapfino", "Bodoni 72 Smallcaps", Georgia, serif;
-      font-size: clamp(32px, 5vw, 68px);
-      line-height: 0.95;
-      text-shadow: 0 2px 26px rgba(255, 255, 255, 0.82);
-    }
-
-    .stage-word.one { left: 9%; top: 18%; transform: rotate(-10deg); }
-    .stage-word.two { right: 9%; top: 28%; transform: rotate(8deg); }
-    .stage-word.three { left: 14%; bottom: 16%; transform: rotate(7deg); }
-
-    .projects-head {
-      display: grid;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: clamp(30px, 5vw, 54px);
-      line-height: 1.05;
-      letter-spacing: 0;
-    }
-
-    .projects-head p {
-      max-width: 620px;
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.72;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .project {
-      position: relative;
-      min-height: 270px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 24px;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.78);
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 26% 16%, rgba(216, 174, 82, 0.28), transparent 10rem),
-        radial-gradient(circle at 86% 18%, rgba(167, 205, 221, 0.36), transparent 12rem),
-        rgba(255, 255, 255, 0.64);
-      box-shadow: 0 28px 64px rgba(8, 47, 87, 0.12);
-      backdrop-filter: blur(18px);
-      text-align: left;
-      font: inherit;
-      cursor: pointer;
-      overflow: hidden;
-    }
-
-    body[data-palette="violet"] .project {
-      background:
-        radial-gradient(circle at 24% 14%, rgba(81, 49, 138, 0.24), transparent 10rem),
-        radial-gradient(circle at 86% 18%, rgba(47, 124, 98, 0.24), transparent 11rem),
-        radial-gradient(circle at 48% 80%, rgba(216, 174, 82, 0.18), transparent 12rem),
-        rgba(255, 255, 255, 0.64);
-    }
-
-    .project small {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .script {
-      display: block;
-      margin-top: 20px;
-      color: #122a4d;
-      font-family: "Snell Roundhand", "Zapfino", "Bodoni 72 Smallcaps", Georgia, serif;
-      font-size: clamp(40px, 5vw, 66px);
-      line-height: 0.95;
-      letter-spacing: 0;
-    }
-
-    .project p {
-      max-width: 25ch;
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.62;
-    }
-
-    dialog {
-      border: 0;
-      padding: 0;
-      background: transparent;
-    }
-
-    dialog::backdrop {
-      background: rgba(8, 47, 87, 0.26);
-      backdrop-filter: blur(16px);
-    }
-
-    .panel {
-      width: min(760px, calc(100vw - 40px));
-      border-radius: 26px;
-      border: 1px solid rgba(255, 255, 255, 0.74);
-      padding: 30px;
-      background: rgba(250, 253, 255, 0.9);
-      box-shadow: 0 50px 120px rgba(8, 47, 87, 0.24);
-    }
-
-    .panel h3 {
-      margin: 0;
-      font-family: "Snell Roundhand", "Zapfino", "Bodoni 72 Smallcaps", Georgia, serif;
-      font-size: clamp(48px, 8vw, 86px);
-      line-height: 1;
-      color: #122a4d;
-    }
-
-    .panel p {
-      margin: 18px 0 0;
-      color: var(--muted);
-      line-height: 1.78;
-    }
-
-    .panel-actions {
-      margin-top: 26px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .stage {
-        min-height: 390px;
-      }
-
-      .projects {
-        grid-template-columns: 1fr;
-      }
-
-      header {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-  </style>
+  @media (prefers-reduced-motion: reduce){
+    canvas#field{display:none;}
+    *{transition-duration:.01ms !important;}
+  }
+</style>
 </head>
-<body data-palette="sea">
-  <canvas id="scene" aria-hidden="true"></canvas>
-  <div class="mist"></div>
+<body>
 
-  <main class="page">
-    <header>
-      <div class="brand">
-        <span class="mark">BM</span>
-        <span>Brocade Maple</span>
-      </div>
-      <div class="palette" aria-label="配色">
-        <button type="button" data-set="sea" aria-pressed="true">海蓝金</button>
-        <button type="button" data-set="violet" aria-pressed="false">紫金绿</button>
-      </div>
-    </header>
+<canvas id="field"></canvas>
 
-    <section class="hero">
+<div class="wrap">
+
+  <nav>
+    <div class="brand">
+      <div class="brand-mark">BM</div>
+      <div class="brand-name">Brocade Maple</div>
+    </div>
+    <div class="nav-links">
+      <a href="#index">作品索引</a>
+      <a href="https://github.com/brocademaple" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Selected works / live prototypes</div>
+      <h1 class="title">Brocade<br><em>Maple</em></h1>
+    </div>
+    <div class="hero-signature">
+      <a class="script s1" href="#proj-mcp-training-system" data-open-project="mcp-training-system">Prototype</a>
+      <a class="script s2" href="https://github.com/brocademaple" target="_blank" rel="noopener">Archive</a>
+      <a class="script s3" href="#proj-siwei-city" data-open-project="siwei-city">Signal</a>
+    </div>
+  </section>
+
+  <section class="index-section" id="index">
+    <div class="index-head">
       <div>
-        <p class="label">Selected works / live prototypes</p>
-        <h1>Brocade Maple</h1>
-        <p>我把想法做成能运行的原型。这里收着 AI 产品、视觉实验和长期打磨的工具。</p>
-        <div class="actions">
-          <a class="button primary" href="#projects">进入作品</a>
-          <a class="button" href="https://github.com/brocademaple">GitHub</a>
-        </div>
+        <h2 class="index-title">作品索引</h2>
+        <div class="index-sub" style="margin-top:8px;">每个标题对应一个仓库，点开看代码和说明。</div>
       </div>
+      <div class="index-status">截至本稿 · 13 个仓库 · <a href="https://github.com/brocademaple" target="_blank" rel="noopener" style="color:var(--accent-text);">在 GitHub 查看全部 →</a></div>
+    </div>
 
-      <div class="stage">
-        <span class="stage-word one">Prototype</span>
-        <span class="stage-word two">Archive</span>
-        <span class="stage-word three">Signal</span>
-      </div>
-    </section>
+    <div class="grid" id="projectGrid"></div>
 
-    <section id="projects">
-      <div class="projects-head">
-        <h2>作品索引</h2>
-        <p>点开一个标题，看它的目标、演示、源码和交付记录。</p>
-      </div>
-      <div class="projects">
-        <button class="project" data-project="Cyber Lover">
-          <small>AI companion prototype</small>
-          <span class="script">Cyber Lover</span>
-          <p>关于人格稳定、长期记忆和日常触达的陪伴实验。</p>
-        </button>
-        <button class="project" data-project="Siwei City">
-          <small>thinking system</small>
-          <span class="script">Siwei City</span>
-          <p>把松散问题整理成地图、判断和下一步行动。</p>
-        </button>
-        <button class="project" data-project="Product Radar">
-          <small>product intelligence</small>
-          <span class="script">Product Radar</span>
-          <p>持续追踪 AI 原生产品线索，沉淀成可检索档案。</p>
-        </button>
-      </div>
-    </section>
-  </main>
+  </section>
 
-  <dialog id="projectDialog">
-    <div class="panel">
-      <h3 id="dialogTitle">Project</h3>
-      <p id="dialogBody"></p>
-      <div class="panel-actions">
-        <a class="button primary" id="dialogLink" href="#">打开详情</a>
-        <button class="button" type="button" id="dialogClose">关闭</button>
+  <footer>© 2026 Brocade Maple — built one prototype at a time</footer>
+
+</div>
+
+<!-- ===================== Project detail modal ===================== -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal-panel" id="modalPanel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" type="button" aria-label="关闭">
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 2.5l10 10M12.5 2.5l-10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <div class="modal-image" id="modalImage"></div>
+    <div class="modal-body">
+      <div class="modal-meta">
+        <span class="modal-catalog" id="modalCatalog"></span>
+        <span class="modal-tag" id="modalTag"></span>
+      </div>
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-actions">
+        <a class="modal-btn modal-btn-primary" id="modalGithub" href="#" target="_blank" rel="noopener">在 GitHub 查看 →</a>
+        <div id="modalDemoSlot"></div>
       </div>
     </div>
-  </dialog>
+  </div>
+</div>
 
-  <script type="module">
-    import * as THREE from 'three';
-    import { animate, createTimer, createTimeline, stagger, utils } from 'animejs';
-    import { getInstances } from 'animejs/adapters/three';
-    import 'animejs/adapters/three';
+<script>
+/* ===================== Project data + card/modal rendering =====================
+   Single source of truth for project info — both the grid cards and the
+   detail modal read from this array, so card copy and modal copy can never
+   drift apart. `demo: null` means no public preview link exists yet; the
+   modal shows an honest "待补充" label instead of a fake/disabled link.
+   `image` is a placeholder flag for now — swap in a real cover image path
+   per project once screenshots exist.
+================================================================================ */
+const PROJECTS = [
+  {
+    id: 'siwei-city',
+    no: '01', status: 'ACTIVE MVP', tag: 'thinking system',
+    title: 'Siwei City',
+    desc: '把模糊问题转成结构化思考地图、行动建议和可复用报告的 AI 知识工作台。',
+    longDesc: '把模糊、松散的问题转成结构化的思考地图、可执行的下一步行动，和能直接复用的报告——目标是减少"想了很多但没有产出"的情况。',
+    github: 'https://github.com/brocademaple/siwei-city',
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'cyber-lover',
+    no: '02', status: 'ACTIVE', tag: 'AI companion prototype',
+    title: 'Cyber Lover',
+    desc: '以稳定人设、本地记忆、通知触达和多模型聊天为核心的 AI 陪伴产品实验。',
+    longDesc: '以稳定人设、本地记忆、主动通知触达和多模型聊天为核心的 AI 陪伴产品实验，探索"长期关系感"在产品层面怎么落地。',
+    github: 'https://github.com/brocademaple/bcmp_cyber_lover',
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'onejd-oneresume',
+    no: '03', status: 'MAINTAINED', tag: 'career workbench',
+    title: 'OneJD\nOneResume',
+    desc: '围绕岗位 JD 生成定制简历、面试准备、题库和复盘报告的 AI 求职工作台。',
+    longDesc: '围绕一份岗位 JD，自动生成定制简历、对应的面试准备材料、题库和复盘报告，把求职这件重复性很高的事变成可以批量处理、持续迭代的流程。',
+    github: 'https://github.com/brocademaple/one_jd_one_resume',
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'sparkweave',
+    no: '04', status: 'LOCAL ITERATION', tag: 'creative workflow',
+    title: 'SparkWeave',
+    desc: '正在本地快速迭代的创意 / 内容工作流产品，公开仓库同步后更新完整说明。',
+    longDesc: '正在本地快速迭代的创意 / 内容工作流产品。公开仓库已经建好，完整说明和截图会在同步稳定之后补上。',
+    github: 'https://github.com/brocademaple/SparkWeave',
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'mcp-training-system',
+    no: '05', status: 'PROTOTYPE', tag: 'systems integration',
+    title: 'MCP Training\nSystem',
+    desc: '面向培训 / 业务流程的 MCP 工具化与系统集成实验。',
+    longDesc: '面向培训和业务流程场景，把 MCP 协议用起来做工具化和系统集成的一个早期实验，验证"AI 工具怎么接进已有业务流程"这个问题。',
+    github: 'https://github.com/brocademaple/mcp_training-system',
+    demo: null,
+    image: null,
+  },
+];
 
-    const body = document.body;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function renderProjectCards(){
+  const grid = document.getElementById('projectGrid');
+  grid.innerHTML = PROJECTS.map((p, i) => `
+    <button class="proj-card" type="button" id="proj-${p.id}" data-index="${i}">
+      <div class="catalog-no">No. ${p.no} — ${p.status}</div>
+      <div class="proj-tag">${p.tag}</div>
+      <div class="proj-script">${p.title.split('\n').join('<br>')}</div>
+      <div class="proj-desc">${p.desc}</div>
+      <div class="proj-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6h6M6.5 3l3 3-3 3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </button>
+  `).join('');
+}
+renderProjectCards();
 
-    document.querySelectorAll('[data-set]').forEach((button) => {
-      button.addEventListener('click', () => {
-        body.dataset.palette = button.dataset.set;
-        document.querySelectorAll('[data-set]').forEach((item) => {
-          item.setAttribute('aria-pressed', String(item === button));
-        });
-        const sea = button.dataset.set === 'sea';
-        scene.fog.color.set(sea ? '#dff0f7' : '#f3eafa');
-        animate(goldMaterial, { color: sea ? '#d8ae52' : '#d7b15a', emissive: sea ? '#4b3200' : '#4f3a05', duration: 700, ease: 'outQuad' });
-        animate(blueMaterial, { color: sea ? '#082f57' : '#51318a', duration: 700, ease: 'outQuad' });
-      });
+/* ---- Modal ---- */
+(function(){
+  const backdrop   = document.getElementById('modalBackdrop');
+  const closeBtn   = document.getElementById('modalClose');
+  const elImage    = document.getElementById('modalImage');
+  const elCatalog  = document.getElementById('modalCatalog');
+  const elTag      = document.getElementById('modalTag');
+  const elTitle    = document.getElementById('modalTitle');
+  const elDesc     = document.getElementById('modalDesc');
+  const elGithub   = document.getElementById('modalGithub');
+  const elDemoSlot = document.getElementById('modalDemoSlot');
+
+  let lastFocused = null;
+
+  function openModal(project){
+    elCatalog.textContent = `No. ${project.no} — ${project.status}`;
+    elTag.textContent = project.tag;
+    elTitle.innerHTML = project.title.split('\n').join('<br>');
+    elDesc.textContent = project.longDesc || project.desc;
+    elGithub.href = project.github;
+    elImage.innerHTML = `<span>封面图占位 · ${project.title.replace('\n',' ')}</span>`;
+
+    if(project.demo){
+      elDemoSlot.innerHTML = `<a class="modal-btn modal-btn-secondary" href="${project.demo}" target="_blank" rel="noopener">查看预览 →</a>`;
+    } else {
+      elDemoSlot.innerHTML = `<span class="modal-btn modal-btn-disabled">预览链接待补充</span>`;
+    }
+
+    lastFocused = document.activeElement;
+    backdrop.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeModal(){
+    backdrop.classList.remove('is-open');
+    document.body.style.overflow = '';
+    if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+
+  // Hero signature words (Prototype / Signal) each point at one specific
+  // project by id and open its modal directly — not three identical links
+  // to the same place. "Archive" is a real external link to the full
+  // GitHub profile, so it's left as a plain anchor with no handler here.
+  document.querySelectorAll('[data-open-project]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const project = PROJECTS.find(p => p.id === el.dataset.openProject);
+      if(project) openModal(project);
     });
+  });
 
-    const canvas = document.getElementById('scene');
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  document.getElementById('projectGrid').addEventListener('click', (e) => {
+    const card = e.target.closest('.proj-card');
+    if(!card) return;
+    const idx = parseInt(card.dataset.index, 10);
+    if(PROJECTS[idx]) openModal(PROJECTS[idx]);
+  });
 
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2('#dff0f7', 0.055);
-    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(0, 0.2, 8);
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', (e) => {
+    if(e.target === backdrop) closeModal();
+  });
+  window.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && backdrop.classList.contains('is-open')) closeModal();
+  });
+})();
+</script>
 
-    scene.add(new THREE.AmbientLight('#ffffff', 1.2));
-    const keyLight = new THREE.PointLight('#f4dc9a', 10, 40, 1.6);
-    keyLight.position.set(3, 4, 5);
-    scene.add(keyLight);
-    const rimLight = new THREE.DirectionalLight('#a7cddd', 2.4);
-    rimLight.position.set(-3, 2, 3);
-    scene.add(rimLight);
+<script>
+/* ===================== Particle field =====================
+   GOLD-DUST RIBBON — particles cluster along a hooked S-shaped path (a
+   multi-waypoint spline, not a single bulge): rises from the lower-left,
+   arcs up and over the top, loops down near the right edge, then sweeps
+   back left underneath — matching a hand-drawn reference path. Density
+   falls off sharply perpendicular to the path. A handful of sparse
+   stragglers wander the empty regions. Dominant shape is a faceted diamond
+   chip (not thin lines), echoing the angular metal-flake look in the
+   reference photo this was modeled on. A one-time converge -> burst ->
+   reform plays on load.
+=============================================================== */
+(function(){
+  const canvas = document.getElementById('field');
+  const ctx = canvas.getContext('2d');
+  let W, H, DPR;
 
-    const group = new THREE.Group();
-    scene.add(group);
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.width = window.innerWidth * DPR;
+    H = canvas.height = window.innerHeight * DPR;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
-    const goldMaterial = new THREE.MeshStandardMaterial({
-      color: '#d8ae52',
-      emissive: '#4b3200',
-      emissiveIntensity: 0.32,
-      metalness: 0.92,
-      roughness: 0.18,
-      transparent: true,
-      opacity: 0.86
-    });
-    const blueMaterial = new THREE.MeshStandardMaterial({
-      color: '#082f57',
-      emissive: '#021525',
-      emissiveIntensity: 0.12,
-      metalness: 0.5,
-      roughness: 0.38,
-      transparent: true,
-      opacity: 0.38
-    });
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isSmall = window.innerWidth < 800;
 
-    const columns = 14;
-    const rows = 9;
-    const depth = 5;
-    const total = columns * rows * depth;
-    const stormGeo = new THREE.BoxGeometry(0.018, 0.018, 0.18);
-    const storm = new THREE.InstancedMesh(stormGeo, goldMaterial, total);
-    storm.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-    group.add(storm);
-    const stormInstances = getInstances(storm);
+  function rand(a,b){ return a + Math.random()*(b-a); }
+  function gaussianish(){
+    // sum of uniforms approximates a normal distribution, cheap and good enough
+    return (Math.random()+Math.random()+Math.random()-1.5)/1.5;
+  }
 
-    const undertowGeo = new THREE.BoxGeometry(0.014, 0.014, 0.12);
-    const undertow = new THREE.InstancedMesh(undertowGeo, blueMaterial, Math.floor(total * 0.34));
-    undertow.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-    group.add(undertow);
-    const undertowInstances = getInstances(undertow);
+  function colorTuple(){
+    const root = getComputedStyle(document.body);
+    const a = root.getPropertyValue('--particle-a').trim();
+    const b = root.getPropertyValue('--particle-b').trim();
+    const c = root.getPropertyValue('--particle-c').trim();
+    return [a,b,c];
+  }
+  let palette = colorTuple();
 
-    const fract = (value) => value - Math.floor(value);
-    const noise = (index, salt) => fract(Math.sin(index * 127.1 + salt * 311.7) * 43758.5453123);
-    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+  // ---- The ribbon path: a large flattened oval loop tilted lower-left to
+  // upper-right. Particles flow steadily clockwise around it (verified:
+  // screen-angle measured clockwise from 3 o'clock increases monotonically
+  // as t increases, since canvas y is flipped relative to math convention).
+  // No size pulsing — just smooth, constant circular flow. An ellipse is
+  // naturally closed and never crosses itself, so there's no density
+  // pile-up anywhere along it; t wraps seamlessly since the curve connects
+  // back to itself exactly. ----
+  const LOOP_CENTER = {x: 0.55, y: 0.38};
+  const LOOP_RADIUS = {x: 0.52, y: 0.30}; // wide, flattened, before rotation
+  const LOOP_ROTATION = -32 * Math.PI / 180; // tilts the long axis lower-left -> upper-right
+  const LOOP_ROT_COS = Math.cos(LOOP_ROTATION);
+  const LOOP_ROT_SIN = Math.sin(LOOP_ROTATION);
 
-    function makeStormPoint(index, count, xCount, yCount, zCount) {
-      const ix = index % xCount;
-      const iy = Math.floor(index / xCount) % yCount;
-      const iz = Math.floor(index / (xCount * yCount)) % zCount;
-      const tx = ix / Math.max(1, xCount - 1);
-      const ty = iy / Math.max(1, yCount - 1);
-      const tz = iz / Math.max(1, zCount - 1);
-      const angle = index * goldenAngle;
-      const clusterRadius = 0.16 + Math.sqrt(index / count) * 1.45;
-      const strand = Math.sin(tx * Math.PI * 3.2 + tz * 2.2);
-      const offset = noise(index, 3) - 0.5;
-      return {
-        migrate: {
-          x: -5.2 + tx * 10.4 + offset * 0.42,
-          y: (ty - 0.5) * 2.7 + strand * 0.58,
-          z: (tz - 0.5) * 2.6 + Math.cos(tx * 5.8 + ty * 3.1) * 0.42,
-          rotateX: -18 + ty * 36,
-          rotateY: 48 + strand * 70,
-          rotateZ: angle * 28
-        },
-        gather: {
-          x: 1.15 + Math.cos(angle) * clusterRadius * 1.35,
-          y: 0.1 + Math.sin(angle) * clusterRadius * 0.84,
-          z: (tz - 0.5) * 1.2 + Math.cos(angle * 0.7) * 0.34,
-          rotateX: 24 + Math.sin(angle) * 44,
-          rotateY: 180 + Math.cos(angle) * 72,
-          rotateZ: angle * 36
-        },
-        burst: {
-          x: (-5.6 + tx * 11.2) + (noise(index, 9) - 0.5) * 1.9,
-          y: ((ty - 0.5) * 3.7 + strand * 0.9) + (noise(index, 11) - 0.5) * 1.4,
-          z: ((tz - 0.5) * 3.8) + (noise(index, 13) - 0.5) * 1.6,
-          rotateX: 140 + noise(index, 15) * 210,
-          rotateY: 80 + noise(index, 17) * 280,
-          rotateZ: angle * 52
-        },
-        scale: 0.45 + noise(index, 21) * 1.05
-      };
-    }
-
-    const stormPoints = Array.from({ length: total }, (_, index) => (
-      makeStormPoint(index, total, columns, rows, depth)
-    ));
-    const undertowPoints = Array.from({ length: undertow.count }, (_, index) => (
-      makeStormPoint(index + 97, undertow.count, 9, 7, 4)
-    ));
-
-    function pose(points, state, scaleMultiplier = 1) {
-      return {
-        x: (_, index) => points[index][state].x,
-        y: (_, index) => points[index][state].y,
-        z: (_, index) => points[index][state].z,
-        rotateX: (_, index) => points[index][state].rotateX,
-        rotateY: (_, index) => points[index][state].rotateY,
-        rotateZ: (_, index) => points[index][state].rotateZ,
-        scale: (_, index) => points[index].scale * scaleMultiplier
-      };
-    }
-
-    utils.set(stormInstances, pose(stormPoints, 'migrate', 1));
-    utils.set(undertowInstances, pose(undertowPoints, 'burst', 0.86));
-
-    if (!prefersReducedMotion) {
-      animate(group.rotation, {
-        y: Math.PI * 2,
-        duration: 36000,
-        loop: true,
-        ease: 'linear'
-      });
-
-      createTimeline({
-        loop: true,
-        defaults: { duration: 2800, ease: 'inOutSine' }
-      })
-      .add(stormInstances, {
-        ...pose(stormPoints, 'gather', 1.32),
-        delay: stagger([0, 900], {
-          grid: [columns, rows, depth],
-          from: 'center',
-          jitter: 80,
-          seed: 17
-        })
-      }, 0)
-      .add(stormInstances, {
-        ...pose(stormPoints, 'burst', 0.74),
-        delay: stagger([0, 700], {
-          grid: [columns, rows, depth],
-          from: [0.62, 0.42, 0.48],
-          jitter: 120,
-          seed: 29
-        }),
-        duration: 2200,
-        ease: 'outExpo'
-      }, '+=180')
-      .add(stormInstances, {
-        ...pose(stormPoints, 'migrate', 1),
-        delay: stagger([0, 1050], {
-          grid: [columns, rows, depth],
-          axis: 'x',
-          jitter: 70,
-          seed: 41
-        }),
-        duration: 3400,
-        ease: 'inOutQuad'
-      }, '+=120');
-
-      createTimeline({
-        loop: true,
-        defaults: { duration: 3600, ease: 'inOutQuad' }
-      })
-      .add(undertowInstances, {
-        ...pose(undertowPoints, 'migrate', 0.72),
-        delay: stagger([0, 1100], { grid: [9, 7, 4], axis: 'z', jitter: 90, seed: 5 })
-      }, 0)
-      .add(undertowInstances, {
-        ...pose(undertowPoints, 'gather', 0.92),
-        delay: stagger([0, 800], { grid: [9, 7, 4], from: 'center', jitter: 100, seed: 9 })
-      }, '+=260')
-      .add(undertowInstances, {
-        ...pose(undertowPoints, 'burst', 0.56),
-        delay: stagger([0, 900], { grid: [9, 7, 4], from: 'random', jitter: 120, seed: 12 }),
-        duration: 2400,
-        ease: 'out(3)'
-      }, '+=160');
-
-      animate(keyLight, {
-        intensity: [6, 14],
-        duration: 3600,
-        alternate: true,
-        loop: true,
-        ease: 'inOutSine'
-      });
-    }
-
-    function resize() {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      renderer.setSize(width, height, false);
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-    }
-
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-    createTimer({ onUpdate: () => renderer.render(scene, camera) });
-
-    const projects = {
-      'Cyber Lover': {
-        body: '一个关于人格稳定、长期记忆和日常触达的陪伴实验，重点放在关系感能否持续。',
-        href: 'https://brocademaple.github.io/bcmp_cyber_lover/'
-      },
-      'Siwei City': {
-        body: '把松散问题整理成地图、判断和下一步行动，用来做选题拆解、方案推演和复盘。',
-        href: 'https://brocademaple.github.io/siwei-city/'
-      },
-      'Product Radar': {
-        body: '持续追踪 AI 原生产品线索，沉淀成可检索的数据、档案和发布记录。',
-        href: 'https://github.com/brocademaple/ai-daily-product-radar'
-      }
+  function loopPoint(t){
+    const a = t * Math.PI * 2;
+    const ex = Math.cos(a) * LOOP_RADIUS.x;
+    const ey = Math.sin(a) * LOOP_RADIUS.y;
+    const wx = ex * LOOP_ROT_COS - ey * LOOP_ROT_SIN;
+    const wy = ex * LOOP_ROT_SIN + ey * LOOP_ROT_COS;
+    return {
+      x: (LOOP_CENTER.x + wx) * W,
+      y: (LOOP_CENTER.y + wy) * H,
     };
+  }
+  function loopTangent(t){
+    const a = t * Math.PI * 2;
+    const dex = -Math.sin(a) * LOOP_RADIUS.x;
+    const dey =  Math.cos(a) * LOOP_RADIUS.y;
+    const dx = dex * LOOP_ROT_COS - dey * LOOP_ROT_SIN;
+    const dy = dex * LOOP_ROT_SIN + dey * LOOP_ROT_COS;
+    const len = Math.hypot(dx,dy) || 1;
+    return {x: dx/len, y: dy/len};
+  }
 
-    const dialog = document.getElementById('projectDialog');
-    const title = document.getElementById('dialogTitle');
-    const bodyText = document.getElementById('dialogBody');
-    const link = document.getElementById('dialogLink');
-    const close = document.getElementById('dialogClose');
+  const RIBBON_COUNT = isSmall ? 620 : 1320;
+  const STRAY_COUNT  = isSmall ? 70  : 150;
 
-    document.querySelectorAll('[data-project]').forEach((button) => {
-      button.addEventListener('click', () => {
-        const project = projects[button.dataset.project];
-        title.textContent = button.dataset.project;
-        bodyText.textContent = project.body;
-        link.href = project.href;
-        dialog.showModal();
-      });
-    });
+  class Particle{
+    constructor(isStray){ this.isStray = !!isStray; this.reset(true); }
+    reset(initial){
+      if(this.isStray){
+        // sparse ambient particles scattered anywhere — matches the faint
+        // stragglers visible in the empty regions of the reference image
+        this.x = rand(0, W);
+        this.y = rand(0, H);
+        this.t = null;
+      } else {
+        this.t = Math.random(); // position around the loop, 0..1, wraps seamlessly
+        const pt = loopPoint(this.t);
+        const tan = loopTangent(this.t);
+        const perp = {x: -tan.y, y: tan.x};
+        // Density falls off perpendicular to the curve via a gaussian-ish spread.
+        // Wider spread + flatter falloff = a thick cloud-band rather than a thin line.
+        const spread = (Math.min(W,H)) * 0.24;
+        this.perpOffset = gaussianish() * spread;
+        this.x = pt.x + perp.x * this.perpOffset;
+        this.y = pt.y + perp.y * this.perpOffset;
+        this.perpUnit = perp;
+        this.tanUnit = tan;
+      }
+      const r = Math.random();
+      this.type = r < 0.55 ? 'chip' : (r < 0.8 ? 'glint' : 'dust');
+      // size: most chips small, a few large bright ones near the curve center for that "scattered gemstone" look
+      const closeness = this.isStray ? 0 : Math.max(0, 1 - Math.abs(this.perpOffset)/(Math.min(W,H)*0.24));
+      this.depth = this.isStray ? rand(0.2,0.5) : rand(0.4, 0.9) + closeness*rand(0.3,0.9);
+      const sizeBase = this.type === 'chip' ? rand(5,14) : this.type === 'glint' ? rand(1.6,3.4) : rand(2,4);
+      this.len = sizeBase * DPR * this.depth;
+      this.angle = rand(0, Math.PI*2);
+      this.spin = rand(-0.01, 0.01);
+      this.baseAlpha = this.isStray ? rand(0.12,0.30) : (rand(0.45,1.0) * (0.4 + closeness*0.6));
+      this.twinklePhase = rand(0, Math.PI*2);
+      this.twinkleSpeed = rand(0.0015, 0.0045);
+      this.colorIdx = Math.floor(rand(0,3));
+      this.driftSpeed = this.isStray ? rand(0.04,0.12) : rand(0.0005, 0.00072);
+      this.scatter = 0; this.scatterVX = 0; this.scatterVY = 0;
+      this.strayVX = this.isStray ? rand(-0.12,0.12)*DPR : 0;
+      this.strayVY = this.isStray ? rand(-0.18,-0.04)*DPR : 0;
+    }
+    burst(){
+      const cx = W/2, cy = H*0.38;
+      const dx = this.x - cx, dy = this.y - cy;
+      const dist = Math.max(Math.hypot(dx,dy), 1);
+      const force = rand(3.5, 8.5) * DPR;
+      this.scatterVX = (dx/dist) * force;
+      this.scatterVY = (dy/dist) * force;
+      this.scatter = 1;
+    }
+    update(t){
+      if(this.scatter > 0){
+        this.x += this.scatterVX;
+        this.y += this.scatterVY;
+        this.scatterVX *= 0.94;
+        this.scatterVY *= 0.94;
+        this.scatter *= 0.96;
+        if(this.scatter < 0.02) this.scatter = 0;
+      } else if(this.isStray){
+        this.x += this.strayVX;
+        this.y += this.strayVY;
+        if(this.x<-20||this.x>W+20||this.y<-20||this.y>H+20) this.reset(false);
+      } else {
+        // travel slowly clockwise around the loop — wraps with modulo since
+        // the ellipse connects back to itself with no seam or jump
+        this.t = (this.t + this.driftSpeed) % 1;
+        const pt = loopPoint(this.t);
+        const tan = loopTangent(this.t);
+        const perp = {x: -tan.y, y: tan.x};
+        // gentle perpendicular wobble so it doesn't look laser-straight
+        const wobble = Math.sin(t*0.0006 + this.twinklePhase) * 3 * DPR;
+        this.x = pt.x + perp.x * (this.perpOffset + wobble);
+        this.y = pt.y + perp.y * (this.perpOffset + wobble);
+      }
+      this.angle += this.spin;
+      this.twinkle = 0.6 + 0.4 * Math.sin(t*this.twinkleSpeed + this.twinklePhase);
+    }
+    draw(ctx, palette){
+      const rgb = palette[this.colorIdx];
+      const alpha = this.baseAlpha * this.twinkle * (this.scatter > 0 ? Math.max(0.15, 1 - this.scatter*0.3) : 1);
+      const useGlow = this.depth > 0.55;
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.angle);
+      ctx.globalAlpha = Math.min(1, alpha);
+      if(this.type === 'chip'){
+        // faceted diamond chip — the dominant shape in the reference image
+        if(useGlow){ ctx.shadowColor = `rgba(${rgb},0.7)`; ctx.shadowBlur = 5 * DPR; }
+        const h = this.len, w = this.len * 0.46;
+        const grad = ctx.createLinearGradient(0,-h/2,0,h/2);
+        grad.addColorStop(0, `rgba(${rgb},1)`);
+        grad.addColorStop(0.5, `rgba(${rgb},0.55)`);
+        grad.addColorStop(1, `rgba(${rgb},0.9)`);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.moveTo(0,-h/2);
+        ctx.lineTo(w/2,0);
+        ctx.lineTo(0,h/2);
+        ctx.lineTo(-w/2,0);
+        ctx.closePath();
+        ctx.fill();
+      } else if(this.type === 'glint'){
+        if(useGlow){ ctx.shadowColor = `rgba(${rgb},1)`; ctx.shadowBlur = 9 * DPR * this.depth; }
+        ctx.fillStyle = `rgba(${rgb},1)`;
+        ctx.beginPath();
+        ctx.arc(0,0,this.len/2,0,Math.PI*2);
+        ctx.fill();
+      } else {
+        ctx.fillStyle = `rgba(${rgb},0.9)`;
+        ctx.beginPath();
+        ctx.arc(0,0,this.len/2,0,Math.PI*2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
 
-    close.addEventListener('click', () => dialog.close());
-  </script>
+  const particles = [];
+  for(let i=0;i<RIBBON_COUNT;i++) particles.push(new Particle(false));
+  for(let i=0;i<STRAY_COUNT;i++) particles.push(new Particle(true));
+
+  function triggerBurst(){
+    palette = colorTuple();
+    particles.forEach(p => p.burst());
+  }
+  window.__triggerParticleBurst = triggerBurst;
+
+  function loop(t){
+    ctx.clearRect(0,0,W,H);
+    for(const p of particles){
+      p.update(t);
+      p.draw(ctx, palette);
+    }
+    requestAnimationFrame(loop);
+  }
+  if(!reduceMotion) requestAnimationFrame(loop);
+
+  setTimeout(()=>{ palette = colorTuple(); }, 50);
+})();
+
+/* ===================== Entrance sequence ===================== */
+(function(){
+  // Particles converge toward center then burst outward on load — the page's opening gesture.
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      if(window.__triggerParticleBurst) window.__triggerParticleBurst();
+    }, 350);
+  });
+})();
+
+/* ===================== Card entrance (subtle, on load) ===================== */
+(function(){
+  const cards = document.querySelectorAll('.proj-card');
+  cards.forEach((c,i) => {
+    c.style.opacity = 0;
+    c.style.transform = 'translateY(14px)';
+    setTimeout(()=>{
+      c.style.transition = 'opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1)';
+      c.style.opacity = 1;
+      c.style.transform = 'translateY(0)';
+    }, 120 + i*70);
+  });
+})();
+</script>
+
 </body>
 </html>
