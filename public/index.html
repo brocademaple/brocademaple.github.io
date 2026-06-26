@@ -59,19 +59,15 @@
     min-height:100vh;
     position:relative;
   }
-  /* sun-glitter sheen sweeping across the sea-blue field */
+  /* soft sun wash over the sea-blue field; no hard stripe texture */
   body::before{
     content:'';
     position:fixed; inset:0;
-    background:repeating-linear-gradient(
-      115deg,
-      transparent 0px,
-      color-mix(in srgb, var(--sun-glow) 22%, transparent) 2px,
-      transparent 5px,
-      transparent 30px
-    );
-    opacity:.75;
-    mix-blend-mode:overlay;
+    background:
+      radial-gradient(ellipse 48% 60% at 69% 9%, color-mix(in srgb, var(--sun-glow) 24%, transparent), transparent 72%),
+      linear-gradient(118deg, transparent 0%, color-mix(in srgb, var(--sun-glow) 10%, transparent) 44%, transparent 70%);
+    opacity:.58;
+    mix-blend-mode:soft-light;
     pointer-events:none;
     z-index:1;
     transition:background 1.2s ease;
@@ -409,7 +405,7 @@
     aspect-ratio:16/8;
     border-radius:20px 20px 0 0;
     background:
-      repeating-linear-gradient(115deg, transparent 0px, color-mix(in srgb, var(--gold-bright) 18%, transparent) 2px, transparent 5px, transparent 26px),
+      radial-gradient(ellipse 70% 56% at 62% 18%, color-mix(in srgb, var(--gold-bright) 22%, transparent), transparent 70%),
       linear-gradient(150deg, var(--bg-1), var(--mist) 60%, var(--bg-0));
     display:flex;
     align-items:center;
@@ -747,7 +743,7 @@ renderProjectCards();
   let W, H, DPR;
 
   function resize(){
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    DPR = Math.min(window.devicePixelRatio || 1, 1.5);
     W = canvas.width = window.innerWidth * DPR;
     H = canvas.height = window.innerHeight * DPR;
     canvas.style.width = window.innerWidth + 'px';
@@ -809,8 +805,8 @@ renderProjectCards();
     return {x: dx/len, y: dy/len};
   }
 
-  const RIBBON_COUNT = isSmall ? 620 : 1320;
-  const STRAY_COUNT  = isSmall ? 70  : 150;
+  const RIBBON_COUNT = isSmall ? 460 : 860;
+  const STRAY_COUNT  = isSmall ? 44  : 92;
 
   class Particle{
     constructor(isStray){ this.isStray = !!isStray; this.reset(true); }
@@ -848,7 +844,7 @@ renderProjectCards();
       this.twinklePhase = rand(0, Math.PI*2);
       this.twinkleSpeed = rand(0.0015, 0.0045);
       this.colorIdx = Math.floor(rand(0,3));
-      this.driftSpeed = this.isStray ? rand(0.04,0.12) : rand(0.0005, 0.00072);
+      this.driftSpeed = this.isStray ? rand(0.04,0.12) : rand(0.00095, 0.00132);
       this.scatter = 0; this.scatterVX = 0; this.scatterVY = 0;
       this.strayVX = this.isStray ? rand(-0.12,0.12)*DPR : 0;
       this.strayVY = this.isStray ? rand(-0.18,-0.04)*DPR : 0;
@@ -862,22 +858,22 @@ renderProjectCards();
       this.scatterVY = (dy/dist) * force;
       this.scatter = 1;
     }
-    update(t){
+    update(t, frameScale = 1){
       if(this.scatter > 0){
-        this.x += this.scatterVX;
-        this.y += this.scatterVY;
-        this.scatterVX *= 0.94;
-        this.scatterVY *= 0.94;
-        this.scatter *= 0.96;
+        this.x += this.scatterVX * frameScale;
+        this.y += this.scatterVY * frameScale;
+        this.scatterVX *= Math.pow(0.94, frameScale);
+        this.scatterVY *= Math.pow(0.94, frameScale);
+        this.scatter *= Math.pow(0.96, frameScale);
         if(this.scatter < 0.02) this.scatter = 0;
       } else if(this.isStray){
-        this.x += this.strayVX;
-        this.y += this.strayVY;
+        this.x += this.strayVX * frameScale;
+        this.y += this.strayVY * frameScale;
         if(this.x<-20||this.x>W+20||this.y<-20||this.y>H+20) this.reset(false);
       } else {
         // travel slowly clockwise around the loop — wraps with modulo since
         // the ellipse connects back to itself with no seam or jump
-        this.t = (this.t + this.driftSpeed) % 1;
+        this.t = (this.t + this.driftSpeed * frameScale) % 1;
         const pt = loopPoint(this.t);
         const tan = loopTangent(this.t);
         const perp = {x: -tan.y, y: tan.x};
@@ -886,13 +882,13 @@ renderProjectCards();
         this.x = pt.x + perp.x * (this.perpOffset + wobble);
         this.y = pt.y + perp.y * (this.perpOffset + wobble);
       }
-      this.angle += this.spin;
+      this.angle += this.spin * frameScale;
       this.twinkle = 0.6 + 0.4 * Math.sin(t*this.twinkleSpeed + this.twinklePhase);
     }
     draw(ctx, palette){
       const rgb = palette[this.colorIdx];
       const alpha = this.baseAlpha * this.twinkle * (this.scatter > 0 ? Math.max(0.15, 1 - this.scatter*0.3) : 1);
-      const useGlow = this.depth > 0.55;
+      const useGlow = this.depth > 1.08;
       ctx.save();
       ctx.translate(this.x, this.y);
       ctx.rotate(this.angle);
@@ -939,10 +935,14 @@ renderProjectCards();
   }
   window.__triggerParticleBurst = triggerBurst;
 
+  let lastFrameTime = performance.now();
   function loop(t){
+    const dt = Math.min(40, Math.max(8, t - lastFrameTime || 16.67));
+    const frameScale = dt / 16.67;
+    lastFrameTime = t;
     ctx.clearRect(0,0,W,H);
     for(const p of particles){
-      p.update(t);
+      p.update(t, frameScale);
       p.draw(ctx, palette);
     }
     requestAnimationFrame(loop);
