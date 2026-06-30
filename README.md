@@ -1,55 +1,11 @@
-# Brocade Maple — 个人主页原型
+<h1 align="center">Brocade Maple</h1>
 
-单文件 HTML 原型，给 Codex 接手继续开发用。这份说明把设计决策、数据结构和已知待办列清楚，避免改的时候漏掉关键逻辑。
+<p align="center">
+  个人项目档案馆
+</p>
 
-> **先看 `AGENTS.md`**——里面是这次设计反复打磨后定下来的硬性原则（配色、字体、粒子形态、卡片质感、诚实性等），改代码前先确认会不会碰到那些红线。这份 README 是项目结构说明，`AGENTS.md` 是设计准则，两者配合着看。
-
-## 文件
-
-- `index.html` —— 唯一的源文件，所有 CSS / JS 都内联在里面，没有外部依赖（除了 Google Fonts CDN）。直接双击打开就能看效果。
-- `AGENTS.md` —— 给 AI coding agent 的设计准则，改之前必读。
-- `README.md` —— 这份文件，项目结构和待办清单。
-
-## 视觉系统（不要随意改的部分）
-
-- **配色**：海蓝金（地中海正午调），只有一套主题，所有颜色变量定义在 `:root` 里。
-- **字体反差是整个页面的视觉签名**：英文标题/项目名用 `Cormorant Garamond` / `Playfair Display` 的斜体花体，中文统一用 `Noto Serif SC`（衬线黑体）。这两者的反差（冷感几何衬线 vs 暖感手写花体）是设计的核心，不要换成别的字体或者把中文换成无衬线字体。
-- **粒子风暴**：纯 Canvas 2D 实现，没有用 Three.js / Anime.js 之类的库。金粉沿一个**倾斜的扁椭圆环**顺时针匀速游动（不是随机飘），细节在 `<script>` 第二段，`LOOP_CENTER` / `LOOP_RADIUS` / `LOOP_ROTATION` 三个常量控制环的位置、大小、倾斜角度。
-
-## 数据结构
-
-所有项目信息集中在 `PROJECTS` 数组里（在第一段 `<script>` 里），卡片网格和详情弹窗都从这一份数据渲染，改项目信息只需要改这一处：
-
-```js
-{
-  id: 'siwei-city',        // 稳定 ID，弹窗 / 锚点跳转都用这个
-  no: '01',                 // 编目号
-  status: 'ACTIVE MVP',      // 状态标签
-  tag: 'thinking system',    // 英文小标签
-  title: 'Siwei City',       // 项目名，需要两行就用 \n
-  desc: '...',                // 卡片上的短描述
-  longDesc: '...',            // 弹窗里的长描述
-  github: 'https://...',      // 真实仓库链接
-  demo: null,                  // 没有预览链接就留 null，弹窗会显示"待补充"，不会伪造链接
-  image: null,                  // 封面图占位，等有真实图片再换成图片路径
-}
-```
-
-## 已知待办（按优先级）
-
-1. **字体本地化**：现在字体是从 Google Fonts CDN 在线加载的（`<style>` 顶部有详细的 HANDOFF NOTE 注释，写清楚了每个字体需要哪些字重）。如果要保证国内访问稳定或离线可用，需要把这几个字体下载成 `.woff2`，换成自己托管的 `@font-face`。`Noto Serif SC` 是中文唯一字体，全字符集很大，建议子集化或用动态子集服务，否则首屏会很慢。
-
-2. **项目封面图**：5 个项目卡的 `image` 字段现在都是 `null`，弹窗里显示的是占位的斜纹蓝金渐变 + "封面图占位"文字。有真实截图后，把对应项目的 `image` 字段换成图片路径，弹窗渲染逻辑需要相应加一段判断（现在的 `openModal()` 函数里 `elImage.innerHTML` 那一行需要改成判断 `project.image` 是否存在）。
-
-3. **预览链接**：5 个项目目前都没有真实的 demo / 预览地址，`demo` 字段全是 `null`，弹窗显示"预览链接待补充"。有真实地址后直接填进对应项目的 `demo` 字段，弹窗会自动改成可点击的"查看预览"按钮（逻辑已经写好，不用改代码）。
-
-4. **GitHub 仓库数 / star 数**：作品索引右上角"13 个仓库"是写稿时的手动快照，不是实时拉取的数据。如果要做成实时数据，需要接 GitHub API。
-
-## 交互逻辑速览
-
-- 点击项目卡 → 弹出详情弹窗（封面图占位 + 长描述 + GitHub 链接 + 预览链接位），不是直接跳转离开页面。
-- Hero 区悬浮的三个词（Prototype / Archive / Signal）各自指向不同的真实目的地：
-  - **Prototype** → 直接弹出状态为 PROTOTYPE 的项目（MCP Training System）详情
-  - **Signal** → 直接弹出状态为 ACTIVE MVP 的旗舰项目（Siwei City）详情
-  - **Archive** → 新标签页跳转到 GitHub 主页全部仓库列表
-- 弹窗关闭方式：右上角按钮 / 点击背景 / 按 ESC，三种都支持。
+<p align="center">
+  <a href="https://brocademaple.github.io/">GitHub Pages 体验入口</a>
+  ·
+  <a href="http://139.196.243.188/">阿里云体验入口</a>
+</p>
