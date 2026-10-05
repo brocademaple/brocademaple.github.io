@@ -1,0 +1,788 @@
+{
+  "blender": "4.5.12 LTS",
+  "engine": "BLENDER_EEVEE_NEXT",
+  "view_transform": "AgX",
+  "look": "AgX - Medium High Contrast",
+  "exposure": 0.30000001192092896,
+  "objects": 5644,
+  "meshes": 5564,
+  "materials": 61,
+  "images": 67,
+  "collections": [
+    "00_V2_ENVIRONMENT",
+    "01_V2_CIRCULATION",
+    "02_V2_GLASS_GALLERY",
+    "03_V2_GRAND_TIDE_ARCHIVE",
+    "04_V2_TERRACED_PAVILIONS",
+    "05_V2_GARDEN_ECOLOGY",
+    "06_V2_LIGHTING",
+    "07_V2_REVIEW_CAMERAS",
+    "08_V23_CRAFT_AND_ECOLOGY",
+    "09_V23_CURATED_WORKS",
+    "10_V23_NAVIGATION",
+    "11_V23_ARCHIVE_FINISH",
+    "11_V24_SURFACES_AND_ACCESS",
+    "11_V24_SURFACES_AND_ACCESS.001",
+    "11_V24_SURFACES_AND_ACCESS.002",
+    "11_V24_SURFACES_AND_ACCESS.003"
+  ],
+  "cameras": [
+    {
+      "name": "V2_HeroCamera",
+      "location": [
+        -57.0,
+        -49.0,
+        28.0
+      ],
+      "lens": 50.0,
+      "fov": 0.691111147403717
+    },
+    {
+      "name": "V2_PlanCamera",
+      "location": [
+        0.0,
+        -6.0,
+        130.0
+      ],
+      "lens": 32.0,
+      "fov": 1.024778962135315
+    },
+    {
+      "name": "V2_LoopCamera",
+      "location": [
+        -21.0,
+        -18.0,
+        8.199999809265137
+      ],
+      "lens": 44.0,
+      "fov": 0.7766374349594116
+    },
+    {
+      "name": "V2_ArchiveCutawayCamera",
+      "location": [
+        12.0,
+        -15.0,
+        20.0
+      ],
+      "lens": 52.0,
+      "fov": 0.6664885878562927
+    },
+    {
+      "name": "V23_heroCamera",
+      "location": [
+        -63.0,
+        -72.0,
+        36.0
+      ],
+      "lens": 40.0,
+      "fov": 0.8457078337669373
+    },
+    {
+      "name": "V23_planCamera",
+      "location": [
+        0.0,
+        -38.0,
+        105.0
+      ],
+      "lens": 40.0,
+      "fov": 0.8457078337669373
+    },
+    {
+      "name": "V23_loopCamera",
+      "location": [
+        -16.5,
+        -10.300000190734863,
+        5.059999942779541
+      ],
+      "lens": 30.0,
+      "fov": 1.0808390378952026
+    },
+    {
+      "name": "V23_glassCamera",
+      "location": [
+        -31.0,
+        -13.0,
+        8.350000381469727
+      ],
+      "lens": 25.0,
+      "fov": 1.2480461597442627
+    },
+    {
+      "name": "V23_archiveCamera",
+      "location": [
+        -12.0,
+        16.0,
+        8.699999809265137
+      ],
+      "lens": 23.0,
+      "fov": 1.328092336654663
+    },
+    {
+      "name": "V23_upperCamera",
+      "location": [
+        -17.0,
+        15.0,
+        13.0600004196167
+      ],
+      "lens": 27.0,
+      "fov": 1.176005244255066
+    },
+    {
+      "name": "V23_lowerCamera",
+      "location": [
+        -11.0,
+        18.0,
+        4.099999904632568
+      ],
+      "lens": 25.0,
+      "fov": 1.2480461597442627
+    },
+    {
+      "name": "V23_materialCamera",
+      "location": [
+        31.0,
+        -0.800000011920929,
+        6.800000190734863
+      ],
+      "lens": 26.0,
+      "fov": 1.2110893726348877
+    }
+  ],
+  "lights": [
+    {
+      "name": "V2_SurfaceSun",
+      "type": "AREA",
+      "energy": 6460.0,
+      "color": [
+        0.47999998927116394,
+        0.8600000143051147,
+        1.0
+      ]
+    },
+    {
+      "name": "V2_GardenFill",
+      "type": "AREA",
+      "energy": 3740.0,
+      "color": [
+        0.23999999463558197,
+        0.6600000262260437,
+        0.8199999928474426
+      ]
+    },
+    {
+      "name": "V2_ArchiveWarmKey",
+      "type": "AREA",
+      "energy": 3230.0,
+      "color": [
+        1.0,
+        0.6200000047683716,
+        0.2800000011920929
+      ]
+    },
+    {
+      "name": "V2_GlassGalleryWarm",
+      "type": "AREA",
+      "energy": 2550.0,
+      "color": [
+        1.0,
+        0.6800000071525574,
+        0.3400000035762787
+      ]
+    },
+    {
+      "name": "V2_SeabedFillWest",
+      "type": "AREA",
+      "energy": 2720.0,
+      "color": [
+        0.20000000298023224,
+        0.6600000262260437,
+        0.699999988079071
+      ]
+    },
+    {
+      "name": "V2_SeabedFillEast",
+      "type": "AREA",
+      "energy": 2975.0,
+      "color": [
+        0.14000000059604645,
+        0.5799999833106995,
+        0.7200000286102295
+      ]
+    },
+    {
+      "name": "V2_BackReefRim",
+      "type": "AREA",
+      "energy": 2295.0,
+      "color": [
+        0.1599999964237213,
+        0.5,
+        0.6000000238418579
+      ]
+    },
+    {
+      "name": "V2_PavilionWarm_0",
+      "type": "POINT",
+      "energy": 760.0,
+      "color": [
+        1.0,
+        0.6000000238418579,
+        0.30000001192092896
+      ]
+    },
+    {
+      "name": "V2_PavilionWarm_1",
+      "type": "POINT",
+      "energy": 760.0,
+      "color": [
+        1.0,
+        0.6000000238418579,
+        0.30000001192092896
+      ]
+    },
+    {
+      "name": "V2_PavilionWarm_2",
+      "type": "POINT",
+      "energy": 760.0,
+      "color": [
+        1.0,
+        0.6000000238418579,
+        0.30000001192092896
+      ]
+    },
+    {
+      "name": "V2_LightShaftGlow",
+      "type": "POINT",
+      "energy": 40.0,
+      "color": [
+        0.1599999964237213,
+        0.8199999928474426,
+        1.0
+      ]
+    },
+    {
+      "name": "V23_ArchiveInteriorFill_0",
+      "type": "AREA",
+      "energy": 935.0,
+      "color": [
+        1.0,
+        0.7699999809265137,
+        0.46000000834465027
+      ]
+    },
+    {
+      "name": "V23_ArchiveInteriorFill_1",
+      "type": "AREA",
+      "energy": 935.0,
+      "color": [
+        1.0,
+        0.7699999809265137,
+        0.46000000834465027
+      ]
+    },
+    {
+      "name": "V23_ArchiveInteriorFill_2",
+      "type": "AREA",
+      "energy": 935.0,
+      "color": [
+        1.0,
+        0.7699999809265137,
+        0.46000000834465027
+      ]
+    },
+    {
+      "name": "V23_RECOMPOSITION_InteriorGlow",
+      "type": "POINT",
+      "energy": 430.0,
+      "color": [
+        1.0,
+        0.6600000262260437,
+        0.30000001192092896
+      ]
+    },
+    {
+      "name": "V23_MATERIAL_InteriorGlow",
+      "type": "POINT",
+      "energy": 430.0,
+      "color": [
+        1.0,
+        0.6600000262260437,
+        0.30000001192092896
+      ]
+    },
+    {
+      "name": "V23_MOOD_OBJECT_InteriorGlow",
+      "type": "POINT",
+      "energy": 430.0,
+      "color": [
+        1.0,
+        0.6600000262260437,
+        0.30000001192092896
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_GlassGalleryArt_+1_0",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_GlassGalleryArt_+1_1",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_GlassGalleryArt_+1_2",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_GlassGalleryArt_+1_3",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_GlassGalleryArt_+1_4",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_GlassGalleryArt_-1_0",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_GlassGalleryArt_-1_1",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_GlassGalleryArt_-1_2",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_GlassGalleryArt_-1_3",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_GlassGalleryArt_-1_4",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_MATERIALArt_0",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_MATERIALArt_1",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_MATERIALArt_2",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_MATERIALArt_3",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_MOOD_OBJECTArt_0",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_MOOD_OBJECTArt_1",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_MOOD_OBJECTArt_2",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_MOOD_OBJECTArt_3",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_RECOMPOSITIONArt_0",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_RECOMPOSITIONArt_1",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_RECOMPOSITIONArt_2",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_RECOMPOSITIONArt_3",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveGroundArt_00",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveGroundArt_01",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveGroundArt_02",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveGroundArt_03",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveGroundArt_04",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveGroundArt_05",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveGroundArt_06",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveGroundArt_07",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveGroundArt_08",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveGroundArt_09",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveGroundArt_10",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveGroundArt_11",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveUpperArt_00",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveUpperArt_01",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveUpperArt_02",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveUpperArt_03",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveUpperArt_04",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveUpperArt_05",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveUpperArt_06",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_ArtLight_V2_ArchiveUpperArt_07",
+      "type": "SPOT",
+      "energy": 75.0,
+      "color": [
+        1.0,
+        0.7799999713897705,
+        0.47999998927116394
+      ]
+    },
+    {
+      "name": "V23_FilteredSun",
+      "type": "SUN",
+      "energy": 2.0,
+      "color": [
+        0.699999988079071,
+        0.8799999952316284,
+        1.0
+      ]
+    }
+  ],
+  "artworks": 42,
+  "markers": [
+    {
+      "name": "V23 hero",
+      "frame": 1
+    },
+    {
+      "name": "V23 plan",
+      "frame": 21
+    },
+    {
+      "name": "V23 loop",
+      "frame": 41
+    },
+    {
+      "name": "V23 glass",
+      "frame": 61
+    },
+    {
+      "name": "V23 archive",
+      "frame": 81
+    },
+    {
+      "name": "V23 upper",
+      "frame": 101
+    },
+    {
+      "name": "V23 lower",
+      "frame": 121
+    },
+    {
+      "name": "V23 material",
+      "frame": 141
+    }
+  ]
+}

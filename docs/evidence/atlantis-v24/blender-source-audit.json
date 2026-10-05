@@ -1,0 +1,17 @@
+{
+  "source_sha256": "1e53fb4d53808908c05abf43c4c615521cab4c370157e0cc3039e26a67ad359f",
+  "evaluated_triangles": 607242,
+  "engine": "BLENDER_EEVEE_NEXT",
+  "samples": 128,
+  "render_size": [
+    1400,
+    900
+  ],
+  "render_views": [
+    "hero",
+    "loop",
+    "glass",
+    "archive"
+  ],
+  "source_modified": false
+}

@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "triangles": 607242,
+  "same_geometry_in_both_modes": true,
+  "artworks_original_JPEG_bytes": 42,
+  "source_aspect_preserved": true,
+  "new_PBR_materials": [
+    "V24_GardenPebbles",
+    "V24_OpusPaving",
+    "V24_HonedTravertine",
+    "V24_CoursedTravertine"
+  ],
+  "new_texture_decoded_pixels_preserved": true,
+  "navigation_markers_match_master": true,
+  "floor_triangles": 4807,
+  "obstacle_triangles": 62688,
+  "web_bytes": 58526864,
+  "web_sha256": "5cd5531c37d78a1ecc58434b22c42a3a15a17623d6785f9f96ea34f2d2be6eb2",
+  "publication": "local review"
+}

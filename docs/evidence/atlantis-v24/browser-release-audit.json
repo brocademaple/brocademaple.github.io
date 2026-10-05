@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "errors": [],
+  "high": {
+    "settings": {
+      "mode": "high",
+      "pixelRatio": 1.5,
+      "shadowSize": 4096,
+      "anisotropy": 16,
+      "waterMotion": true,
+      "waterStrength": 0.24
+    },
+    "buffer": [
+      2100,
+      1350
+    ],
+    "fps": 23
+  },
+  "balanced": {
+    "settings": {
+      "mode": "balanced",
+      "pixelRatio": 1,
+      "shadowSize": 1024,
+      "anisotropy": 2,
+      "waterMotion": false,
+      "waterStrength": 0.09
+    },
+    "buffer": [
+      1400,
+      900
+    ]
+  },
+  "walk": {
+    "mode": "walk",
+    "distance": 4.203333333333331
+  },
+  "artworks": 42,
+  "views": 8,
+  "mobile": {
+    "width": 390,
+    "scrollWidth": 390,
+    "renderVisible": true,
+    "threeLink": "http://127.0.0.1:8033/?three=1"
+  }
+}
